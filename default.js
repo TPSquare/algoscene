@@ -5,7 +5,7 @@ import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
 const url = `../languages/${localData.lang}/default.json`,
     langData = await fetch(url).then(async (r) => r.json()),
-    VERSION = '-beta-1';
+    VERSION = 'beta-1.2';
 
 new (class {
     constructor() {

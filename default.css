@@ -1139,6 +1139,10 @@ footer {
         opacity: 1;
         top: 50%;
         pointer-events: all;
+
+        * {
+            pointer-events: all;
+        }
     }
 
     .custom-input.success {
