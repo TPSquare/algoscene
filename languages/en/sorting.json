@@ -1,0 +1,198 @@
+{
+    "bubble": {
+        "name": "Bubble Sort",
+        "informations": {
+            "description": "The {{Bubble Sort}} algorithm is a simple sorting algorithm. It works by repeatedly traversing the array, comparing each pair of adjacent elements and swapping them if they are in the wrong order. This process is repeated from the beginning of the array until no more pairs of elements need to be swapped.",
+            "advantage": [
+                "Simple, intuitive, easy to understand.",
+                "Efficient for small arrays."
+            ],
+            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "application": [
+                "Often used for teaching and illustrating basic concepts of sorting algorithms.",
+                "Simple and efficient enough for small data arrays."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {bbs} function.",
+                "The outer loop allows iterating through the array multiple times to push the largest element (for ascending order) or the smallest element (for descending order) to the end of the array.",
+                "The inner loop is used to compare adjacent elements and swap them if they are not in order.",
+                "Check if two adjacent elements in the array are in the wrong order. If the condition is true, these two elements need to be swapped to move the larger element later (for ascending order).",
+                "Swap two elements."
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ]
+        }
+    },
+    "selection": {
+        "name": "Selection Sort",
+        "informations": {
+            "description": "The {{Selection Sort}} algorithm is a simple sorting algorithm. It works by finding the smallest element in the array and swapping it with the first element, then finding the next smallest element and swapping it with the second element, continuing this process until the entire array is sorted.",
+            "advantage": [
+                "Simple, intuitive, easy to understand.",
+                "Efficient for small arrays."
+            ],
+            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "application": [
+                "Often used for teaching and illustrating basic concepts of sorting algorithms.",
+                "Simple and efficient enough for small data arrays."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {slts} function.",
+                "The outer loop helps iterate through the array multiple times to find and place the smallest or largest element of the unsorted part of the array in its correct position.",
+                "Initialize the variable {min} to hold the position of the smallest element in the unsorted part of the array.",
+                "The inner loop is used to find the smallest element in the unsorted part of the array.",
+                "Check if the element at position {j} is smaller than the element at position {min}. If true, update {min} to hold the position of the current smallest element.",
+                "Swap two elements."
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "Update {min}.",
+                "{{{cpp,5}}}"
+            ]
+        }
+    },
+    "insertion": {
+        "name": "Insertion Sort",
+        "informations": {
+            "description": "The {{Insertion Sort}} algorithm is a simple sorting algorithm. It iteratively selects each element of the array, finds its appropriate position, and inserts it into that position.",
+            "advantage": [
+                "Simple, intuitive, easy to understand.",
+                "Efficient for small arrays."
+            ],
+            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "application": [
+                "Simple and efficient enough for small data arrays.",
+                "Useful when the input data is an array that is nearly sorted.",
+                "In practice, this algorithm is often used as a part of more complex sorting algorithms."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {ists} function.",
+                "The outer loop is used to iterate through the array positions. The first element is considered sorted.",
+                "Initialize {j} to iterate backwards through the sorted elements.",
+                "Initialize {current} to hold the value of the element currently being positioned.",
+                "The inner loop is used to iterate from right to left, finding the correct position to insert the {current} element in the sorted part of the array. Compare to check if the element at position {j} is greater than {current}; if true, shift the element at {j} to the right to make room for {current}.",
+                "Shift the element at position {j} to the right.",
+                "Insert {current} into the correct position."
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Initialize {j} to iterate backwards through the sorted elements. Initialize {current} to hold the value of the element currently being positioned.",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "Decrease {j} to continue iterating to the left.",
+                "{{{cpp,6}}}"
+            ]
+        }
+    },
+    "quick": {
+        "name": "Quick Sort",
+        "informations": {
+            "description": "The {{Quick Sort}} algorithm is a popular sorting algorithm based on the divide-and-conquer principle. It works by selecting an element as a pivot and partitioning the remaining elements of the array into two groups, one group with elements smaller than the pivot and the other group with elements larger than the pivot. Then, the algorithm continues applying the same process to these two subgroups recursively, resulting in a sorted array.",
+            "advantage": "Fast, good for sorting large arrays.",
+            "application": [
+                "Utilized in real-world applications to sort large arrays.",
+                "Used in algorithms for searching and classifying data."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {qs} function.",
+                "If {left} is greater than or equal to {right}, it means the segment of the array to be sorted has only one element or no elements left to sort, the function will stop and do nothing further.",
+                "Initialize {pivot} to store the pivot value, which is the element in the middle of the segment. This element will be used to divide the segment into two parts.",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, looking for elements with values greater than or equal to {pivot}.",
+                "Initialize {j} to iterate from the end to the middle of the segment, looking for elements with values less than or equal to {pivot}.",
+                "Ensure {i} does not exceed {j} during the search and swap of elements.",
+                "Increase {i} until an element greater than or equal to {pivot} is found.",
+                "Decrease {j} until an element less than or equal to {pivot} is found.",
+                "Check again if {i} exceeds {j}.",
+                "Swap two elements so that the left side has elements less than or equal to {pivot} and the right side has elements greater than or equal to {pivot}. Increase {i} and decrease {j} for the next search.",
+                "",
+                "Continue sorting the segment from {left} to {j}.",
+                "Continue sorting the segment from {i} to {right}."
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Initialize {jspivot} to store the pivot value, which is the element in the middle of the segment. This element will be used to divide the segment into two parts.",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, looking for elements with values greater than or equal to {jspivot}.",
+                "Initialize {j} to iterate from the end to the middle of the segment, looking for elements with values less than or equal to {jspivot}.",
+                "{{{cpp,5}}}",
+                "Increase {i} until an element greater than or equal to {jspivot} is found.",
+                "Decrease {j} until an element less than or equal to {jspivot} is found.",
+                "{{{cpp,8}}}",
+                "Swap two elements so that the left side has elements less than or equal to {jspivot} and the right side has elements greater than or equal to {jspivot}.",
+                "Increase {i} for the next search.",
+                "Decrease {j} for the next search.",
+                "",
+                "",
+                "Continue sorting the segment from {left} to {j}.",
+                "Continue sorting the segment from {i} to {right}."
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Exit the function.",
+                "{{{cpp,2}}}",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, looking for elements with values greater than or equal to {pivot}. Initialize {j} to iterate from the end to the middle of the segment, looking for elements with values less than or equal to {pivot}.",
+                "{{{cpp,5}}}",
+                "While {i} hasn't found an element greater than or equal to {pivot}.",
+                "Increase {i}.",
+                "While {j} hasn't found an element less than or equal to {pivot}.",
+                "Decrease {j}.",
+                "{{{cpp,8}}}",
+                "Swap two elements so that the left side has elements less than or equal to {pivot} and the right side has elements greater than or equal to {pivot}.",
+                "{{{js,10}}}",
+                "{{{js,11}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}"
+            ]
+        }
+    },
+    "_": {
+        "constraints": [
+            "Values are separated by whitespace.",
+            "Values are integers ranging from -9 to 99.",
+            "There must be at least 5 values."
+        ]
+    }
+}
