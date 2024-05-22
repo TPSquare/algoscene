@@ -2,7 +2,7 @@
 
 const localData = new (class {
     constructor() {
-        this.debug = true;
+        this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);

@@ -888,7 +888,6 @@ new (class {
             ],
             handle,
         });
-        guide.handle();
 
         const message = document.createElement({
                 className: 'message',
