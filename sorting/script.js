@@ -178,37 +178,37 @@ await ALGOSCENE.init(
     }
 );
 
-let VALUE = [5, 2, 4, 1, 3];
+let ARRAY = [5, 2, 4, 6, 1, 3, 7];
 
-ALGOSCENE.customInput.setCurrentValue(VALUE.join(' '));
-
-ALGOSCENE.customInput.setConstraints(ALGOSCENE.langData.constraints);
+ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
 
 ALGOSCENE.customInput.onApply = function (value) {
     let isValid = true;
     value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) => (isNaN(e) || e < -9 || e > 99 ? (isValid = false) : null));
-    if (value.length < 5) isValid = false;
+    value.forEach((e) =>
+        isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e) ? (isValid = false) : null
+    );
+    if (value.length < 7) isValid = false;
     if (isValid) {
-        VALUE = value.slice(0, 5);
+        ARRAY = value.slice(0, 7);
         ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
         ALGOSCENE.resetAction();
-        ALGOSCENE.customInput.setCurrentValue(VALUE.join(' '));
+        ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
         ALGOSCENE.customInput.notify.success();
     } else ALGOSCENE.customInput.notify.failure();
 };
 
 const getDefaultFrameHTML = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
-    `<div class="array">${VALUE.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>`;
+    `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>`;
 
 ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
 
-const colors = ['', 'yellowgreen', 'red', 'blue'];
+const colors = ['', 'yellowgreen', 'red'];
 
 const array = new (class {
     constructor() {
-        this.length = 5;
+        this.length = ARRAY.length;
         ALGOSCENE.resetFrame.setAction('resetArray', () => this.reset());
     }
     setPosition() {

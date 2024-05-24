@@ -5,6 +5,9 @@
     "reload___": "Reload the page to apply the changes",
     "setting": "Setting",
     "play": "Play",
+    "pause": "Pause",
+    "continue": "Continue",
+    "repeat": "Repeat",
     "fullScreen": "Full screen",
     "exitFullScreen": "Exit full screen",
     "search": "Search",
@@ -56,10 +59,5 @@
     "previous": "Previous",
     "next": "Next",
     "apply": "Apply",
-    "customizeInput": "Customize input",
-    "shortcuts": "Shortcuts",
-    "shortcutNames": {
-        "ca": "Change algorithm",
-        "cpl": "Change programming language"
-    }
+    "customizeInput": "Customize input"
 }

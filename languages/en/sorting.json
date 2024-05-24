@@ -7,9 +7,9 @@
                 "Simple, intuitive, easy to understand.",
                 "Efficient for small arrays."
             ],
-            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "disadvantage": "Poor performance with large arrays.",
             "application": [
-                "Often used for teaching and illustrating basic concepts of sorting algorithms.",
+                "Commonly used for teaching and illustrating basic sorting algorithms.",
                 "Simple and efficient enough for small data arrays."
             ]
         },
@@ -45,7 +45,7 @@
                 "Simple, intuitive, easy to understand.",
                 "Efficient for small arrays."
             ],
-            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "disadvantage": "Poor performance with large arrays.",
             "application": [
                 "Often used for teaching and illustrating basic concepts of sorting algorithms.",
                 "Simple and efficient enough for small data arrays."
@@ -87,7 +87,7 @@
                 "Simple, intuitive, easy to understand.",
                 "Efficient for small arrays."
             ],
-            "disadvantage": "Slow, inefficient when applied to large data arrays.",
+            "disadvantage": "Poor performance with large arrays.",
             "application": [
                 "Simple and efficient enough for small data arrays.",
                 "Useful when the input data is an array that is nearly sorted.",
@@ -128,7 +128,7 @@
         "name": "Quick Sort",
         "informations": {
             "description": "The {{Quick Sort}} algorithm is a popular sorting algorithm based on the divide-and-conquer principle. It works by selecting an element as a pivot and partitioning the remaining elements of the array into two groups, one group with elements smaller than the pivot and the other group with elements larger than the pivot. Then, the algorithm continues applying the same process to these two subgroups recursively, resulting in a sorted array.",
-            "advantage": "Fast, good for sorting large arrays.",
+            "advantage": "Good performance, even with large arrays.",
             "application": [
                 "Utilized in real-world applications to sort large arrays.",
                 "Used in algorithms for searching and classifying data."
@@ -192,7 +192,7 @@
         "constraints": [
             "Values are separated by whitespace.",
             "Values are integers ranging from -9 to 99.",
-            "There must be at least 5 values."
+            "There must be at least 7 values."
         ]
     }
 }

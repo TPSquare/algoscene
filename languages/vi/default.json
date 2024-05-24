@@ -5,6 +5,9 @@
     "reload___": "Tải lại trang để áp dụng thay đổi",
     "setting": "Cài đặt",
     "play": "Phát",
+    "pause": "Tạm ngừng",
+    "continue": "Tiếp tục",
+    "repeat": "Lặp lại",
     "fullScreen": "Toàn màn hình",
     "exitFullScreen": "Thoát khỏi chế độ toàn màn hình",
     "search": "Tìm kiếm",
@@ -56,10 +59,5 @@
     "previous": "Trước đó",
     "next": "Kế tiếp",
     "apply": "Áp dụng",
-    "customizeInput": "Tùy chỉnh đầu vào",
-    "shortcuts": "Các phím tắt",
-    "shortcutNames": {
-        "ca": "Đổi thuật toán",
-        "cpl": "Đổi ngôn ngữ lập trình"
-    }
+    "customizeInput": "Tùy chỉnh đầu vào"
 }

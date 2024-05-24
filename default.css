@@ -583,6 +583,7 @@ code {
                 transition: ease-in-out 200ms;
             }
 
+
             .copy-code span.show {
                 transform: translateX(-50%) scale(1);
                 bottom: 150%;
@@ -1033,10 +1034,24 @@ footer {
         }
 
         .line {
+            position: relative;
             margin: 0 5px;
             height: 10px;
+            width: 100px;
             border-radius: 5px;
             background-color: gray;
+            overflow: hidden;
+        }
+        .line::before {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            width: calc(100% / var(--len));
+            height: 100%;
+            top: 0;
+            left: calc(1% * (var(--cur) / var(--len) * 100));
+            background-color: black;
+            transition: left 1s;
         }
 
         .close {

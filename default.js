@@ -5,7 +5,14 @@ import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
 const url = `../languages/${localData.lang}/default.json`,
     langData = await fetch(url).then(async (r) => r.json()),
-    VERSION = 'beta-1.2';
+    VERSION = '2.0 (Preview)';
+// desktopOS = (() => {
+//     const userAgent = navigator.userAgent;
+//     if (userAgent.includes('Win')) return 'Windows';
+//     if (userAgent.includes('Mac')) return 'MacOS';
+//     if (userAgent.includes('Linux')) return 'Linux';
+//     return 'Mobile';
+// })();
 
 new (class {
     constructor() {
@@ -37,8 +44,6 @@ new (class {
                     coms = {},
                     cmts = {};
 
-                this.langData = lang._;
-
                 for (const key in algoConfigs) {
                     algos[key] = lang[key].name;
                     info[key] = lang[key].informations;
@@ -52,6 +57,9 @@ new (class {
                 document.body.codeBox.code.save(codes, cmts, shortcuts);
                 document.body.rightBox.complexity.save(coms);
                 document.update();
+
+                // this.langData = lang._;
+                this.customInput.setConstraints(lang._.constraints);
             },
             delayDuration: localData.delay,
             updateDelayDuration() {
@@ -178,7 +186,7 @@ new (class {
                 title: langData.___guide,
                 innerHTML:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
-                onclick: () => document.body.popup.guide.handle(),
+                onclick: () => document.body.popup.guideMessageElm.controller.run(),
             }),
             right = document.createElement({
                 className: 'right',
@@ -263,20 +271,6 @@ new (class {
                 children: [algoListWrapper],
             });
 
-        window.addEventListener('keydown', (e) => {
-            if (e.ctrlKey)
-                switch (e.key) {
-                    case 'ArrowUp':
-                        e.preventDefault();
-                        algoList.up();
-                        break;
-                    case 'ArrowDown':
-                        e.preventDefault();
-                        algoList.down();
-                        break;
-                }
-        });
-
         const playPauseBtn = document.createElement({
                 tag: 'button',
                 type: 'button',
@@ -296,20 +290,25 @@ new (class {
                         if (this.isPausing) {
                             this.isPausing = false;
                             this.innerHTML = this.pauseIcon;
+                            this.title = langData.pause;
                         } else {
                             this.isPausing = true;
                             this.innerHTML = this.playIcon;
+                            this.title = langData.continue;
                         }
                     } else {
                         this.isPlaying = true;
                         this.innerHTML = this.pauseIcon;
+                        this.title = langData.pause;
                         await this.click();
                         this.isPausing = true;
                         this.innerHTML = this.resetIcon;
+                        this.title = langData.repeat;
                         await ALGOSCENE.delay(0);
                         this.isPausing = false;
                         this.isPlaying = false;
                         this.innerHTML = this.playIcon;
+                        this.title = langData.play;
                         ALGOSCENE.resetFrame.reset();
                     }
                 },
@@ -371,6 +370,7 @@ new (class {
             className: 'setting',
             title: langData.setting,
             onclick(e) {
+                if (!e) e = {target: this};
                 if (e.target.classList.contains('setting'))
                     if (this.classList.contains('show')) this.classList.remove('show');
                     else this.classList.add('show');
@@ -580,19 +580,6 @@ new (class {
                 );
                 document.update();
             },
-        });
-        window.addEventListener('keydown', (e) => {
-            if (e.ctrlKey)
-                switch (e.key) {
-                    case 'ArrowLeft':
-                        e.preventDefault();
-                        prolangList.left();
-                        break;
-                    case 'ArrowRight':
-                        e.preventDefault();
-                        prolangList.right();
-                        break;
-                }
         });
 
         const textarea = document.createElement({
@@ -820,19 +807,13 @@ new (class {
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
-                switch (localData.lang) {
-                    case 'vi':
-                        return `<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${content}</span>`;
-                    case 'en':
-                        return `<span>${content}</span>`;
-                }
-            },
-            newShortcut = (name, keys) =>
-                `<li>${name}:
-                    <section>${keys
-                        .map((e) => `<span>${e}</span>`)
-                        .join('&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;')}</section>
-                </li>`;
+            switch (localData.lang) {
+                case 'vi':
+                    return `<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${content}</span>`;
+                case 'en':
+                    return `<span>${content}</span>`;
+            }
+        };
 
         const info = document.createElement({
             className: 'info',
@@ -865,29 +846,27 @@ new (class {
             handle,
         });
 
-        const guide = document.createElement({
-            className: 'guide',
-            key: 'guide',
-            children: [
-                document.createElement(closeConfig),
-                document.createElement({
-                    tag: 'fieldset',
-                    innerHTML:
-                        `<legend>${langData.___guide}</legend>` +
-                        logoHTML +
-                        `<div class="start-guide-wrapper"><span>${langData.startGuide}:</span><button class="start-guide" type="button" title="${langData.startGuide}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg></button></div>` +
-                        lineHTML +
-                        newParagraph(langData.shortcuts + ':') +
-                        `<ul class="shortcuts">${[
-                            newShortcut(langData.shortcutNames.ca, ['CTRL', '&and;']),
-                            newShortcut(langData.shortcutNames.ca, ['CTRL', '&or;']),
-                            newShortcut(langData.shortcutNames.cpl, ['CTRL', '<']),
-                            newShortcut(langData.shortcutNames.cpl, ['CTRL', '>'])
-                        ].join('')}</ul>`,
-                }),
-            ],
-            handle,
-        });
+        // const guide = document.createElement({
+        //     className: 'guide',
+        //     key: 'guide',
+        //     children: [
+        //         document.createElement(closeConfig),
+        //         document.createElement({
+        //             tag: 'fieldset',
+        //             innerHTML:
+        //                 `<legend>${langData.___guide}</legend>` +
+        //                 logoHTML +
+        //                 `<div class="start-guide-wrapper"><span>${langData.startGuide}:</span><button class="start-guide" type="button" title="${langData.startGuide}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg></button></div>`,
+        //         }),
+        //     ],
+        //     handle,
+        // });
+        // guide.querySelector('.start-guide').set('onclick', function () {
+        //     guide.handle();
+        //     overlay.handleElms();
+        //     guideMessageElm.handle();
+        //     guideController.run();
+        // });
 
         const message = document.createElement({
                 className: 'message',
@@ -904,7 +883,7 @@ new (class {
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 256a208 208 0 1 1 416 0A208 208 0 1 1 48 256zm464 0A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM217.4 376.9c4.2 4.5 10.1 7.1 16.3 7.1c12.3 0 22.3-10 22.3-22.3V304h96c17.7 0 32-14.3 32-32V240c0-17.7-14.3-32-32-32H256V150.3c0-12.3-10-22.3-22.3-22.3c-6.2 0-12.1 2.6-16.3 7.1L117.5 242.2c-3.5 3.8-5.5 8.7-5.5 13.8s2 10.1 5.5 13.8l99.9 107.1z"/></svg>',
                 onclick() {
                     if (!this.disabled) {
-                        if (!guideController.previous()) this.disable();
+                        if (!guideMessageElm.controller.previous()) this.disable();
                         if (nextBtn.disabled) nextBtn.enable();
                     }
                 },
@@ -926,7 +905,7 @@ new (class {
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1c-4.2-4.5-10.1-7.1-16.3-7.1C266 128 256 138 256 150.3V208H160c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h96v57.7c0 12.3 10 22.3 22.3 22.3c6.2 0 12.1-2.6 16.3-7.1l99.9-107.1c3.5-3.8 5.5-8.7 5.5-13.8s-2-10.1-5.5-13.8L294.6 135.1z"/></svg>',
                 onclick() {
                     if (!this.disabled) {
-                        if (!guideController.next()) this.disable();
+                        if (!guideMessageElm.controller.next()) this.disable();
                         if (previousBtn.disabled) previousBtn.enable();
                     }
                 },
@@ -939,7 +918,15 @@ new (class {
                     this.classList.remove('disabled');
                 },
             }),
-            line = document.createElement({className: 'line', style: 'width: 100px;'}),
+            line = document.createElement({
+                className: 'line',
+                setLen(len) {
+                    this.style.setProperty('--len', len);
+                },
+                setCurrent(cur) {
+                    this.style.setProperty('--cur', cur);
+                },
+            }),
             bottombar = document.createElement({
                 className: 'bottombar',
                 children: [previousBtn, line, nextBtn],
@@ -947,6 +934,7 @@ new (class {
             guideMessageElm = document.createElement({
                 tag: 'section',
                 className: 'guide-box',
+                key: 'guideMessageElm',
                 children: [
                     message,
                     bottombar,
@@ -966,130 +954,139 @@ new (class {
                     if (this.classList.contains('show')) this.classList.remove('show');
                     else this.classList.add('show');
                 },
+                controller: new (class {
+                    constructor() {
+                        this.identifier = 2001;
+                        this.config = [
+                            () =>
+                                this.focusTo(
+                                    document.body.main.frame,
+                                    langData.guideMessage.algorithm___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.left.algoListWrapper,
+                                    langData.guideMessage.select___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.right.playPauseBtn,
+                                    langData.guideMessage.run___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.right.customInputBtn,
+                                    langData.guideMessage.change___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.right.settingBtn,
+                                    langData.guideMessage.set___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.right.screenBtn,
+                                    langData.guideMessage.toggle___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.codeBox.code,
+                                    langData.guideMessage.___code
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.codeBox.code.querySelector('span'),
+                                    langData.guideMessage.hover___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.codeBox.top.prolangList,
+                                    langData.guideMessage.choose___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.codeBox.top.right.copyCodeBtn,
+                                    langData.guideMessage.copy___
+                                ),
+                            () =>
+                                this.focusTo(
+                                    document.body.rightBox,
+                                    langData.guideMessage.information___
+                                ),
+                        ];
+                        this.length = this.config.length;
+                        line.setLen(this.length);
+                    }
+                    run() {
+                        overlay.handleElms();
+                        guideMessageElm.handle();
+
+                        this.current = 0;
+                        this.config[0]();
+                        previousBtn.disable();
+                        nextBtn.enable();
+                        line.setCurrent(this.current);
+                    }
+                    next() {
+                        this.config[++this.current]();
+                        line.setCurrent(this.current);
+                        if (this.current + 1 >= this.length) return false;
+                        return true;
+                    }
+                    previous() {
+                        this.config[--this.current]();
+                        line.setCurrent(this.current);
+                        if (this.current - 1 < 0) return false;
+                        return true;
+                    }
+                    async focusTo(elm, text) {
+                        message.setText(text);
+
+                        await this.scrollToElement(elm);
+
+                        const bcr = elm.getBoundingClientRect(),
+                            t = 5,
+                            top = bcr.top - t + 'px',
+                            bottom = window.innerHeight - bcr.top - bcr.height - t + 'px',
+                            left = bcr.left - t + 'px',
+                            right = window.innerWidth - bcr.left - bcr.width - t + 'px',
+                            height = bcr.height + t * 2 + 'px';
+                        overlay.elmTop.setStyle({height: top});
+                        overlay.elmBottom.setStyle({height: bottom});
+                        overlay.elmLeft.setStyle({top, height, width: left});
+                        overlay.elmRight.setStyle({top, height, width: right});
+
+                        const rect = guideMessageElm.getBoundingClientRect(),
+                            styles = {},
+                            e = 20;
+                        if (bcr.top + bcr.height / 2 < window.innerHeight / 2)
+                            styles.top = bcr.top + bcr.height - e;
+                        else styles.top = bcr.top - rect.height - e;
+                        if (styles.top < 0) styles.top = 10;
+                        styles.top += 'px';
+                        if (bcr.left < window.innerWidth / 2) styles.left = left;
+                        else styles.left = bcr.left + bcr.width + t - rect.width + 'px';
+                        guideMessageElm.style = '';
+                        guideMessageElm.setStyle(styles);
+                    }
+                    scrollToElement(element) {
+                        return new Promise((resolve) => {
+                            let isScrolling;
+                            function onScroll() {
+                                clearTimeout(isScrolling);
+                                isScrolling = setTimeout(() => {
+                                    window.removeEventListener('scroll', onScroll);
+                                    resolve();
+                                }, 100);
+                            }
+                            window.addEventListener('scroll', onScroll);
+                            window.dispatchEvent(new Event('scroll'));
+                            element.scrollIntoView({behavior: 'smooth', block: 'center'});
+                        });
+                    }
+                })(),
             });
         previousBtn.disable();
-
-        const guideController = new (class {
-            constructor() {
-                this.identifier = 2001;
-                this.config = [
-                    () =>
-                        this.focusTo(document.body.main.frame, langData.guideMessage.algorithm___),
-                    () =>
-                        this.focusTo(
-                            document.body.main.bottombar.left.algoListWrapper,
-                            langData.guideMessage.select___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.main.bottombar.right.playPauseBtn,
-                            langData.guideMessage.run___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.main.bottombar.right.customInputBtn,
-                            langData.guideMessage.change___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.main.bottombar.right.settingBtn,
-                            langData.guideMessage.set___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.main.bottombar.right.screenBtn,
-                            langData.guideMessage.toggle___
-                        ),
-                    () => this.focusTo(document.body.codeBox.code, langData.guideMessage.___code),
-                    () =>
-                        this.focusTo(
-                            document.body.codeBox.code.querySelector('span'),
-                            langData.guideMessage.hover___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.codeBox.top.prolangList,
-                            langData.guideMessage.choose___
-                        ),
-                    () =>
-                        this.focusTo(
-                            document.body.codeBox.top.right.copyCodeBtn,
-                            langData.guideMessage.copy___
-                        ),
-                    () =>
-                        this.focusTo(document.body.rightBox, langData.guideMessage.information___),
-                ];
-                this.length = this.config.length;
-            }
-            run() {
-                this.current = 0;
-                this.config[0]();
-                previousBtn.disable();
-                nextBtn.enable();
-            }
-            next() {
-                this.config[++this.current]();
-                if (this.current + 1 >= this.length) return false;
-                return true;
-            }
-            previous() {
-                this.config[--this.current]();
-                if (this.current - 1 < 0) return false;
-                return true;
-            }
-            async focusTo(elm, text) {
-                message.setText(text);
-
-                await this.scrollToElement(elm);
-
-                const bcr = elm.getBoundingClientRect(),
-                    t = 5,
-                    top = bcr.top - t + 'px',
-                    bottom = window.innerHeight - bcr.top - bcr.height - t + 'px',
-                    left = bcr.left - t + 'px',
-                    right = window.innerWidth - bcr.left - bcr.width - t + 'px',
-                    height = bcr.height + t * 2 + 'px';
-                overlay.elmTop.setStyle({height: top});
-                overlay.elmBottom.setStyle({height: bottom});
-                overlay.elmLeft.setStyle({top, height, width: left});
-                overlay.elmRight.setStyle({top, height, width: right});
-
-                const rect = guideMessageElm.getBoundingClientRect(),
-                    styles = {},
-                    e = 20;
-                if (bcr.top + bcr.height / 2 < window.innerHeight / 2)
-                    styles.top = bcr.top + bcr.height - e;
-                else styles.top = bcr.top - rect.height - e;
-                if (styles.top < 0) styles.top = 10;
-                styles.top += 'px';
-                if (bcr.left < window.innerWidth / 2) styles.left = left;
-                else styles.left = bcr.left + bcr.width + t - rect.width + 'px';
-                guideMessageElm.style = '';
-                guideMessageElm.setStyle(styles);
-            }
-            scrollToElement(element) {
-                return new Promise((resolve) => {
-                    let isScrolling;
-                    function onScroll() {
-                        clearTimeout(isScrolling);
-                        isScrolling = setTimeout(() => {
-                            window.removeEventListener('scroll', onScroll);
-                            resolve();
-                        }, 100);
-                    }
-                    window.addEventListener('scroll', onScroll);
-                    window.dispatchEvent(new Event('scroll'));
-                    element.scrollIntoView({behavior: 'smooth', block: 'center'});
-                });
-            }
-        })();
-
-        guide.querySelector('.start-guide').set('onclick', function () {
-            guide.handle();
-            overlay.handleElms();
-            guideMessageElm.handle();
-            guideController.run();
-        });
 
         const constraints = document.createElement({
                 tag: 'i',
@@ -1100,7 +1097,15 @@ new (class {
                 tag: 'textarea',
                 title: langData.customizeInput,
                 handle() {
-                    let value = this.value.trim();
+                    let value = this.value
+                        .split('\n')
+                        .map((e) => {
+                            e = e.trim();
+                            while (e.includes('  ')) e = e.replaceAll('  ', ' ');
+                            return e;
+                        })
+                        .join(' ')
+                        .trim();
                     while (value.includes('  ')) value = value.replaceAll('  ', ' ');
                     return value;
                 },
@@ -1178,7 +1183,7 @@ new (class {
         const popup = document.createElement({
             id: 'popup',
             key: 'popup',
-            children: [overlay, guide, info, guideMessageElm, customInput],
+            children: [overlay, info, guideMessageElm, customInput],
         });
 
         document.body.appendChild(popup);

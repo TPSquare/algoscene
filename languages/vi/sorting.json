@@ -7,9 +7,9 @@
                 "Đơn giản, trực quan, dễ hiểu.",
                 "Hiệu quả với mảng nhỏ."
             ],
-            "disadvantage": "Chậm, không hiệu quả khi áp dụng cho các mảng dữ liệu lớn.",
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn.",
             "application": [
-                "Thường được sử dụng để giảng dạy và minh họa các khái niệm cơ bản về thuật toán sắp xếp.",
+                "Thường được sử dụng để giảng dạy và minh họa cơ bản về thuật toán sắp xếp.",
                 "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ."
             ]
         },
@@ -45,7 +45,7 @@
                 "Đơn giản, trực quan, dễ hiểu.",
                 "Hiệu quả với mảng nhỏ."
             ],
-            "disadvantage": "Chậm, không hiệu quả khi áp dụng cho các mảng dữ liệu lớn.",
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn.",
             "application": [
                 "Thường được sử dụng để giảng dạy và minh họa các khái niệm cơ bản về thuật toán sắp xếp.",
                 "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ."
@@ -87,7 +87,7 @@
                 "Đơn giản, trực quan, dễ hiểu.",
                 "Hiệu quả với mảng nhỏ."
             ],
-            "disadvantage": "Chậm, không hiệu quả khi áp dụng cho các mảng dữ liệu lớn.",
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn.",
             "application": [
                 "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ.",
                 "Hữu ích khi dữ liệu đầu vào là một mảng gần như đã được sắp xếp.",
@@ -128,7 +128,7 @@
         "name": "Sắp xếp nhanh",
         "informations": {
             "description": "Thuật toán {{sắp xếp nhanh}} (Quick Sort) là một thuật toán sắp xếp phổ biến dựa trên nguyên tắc chia để trị. Nó hoạt động bằng cách chọn một phần tử làm điểm chốt và phân chia các phần tử khác của mảng thành hai nhóm, một nhóm gồm các phần tử nhỏ hơn điểm chốt và nhóm kia gồm các phần tử lớn hơn điểm chốt. Sau đó, thuật toán sẽ tiếp tục áp dụng cùng một quy trình cho hai nhóm con này, kết quả sẽ là một mảng đã được sắp xếp.",
-            "advantage": "Nhanh, tốt cho việc sắp xếp các mảng lớn.",
+            "advantage": "Hiệu suất tốt, kể cả với mảng lớn.",
             "application": [
                 "Được sử dụng trong các ứng dụng thực tế để sắp xếp các mảng lớn.",
                 "Được sử dụng trong các thuật toán tìm kiếm và phân loại dữ liệu."
@@ -192,7 +192,7 @@
         "constraints": [
             "Các giá trị cách nhau bởi khoảng trắng.",
             "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99.",
-            "Có tối thiểu 5 giá trị."
+            "Có tối thiểu 7 giá trị."
         ]
     }
 }
