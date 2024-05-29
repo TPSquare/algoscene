@@ -15,6 +15,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">void</span> <span class="mtk16">bubbleSort</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span>',
                     '&tab2;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">-</span> <span class="mtk10">i</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span> <span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span>',
@@ -45,6 +48,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">void</span> <span class="mtk16">selectionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span> <span class="bracket-highlighting-1">{</span>',
                     '&tab2;<span class="mtk6">int</span> <span class="mtk10">min</span> <span class="mtk3">=</span> <span class="mtk10">i</span><span class="mtk1">;</span>',
@@ -80,6 +86,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">void</span> <span class="mtk16">insertionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">1</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span> <span class="bracket-highlighting-1">{</span>',
                     '&tab2;<span class="mtk6">int</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk10">i</span><span class="mtk1">,</span>',
@@ -124,6 +133,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">void</span> <span class="mtk16">quickSort</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
                     '&tab1;<span class="mtk6">int</span> <span class="mtk10">pivot</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="bracket-highlighting-2">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-1">]</span><span class="mtk1">,</span>',
@@ -191,18 +203,18 @@ ALGOSCENE.customInput.onApply = function (value) {
     if (value.length < 7) isValid = false;
     if (isValid) {
         ARRAY = value.slice(0, 7);
-        ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
+        ALGOSCENE.frameHTML = getframeHTML();
         ALGOSCENE.resetAction();
         ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
         ALGOSCENE.customInput.notify.success();
     } else ALGOSCENE.customInput.notify.failure();
 };
 
-const getDefaultFrameHTML = () =>
+const getframeHTML = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
     `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>`;
 
-ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
+ALGOSCENE.frameHTML = getframeHTML();
 
 const colors = ['', 'yellowgreen', 'red'];
 

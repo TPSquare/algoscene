@@ -15,6 +15,9 @@
         },
         "comments": {
             "cpp": [
+                "",
+                "",
+                "",
                 "Khai báo hàm {bbs}.",
                 "Vòng lặp ngoài dùng giúp cho phép lặp qua mảng nhiều lần để đẩy phần tử lớn nhất (sắp xếp tăng dần) hoặc nhỏ nhất (sắp xếp giảm dần) vào vị trí cuối cùng của mảng.",
                 "Vòng lặp trong dùng so sánh các cặp phần tử liền kề và hoán đổi nếu chúng không theo thứ tự.",
@@ -22,18 +25,18 @@
                 "Hoán đổi hai phần tử."
             ],
             "js": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "{{{cpp,2}}}",
                 "{{{cpp,3}}}",
-                "{{{cpp,4}}}"
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}"
             ],
             "py": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "{{{cpp,2}}}",
                 "{{{cpp,3}}}",
-                "{{{cpp,4}}}"
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}"
             ]
         }
     },
@@ -53,6 +56,9 @@
         },
         "comments": {
             "cpp": [
+                "",
+                "",
+                "",
                 "Khai báo hàm {slts}.",
                 "Vòng lặp ngoài giúp lặp qua mảng nhiều lần để tìm và đặt phần tử nhỏ nhất hoặc lớn nhất của phần mảng chưa được sắp xếp vào vị trí đúng của nó.",
                 "Khởi tạo biến {min} dùng để giữ vị trí của phần tử nhỏ nhất trong phần mảng chưa được sắp xếp.",
@@ -61,21 +67,21 @@
                 "Hoán đổi hai phần tử."
             ],
             "js": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "{{{cpp,2}}}",
                 "{{{cpp,3}}}",
                 "{{{cpp,4}}}",
-                "{{{cpp,5}}}"
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}"
             ],
             "py": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "{{{cpp,2}}}",
                 "{{{cpp,3}}}",
                 "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}",
                 "Cập nhật {min}.",
-                "{{{cpp,5}}}"
+                "{{{cpp,8}}}"
             ]
         }
     },
@@ -96,6 +102,9 @@
         },
         "comments": {
             "cpp": [
+                "",
+                "",
+                "",
                 "Khai báo hàm {ists}.",
                 "Vòng lặp ngoài để duyệt qua các vị trí của mảng. Phần tử đầu tiên được xem là đã sắp xếp.",
                 "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp.",
@@ -105,22 +114,22 @@
                 "Chèn {current} vào vị trí đúng."
             ],
             "js": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "{{{cpp,2}}}",
                 "{{{cpp,3}}}",
                 "{{{cpp,4}}}",
                 "{{{cpp,5}}}",
-                "{{{cpp,6}}}"
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}"
             ],
             "py": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
-                "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp. Khởi tạo {current} để lưu giữ giá trị của phần tử hiện đang cần tìm vị trí.",
+                "{{{cpp,3}}}",
                 "{{{cpp,4}}}",
-                "{{{cpp,5}}}",
+                "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp. Khởi tạo {current} để lưu giữ giá trị của phần tử hiện đang cần tìm vị trí.",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
                 "Giảm {j} để tiếp tục duyệt sang trái.",
-                "{{{cpp,6}}}"
+                "{{{cpp,9}}}"
             ]
         }
     },
@@ -136,6 +145,9 @@
         },
         "comments": {
             "cpp": [
+                "",
+                "",
+                "",
                 "Khai báo hàm {qs}.",
                 "Nếu {left} lớn hơn hoặc bằng {right}, nghĩa là đoạn mảng cần sắp xếp chỉ có một phần tử hoặc không còn phần tử nào để sắp xếp, hàm sẽ dừng lại và không thực hiện gì thêm.",
                 "Khởi tạo {pivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
@@ -151,15 +163,15 @@
                 "Tiếp tục sắp xếp đoạn mảng từ {i} đến {right}."
             ],
             "js": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
                 "Khởi tạo {jspivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
                 "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {jspivot}.",
                 "Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {jspivot}.",
-                "{{{cpp,5}}}",
+                "{{{cpp,8}}}",
                 "Tăng {i} cho đến khi tìm thấy phần tử lớn hơn hoặc bằng {jspivot}.",
                 "Giảm {j} cho đến khi tìm thấy phần tử nhỏ hơn hoặc bằng {jspivot}.",
-                "{{{cpp,8}}}",
+                "{{{cpp,11}}}",
                 "Hoán đổi hai phần tử để bên trái là các phần tử nhỏ hơn hoặc bằng {jspivot}, bên phải là các phần tử lớn hơn hoặc bằng {jspivot}.",
                 "Tăng {i} cho lần tìm tiếp theo.",
                 "Giảm {j} cho lần tìm tiếp theo.",
@@ -169,22 +181,22 @@
                 "Tiếp tục sắp xếp đoạn mảng từ {i} đến {right}."
             ],
             "py": [
-                "{{{cpp,0}}}",
-                "{{{cpp,1}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
                 "Thoát khỏi hàm.",
-                "{{{cpp,2}}}",
-                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
                 "{{{cpp,5}}}",
+                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
+                "{{{cpp,8}}}",
                 "Khi {i} chưa tìm thấy phần tử lớn hơn hoặc bằng {pivot}.",
                 "Tăng {i}.",
                 "Khi {j} chưa tìm thấy phần tử nhỏ hơn hoặc bằng {pivot}.",
                 "Giảm {j}.",
-                "{{{cpp,8}}}",
+                "{{{cpp,11}}}",
                 "Hoán đổi hai phần tử để bên trái là các phần tử nhỏ hơn hoặc bằng {pivot}, bên phải là các phần tử lớn hơn hoặc bằng {pivot}.",
                 "{{{js,10}}}",
                 "{{{js,11}}}",
-                "{{{cpp,11}}}",
-                "{{{cpp,12}}}"
+                "{{{cpp,14}}}",
+                "{{{cpp,15}}}"
             ]
         }
     },

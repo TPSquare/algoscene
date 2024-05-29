@@ -1,0 +1,35 @@
+#frame {
+    background-color: #E0EFF1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    div {
+        display: flex;
+
+        span:first-child {
+            border-left-width: 0.3em;
+        }
+
+        span:last-child {
+            border-right-width: 0.3em;
+        }
+    }
+
+    div:first-child span {
+        border-top-width: 0.3em;
+    }
+
+    div:last-child span {
+        border-bottom-width: 0.3em;
+    }
+
+    span {
+        display: inline-block;
+        height: 7em;
+        width: 7em;
+        background-color: white;
+        border: 0.1em solid black;
+    }
+}

@@ -2,6 +2,7 @@
 
 const localData = new (class {
     constructor() {
+        this.version = '3.0 (Preview)';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
@@ -34,7 +35,7 @@ const localData = new (class {
         localStorage.setItem(this.key, JSON.stringify(data));
     }
     async getText() {
-        const url = `../languages/${this.lang}/default.json`,
+        const url = `/languages/${this.lang}/default.json`,
             {reload___} = await fetch(url).then(async (r) => r.json());
         this.reload___ = reload___;
     }

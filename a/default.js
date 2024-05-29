@@ -1,11 +1,12 @@
 'use strict';
 
-import localData from './local-data.js';
+import localData from '/local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
-const url = `../languages/${localData.lang}/default.json`,
-    langData = await fetch(url).then(async (r) => r.json()),
-    VERSION = '2.0 (Preview)';
+const langData = Object.assign(
+    await fetch(`/languages/${localData.lang}/default.json`).then(async (r) => r.json()),
+    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
+);
 // desktopOS = (() => {
 //     const userAgent = navigator.userAgent;
 //     if (userAgent.includes('Win')) return 'Windows';
@@ -72,7 +73,7 @@ new (class {
                 const t = localData.delay / 10;
                 while (this.playPauseBtn.isPausing) await window.delay(t);
             },
-            defaultFrameHTML: '',
+            frameHTML: '',
             actions: {},
             setAction(key, action) {
                 this.actions[key] = action;
@@ -80,14 +81,14 @@ new (class {
             },
             runAction(key) {
                 this.currentAction = key;
-                this.frameElm.innerHTML = this.defaultFrameHTML;
+                this.frameElm.innerHTML = this.frameHTML;
                 if (this.actions[key]) this.actions[key]();
                 else console.warn(`There are no actions for '${key}'`);
                 this.frameElm.className = key;
                 ALGOSCENE.playPauseBtn.reset();
             },
             resetAction() {
-                this.frameElm.innerHTML = this.defaultFrameHTML;
+                this.frameElm.innerHTML = this.frameHTML;
                 this.actions[this.currentAction]();
                 ALGOSCENE.playPauseBtn.reset();
             },
@@ -107,7 +108,7 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `../languages/${localData.lang}/${key}.json`;
+            const url = `/languages/${localData.lang}/a/${key}.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
@@ -138,7 +139,7 @@ new (class {
         document.body.appendChild(
             document.createElement({
                 id: 'bg',
-                innerHTML: '<img class="brc" src="../static/bottom-right-decoration.svg" alt="">',
+                innerHTML: '<img class="brc" src="/static/bottom-right-decoration.svg" alt="">',
             })
         );
     }
@@ -147,14 +148,14 @@ new (class {
                 tag: 'button',
                 type: 'button',
                 className: 'home',
+                onclick: () => (window.location.href = '/'),
                 innerHTML:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg>',
                 title: langData.return___,
             }),
             title = document.createElement({
                 className: 'title',
-                innerHTML:
-                    'ALGOSCENE<svg viewBox="0 0 212 45" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, sans-serif" author="Hbat(PHHN)"><text fill="#475ab9" font-size="2.99998px" x="38.594646" y="4.856184">+</text><text fill="#ffffff" font-size="3.99998px" x="68.69146" y="7.8561654">+</text><text fill="#475ab9" font-size="3.99998px" x="13.732798" y="41.855953">+</text><text fill="#475ab9" font-size="3.99998px" x="72.941429" y="37.85598">+</text><text fill="#475ab9" font-size="3.99998px" x="96.979279" y="2.8561957">+</text><text fill="#ffffff" font-size="2.99998px" x="46.912594" y="42.855949">+</text><text fill="#ffffff" font-size="3.99998px" x="103.61924" y="44.855938">+</text><text fill="#ffffff" font-size="2.99998px" x="124.41412" y="40.855961">+</text><text fill="#ffffff" font-size="3.99998px" x="-0.086718291" y="15.856116">+</text><text fill="#ffffff" font-size="3.99998px" x="161.50887" y="40.855961">+</text><text fill="#ffffff" font-size="4.99997px" x="118.47816" y="4.856184">+</text><text fill="#ffffff" font-size="2.99998px" x="128.36009" y="6.8561711">+</text><text fill="#ffffff" font-size="3.99998px" x="192.42171" y="4.856184">+</text><text fill="#ffffff" font-size="3.99998px" x="210.09358" y="35.855991">+</text><text fill="#ffffff" font-size="4.99997px" x="9.9238205" y="5.8561783">+</text><text fill="#475ab9" font-size="4.99997px" x="172.76381" y="12.856133">+</text><text fill="#475ab9" font-size="3.99998px" x="80.338387" y="42.855949">+</text><text fill="#475ab9" font-size="4.99997px" x="158.80688" y="2.8561957">+</text><text fill="#ffffff" font-size="2.99998px" x="181.28975" y="44.855938">+</text></svg>',
+                innerHTML: 'ALGOSCENE<img src="/static/name.svg" alt="">',
             }),
             left = document.createElement({className: 'left', children: [homeBtn, title]});
 
@@ -762,7 +763,7 @@ new (class {
             tag: 'footer',
             innerHTML: `
             <span>© 2024 TPSquare</span>
-            <span>v${VERSION}</span>`,
+            <span>v${localData.version}</span>`,
         });
         document.body.appendChild(footer);
     }
@@ -803,7 +804,7 @@ new (class {
             },
         };
 
-        const logoHTML = '<div class="logo"><img src="../static/logo-with-name.svg" alt=""></div>',
+        const logoHTML = '<div class="logo"><img src="/static/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
@@ -840,7 +841,7 @@ new (class {
                             <li>Hbat - ${langData.graphicDesigner}</li>
                         </ul>` +
                         lineHTML +
-                        `<div class="footer"><span>© ${langData.copyright___} TPSquare</span><span>${langData.version}: ${VERSION}</span></div>`,
+                        `<div class="footer"><span>© ${langData.copyright___} TPSquare</span><span>${langData.version}: ${localData.version}</span></div>`,
                 }),
             ],
             handle,
@@ -988,6 +989,12 @@ new (class {
                                     document.body.main.bottombar.right.screenBtn,
                                     langData.guideMessage.toggle___
                                 ),
+
+                            () =>
+                                this.focusTo(
+                                    document.body.rightBox,
+                                    langData.guideMessage.information___
+                                ),
                             () =>
                                 this.focusTo(
                                     document.body.codeBox.code,
@@ -1007,11 +1014,6 @@ new (class {
                                 this.focusTo(
                                     document.body.codeBox.top.right.copyCodeBtn,
                                     langData.guideMessage.copy___
-                                ),
-                            () =>
-                                this.focusTo(
-                                    document.body.rightBox,
-                                    langData.guideMessage.information___
                                 ),
                         ];
                         this.length = this.config.length;

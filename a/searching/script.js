@@ -14,6 +14,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">int</span> <span class="mtk16">sequentialSearch</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span>',
                     '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-2">[</span><span class="mtk10">i</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk10">i</span><span class="mtk1">;</span>',
@@ -46,6 +49,9 @@ await ALGOSCENE.init(
                     '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
                 ],
                 cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
                     '<span class="mtk6">int</span> <span class="mtk16">binarySearch</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
                     '&tab1;<span class="mtk6">int</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span>',
                     '&tab2;<span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
@@ -103,21 +109,21 @@ ALGOSCENE.customInput.onApply = function (value) {
     if (isValid) {
         TARGET = value[0];
         ARRAY = value.slice(1, 13);
-        ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
+        ALGOSCENE.frameHTML = getframeHTML();
         ALGOSCENE.resetAction();
         ALGOSCENE.customInput.setCurrentValue(`${String(TARGET)}\n${ARRAY.join(' ')}`);
         ALGOSCENE.customInput.notify.success();
     } else ALGOSCENE.customInput.notify.failure();
 };
 
-const getDefaultFrameHTML = () =>
+const getframeHTML = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
     `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>` +
     `<div class="target"><span>${TARGET}</span>: <span>?</span></div>`;
 
-ALGOSCENE.defaultFrameHTML = getDefaultFrameHTML();
+ALGOSCENE.frameHTML = getframeHTML();
 
-const colors = ['', 'yellowgreen', 'red', 'orange'];
+const colors = ['', 'yellowgreen', 'orange', 'red'];
 
 const array = new (class {
     constructor() {
@@ -155,18 +161,6 @@ const array = new (class {
     get(index) {
         return Array.from(this.elm.childNodes).find((e) => e.index == index);
     }
-    async swap(i, j) {
-        if (i == j) {
-            await ALGOSCENE.delay();
-            return;
-        }
-        const a = this.get(i),
-            b = this.get(j);
-        a.index = j;
-        b.index = i;
-        this.setPosition();
-        await ALGOSCENE.delay();
-    }
     async end(index) {
         await ALGOSCENE.delay(0.2);
         if (index == undefined) {
@@ -178,7 +172,7 @@ const array = new (class {
         target.success(index);
         await ALGOSCENE.delay();
     }
-    async quickSort(left = 0, right = this.length - 1) {
+    quickSort(left = 0, right = this.length - 1) {
         if (left >= right) return;
         const pivot = this.get(Math.floor((left + right) / 2));
         let i = left,
@@ -187,9 +181,10 @@ const array = new (class {
             while (this.get(i).value < pivot.value) ++i;
             while (this.get(j).value > pivot.value) --j;
             if (i <= j) {
-                await this.swap(i, j);
-                ++i;
-                --j;
+                const a = this.get(i),
+                    b = this.get(j);
+                a.index = j--;
+                b.index = i++;
             }
         }
         this.quickSort(left, j);
@@ -197,8 +192,9 @@ const array = new (class {
     }
     async sort() {
         if (!this.sorted) {
-            await this.quickSort();
-            await ALGOSCENE.delay(8);
+            this.quickSort();
+            this.setPosition();
+            await ALGOSCENE.delay(4);
         }
     }
 })();

@@ -1,0 +1,99 @@
+{
+    "bfs": {
+        "name": "Breadth-First Search (BFS)",
+        "informations": {
+            "description": "The {{Breadth-First Search (BFS)}} algorithm is a graph or matrix search algorithm that explores points in breadth from a starting point. It starts by placing the starting point in a queue and marking it as visited. Then, it iteratively dequeues a point, checks all its unvisited adjacent points, adds them to the queue, and marks them as visited. This process continues until the queue is empty. BFS ensures breadth-first search, examining all points at the same level before moving to the next level.",
+            "advantage": [
+                "Ensures finding the shortest path.",
+                "Simple and easy to implement.",
+                "Comprehensively explores the graph, matrix."
+            ],
+            "disadvantage": [
+                "Requires large memory.",
+                "Inefficient for large graphs, matrices.",
+                "Not optimal for weighted graphs, matrices.",
+                "Difficult to work with infinite graphs, matrices."
+            ],
+            "application": [
+                "Finding the shortest path in an unweighted graph.",
+                "Searching in games and AI algorithms.",
+                "Checking the connectivity of a graph.",
+                "Tree search.",
+                "Graph classification.",
+                "Creating GPS systems and route finding.",
+                "Checking cycles in a graph."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "",
+                "",
+                "",
+                "Declare the {bfs} function.",
+                "Get the number of rows of the matrix.",
+                "Get the number of columns of the matrix.",
+                "Initialize a matrix to mark visited points.",
+                "Initialize a matrix to store information about the previous point in the path.",
+                "Initialize a queue to store points to visit.",
+                "Enqueue the starting point.",
+                "Mark the starting point as visited.",
+                "Define directions (up, down, left, right).",
+                "While the queue still has points to explore.",
+                "Dequeue the current point (first) from the queue.",
+                "Remove the current point from the queue.",
+                "Get the {x} coordinate of the current point.",
+                "Get the {y} coordinate of the current point.",
+                "Check if the current point is the destination point. If true, reconstruct the path and return.",
+                "Initialize a {vector} to store the path.",
+                "Reconstruct the path from the destination point to the starting point.",
+                "Add the current point to the path.",
+                "Reverse the path to get the correct order.",
+                "Return the path.",
+                "",
+                "If not at the destination point, explore through the directions.",
+                "Calculate the new {x} coordinate.",
+                "Calculate the new {y} coordinate.",
+                "Check if the new coordinates are valid and unvisited. If satisfied, update the state and information of that point.",
+                "Enqueue the new point.",
+                "Mark the new point as visited.",
+                "Store the current point as the previous point of the new point.",
+                "",
+                "",
+                "",
+                "Return an empty array if no path is found."
+            ],
+            "js": [
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "{{{cpp,7}}}",
+                "Initialize a queue to store points to visit. Enqueue the starting point.",
+                "{{{cpp,10}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}",
+                "Dequeue the current point (first) from the queue.",
+                "{{{cpp,17}}}",
+                "Initialize an array to store the path.",
+                "{{{cpp,19}}}",
+                "{{{cpp,20}}}",
+                "Return the path after reversing the order.",
+                "",
+                "{{{cpp,24}}}",
+                "Calculate the new {xjs} coordinate.",
+                "Calculate the new {yjs} coordinate.",
+                "{{{cpp,27}}}",
+                "{{{cpp,28}}}",
+                "{{{cpp,29}}}",
+                "{{{cpp,30}}}",
+                "",
+                "",
+                "",
+                "{{{cpp,34}}}"
+            ]
+        }
+    },
+    "_": {
+        "constraints": []
+    }
+}
