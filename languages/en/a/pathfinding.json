@@ -2,26 +2,26 @@
     "bfs": {
         "name": "Breadth-First Search (BFS)",
         "informations": {
-            "description": "The {{Breadth-First Search (BFS)}} algorithm is a graph or matrix search algorithm that explores points in breadth from a starting point. It starts by placing the starting point in a queue and marking it as visited. Then, it iteratively dequeues a point, checks all its unvisited adjacent points, adds them to the queue, and marks them as visited. This process continues until the queue is empty. BFS ensures breadth-first search, examining all points at the same level before moving to the next level.",
+            "description": "The {{Breadth-First Search (BFS)}} algorithm is a graph or matrix traversal algorithm that explores points in breadth from a starting point. It begins by placing the starting point in the queue and marking it as visited. Then, it repeatedly takes a point from the front of the queue, checks all its unvisited adjacent points, adds them to the queue, and marks them as visited. This process continues until the queue is empty. BFS ensures a breadth-first search, checking all points at the same level before moving to the next level.",
             "advantage": [
-                "Ensures finding the shortest path.",
+                "Guarantees the shortest path.",
                 "Simple and easy to implement.",
-                "Comprehensively explores the graph, matrix."
+                "Comprehensive exploration of the graph or matrix."
             ],
             "disadvantage": [
-                "Requires large memory.",
-                "Inefficient for large graphs, matrices.",
-                "Not optimal for weighted graphs, matrices.",
-                "Difficult to work with infinite graphs, matrices."
+                "Requires a large amount of memory.",
+                "Inefficient for large graphs or matrices.",
+                "Not optimal for weighted graphs or matrices.",
+                "Challenging to work with infinite graphs or matrices."
             ],
             "application": [
-                "Finding the shortest path in an unweighted graph.",
-                "Searching in games and AI algorithms.",
-                "Checking the connectivity of a graph.",
-                "Tree search.",
-                "Graph classification.",
-                "Creating GPS systems and route finding.",
-                "Checking cycles in a graph."
+                "Finding the shortest path in unweighted graphs or matrices.",
+                "Game search and AI algorithms.",
+                "Checking the connectivity of graphs or matrices.",
+                "Processing data structures like trees.",
+                "Classifying graphs or matrices.",
+                "Creating GPS systems and pathfinding.",
+                "Checking for cycles in graphs or matrices."
             ]
         },
         "comments": {
@@ -30,37 +30,37 @@
                 "",
                 "",
                 "Declare the {bfs} function.",
-                "Get the number of rows of the matrix.",
-                "Get the number of columns of the matrix.",
+                "Get the number of rows in the matrix.",
+                "Get the number of columns in the matrix.",
                 "Initialize a matrix to mark visited points.",
                 "Initialize a matrix to store information about the previous point in the path.",
-                "Initialize a queue to store points to visit.",
-                "Enqueue the starting point.",
+                "Initialize a queue to store points to be visited.",
+                "Add the starting point to the queue.",
                 "Mark the starting point as visited.",
-                "Define directions (up, down, left, right).",
-                "While the queue still has points to explore.",
-                "Dequeue the current point (first) from the queue.",
+                "Define the movement directions (up, down, left, right).",
+                "While the queue still has points to be processed.",
+                "Get the current point (first) from the queue.",
                 "Remove the current point from the queue.",
                 "Get the {x} coordinate of the current point.",
                 "Get the {y} coordinate of the current point.",
-                "Check if the current point is the destination point. If true, reconstruct the path and return.",
+                "Check if the current point is the end point. If true, reconstruct the path and return it.",
                 "Initialize a {vector} to store the path.",
-                "Reconstruct the path from the destination point to the starting point.",
+                "Reconstruct the path from the end point to the starting point.",
                 "Add the current point to the path.",
                 "Reverse the path to get the correct order.",
                 "Return the path.",
                 "",
-                "If not at the destination point, explore through the directions.",
+                "If the end point is not reached, iterate through the movement directions.",
                 "Calculate the new {x} coordinate.",
                 "Calculate the new {y} coordinate.",
-                "Check if the new coordinates are valid and unvisited. If satisfied, update the state and information of that point.",
-                "Enqueue the new point.",
+                "Check if the new coordinates are valid and not visited. If valid, update the state and information of that point.",
+                "Add the new point to the queue.",
                 "Mark the new point as visited.",
                 "Store the current point as the previous point of the new point.",
                 "",
                 "",
                 "",
-                "Return an empty array if no path is found."
+                "Return an empty {vector} if no path is found."
             ],
             "js": [
                 "{{{cpp,3}}}",
@@ -68,11 +68,11 @@
                 "{{{cpp,5}}}",
                 "{{{cpp,6}}}",
                 "{{{cpp,7}}}",
-                "Initialize a queue to store points to visit. Enqueue the starting point.",
+                "Initialize a queue to store points to be visited. Add the starting point to the queue.",
                 "{{{cpp,10}}}",
                 "{{{cpp,11}}}",
                 "{{{cpp,12}}}",
-                "Dequeue the current point (first) from the queue.",
+                "Get the coordinates of the current point (first) from the queue.",
                 "{{{cpp,17}}}",
                 "Initialize an array to store the path.",
                 "{{{cpp,19}}}",
@@ -89,11 +89,99 @@
                 "",
                 "",
                 "",
-                "{{{cpp,34}}}"
+                "Return an empty array if no path is found."
+            ]
+        }
+    },
+    "dfs": {
+        "name": "Depth-First Search (DFS)",
+        "informations": {
+            "description": "The {{Depth-First Search (DFS)}} algorithm is a graph or matrix traversal algorithm. It starts from a point and visits its child points, delving into each branch of the graph or matrix as far as possible before backtracking. This is done using a stack to track the next vertices to be visited.",
+            "advantage": [
+                "Efficient use of memory.",
+                "Quickly explores deeper levels.",
+                "Simple and easy to implement."
+            ],
+            "disadvantage": [
+                "Does not guarantee the shortest path."
+            ],
+            "application":[
+                "Searching and marking paths in graphs or matrices.",
+                "Checking for cycles in graphs or matrices.",
+                "Checking the connectivity of graphs or matrices.",
+                "Processing data structures like trees.",
+                "Game search and AI algorithms."
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {dfs} function.",
+                "Get the number of rows in the matrix.",
+                "Get the number of columns in the matrix.",
+                "Initialize a matrix to mark visited points.",
+                "Initialize a stack {s} to store points to be visited.",
+                "Initialize a stack {paths} to store paths corresponding to the points.",
+                "Add the starting point to the stack {s}.",
+                "Add the initial path (only containing the starting point) to the stack {paths}.",
+                "Mark the starting point as visited.",
+                "Define the movement directions (up, down, left, right).",
+                "While the stack still has points to be processed.",
+                "Get the current point from the top of the stack {s}.",
+                "Get the path corresponding to the current point from the stack {paths}.",
+                "Remove the current point from the stack {s}.",
+                "Remove the current path from the stack {paths}.",
+                "Get the {x} coordinate of the current point.",
+                "Get the {y} coordinate of the current point.",
+                "Check if the current point is the end point. If true, return the path.",
+                "Return the path.",
+                "If the end point is not reached, iterate through the movement directions.",
+                "Calculate the new {x} coordinate.",
+                "Calculate the new {y} coordinate.",
+                "Check if the new coordinates are valid and not visited. If valid, update the state and information of that point.",
+                "Mark the new point as visited.",
+                "Add the new point to the stack {s}.",
+                "Initialize a new path from the current path.",
+                "Add the new point to the new path.",
+                "Add the new path to the stack {paths}.",
+                "",
+                "",
+                "",
+                "Return an empty {vector} if no path is found."
+            ],
+            "js": [
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}",
+                "Initialize a {stackjs} to store points to be visited. Add the starting point to the {stackjs}.",
+                "Initialize {pathsjs} to store paths corresponding to the points. Add the initial path (only containing the starting point) to the {pathsjs}.",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}",
+                "While the {stackjs} still has points to be processed.",
+                "Get the current point (last) from the {stackjs}.",
+                "Get the path corresponding to the current point from the {pathsjs}.",
+                "If the current point is the end point, return the path.",
+                "If the end point is not reached, iterate through the movement directions.",
+                "Calculate the new {xjs} coordinate.",
+                "Calculate the new {yjs} coordinate.",
+                "Check if the new coordinates are valid and not visited. If valid, update the state and information of that point.",
+                "Mark the new point as visited.",
+                "Add the new point to the {stackjs}.",
+                "Add the new path with the new point to the {pathsjs}.",
+                "",
+                "",
+                "",
+                "Return an empty array if no path is found."
             ]
         }
     },
     "_": {
-        "constraints": []
+        "constraints": [
+            "Yellow cell is the starting cell, double-click to swap with the end cell.",
+            "Green cell is the end cell, double-click to swap with the starting cell.",
+            "White cell is passable, click to turn it into an impassable cell.",
+            "Black cell is impassable, click to turn it into a passable cell.",
+            "Double-click on a white or black cell to turn it into a starting cell."
+        ]
     }
 }

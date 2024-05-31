@@ -15,7 +15,6 @@ new (class {
         this.header();
         this.popup();
         this.main();
-        // this.search();
         this.sizeNotice();
         this.footer();
     }
@@ -110,10 +109,14 @@ new (class {
                             keys.findIndex((key) => key == '_'),
                             1
                         );
-                        return keys.map((key) => {
-                            obj[key].name = Object.assign(obj[key].name, {key: fileList[index]});
-                            return obj[key].name;
-                        });
+                        return keys
+                            .map((key) => {
+                                obj[key].name = Object.assign(obj[key].name, {
+                                    key: fileList[index],
+                                });
+                                return obj[key].name;
+                            })
+                            .concat([Object.assign(fileList[index], {key: fileList[index]})]);
                     });
                     let data = [];
                     LIST.forEach((list) => (data = data.concat(list)));

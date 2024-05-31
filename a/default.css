@@ -41,6 +41,7 @@ body {
 
     --popup-bgc: #e0f5ff;
     --code-bgc: #1f1f1f;
+    --default-font-family: 'Open Sans', sans-serif;
 }
 
 #bg {
@@ -110,7 +111,7 @@ header {
             display: flex;
             align-items: center;
             color: #ffffff;
-            font-family: 'Open Sans', sans-serif;
+            font-family: var(--default-font-family);
             font-weight: 900;
             font-size: 32px;
             text-shadow: 3px 3px 0 #475ab9;
@@ -272,11 +273,11 @@ main {
         button.setting {
             position: relative;
             transition: transform 400ms;
-            font-family: 'Open Sans', sans-serif;
+            font-family: var(--default-font-family);
             font-weight: 600;
 
             * {
-                font-family: 'Open Sans', sans-serif;
+                font-family: var(--default-font-family);
                 font-weight: 500;
             }
 
@@ -362,8 +363,15 @@ main {
     width: 0;
     height: 0;
     font-size: calc(var(--size) / 100);
-    transition: width 500ms, height 500ms;
+    transition: width 500ms, height 500ms, border-radius 200ms;
     overflow: hidden;
+}
+
+#frame.editable {
+    border-radius: 0;
+    * {
+        pointer-events: all;
+    }
 }
 
 #right-box {
@@ -436,7 +444,7 @@ main {
         pre {
             white-space: wrap;
             line-height: 18px;
-            font-family: 'Open Sans', sans-serif;
+            font-family: var(--default-font-family);
         }
 
         pre span {
@@ -445,7 +453,7 @@ main {
     }
 
     >* {
-        font-family: 'Open Sans', sans-serif;
+        font-family: var(--default-font-family);
         font-weight: 600;
         font-size: 14px;
         color: #ffffff;
@@ -574,7 +582,7 @@ code {
                 padding: 2px 5px;
                 font-size: 14px;
                 color: white;
-                font-family: 'Open Sans', sans-serif;
+                font-family: var(--default-font-family);
                 font-weight: 500;
                 border-radius: 5px;
                 pointer-events: none;
@@ -810,10 +818,10 @@ footer {
     .overlay.elm-show {
         background-color: transparent;
         opacity: 0.7;
-        pointer-events: all;
 
         * {
             opacity: 1;
+            pointer-events: all;
         }
     }
 
@@ -830,7 +838,7 @@ footer {
         border-top-right-radius: 10px;
         padding: 2%;
         padding-bottom: 0;
-        font-family: 'Open Sans', sans-serif;
+        font-family: var(--default-font-family);
         font-weight: 600;
         font-size: 15px;
         transition: bottom 500ms, top 500ms;
@@ -1004,7 +1012,7 @@ footer {
         .message {
             padding: 15px;
             padding-top: 25px;
-            font-family: 'Open Sans', sans-serif;
+            font-family: var(--default-font-family);
             font-size: 15px;
             font-weight: 700;
         }
@@ -1042,6 +1050,7 @@ footer {
             background-color: gray;
             overflow: hidden;
         }
+
         .line::before {
             content: '';
             position: absolute;
@@ -1079,7 +1088,7 @@ footer {
         border: 0 solid transparent;
         transition: top 500ms, opacity 500ms, border 500ms;
         box-sizing: content-box;
-        font-family: 'Open Sans', sans-serif;
+        font-family: var(--default-font-family);
 
         .title {
             position: relative;
@@ -1141,7 +1150,7 @@ footer {
                 color: red;
             }
 
-            .apply {
+            .custom {
                 margin-left: 5px;
                 border-color: green;
                 background-color: green;
@@ -1168,6 +1177,25 @@ footer {
     .custom-input.failure {
         border-width: 5px;
         border-color: red;
+    }
+
+    .apply-frame-editing {
+        position: absolute;
+        background-color: green;
+        color: white;
+        font-family: var(--default-font-family);
+        font-weight: 600;
+        font-size: 18px;
+        padding: 2px 10px 4px;
+        border-radius: 5px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 200ms;
+    }
+
+    .apply-frame-editing.show {
+        opacity: 1;
+        pointer-events: all;
     }
 }
 
@@ -1378,6 +1406,9 @@ footer {
             .title::after {
                 font-size: 16px;
             }
+        }
+        .apply-frame-editing {
+            font-size: 16px;
         }
     }
 }

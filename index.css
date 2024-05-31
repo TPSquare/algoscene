@@ -68,10 +68,6 @@ header {
         align-items: center;
     }
 
-    .left>* {
-        margin-left: 70px;
-    }
-
     .left {
         .title {
             position: relative;
@@ -82,6 +78,7 @@ header {
             font-weight: 900;
             font-size: 50px;
             text-shadow: 4px 4px 0 #475ab9;
+            margin-left: 70px;
         }
 
         .title img {
@@ -163,7 +160,7 @@ main {
     background-size: cover;
     background-position: center top;
     text-align: center;
-    height: 600px;
+    height: 500px;
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
 
@@ -349,17 +346,64 @@ footer {
 #size-notice {
     display: none;
     width: 100%;
-    margin-top: 55vw;
+    margin-top: 35vw;
     font-family: Arial, sans-serif;
-    color: #ffffff;
+    color: black;
     font-size: 4.8vw;
     line-height: 6vw;
     text-align: center;
 }
 
-@media only screen and (max-width: 72em) {}
+@media only screen and (max-width: 72em) {
+    body {
+        --header-height: 80px;
+    }
+
+    header {
+        .left {
+            .title {
+                font-size: 40px;
+                margin-left: 50px;
+            }
+        }
+    }
+
+    main {
+        height: 450px;
+    }
+}
 
 @media only screen and (max-width: 56em) {
+    body {
+        --header-height: 60px;
+    }
+
+    header {
+        .left {
+            .title {
+                font-size: 30px;
+                margin-left: 30px;
+                text-shadow: 3px 3px 0 #475ab9;
+            }
+        }
+
+        .right {
+            font-size: 20px;
+        }
+    }
+
+    main {
+        font-size: 16px;
+        height: 400px;
+
+        .above {
+            font-size: 28px;
+        }
+
+        input {
+            width: 600px;
+        }
+    }
 
     #popup {
         legend {
@@ -382,6 +426,41 @@ footer {
 }
 
 @media only screen and (max-width: 40em) {
+    body {
+        --header-height: 50px;
+    }
+
+    header {
+        .left {
+            .title {
+                font-size: 25px;
+                margin-left: 20px;
+                text-shadow: 2px 2px 0 #475ab9;
+            }
+        }
+
+        .right {
+            --margin: 10px;
+
+            .decorate {
+                display: none;
+            }
+        }
+    }
+
+    main {
+        font-size: 14px;
+        height: 350px;
+
+        .above {
+            font-size: 25px;
+        }
+
+        input {
+            width: 300px;
+        }
+    }
+
     #popup {
         legend {
             font-size: 16px;
@@ -396,6 +475,7 @@ footer {
 
 @media only screen and (max-width: 24em) {
     header .right,
+    main,
     #popup {
         display: none;
         pointer-events: none;
@@ -403,10 +483,10 @@ footer {
 
     body {
         padding: 0 4vw;
+        --header-height: 26vw;
     }
 
     header {
-        height: auto;
         padding: 5vw 0;
 
         .left {
@@ -424,7 +504,7 @@ footer {
     }
 
     footer {
-        margin-top: 5vw;
+        margin: 5vw;
         font-size: 4vw;
         padding: 1vw 2vw;
     }

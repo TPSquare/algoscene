@@ -47,5 +47,7 @@
     "previous": "Previous",
     "next": "Next",
     "apply": "Apply",
-    "customizeInput": "Customize Input"
+    "customizeInput": "Customize Input",
+    "edit": "Edit",
+    "directEditing___": "Direct editing on the frame"
 }

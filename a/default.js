@@ -61,6 +61,8 @@ new (class {
 
                 // this.langData = lang._;
                 this.customInput.setConstraints(lang._.constraints);
+
+                this.firstAction = Object.keys(algos)[0];
             },
             delayDuration: localData.delay,
             updateDelayDuration() {
@@ -77,7 +79,7 @@ new (class {
             actions: {},
             setAction(key, action) {
                 this.actions[key] = action;
-                if (Object.keys(this.actions).length == 1) this.runAction(key);
+                if (key == this.firstAction) this.runAction(key);
             },
             runAction(key) {
                 this.currentAction = key;
@@ -131,6 +133,10 @@ new (class {
             algo = t.querySelector(`option[value="${algo}"]`).innerHTML;
             this.head.querySelector('title').innerHTML =
                 algo + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene';
+        };
+
+        document.body.overflow = function (ok) {
+            this.style.setProperty('overflow', ok ? '' : 'hidden');
         };
 
         MODULES.upgradeDocument();
@@ -194,7 +200,11 @@ new (class {
                 children: [langBtn, guideBtn, infoBtn],
             });
 
-        const header = document.createElement({tag: 'header', children: [left, right]});
+        const header = document.createElement({
+            tag: 'header',
+            key: 'header',
+            children: [left, right],
+        });
 
         document.body.appendChild(header);
     }
@@ -222,6 +232,12 @@ new (class {
                 this.setStyle({'--delay': (value || localData.delay) + 'ms'});
             },
             style: `--delay:${localData.delay}ms;`,
+            enableEditing() {
+                this.classList.add('editable');
+            },
+            disableEditing() {
+                this.classList.remove('editable');
+            },
         });
         window.addEventListener('resize', () => frame.onresize());
 
@@ -728,6 +744,7 @@ new (class {
                                 }
                                 return l + c;
                             });
+                        if (s == 'cpp') cmts[f][s] = ['', '', ''].concat(cmts[f][s]);
                     }
                 }
                 this.codes = codes;
@@ -785,13 +802,29 @@ new (class {
                 if (this.classList.contains('elm-show')) this.classList.remove('elm-show');
                 else this.classList.add('elm-show');
             },
-        });
+            focusTo(elm) {
+                const bcr = elm.getBoundingClientRect(),
+                    t = 5;
 
-        function handle() {
-            if (this.classList.contains('show')) this.classList.remove('show');
-            else this.classList.add('show');
-            overlay.handle();
-        }
+                const top =
+                        (bcr.height > window.innerHeight
+                            ? t + document.body.header.offsetHeight
+                            : bcr.top - t) + 'px',
+                    bottom =
+                        (bcr.height > window.innerHeight
+                            ? t
+                            : window.innerHeight - bcr.top - bcr.height - t) + 'px',
+                    left = bcr.left - t + 'px',
+                    right = window.innerWidth - bcr.left - bcr.width - t + 'px',
+                    height = bcr.height + t * 2 + 'px';
+                this.elmTop.setStyle({height: top});
+                this.elmBottom.setStyle({height: bottom});
+                this.elmLeft.setStyle({top, height, width: left});
+                this.elmRight.setStyle({top, height, width: right});
+
+                return [left, t];
+            },
+        });
 
         const closeConfig = {
             tag: 'button',
@@ -844,7 +877,11 @@ new (class {
                         `<div class="footer"><span>© ${langData.copyright___} TPSquare</span><span>${langData.version}: ${localData.version}</span></div>`,
                 }),
             ],
-            handle,
+            handle() {
+                if (this.classList.contains('show')) this.classList.remove('show');
+                else this.classList.add('show');
+                overlay.handle();
+            },
         });
 
         // const guide = document.createElement({
@@ -1044,19 +1081,10 @@ new (class {
                     async focusTo(elm, text) {
                         message.setText(text);
 
-                        await this.scrollToElement(elm);
+                        await window.scrollToElement(elm, 'center');
 
-                        const bcr = elm.getBoundingClientRect(),
-                            t = 5,
-                            top = bcr.top - t + 'px',
-                            bottom = window.innerHeight - bcr.top - bcr.height - t + 'px',
-                            left = bcr.left - t + 'px',
-                            right = window.innerWidth - bcr.left - bcr.width - t + 'px',
-                            height = bcr.height + t * 2 + 'px';
-                        overlay.elmTop.setStyle({height: top});
-                        overlay.elmBottom.setStyle({height: bottom});
-                        overlay.elmLeft.setStyle({top, height, width: left});
-                        overlay.elmRight.setStyle({top, height, width: right});
+                        const [left, t] = overlay.focusTo(elm);
+                        const bcr = elm.getBoundingClientRect();
 
                         const rect = guideMessageElm.getBoundingClientRect(),
                             styles = {},
@@ -1070,21 +1098,6 @@ new (class {
                         else styles.left = bcr.left + bcr.width + t - rect.width + 'px';
                         guideMessageElm.style = '';
                         guideMessageElm.setStyle(styles);
-                    }
-                    scrollToElement(element) {
-                        return new Promise((resolve) => {
-                            let isScrolling;
-                            function onScroll() {
-                                clearTimeout(isScrolling);
-                                isScrolling = setTimeout(() => {
-                                    window.removeEventListener('scroll', onScroll);
-                                    resolve();
-                                }, 100);
-                            }
-                            window.addEventListener('scroll', onScroll);
-                            window.dispatchEvent(new Event('scroll'));
-                            element.scrollIntoView({behavior: 'smooth', block: 'center'});
-                        });
                     }
                 })(),
             });
@@ -1114,15 +1127,33 @@ new (class {
                 clearValue() {
                     this.value = '';
                 },
+                isEditOnFrame() {
+                    customInput.removeChild(this);
+                },
             }),
-            applyBtn = document.createElement({
+            customBtn = document.createElement({
                 tag: 'button',
                 type: 'button',
-                className: 'apply',
+                className: 'custom',
                 title: langData.apply,
                 innerText: langData.apply,
                 onclick() {
-                    customInput.applyHandle();
+                    customInput.onApply(input.handle());
+                },
+                isEditOnFrame() {
+                    this.title = langData.edit;
+                    this.innerText = langData.edit;
+                    this.onclick = async () => {
+                        ALGOSCENE.resetAction();
+                        customInput.handle();
+                        document.body.overflow(false);
+                        await window.scrollToElement(document.body.main.frame, 'center');
+                        await window.delay(100);
+                        document.body.main.frame.enableEditing();
+                        overlay.handleElms();
+                        overlay.focusTo(document.body.main.frame);
+                        popup.applyFrameEditingBtn.handle();
+                    };
                 },
             }),
             closeBtn = document.createElement({
@@ -1148,7 +1179,7 @@ new (class {
                     input,
                     document.createElement({
                         className: 'btns',
-                        children: [closeBtn, applyBtn],
+                        children: [closeBtn, customBtn],
                     }),
                 ],
                 handle() {
@@ -1164,9 +1195,6 @@ new (class {
                     this.currentValue = value;
                     input.setAttribute('placeholder', value);
                 },
-                applyHandle() {
-                    this.onApply(input.handle());
-                },
                 setConstraints(list) {
                     constraints.innerHTML = list.map((e) => '*' + e).join('<br>');
                 },
@@ -1179,6 +1207,40 @@ new (class {
                         customInput.classList.add('failure');
                         setTimeout(() => customInput.classList.remove('failure'), 1000);
                     },
+                },
+                isEditOnFrame() {
+                    customBtn.isEditOnFrame();
+                    input.isEditOnFrame();
+
+                    const applyFrameEditingBtn = document.createElement({
+                        tag: 'button',
+                        type: 'button',
+                        key: 'applyFrameEditingBtn',
+                        className: 'apply-frame-editing',
+                        innerText: langData.apply,
+                        title: langData.apply,
+                        onclick() {
+                            document.body.overflow(true);
+                            document.body.main.frame.disableEditing();
+                            overlay.handleElms();
+                            this.handle();
+                            customInput.onApply();
+                        },
+                        handle() {
+                            if (this.classList.contains('show')) this.classList.remove('show');
+                            else {
+                                this.classList.add('show');
+
+                                const {top, width, left} =
+                                    document.body.main.frame.getBoundingClientRect();
+                                this.setStyle({
+                                    bottom: window.innerHeight - top + 10 + 'px',
+                                    right: window.innerWidth - left - width + 'px',
+                                });
+                            }
+                        },
+                    });
+                    popup.appendChild(applyFrameEditingBtn);
                 },
             });
 
