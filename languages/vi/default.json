@@ -1,0 +1,53 @@
+{
+    "return___": "Trở về trang chủ",
+    "algorithms": "Thuật toán",
+    "language": "Ngôn ngữ",
+    "reload___": "Tải lại trang để áp dụng thay đổi",
+    "setting": "Cài đặt",
+    "play": "Phát",
+    "pause": "Tạm ngừng",
+    "continue": "Tiếp tục",
+    "repeat": "Lặp lại",
+    "fullScreen": "Toàn màn hình",
+    "exitFullScreen": "Thoát khỏi chế độ toàn màn hình",
+    "none": "Không có",
+    "copyCode": "Sao chép mã",
+    "success": "Thành công",
+    "failure": "Thất bại",
+    "delay": "Khoảng trễ",
+    "___guide": "Hướng dẫn sử dụng",
+    "close": "Đóng",
+    "information": {
+        "complexity": "Độ phức tạp",
+        "description": "Mô tả",
+        "advantage": "Ưu điểm",
+        "disadvantage": "Nhược điểm",
+        "application": "Ứng dụng"
+    },
+    "complexity": {
+        "average": "Độ phức tạp trung bình",
+        "best": "Trường hợp tốt nhất",
+        "worst": "Trường hợp xấu nhất",
+        "space": "Độ phức tạp không gian"
+    },
+    "startGuide": "Bắt đầu hướng dẫn",
+    "guideMessage": {
+        "algorithm___": "Chương trình mô phỏng thuật toán",
+        "select___": "Chọn một loại thuật toán cụ thể trong danh sách có sẵn",
+        "run___": "Phát chương trình mô phỏng thuật toán đã chọn",
+        "change___": "Thay đổi đầu vào",
+        "set___": "Cài đặt chương trình mô phỏng thuật toán",
+        "toggle___": "Bật hoặc tắt chế độ toàn màn hình",
+        "___code": "Mã triển khai thuật toán",
+        "choose___": "Chọn ngôn ngữ lập trình mong muốn",
+        "hover___": "Di chuột lên dòng mã để nhận được mô tả cho dòng mã đó",
+        "copy___": "Sao chép toàn bộ mã bên dưới",
+        "information___": "Thông tin, mô tả về thuật toán"
+    },
+    "previous": "Trước đó",
+    "next": "Kế tiếp",
+    "apply": "Áp dụng",
+    "customizeInput": "Tùy chỉnh đầu vào",
+    "edit": "Chỉnh sửa",
+    "directEditing___": "Chỉnh sửa trực tiếp trên khung"
+}
