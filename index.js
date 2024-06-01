@@ -131,7 +131,7 @@ new (class {
             },
         });
         autoCompleteJS.input.addEventListener('selection', function (e) {
-            window.location.href = `/a/${e.detail.selection.value.key}`;
+            window.location.href = `./a/${e.detail.selection.value.key}`;
         });
     }
     popup() {
