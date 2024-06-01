@@ -147,7 +147,7 @@ new (class {
         document.body.appendChild(
             document.createElement({
                 id: 'bg',
-                innerHTML: '<img class="brc" src="/static/bottom-right-decoration.svg" alt="">',
+                innerHTML: '<img class="brc" src="../../static/bottom-right-decoration.svg" alt="">',
             })
         );
     }
@@ -163,7 +163,7 @@ new (class {
             }),
             title = document.createElement({
                 className: 'title',
-                innerHTML: 'ALGOSCENE<img src="/static/name.svg" alt="">',
+                innerHTML: 'ALGOSCENE<img src="../../static/name.svg" alt="">',
             }),
             left = document.createElement({className: 'left', children: [homeBtn, title]});
 
@@ -839,7 +839,7 @@ new (class {
             },
         };
 
-        const logoHTML = '<div class="logo"><img src="/static/logo-with-name.svg" alt=""></div>',
+        const logoHTML = '<div class="logo"><img src="../../static/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
