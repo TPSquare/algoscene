@@ -39,6 +39,7 @@ input:focus-visible {
 
 body {
     height: 100vh;
+    overflow: hidden;
     --popup-bgc: #e0f5ff;
     --header-height: 100px;
 }
@@ -155,14 +156,16 @@ header {
 
 main {
     padding: 20px;
-    padding-top: calc(var(--header-height) + 20px);
+    margin-top: var(--header-height);
     background: url(/static/picture.jpg);
     background-size: cover;
-    background-position: center top;
     text-align: center;
-    height: 500px;
+    height: calc(100vh);
     font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+
+    * {
+        font-family: 'Open Sans', sans-serif;
+    }
 
     .above {
         font-weight: 800;
@@ -332,14 +335,15 @@ main {
 }
 
 footer {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
     display: flex;
     justify-content: space-around;
-    padding: 2px 20px;
-    margin: 10px 50px 50px;
-    background-color: #1D2033;
+    background-color: transparent;
     font-family: Arial, sans-serif;
     border-radius: 10px;
-    font-size: 14px;
     color: #f4f4f4;
 }
 
@@ -367,10 +371,6 @@ footer {
             }
         }
     }
-
-    main {
-        height: 450px;
-    }
 }
 
 @media only screen and (max-width: 56em) {
@@ -394,7 +394,6 @@ footer {
 
     main {
         font-size: 16px;
-        height: 400px;
 
         .above {
             font-size: 28px;
@@ -450,7 +449,6 @@ footer {
 
     main {
         font-size: 14px;
-        height: 350px;
 
         .above {
             font-size: 25px;
@@ -474,6 +472,7 @@ footer {
 }
 
 @media only screen and (max-width: 24em) {
+
     header .right,
     main,
     #popup {
@@ -503,13 +502,15 @@ footer {
         }
     }
 
+    #size-notice {
+        display: block;
+    }
+
     footer {
+        position: static;
         margin: 5vw;
         font-size: 4vw;
         padding: 1vw 2vw;
-    }
-
-    #size-notice {
-        display: block;
+        background-color: #1D2033;
     }
 }

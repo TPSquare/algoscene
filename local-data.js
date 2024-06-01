@@ -2,7 +2,7 @@
 
 const localData = new (class {
     constructor() {
-        this.version = '3.1 (Preview)';
+        this.version = '3.2 (Preview)';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
