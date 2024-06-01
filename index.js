@@ -32,7 +32,7 @@ new (class {
         const title = document.createElement({
                 className: 'title',
                 innerHTML:
-                    'ALGOSCENE<img src="/static/name.svg" alt="">' +
+                    'ALGOSCENE<img src="./static/name.svg" alt="">' +
                     '<svg class="decorate" viewBox="0 0 297.5 108" xmlns="http://www.w3.org/2000/svg"><path d="M 89.421631,0 0,108 H 140.82823 L 229.83149,0.49609375 H 230 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1" id="path1" /><path d="M 156.92163,0 67.5,108 H 208.32823 L 297.33149,0.49609375 H 297.5 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1" id="path2" /></svg>',
             }),
             left = document.createElement({className: 'left', children: [title]});
@@ -99,9 +99,9 @@ new (class {
             placeHolder: langData.search,
             data: {
                 src: (async () => {
-                    const fileList = await fetch('/a/list.json').then((res) => res.json());
+                    const fileList = await fetch('./a/list.json').then((res) => res.json());
                     const jsonPromises = fileList.map(async (fileName) => {
-                        const url = `/languages/${localData.lang}/a/${fileName}.json`;
+                        const url = `./languages/${localData.lang}/a/${fileName}.json`;
                         return await fetch(url).then((res) => res.json());
                     });
                     const res = await Promise.all(jsonPromises);
@@ -161,7 +161,7 @@ new (class {
             },
         };
 
-        const logoHTML = '<div class="logo"><img src="/static/logo-with-name.svg" alt=""></div>',
+        const logoHTML = '<div class="logo"><img src="./static/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
