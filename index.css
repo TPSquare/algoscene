@@ -157,7 +157,7 @@ header {
 main {
     padding: 20px;
     margin-top: var(--header-height);
-    background: url(/static/picture.jpg);
+    background: url(./static/picture.jpg);
     background-size: cover;
     text-align: center;
     height: calc(100vh);

@@ -1,11 +1,13 @@
 'use strict';
 
-import localData from '/local-data.js';
+import localData from './local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
+localData.init('./');
+
 const langData = Object.assign(
-    await fetch(`/languages/${localData.lang}/index.json`).then(async (r) => r.json()),
-    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
+    await fetch(`./languages/${localData.lang}/index.json`).then(async (r) => r.json()),
+    await fetch(`./languages/${localData.lang}/general.json`).then(async (r) => r.json())
 );
 
 new (class {

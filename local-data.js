@@ -2,7 +2,7 @@
 
 const localData = new (class {
     constructor() {
-        this.version = '3.2 (Preview)';
+        this.version = '3.2.1 (Preview)';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
@@ -11,7 +11,9 @@ const localData = new (class {
         this.check('lang', 'vi');
         this.check('delay', 500);
         this.upload();
-        this.getText();
+    }
+    init(root) {
+        this.getText(root);
     }
     async setLanguage(value) {
         this.lang = value;
@@ -34,8 +36,8 @@ const localData = new (class {
         keys.forEach((key) => (data[key] = this[key]));
         localStorage.setItem(this.key, JSON.stringify(data));
     }
-    async getText() {
-        const url = `/languages/${this.lang}/default.json`,
+    async getText(root) {
+        const url = `${root}languages/${this.lang}/default.json`,
             {reload___} = await fetch(url).then(async (r) => r.json());
         this.reload___ = reload___;
     }

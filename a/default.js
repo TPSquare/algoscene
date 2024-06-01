@@ -1,11 +1,13 @@
 'use strict';
 
-import localData from '/local-data.js';
+import localData from '../local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
+localData.init('../../');
+
 const langData = Object.assign(
-    await fetch(`/languages/${localData.lang}/default.json`).then(async (r) => r.json()),
-    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
+    await fetch(`../../languages/${localData.lang}/default.json`).then(async (r) => r.json()),
+    await fetch(`../../languages/${localData.lang}/general.json`).then(async (r) => r.json())
 );
 // desktopOS = (() => {
 //     const userAgent = navigator.userAgent;
@@ -110,7 +112,7 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `/languages/${localData.lang}/a/${key}.json`;
+            const url = `../../languages/${localData.lang}/a/${key}.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
