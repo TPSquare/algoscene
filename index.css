@@ -219,7 +219,8 @@ main {
         font-family: 'Open Sans', sans-serif;
         font-weight: 600;
         font-size: 15px;
-        transition: bottom 500ms, top 500ms;
+        opacity: 0;
+        transition: bottom 500ms, top 500ms, opacity 1s;
 
         .line {
             position: relative;
@@ -253,6 +254,7 @@ main {
     }
 
     >.info.show {
+        opacity: 1;
         bottom: 0;
         top: 10%;
         pointer-events: all;
@@ -340,6 +342,8 @@ footer {
     left: 5px;
     right: 5px;
     display: flex;
+    flex-direction: column;
+    align-items: end;
     justify-content: space-around;
     background-color: transparent;
     font-family: Arial, sans-serif;
@@ -472,6 +476,117 @@ footer {
 }
 
 @media only screen and (max-width: 24em) {
+    body {
+        --header-height: 15vw;
+    }
+
+    header {
+        .left {
+            .title {
+                font-size: 7vw;
+                margin-left: 5vw;
+            }
+        }
+
+        .right {
+            font-size: 5vw;
+            --margin: 4vw;
+        }
+    }
+
+    main {
+        padding: 6vw;
+        font-size: 4vw;
+
+        .above {
+            margin-top: 10vw;
+            margin-bottom: 5vw;
+            font-size: 7vw;
+        }
+
+        input {
+            width: 80vw;
+        }
+    }
+
+    footer {
+        font-size: 5vw;
+    }
+
+    #popup {
+        .info {
+            font-size: 3vw;
+
+            ul {
+                padding-left: 12vw;
+
+                li {
+                    margin-top: 1vw;
+                }
+
+                svg {
+                    height: 3vw;
+                    margin-right: 1vw;
+                }
+            }
+
+            .footer {
+                font-size: 2vw;
+            }
+
+            .line {
+                height: 0.1vw;
+                margin: 2vw 0;
+            }
+
+            >.close {
+                top: auto;
+                bottom: 100%;
+                left: auto;
+                right: 5%;
+                height: 6vw;
+                width: 10vw;
+                border-radius: 0;
+                border-top-left-radius: 2vw;
+                border-top-right-radius: 2vw;
+                font-size: 6vw;
+            }
+        }
+
+
+        >.info.show {
+            top: 30%;
+            border-top-left-radius: 2vw;
+            border-top-right-radius: 2vw;
+        }
+
+        fieldset {
+            padding: 2vw;
+            padding-bottom: 20vw;
+            border-top-left-radius: 2vw;
+            border-top-right-radius: 2vw;
+            border-width: 0.6vw;
+
+            legend {
+                font-size: 5vw;
+            }
+        }
+
+        .logo {
+            margin-bottom: 2vw;
+        }
+
+        fieldset::-webkit-scrollbar-track {
+            border-width: 1vw;
+        }
+
+        fieldset::-webkit-scrollbar {
+            width: 1.5vw;
+        }
+    }
+}
+
+@media only screen and (max-width: 8em) {
 
     header .right,
     main,
@@ -512,5 +627,7 @@ footer {
         font-size: 4vw;
         padding: 1vw 2vw;
         background-color: #1D2033;
+        flex-direction: row;
+        align-items: center;
     }
 }

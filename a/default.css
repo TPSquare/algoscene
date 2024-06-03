@@ -165,8 +165,8 @@ header {
         }
 
         .lang {
-            height: 30px;
-            width: 40px;
+            height: 1.5em;
+            width: 2em;
             color: #f2f2f2;
             font-size: inherit;
             background-color: #7077a1;
@@ -337,7 +337,7 @@ main {
         }
 
         button.setting.show {
-            svg {
+            >svg {
                 transform: rotate(-30deg);
             }
 
@@ -369,6 +369,7 @@ main {
 
 #frame.editable {
     border-radius: 0;
+
     * {
         pointer-events: all;
     }
@@ -841,7 +842,8 @@ footer {
         font-family: var(--default-font-family);
         font-weight: 600;
         font-size: 15px;
-        transition: bottom 500ms, top 500ms;
+        opacity: 0;
+        transition: bottom 500ms, top 500ms, opacity 1s;
 
         .line {
             position: relative;
@@ -876,6 +878,7 @@ footer {
 
     >.guide.show,
     >.info.show {
+        opacity: 1;
         bottom: 0;
         top: 10%;
         pointer-events: all;
@@ -1249,11 +1252,6 @@ footer {
 
         .right {
             --margin: 10px;
-
-            .lang {
-                height: 28px;
-                width: 38px;
-            }
         }
     }
 
@@ -1301,11 +1299,6 @@ footer {
         .right {
             --margin: 5px;
             font-size: 16px;
-
-            .lang {
-                height: 25px;
-                width: 35px;
-            }
         }
     }
 
@@ -1407,6 +1400,7 @@ footer {
                 font-size: 16px;
             }
         }
+
         .apply-frame-editing {
             font-size: 16px;
         }
@@ -1414,6 +1408,312 @@ footer {
 }
 
 @media only screen and (max-width: 24em) {
+    body {
+        padding: 0 1vw;
+    }
+
+    header {
+        height: 12vw;
+
+        .left>* {
+            margin-left: 1vw;
+        }
+
+        .left {
+            .home {
+                width: 12vw;
+            }
+
+            .title {
+                font-size: 6vw;
+            }
+        }
+
+        .right {
+            --margin: 2vw;
+            font-size: 4vw;
+        }
+    }
+
+    main {
+        margin-top: 15vw;
+
+        .bottombar {
+            height: 12vw;
+            border-radius: 2vw;
+            padding: 0 2vw;
+            margin-top: 2vw;
+
+            .algo-list-wrapper {
+                height: 8vw;
+                border-radius: 2vw;
+
+                div {
+                    font-size: 6vw;
+                    top: 0.5vw;
+                    right: 2vw;
+                }
+            }
+
+            .algo-list {
+                font-size: 5vw;
+                padding-left: 2.5vw;
+                padding-right: 5vw;
+                border-radius: 2vw;
+            }
+
+            button {
+                width: 7vw;
+            }
+
+            .right {
+                width: 30vw;
+                height: 7vw;
+            }
+
+            button.setting {
+                ul {
+                    width: 50vw;
+                    font-size: 4vw;
+                    padding: 2vw;
+                    border-radius: 2vw;
+                }
+                ul::after {
+                    border-width: 2vw;
+                    right: 2vw;
+                }
+                li.delay .value {
+                    width: 12vw;
+                    font-size: 4vw;
+                    padding: 0.2vw 1vw;
+                    border-radius: 1vw;
+                    border-width: 0.2vw;
+                    margin: 0 1vw;
+                }
+
+                li svg {
+                    height: 3vw;
+                    margin-right: 1vw;
+                }
+            }
+        }
+    }
+
+    #right-box {
+        margin-top: 2vw;
+
+        label {
+            font-size: 4.2vw;
+        }
+
+        div {
+            .name {
+                font-size: 6vw;
+            }
+
+            pre {
+                line-height: 4.5vw;
+            }
+        }
+
+        >* {
+            font-size: 4vw;
+        }
+
+        td {
+            padding: 2vw;
+        }
+    }
+
+    #code-box {
+        padding: 4vw 2vw;
+        margin-top: 2vw;
+
+        >code {
+            --line-numbers-width: 6vw;
+            font-size: 3vw;
+            padding: 2vw;
+            padding-left: calc(var(--line-numbers-width) + 1vw);
+        }
+
+        .top {
+            height: 12vw;
+
+            .prolang-list button {
+                width: 12vw;
+            }
+
+            .right {
+                button {
+                    margin-right: 2vw;
+                }
+            }
+        }
+
+        code {
+            .view-line {
+                border-width: 0.1vw;
+            }
+
+            .view-line::before {
+                top: 0.1vw;
+                transform: translateX(calc(-100% - 2vw));
+            }
+
+            .view-line .cmt {
+                padding: 2vw;
+                border-radius: 2vw;
+            }
+        }
+    }
+
+    footer {
+        margin-top: 2vw;
+        padding: 1vw 4vw;
+        font-size: 4vw;
+    }
+
+    #popup {
+        .guide-box {
+            max-width: 80vw;
+            border-radius: 3vw;
+
+            .message {
+                padding: 5vw;
+                padding-top: 8vw;
+                font-size: 5vw;
+            }
+
+            .close {
+                right: 2vw;
+                font-size: 10vw;
+            }
+
+            .line {
+                height: 2vw;
+                width: 20vw;
+                margin: 0 1vw;
+            }
+
+            .previous svg,
+            .next svg {
+                height: 10vw;
+            }
+        }
+
+        .info {
+            font-size: 3vw;
+
+            ul {
+                padding-left: 12vw;
+
+                li {
+                    margin-top: 1vw;
+                }
+
+                svg {
+                    height: 3vw;
+                    margin-right: 1vw;
+                }
+            }
+
+            .footer {
+                font-size: 2vw;
+            }
+        }
+
+        >.guide,
+        >.info {
+            .line {
+                height: 0.1vw;
+                margin: 2vw 0;
+            }
+
+            >.close {
+                top: auto;
+                bottom: 100%;
+                left: auto;
+                right: 5%;
+                height: 6vw;
+                width: 10vw;
+                border-radius: 0;
+                border-top-left-radius: 2vw;
+                border-top-right-radius: 2vw;
+                font-size: 6vw;
+            }
+        }
+
+        >.guide.show,
+        >.info.show {
+            top: 30%;
+            border-top-left-radius: 2vw;
+            border-top-right-radius: 2vw;
+        }
+
+        fieldset {
+            padding: 2vw;
+            padding-bottom: 20vw;
+            border-top-left-radius: 2vw;
+            border-top-right-radius: 2vw;
+            border-width: 0.6vw;
+
+            legend {
+                font-size: 5vw;
+            }
+        }
+
+        .logo {
+            margin-bottom: 2vw;
+        }
+
+        fieldset::-webkit-scrollbar-track {
+            border-width: 1vw;
+        }
+
+        fieldset::-webkit-scrollbar {
+            width: 1.5vw;
+        }
+
+        .custom-input {
+            padding: 2vw;
+            border-radius: 2vw;
+
+            .title::before {
+                height: 0.4vw;
+                top: 0.85em;
+            }
+
+            .title::after {
+                font-size: 5vw;
+            }
+
+            .constraints {
+                font-size: 4vw;
+                margin-bottom: 1vw;
+            }
+
+            .btns {
+                margin-top: 1vw;
+
+                button {
+                    border-width: 0.2vw;
+                    padding: 1vw 2vw;
+                    font-size: 4vw;
+                    border-radius: 1vw;
+                }
+            }
+
+            textarea {
+                min-height: 20vw;
+                padding: 2vw;
+                border-radius: 1vw;
+                font-size: 5vw;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 8em) {
 
     header .right,
     main,
