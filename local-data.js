@@ -2,7 +2,7 @@
 
 const localData = new (class {
     constructor() {
-        this.version = 'Preview 1.1.1';
+        this.version = 'Preview 1.1.2';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
@@ -21,7 +21,6 @@ const localData = new (class {
         await window.delay(100);
         if (confirm(this.reload___ + '?')) window.location.reload();
     }
-
     setDelay(value) {
         this.delay = Number(value);
         this.upload();

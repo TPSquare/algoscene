@@ -147,7 +147,8 @@ new (class {
         document.body.appendChild(
             document.createElement({
                 id: 'bg',
-                innerHTML: '<img class="brc" src="../../static/bottom-right-decoration.svg" alt="">',
+                innerHTML:
+                    '<img class="brc" src="../../static/bottom-right-decoration.svg" alt="">',
             })
         );
     }
@@ -712,41 +713,47 @@ new (class {
                     );
                 let i, r, l;
                 for (const f in codes) {
-                    for (const s in codes[f]) {
-                        if (codes[f][s])
-                            codes[f][s] = codes[f][s]
-                                .map((e) => {
-                                    if (e == '<span>&empty-line;</span>')
-                                        return '<span class="line-code"><span>&nbsp;</span></span>';
-                                    if (e[0] != '&') return `<span class="line-code">${e}</span>`;
-                                    l = Number(e.substring(4, e.indexOf(';')));
-                                    r = '';
-                                    for (i = 0; i < l; i++) r += '&nbsp;&nbsp;&nbsp;&nbsp;';
-                                    r = `<span class="tab">${r}</span><span class="line-code">`;
-                                    e = e.replace(`&tab${l};`, r) + '</span>';
-                                    return e;
-                                })
-                                .map((e, i) => `<span order="${++i}" class="view-line">${e}</span>`)
-                                .join('');
-                        if (cmts[f] && cmts[f][s])
-                            cmts[f][s] = cmts[f][s].map((c) => {
-                                if (c.includes('{{{') && c.includes('}}}')) {
-                                    c = c.substring(3, c.length - 3).split(',');
-                                    c = cmts[f][c[0]][Number(c[1])];
-                                }
-                                l = '';
-                                while (c.includes('{')) {
-                                    i = c.indexOf('{') + 1;
-                                    l += c.substring(0, i).replace('{', '<code>');
-                                    c = c.substring(i);
-                                    i = c.indexOf('}');
-                                    r = c.substring(0, i).split('_');
-                                    l += r.map((k) => shortcuts[k]).join('') + '</code>';
-                                    c = c.substring(i + 1);
-                                }
-                                return l + c;
-                            });
-                        if (s == 'cpp') cmts[f][s] = ['', '', ''].concat(cmts[f][s]);
+                    {
+                        for (const s in codes[f]) {
+                            if (codes[f][s])
+                                codes[f][s] = codes[f][s]
+                                    .map((e) => {
+                                        if (e == '<span>&empty-line;</span>')
+                                            return '<span class="line-code"><span>&nbsp;</span></span>';
+                                        if (e[0] != '&')
+                                            return `<span class="line-code">${e}</span>`;
+                                        l = Number(e.substring(4, e.indexOf(';')));
+                                        r = '';
+                                        for (i = 0; i < l; i++) r += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                        r = `<span class="tab">${r}</span><span class="line-code">`;
+                                        e = e.replace(`&tab${l};`, r) + '</span>';
+                                        return e;
+                                    })
+                                    .map(
+                                        (e, i) =>
+                                            `<span order="${++i}" class="view-line">${e}</span>`
+                                    )
+                                    .join('');
+                            if (cmts[f] && cmts[f][s])
+                                cmts[f][s] = cmts[f][s].map((c) => {
+                                    if (c.includes('{{{') && c.includes('}}}')) {
+                                        c = c.substring(3, c.length - 3).split(',');
+                                        c = cmts[f][c[0]][Number(c[1])];
+                                    }
+                                    l = '';
+                                    while (c.includes('{')) {
+                                        i = c.indexOf('{') + 1;
+                                        l += c.substring(0, i).replace('{', '<code>');
+                                        c = c.substring(i);
+                                        i = c.indexOf('}');
+                                        r = c.substring(0, i).split('_');
+                                        l += r.map((k) => shortcuts[k]).join('') + '</code>';
+                                        c = c.substring(i + 1);
+                                    }
+                                    return l + c;
+                                });
+                        }
+                        if (cmts[f].cpp) cmts[f].cpp = ['', '', '', ...cmts[f].cpp];
                     }
                 }
                 this.codes = codes;
@@ -839,7 +846,8 @@ new (class {
             },
         };
 
-        const logoHTML = '<div class="logo"><img src="../../static/logo-with-name.svg" alt=""></div>',
+        const logoHTML =
+                '<div class="logo"><img src="../../static/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
