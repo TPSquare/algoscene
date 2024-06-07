@@ -17,7 +17,6 @@ new (class {
         this.header();
         this.popup();
         this.main();
-        this.sizeNotice();
         this.footer();
     }
     document() {
@@ -211,13 +210,6 @@ new (class {
         });
 
         document.body.appendChild(popup);
-    }
-    sizeNotice() {
-        const sizeNotice = document.createElement({
-            id: 'size-notice',
-            innerHTML: langData.sizeNotice,
-        });
-        document.body.appendChild(sizeNotice);
     }
     footer() {
         const footer = document.createElement({

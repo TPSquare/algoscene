@@ -27,7 +27,6 @@ new (class {
         this.main();
         this.rightBox();
         this.codeBox();
-        this.sizeNotice();
         this.footer();
         this.popup();
     }
@@ -777,13 +776,6 @@ new (class {
 
         document.body.appendChild(codeBox);
     }
-    sizeNotice() {
-        const sizeNotice = document.createElement({
-            id: 'size-notice',
-            innerHTML: langData.sizeNotice,
-        });
-        document.body.appendChild(sizeNotice);
-    }
     footer() {
         const footer = document.createElement({
             tag: 'footer',
@@ -1099,13 +1091,12 @@ new (class {
                         const rect = guideMessageElm.getBoundingClientRect(),
                             styles = {},
                             e = 20;
-                        if (bcr.top + bcr.height / 2 < window.innerHeight / 2)
-                            styles.top = bcr.top + bcr.height - e;
-                        else styles.top = bcr.top - rect.height - e;
-                        if (styles.top < 0) styles.top = 10;
-                        styles.top += 'px';
-                        if (bcr.left < window.innerWidth / 2) styles.left = left;
-                        else styles.left = bcr.left + bcr.width + t - rect.width + 'px';
+                        styles.top = Math.max(bcr.top - rect.height - e, 10) + 'px';
+                        if (bcr.left < window.innerWidth / 2)
+                            styles.left = Number(left.substring(0, left.length - 2));
+                        else styles.left = bcr.left + bcr.width + t - rect.width;
+                        if (styles.left < 0) styles.left = 2;
+                        styles.left += 'px';
                         guideMessageElm.style = '';
                         guideMessageElm.setStyle(styles);
                     }
