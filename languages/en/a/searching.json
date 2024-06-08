@@ -2,7 +2,11 @@
     "sequential": {
         "name": "Sequential Search",
         "informations": {
-            "description": "The {{Sequential Search}} algorithm (Sequential Search, or Linear Search) is a simple searching algorithm. It sequentially checks each element of the array until it finds the target element or until the end of the array is reached.",
+            "idea": [
+                "Start from the first element of the array, the algorithm checks if this element is the desired one",
+                "If not, it moves to the next element and continues the checking process",
+                "This process continues until the element is found or there are no more elements to check"
+            ],
             "advantage": [
                 "Simple, easy to understand, and easy to implement",
                 "Does not require the array to be sorted"
@@ -38,7 +42,13 @@
     "binary": {
         "name": "Binary Search",
         "informations": {
-            "description": "The {{Binary Search}} algorithm is an efficient searching algorithm for sorted arrays. This algorithm works by repeatedly dividing the search range in half to reduce the number of elements to be checked. It continues this process until it finds the target element or until the search range is narrowed down to zero.",
+            "idea": [
+                "Start by selecting the element in the middle of the array that is sorted in ascending order",
+                "Compare this element with the value to be found, if they are equal, conclude the result and end the search",
+                "If the value to be found is less than the middle element, continue searching in the left half of the array",
+                "If the value to be found is greater than the middle element, continue searching in the right half of the array",
+                "Repeat the above process until the value is found or the search range becomes empty"
+            ],
             "advantage": "Good performance, even with large arrays",
             "disadvantage": "Requires the array to be sorted before performing the search",
             "application": [

@@ -457,7 +457,7 @@ new (class {
                     }
                     for (const l in t)
                         dess[k] +=
-                            `<label>${langData.information[l]}:</label>` + `<pre>${t[l]}</pre>`;
+                            `<label>${langData.information[l]}</label>` + `<pre>${t[l]}</pre>`;
                 }
                 for (const k in dess) {
                     dess[k] = dess[k]?.replaceAll('{{', '<span>').replaceAll('}}', '</span>');

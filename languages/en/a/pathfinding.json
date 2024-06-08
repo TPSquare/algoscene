@@ -2,7 +2,10 @@
     "bfs": {
         "name": "Breadth-First Search (BFS)",
         "informations": {
-            "description": "The {{Breadth-First Search (BFS)}} algorithm is a graph traversal algorithm that explores the nodes in a graph or matrix in a breadthward motion from a starting point. It begins by enqueueing the starting node and marking it as visited. Then, it iteratively dequeues a node from the front of the queue, checks all its unvisited neighboring nodes, enqueues them, and marks them as visited. This process continues until the queue is empty. BFS ensures breadth-first search by checking all nodes at the same level before moving to the next level.",
+            "idea": [
+                "Start at the starting point and expand to each successive level",
+                "Traverse all points adjacent to the current point before moving to points adjacent to those already traversed at the previous level"
+            ],
             "advantage": [
                 "Ensures finding the shortest path",
                 "Simple and easy to implement",
@@ -93,7 +96,10 @@
     "dfs": {
         "name": "Depth-First Search (DFS)",
         "informations": {
-            "description": "The {{Depth-First Search (DFS)}} algorithm is a search algorithm on a graph or matrix. It starts from a starting point and explores the child nodes of this node, diving deep into each branch of the graph or matrix as far as possible before backtracking. This is done using a stack to keep track of the next vertices to be visited.",
+            "idea": [
+                "Explore a branch of the graph, delve deeper into the matrix before returning to explore other branches",
+                "Traverse a branch until no more points can be explored, then backtrack and explore the remaining branches"
+            ],
             "advantage": [
                 "Uses memory efficiently",
                 "Quickly searches deeper",

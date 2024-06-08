@@ -2,14 +2,18 @@
     "sequential": {
         "name": "Tìm kiếm tuần tự",
         "informations": {
-            "description": "Thuật toán {{tìm kiếm tuần tự}} (Sequential Search, hay Linear Search) là một thuật toán tìm kiếm đơn giản. Trong đó, ta lần lượt kiểm tra từng phần tử của mảng cho đến khi tìm thấy phần tử cần tìm hoặc đến khi kết thúc mảng.",
+            "idea": [
+                "Bắt đầu từ phần tử đầu tiên của mảng, thuật toán kiểm tra xem phần tử này có phải là phần tử cần tìm không",
+                "Nếu không phải, nó di chuyển đến phần tử tiếp theo và tiếp tục quá trình kiểm tra",
+                "Quá trình này tiếp tục cho đến khi phần tử được tìm thấy hoặc không còn phần tử nào để kiểm tra"
+            ],
             "advantage": [
                 "Đơn giản, dễ hiểu và dễ triển khai",
                 "Không yêu cầu mảng phải được sắp xếp"
             ],
             "disadvantage": "Hiệu suất kém đối với các mảng lớn",
             "application": [
-                "Thường được sử dụng để giảng dạy và minh họa cơ bản về thuật toán sắp xếp",
+                "Thường được sử dụng để giảng dạy và minh họa cơ bản về thuật toán tìm kiếm",
                 "Tìm kiếm trong mảng nhỏ hoặc không được sắp xếp"
             ]
         },
@@ -38,7 +42,13 @@
     "binary": {
         "name": "Tìm kiếm nhị phân",
         "informations": {
-            "description": "Thuật toán {{tìm kiếm nhị phân}} (Binary Search) là một thuật toán tìm kiếm hiệu quả cho các mảng đã được sắp xếp. Thuật toán này hoạt động bằng cách liên tục chia đôi phạm vi tìm kiếm để giảm thiểu số lượng phần tử cần kiểm tra. Thực hiện việc lặp đến khi tìm thấy phần tử cần tìm hoặc đến khi phạm vi tìm kiếm thu hẹp đến không.",
+            "idea": [
+                "Bắt đầu với việc chọn phần tử ở giữa của mảng đã được sắp xếp tăng dần",
+                "So sánh phần tử này với giá trị cần tìm, nếu bằng nhau thì kết luận kết quả và kết thúc tìm kiếm",
+                "Nếu giá trị cần tìm nhỏ hơn phần tử ở giữa, tiếp tục tìm kiếm trong nửa bên trái của mảng",
+                "Nếu giá trị cần tìm lớn hơn phần tử ở giữa, tiếp tục tìm kiếm trong nửa bên phải của mảng",
+                "Lặp lại quá trình trên cho đến khi tìm thấy giá trị cần tìm hoặc phạm vi tìm kiếm trở nên rỗng"
+            ],
             "advantage": "Hiệu suất tốt, kể cả với mảng lớn",
             "disadvantage": "Yêu cầu mảng phải được sắp xếp trước khi thực hiện tìm kiếm",
             "application": [

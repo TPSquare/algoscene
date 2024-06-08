@@ -2,7 +2,11 @@
     "bubble": {
         "name": "Sắp xếp nổi bọt",
         "informations": {
-            "description": "Thuật toán {{sắp xếp nổi bọt}} (Bubble Sort) là một thuật toán sắp xếp đơn giản. Nó hoạt động bằng cách lặp đi lặp lại qua mảng, so sánh từng cặp phần tử liền kề và hoán đổi chúng nếu chúng không đúng thứ tự. Quá trình này được lặp lại từ đầu mảng cho đến khi không còn cặp phần tử nào cần được hoán đổi.",
+            "idea": [
+                "Duyệt qua mảng nhiều lần",
+                "Mỗi lần duyệt, so sánh các cặp phần tử liền kề và hoán đổi chúng nếu cần thiết",
+                "Phần tử lớn nhất {{nổi lên}} cuối mảng sau mỗi lần duyệt, tương tự như bong bóng nổi lên mặt nước"
+            ],
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
                 "Hiệu quả với mảng nhỏ"
@@ -40,7 +44,11 @@
     "selection": {
         "name": "Sắp xếp chọn",
         "informations": {
-            "description": "Thuật toán {{sắp xếp chọn}} (Selection Sort) là một thuật toán sắp xếp đơn giản. Nó hoạt động bằng cách tìm phần tử nhỏ nhất trong mảng và đổi chỗ nó với phần tử đầu tiên, sau đó tìm phần tử nhỏ nhất tiếp theo và đổi chỗ nó với phần tử thứ hai, tiếp tục quá trình này cho đến khi toàn bộ mảng được sắp xếp.",
+            "idea": [
+                "Chia mảng thành hai phần: phần đã được sắp xếp và phần chưa được sắp xếp",
+                "Ban đầu, phần đã được sắp xếp là trống và phần chưa được sắp xếp là toàn bộ mảng",
+                "Lặp nhiều lần, với mỗi lần lặp, tìm phần tử nhỏ nhất (hoặc lớn nhất) trong phần chưa sắp xếp, sau đó hoán đổi nó với phần tử đầu tiên trong phần chưa sắp xếp, mở rộng phần đã được sắp xếp"
+            ],
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
                 "Hiệu quả với mảng nhỏ"
@@ -82,7 +90,11 @@
     "insertion": {
         "name": "Sắp xếp chèn",
         "informations": {
-            "description": "Thuật toán {{sắp xếp chèn}} (Insertion Sort) là một thuật toán sắp xếp đơn giản. Nó sẽ lần lượt chọn tất cả các phần tử của mảng, tìm vị trí thích hợp và chèn nó vào vị trí đó.",
+            "idea": [
+                "Chia mảng thành hai phần: phần đã được sắp xếp và phần chưa được sắp xếp",
+                "Ban đầu, phần đã được sắp xếp chỉ chứa phần tử đầu tiên, phần còn lại của mảng là phần chưa được sắp xếp",
+                "Lặp lại quá trình lấy phần tử tiếp theo từ phần chưa được sắp xếp và chèn nó vào vị trí đúng trong phần đã được sắp xếp"
+            ],
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
                 "Hiệu quả với mảng nhỏ"
@@ -127,7 +139,12 @@
     "quick": {
         "name": "Sắp xếp nhanh",
         "informations": {
-            "description": "Thuật toán {{sắp xếp nhanh}} (Quick Sort) là một thuật toán sắp xếp phổ biến dựa trên nguyên tắc chia để trị. Nó hoạt động bằng cách chọn một phần tử làm điểm chốt và phân chia các phần tử khác của mảng thành hai nhóm, một nhóm gồm các phần tử nhỏ hơn điểm chốt và nhóm kia gồm các phần tử lớn hơn điểm chốt. Sau đó, thuật toán sẽ tiếp tục áp dụng cùng một quy trình cho hai nhóm con này, kết quả sẽ là một mảng đã được sắp xếp.",
+            "idea": [
+                "Chọn một phần tử từ mảng làm điểm chốt",
+                "Phân chia mảng thành hai phần: phần chứa các phần tử nhỏ hơn hoặc bằng điểm chốt và phần chứa các phần tử lớn hơn hoặc bằng điểm chốt",
+                "Đệ quy cho hai phần mảng con",
+                "Các mảng con đã được sắp xếp và gộp lại với nhau sẽ tạo thành mảng đã sắp xếp hoàn chỉnh"
+            ],
             "advantage": "Hiệu suất tốt, kể cả với mảng lớn",
             "application": [
                 "Được sử dụng trong các ứng dụng thực tế để sắp xếp các mảng lớn",

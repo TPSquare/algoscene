@@ -2,7 +2,11 @@
     "bubble": {
         "name": "Bubble Sort",
         "informations": {
-            "description": "The {{Bubble Sort}} algorithm is a simple sorting algorithm. It works by repeatedly stepping through the list, comparing each pair of adjacent items and swapping them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.",
+            "idea": [
+                "Iterate through the array multiple times",
+                "During each iteration, compare adjacent pairs of elements and swap them if necessary",
+                "The largest element {{bubbles up}} to the end of the array after each iteration, similar to bubbles rising to the surface of water"
+            ],
             "advantage": [
                 "Simple, intuitive, easy to understand",
                 "Effective for small arrays"
@@ -40,7 +44,11 @@
     "selection": {
         "name": "Selection Sort",
         "informations": {
-            "description": "The {{Selection Sort}} algorithm is a simple sorting algorithm. It works by repeatedly finding the minimum element from the unsorted part of the array and moving it to the beginning. The algorithm maintains two subarrays in a given array.",
+            "idea": [
+                "Divide the array into two parts: the sorted part and the unsorted part",
+                "Initially, the sorted part is empty and the unsorted part is the entire array",
+                "Iterate multiple times, with each iteration, find the smallest (or largest) element in the unsorted part, then swap it with the first element in the unsorted part, expanding the sorted part"
+            ],
             "advantage": [
                 "Simple, intuitive, easy to understand",
                 "Effective for small arrays"
@@ -82,7 +90,11 @@
     "insertion": {
         "name": "Insertion Sort",
         "informations": {
-            "description": "The {{Insertion Sort}} algorithm is a simple sorting algorithm. It builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort.",
+            "idea": [
+                "Divide the array into two parts: the sorted part and the unsorted part",
+                "Initially, the sorted part contains only the first element, and the rest of the array is the unsorted part",
+                "Repeat the process of taking the next element from the unsorted part and inserting it into the correct position in the sorted part"
+            ],
             "advantage": [
                 "Simple, intuitive, easy to understand",
                 "Effective for small arrays"
@@ -127,7 +139,12 @@
     "quick": {
         "name": "Quick Sort",
         "informations": {
-            "description": "The {{Quick Sort}} algorithm is a widely used sorting algorithm based on the principle of partitioning data. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then recursively sorted.",
+            "idea": [
+                "Select an element from the array as a pivot point",
+                "Partition the array into two parts: one containing elements smaller than or equal to the pivot and the other containing elements larger than or equal to the pivot",
+                "Recursively sort the two subarrays",
+                "The sorted subarrays merged together will form the complete sorted array"
+            ],
             "advantage": "Good performance, even with large arrays",
             "application": [
                 "Used in real-world applications to sort large arrays",
