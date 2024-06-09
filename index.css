@@ -158,7 +158,7 @@ header {
 
 main {
     position: relative;
-    padding: 100px 20px;
+    padding: 100px 20px 200px;
     background: url(./static/picture.jpg);
     background-size: cover;
     text-align: center;
@@ -422,7 +422,7 @@ main {
 
     main {
         font-size: 16px;
-        padding: 80px 16px;
+        padding: 80px 16px 150px;
 
         .above {
             font-size: 26px;
@@ -488,7 +488,7 @@ main {
 
     main {
         font-size: 14px;
-        padding: 60px 12px;
+        padding: 60px 12px 100px;
 
         .above {
             font-size: 25px;
@@ -540,7 +540,7 @@ main {
     }
 
     main {
-        padding: 12vw 6vw;
+        padding: 12vw 6vw 24vw;
         font-size: 4vw;
 
         .above {
