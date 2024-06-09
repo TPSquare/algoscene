@@ -1757,3 +1757,11 @@ footer {
         }
     }
 }
+
+#NOTEPAD_controls {
+    pointer-events: all;
+
+    * {
+        pointer-events: all;
+    }
+}
