@@ -526,7 +526,9 @@ new (class {
             });
             tbody.appendChild(tr);
         });
-        window.addEventListener('resize', () => complexity.onresize());
+        window.addEventListener('resize', () =>
+            window.setTimeout(() => complexity.onresize(), 1000)
+        );
 
         const expand = document.createElement({
             tag: 'button',
