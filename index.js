@@ -26,7 +26,6 @@ new (class {
         this.popup();
         this.main();
         this.algorithms();
-        this.footer();
     }
     document() {
         document.querySelector('html').lang = localData.lang;
@@ -91,7 +90,7 @@ new (class {
         const algorithms = document.createElement({
             tag: 'section',
             id: 'algorithms',
-            innerHTML: html
+            innerHTML: html,
         });
 
         document.body.appendChild(algorithms);
@@ -117,7 +116,13 @@ new (class {
             },
         });
 
-        const main = document.createElement({tag: 'main', children: [above, input]});
+        const info = document.createElement({
+            tag: 'span',
+            className: 'info',
+            innerHTML: `© 2024 TPSquare v${localData.version}`,
+        });
+
+        const main = document.createElement({tag: 'main', children: [above, input, info]});
 
         document.body.appendChild(main);
 
@@ -238,14 +243,5 @@ new (class {
         });
 
         document.body.appendChild(popup);
-    }
-    footer() {
-        const footer = document.createElement({
-            tag: 'footer',
-            innerHTML: `
-            <span>© 2024 TPSquare</span>
-            <span>v${localData.version}</span>`,
-        });
-        document.body.appendChild(footer);
     }
 })();

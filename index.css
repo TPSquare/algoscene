@@ -157,6 +157,7 @@ header {
 }
 
 main {
+    position: relative;
     padding: 100px 20px;
     background: url(./static/picture.jpg);
     background-size: cover;
@@ -178,6 +179,14 @@ main {
 
     input {
         width: 800px;
+    }
+
+    .info {
+        position: absolute;
+        right: 4px;
+        bottom: 2px;
+        font-size: 12px;
+        color: white;
     }
 }
 
@@ -373,19 +382,6 @@ main {
     }
 }
 
-footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 2px 20px;
-    margin: 0 20px;
-    margin-top: 10px;
-    background-color: #1D2033;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
-    font-size: 14px;
-    color: #f4f4f4;
-}
-
 @media only screen and (max-width: 72em) {
     body {
         --header-height: 80px;
@@ -436,6 +432,10 @@ footer {
 
         input {
             width: 600px;
+        }
+
+        .info {
+            font-size: 10px;
         }
     }
 
@@ -498,6 +498,10 @@ footer {
         input {
             width: 300px;
         }
+
+        .info {
+            font-size: 8px;
+        }
     }
 
     #popup {
@@ -509,10 +513,6 @@ footer {
             font-size: 14px;
             width: 80%;
         }
-    }
-
-    footer {
-        font-size: 12px;
     }
 }
 
@@ -552,13 +552,12 @@ footer {
         input {
             width: 80vw;
         }
-    }
 
-    footer {
-        margin: 0 4vw;
-        margin-top: 2vw;
-        padding: 1vw 4vw;
-        font-size: 4vw;
+        .info {
+            font-size: 2vw;
+            right: 0.2vw;
+            bottom: 0.1vw;
+        }
     }
 
     #popup {
