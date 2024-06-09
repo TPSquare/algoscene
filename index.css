@@ -302,7 +302,7 @@ main {
     >.info.show {
         opacity: 1;
         bottom: 0;
-        top: 10%;
+        top: 70px;
         pointer-events: all;
 
         * {
@@ -602,7 +602,7 @@ main {
 
 
         >.info.show {
-            top: 30%;
+            top: 20vw;
             border-top-left-radius: 2vw;
             border-top-right-radius: 2vw;
         }

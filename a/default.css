@@ -911,7 +911,7 @@ footer {
     >.info.show {
         opacity: 1;
         bottom: 0;
-        top: 10%;
+        top: 70px;
         pointer-events: all;
 
         * {
@@ -1690,7 +1690,7 @@ footer {
 
         >.guide.show,
         >.info.show {
-            top: 30%;
+            top: 20vw;
             border-top-left-radius: 2vw;
             border-top-right-radius: 2vw;
         }
