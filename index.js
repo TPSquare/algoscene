@@ -10,6 +10,14 @@ const langData = Object.assign(
     await fetch(`./languages/${localData.lang}/general.json`).then(async (r) => r.json())
 );
 
+const A = {names: await fetch('./a/list.json').then((res) => res.json())};
+A.data = await Promise.all(
+    A.names.map(async (fileName) => {
+        const url = `./languages/${localData.lang}/a/${fileName}.json`;
+        return await fetch(url).then((res) => res.json());
+    })
+);
+
 new (class {
     constructor() {
         this.document();
@@ -17,6 +25,7 @@ new (class {
         this.header();
         this.popup();
         this.main();
+        this.algorithms();
         this.footer();
     }
     document() {
@@ -68,6 +77,25 @@ new (class {
 
         document.body.appendChild(header);
     }
+    algorithms() {
+        let html = '';
+        A.names.forEach(
+            (key, index) =>
+                (html +=
+                    `<a href="./a/${key}">` +
+                    `<img src="./static/a/${key}.jpg" alt="">` +
+                    `<span>${A.data[index].NAME}</span>` +
+                    `</a>`)
+        );
+
+        const algorithms = document.createElement({
+            tag: 'section',
+            id: 'algorithms',
+            innerHTML: html
+        });
+
+        document.body.appendChild(algorithms);
+    }
     main() {
         const above = document.createElement({
             className: 'above',
@@ -98,16 +126,16 @@ new (class {
             placeHolder: langData.search,
             data: {
                 src: (async () => {
-                    const fileList = await fetch('./a/list.json').then((res) => res.json());
-                    const jsonPromises = fileList.map(async (fileName) => {
-                        const url = `./languages/${localData.lang}/a/${fileName}.json`;
-                        return await fetch(url).then((res) => res.json());
-                    });
-                    const res = await Promise.all(jsonPromises);
+                    const fileList = A.names;
+                    const res = A.data;
                     const LIST = res.map((obj, index) => {
                         const keys = Object.keys(obj);
                         keys.splice(
                             keys.findIndex((key) => key == '_'),
+                            1
+                        );
+                        keys.splice(
+                            keys.findIndex((key) => key == 'NAME'),
                             1
                         );
                         return keys

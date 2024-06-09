@@ -1,4 +1,5 @@
 {
+    "NAME": "Sorting",
     "bubble": {
         "name": "Bubble Sort",
         "informations": {
@@ -97,7 +98,8 @@
             ],
             "advantage": [
                 "Simple, intuitive, easy to understand",
-                "Effective for small arrays"
+                "Effective for small arrays",
+                "Works well with nearly sorted arrays"
             ],
             "disadvantage": "Poor performance for large arrays",
             "application": [

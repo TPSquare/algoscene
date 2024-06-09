@@ -2,13 +2,13 @@
 
 const localData = new (class {
     constructor() {
-        this.version = 'Preview 1.1.4';
+        this.version = '1.0.0';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);
         this.keys = {};
-        this.check('lang', 'vi');
+        this.check('lang', 'en');
         this.check('delay', 500);
         this.upload();
     }

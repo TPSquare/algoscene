@@ -1,4 +1,5 @@
 {
+    "NAME": "Sắp xếp",
     "bubble": {
         "name": "Sắp xếp nổi bọt",
         "informations": {
@@ -97,7 +98,8 @@
             ],
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
-                "Hiệu quả với mảng nhỏ"
+                "Hiệu quả với mảng nhỏ",
+                "Hoạt động tốt với mảng gần như đã được sắp xếp"
             ],
             "disadvantage": "Hiệu suất kém đối với các mảng lớn",
             "application": [

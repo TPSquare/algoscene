@@ -1,4 +1,5 @@
 {
+    "NAME": "Tìm đường",
     "bfs": {
         "name": "Breadth-First Search (BFS)",
         "informations": {

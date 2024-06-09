@@ -1,4 +1,5 @@
 {
+    "NAME": "Pathfinding",
     "bfs": {
         "name": "Breadth-First Search (BFS)",
         "informations": {
