@@ -2,7 +2,7 @@
 
 const localData = new (class {
     constructor() {
-        this.version = '1.0.7';
+        this.version = '1.0.8';
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
@@ -43,3 +43,5 @@ const localData = new (class {
 })();
 
 export default localData;
+
+alert('Being continuously updated! / Đang được cập nhật liên tục!')
