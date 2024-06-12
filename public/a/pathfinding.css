@@ -47,12 +47,12 @@
 
     span.start,
     div.non span.start {
-        background-color: #FFFF00 !important;
+        background-color: #00FF00 !important;
     }
 
     span.end,
     div.non span.end {
-        background-color: #00FF00 !important;
+        background-color: red !important;
     }
 
     span.path {

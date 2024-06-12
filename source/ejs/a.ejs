@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
+    <meta name="description" content="<%= description %>">
+    <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/a/default.css">
+    <link rel="stylesheet" href="/a/<%= key %>.css">
+</head>
+
+<body>
+    <script type="module">import('/a/default.js').then(() => import('/a/<%= key %>.js'))</script>
+</body>
+
+</html>

@@ -1,13 +1,11 @@
 'use strict';
 
-import localData from '../local-data.js';
+import localData from '/local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
-localData.init('../../');
-
 const langData = Object.assign(
-    await fetch(`../../languages/${localData.lang}/default.json`).then(async (r) => r.json()),
-    await fetch(`../../languages/${localData.lang}/general.json`).then(async (r) => r.json())
+    await fetch(`/languages/${localData.lang}/default.json`).then(async (r) => r.json()),
+    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
 );
 // desktopOS = (() => {
 //     const userAgent = navigator.userAgent;
@@ -111,7 +109,7 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `../../languages/${localData.lang}/a/${key}.json`;
+            const url = `/languages/${localData.lang}/a/${key}.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
@@ -147,14 +145,14 @@ new (class {
             document.createElement({
                 id: 'bg',
                 innerHTML:
-                    '<img class="brc" src="../../static/bottom-right-decoration.svg" alt="">',
+                    '<img class="brc" src="/svg/bottom-right-decoration.svg" alt="">',
             })
         );
     }
     header() {
         const homeBtn = document.createElement({
                 tag: 'a',
-                href: '../../',
+                href: '/',
                 className: 'home',
                 innerHTML:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg>',
@@ -162,7 +160,7 @@ new (class {
             }),
             title = document.createElement({
                 className: 'title',
-                innerHTML: 'ALGOSCENE<img src="../../static/name.svg" alt="">',
+                innerHTML: 'ALGOSCENE<img src="/svg/name.svg" alt="">',
             }),
             left = document.createElement({className: 'left', children: [homeBtn, title]});
 
@@ -855,7 +853,7 @@ new (class {
         };
 
         const logoHTML =
-                '<div class="logo"><img src="../../static/logo-with-name.svg" alt=""></div>',
+                '<div class="logo"><img src="/svg/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {

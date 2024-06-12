@@ -24,7 +24,7 @@
     border-radius: 1em;
     border: .05em solid rgba(63, 83, 182, 0.5);
     box-shadow: 0 0.1em 0.5em 0 #000000;
-    background-image: url(../static/search.svg);
+    background-image: url(/svg/search.svg);
     background-size: 1.4em;
     background-position: left 1.05em top .8em;
     background-repeat: no-repeat;

@@ -159,7 +159,7 @@ header {
 main {
     position: relative;
     padding: 100px 20px 200px;
-    background: url(./static/picture.jpg);
+    background: url(/jpg/home-main-bg.jpg);
     background-size: cover;
     text-align: center;
     font-size: 18px;

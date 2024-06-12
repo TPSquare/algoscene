@@ -1,8 +1,10 @@
 'use strict';
 
+const version = await fetch('/version').then(res => res.json());
+
 const localData = new (class {
     constructor() {
-        this.version = '1.0.9';
+        this.version = version;
         this.debug = false;
         this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
@@ -11,9 +13,7 @@ const localData = new (class {
         this.check('lang', 'en');
         this.check('delay', 500);
         this.upload();
-    }
-    init(root) {
-        this.getText(root);
+        this.getText();
     }
     async setLanguage(value) {
         this.lang = value;
@@ -35,8 +35,8 @@ const localData = new (class {
         keys.forEach((key) => (data[key] = this[key]));
         localStorage.setItem(this.key, JSON.stringify(data));
     }
-    async getText(root) {
-        const url = `${root}languages/${this.lang}/default.json`,
+    async getText() {
+        const url = `/languages/${this.lang}/default.json`,
             {reload___} = await fetch(url).then(async (r) => r.json());
         this.reload___ = reload___;
     }
