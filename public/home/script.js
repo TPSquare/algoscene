@@ -11,7 +11,7 @@ const langData = Object.assign(
 const A = {names: await fetch('/listA').then((res) => res.json())};
 A.data = await Promise.all(
     A.names.map(async (fileName) => {
-        const url = `/languages/${localData.lang}/a/${fileName}.json`;
+        const url = `/languages/${localData.lang}/${fileName}.a.json`;
         return await fetch(url).then((res) => res.json());
     })
 );
@@ -47,11 +47,11 @@ new (class {
                 type: 'button',
                 className: 'lang',
                 title: langData.language,
-                innerHTML: localData.lang.toUpperCase(),
+                innerHTML: localData.lang,
                 onclick() {
-                    if (this.innerHTML == 'EN') this.innerHTML = 'VI';
-                    else this.innerHTML = 'EN';
-                    localData.setLanguage(this.innerHTML.toLowerCase());
+                    if (this.innerHTML == 'en') this.innerHTML = 'vi';
+                    else this.innerHTML = 'en';
+                    localData.setLanguage(this.innerHTML);
                 },
             }),
             infoBtn = document.createElement({

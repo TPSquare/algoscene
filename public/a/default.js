@@ -109,7 +109,7 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `/languages/${localData.lang}/a/${key}.json`;
+            const url = `/languages/${localData.lang}/${key}.a.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
@@ -144,8 +144,7 @@ new (class {
         document.body.appendChild(
             document.createElement({
                 id: 'bg',
-                innerHTML:
-                    '<img class="brc" src="/svg/bottom-right-decoration.svg" alt="">',
+                innerHTML: '<img class="brc" src="/svg/bottom-right-decoration.svg" alt="">',
             })
         );
     }
@@ -169,11 +168,11 @@ new (class {
                 type: 'button',
                 className: 'lang',
                 title: langData.language,
-                innerHTML: localData.lang.toUpperCase(),
+                innerHTML: localData.lang,
                 onclick() {
-                    if (this.innerHTML == 'EN') this.innerHTML = 'VI';
-                    else this.innerHTML = 'EN';
-                    localData.setLanguage(this.innerHTML.toLowerCase());
+                    if (this.innerHTML == 'en') this.innerHTML = 'vi';
+                    else this.innerHTML = 'en';
+                    localData.setLanguage(this.innerHTML);
                 },
             }),
             infoBtn = document.createElement({
@@ -362,10 +361,11 @@ new (class {
                 attributes: {maxlength: 4},
                 value: localData.delay,
                 saveValue: localData.delay,
+                min: 50,
                 onblur() {
                     if (isNaN(this.value)) this.value = this.saveValue;
                     else {
-                        if (Number(this.value) < 100) this.value = 100;
+                        if (Number(this.value) < this.min) this.value = this.min;
                         this.saveValue = this.value;
                         localData.setDelay(this.value);
                         ALGOSCENE.updateDelayDuration();
@@ -706,24 +706,24 @@ new (class {
                                 .replace('|', '">') + '</span>';
                 shortcuts[' '] = ' ';
 
-                ['1|.', '3|-', '3|+', '3|--', '3|>', '3|<', '3|...', '3|/', '3|%']
+                ['1|.', '3|-', '3|+', '3|--', '3|>', '3|<', '3|...', '3|/', '3|%', '1|,']
                     .map((k) => k.split('|'))
                     .forEach(
                         (k) => (shortcuts[k[1]] = `<span class="mtk${k[0]}">${k[2] || k[1]}</span>`)
                     );
 
-                ['2|()', '1|()']
-                    .map((k) => k.split('|'))
-                    .forEach((k) =>
-                        k[1]
-                            .split('')
-                            .forEach(
-                                (c) =>
-                                    (shortcuts[
-                                        c + k[0]
-                                    ] = `<span class="bracket-highlighting-${k[0]}">${c}</span>`)
-                            )
-                    );
+                ['()|1,2,3']
+                    .forEach((k) => {
+                        k = k.split('|');
+                        k[1].split(',').forEach((n) => {
+                            shortcuts[
+                                k[0][0] + n
+                            ] = `<span class="bracket-highlighting-${n}">${k[0][0]}</span>`;
+                            shortcuts[
+                                k[0][1] + n
+                            ] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
+                        });
+                    })
                 let i, r, l;
                 for (const f in codes) {
                     {
@@ -852,8 +852,7 @@ new (class {
             },
         };
 
-        const logoHTML =
-                '<div class="logo"><img src="/svg/logo-with-name.svg" alt=""></div>',
+        const logoHTML = '<div class="logo"><img src="/svg/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
@@ -1271,7 +1270,7 @@ new (class {
         if (ok) {
             console.warn('Development mode is enabled');
             window.dev = {
-                getCodeData: (input) => {
+                getCodeFromVSCode: (input) => {
                     const t = document.createElement('div'),
                         r = [];
                     let i, s, f, h;
@@ -1313,6 +1312,10 @@ new (class {
                     });
                     console.log(r);
                 },
+                turnOnFrameCaptureMode: () => {
+                    document.body.main.frame.style.setProperty('border-radius', '0');
+                    document.openFullScreen(document.body.main.frame);
+                }
             };
         } else {
             document.head.innerHTML += '<style>*{pointer-events:none;}</style>';
