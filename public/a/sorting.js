@@ -172,6 +172,99 @@ await ALGOSCENE.init(
             },
             complexity: ALGOSCENE.createComplexity('n {x} log n', 'n {x} log n', 'n{^2}', 'n'),
         },
+        merge: {
+            code: {
+                cpp: [
+                    '<span class="mtk5">// include: vector</span>',
+                    '<span class="mtk5">// namespace: std</span>',
+                    '<span>&empty-line;</span>',
+                    '<span class="mtk6">void</span> <span class="mtk16">merge</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">leftSize</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">-</span> <span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">rightSize</span> <span class="mtk3">=</span> <span class="mtk10">right</span> <span class="mtk3">-</span> <span class="mtk10">middle</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk17">vector</span><span class="mtk3">&lt;</span><span class="mtk6">int</span><span class="mtk3">&gt;</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-1">(</span><span class="mtk10">leftSize</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk17">vector</span><span class="mtk3">&lt;</span><span class="mtk6">int</span><span class="mtk3">&gt;</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-1">(</span><span class="mtk10">rightSize</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">leftSize</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">i</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">i</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">rightSize</span><span class="mtk1">;</span> <span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">j</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span> <span class="mtk3">+</span> <span class="mtk10">j</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">k</span> <span class="mtk3">=</span> <span class="mtk10">left</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">leftSize</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">rightSize</span><span class="bracket-highlighting-1">)</span>',
+                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftArray</span><span class="bracket-highlighting-2">[</span><span class="mtk10">i</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">&lt;=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-2">[</span><span class="mtk10">j</span><span class="bracket-highlighting-2">]</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab2;<span class="mtk18">else</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">leftSize</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">rightSize</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '<span class="bracket-highlighting-0">}</span>',
+                    '<span>&empty-line;</span>',
+                    '<span class="mtk6">void</span> <span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span><span class="mtk6">&amp;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+                    '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">merge</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '<span class="bracket-highlighting-0">}</span>',
+                ],
+                js: [
+                    '<span class="mtk6">const</span> <span class="mtk16">merge</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">{</span>',
+                    '&tab1;<span class="mtk6">const</span> <span class="mtk19">leftSize</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">-</span> <span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">const</span> <span class="mtk19">rightSize</span> <span class="mtk3">=</span> <span class="mtk10">right</span> <span class="mtk3">-</span> <span class="mtk10">middle</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">const</span> <span class="mtk19">leftArray</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">slice</span><span class="bracket-highlighting-1">(</span><span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk19">leftSize</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">const</span> <span class="mtk19">rightArray</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">slice</span><span class="bracket-highlighting-1">(</span><span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span> <span class="mtk3">+</span> <span class="mtk19">rightSize</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">let</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">let</span> <span class="mtk10">k</span> <span class="mtk3">=</span> <span class="mtk10">left</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk19">leftSize</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk19">rightSize</span><span class="bracket-highlighting-1">)</span>',
+                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk19">leftArray</span><span class="bracket-highlighting-2">[</span><span class="mtk10">i</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">&lt;=</span> <span class="mtk19">rightArray</span><span class="bracket-highlighting-2">[</span><span class="mtk10">j</span><span class="bracket-highlighting-2">]</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">leftArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab2;<span class="mtk18">else</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">rightArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk19">leftSize</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">leftArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk19">rightSize</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="mtk10">k</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">rightArray</span><span class="bracket-highlighting-1">[</span><span class="mtk10">j</span><span class="mtk3">++</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
+                    '<span>&empty-line;</span>',
+                    '<span class="mtk6">const</span> <span class="mtk16">mergeSort</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk10">length</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">{</span>',
+                    '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-2">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '&tab1;<span class="mtk16">merge</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
+                ],
+                py: [
+                    '<span class="mtk6">def</span> <span class="mtk16">merge</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '&tab1;<span class="mtk10">leftSize</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">-</span> <span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk7">1</span>',
+                    '&tab1;<span class="mtk10">rightSize</span> <span class="mtk3">=</span> <span class="mtk10">right</span> <span class="mtk3">-</span> <span class="mtk10">middle</span>',
+                    '&tab1;<span class="mtk10">leftArray</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">left</span> <span class="mtk1">:</span> <span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">leftSize</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab1;<span class="mtk10">rightArray</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span> <span class="mtk1">:</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span> <span class="mtk3">+</span> <span class="mtk10">rightSize</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab1;<span class="mtk10">i</span><span class="mtk1">,</span> <span class="mtk10">j</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk7">0</span>',
+                    '&tab1;<span class="mtk10">k</span> <span class="mtk3">=</span> <span class="mtk10">left</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">leftSize</span> <span class="mtk6">and</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">rightSize</span><span class="mtk1">:</span>',
+                    '&tab2;<span class="mtk18">if</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">&lt;=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span><span class="mtk1">:</span>',
+                    '&tab3;<span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">k</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">=</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab3;<span class="mtk10">i</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab2;<span class="mtk18">else</span><span class="mtk1">:</span>',
+                    '&tab3;<span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">k</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab3;<span class="mtk10">j</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab2;<span class="mtk10">k</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">leftSize</span><span class="mtk1">:</span>',
+                    '&tab2;<span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">k</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">=</span> <span class="mtk10">leftArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab2;<span class="mtk10">i</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab2;<span class="mtk10">k</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab1;<span class="mtk18">while</span> <span class="mtk10">j</span> <span class="mtk3">&lt;</span> <span class="mtk10">rightSize</span><span class="mtk1">:</span>',
+                    '&tab2;<span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">k</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">=</span> <span class="mtk10">rightArray</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span>',
+                    '&tab2;<span class="mtk10">j</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '&tab2;<span class="mtk10">k</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
+                    '<span>&empty-line;</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '&tab1;<span class="mtk18">if</span> <span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="mtk1">:</span> <span class="mtk18">return</span>',
+                    '&tab1;<span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="mtk3">//</span> <span class="mtk7">2</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-0">)</span>',
+                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>',
+                    '&tab1;<span class="mtk16">merge</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>',
+                ],
+            },
+            complexity: ALGOSCENE.createComplexity(
+                'n {x} log n',
+                'n {x} log n',
+                'n {x} log n',
+                'n'
+            ),
+        },
     },
     {
         bbs: 'mtk16|bubbleSort',
@@ -187,6 +280,13 @@ await ALGOSCENE.init(
         jspivot: 'mtk19|pivot',
         pivot: 'mtk10|pivot',
         jspivot: 'mtk19|pivot',
+        merge: 'mtk16|merge',
+        vector: 'mtk17|vector',
+        k: 'mtk10|k',
+        ms: 'mtk16|mergeSort',
+        middle: 'mtk10|middle',
+        middlejs: 'mtk19|middle',
+        1: 'mtk7|1',
     }
 );
 
@@ -216,7 +316,7 @@ const getframeHTML = () =>
 
 ALGOSCENE.frameHTML = getframeHTML();
 
-const colors = ['', 'yellowgreen', 'red'];
+const colors = ['', 'yellowgreen', 'red', 'orange'];
 
 const array = new (class {
     constructor() {
@@ -273,12 +373,7 @@ const array = new (class {
         return this.get(i);
     }
     async swap(i, j) {
-        if (i == j) {
-            this.get(i).setBackgroundColor(1);
-            await ALGOSCENE.delay();
-            this.get(i).setBackgroundColor(0);
-            return;
-        }
+        if (i == j) return;
         const a = this.get(i),
             b = this.get(j);
         a.setBackgroundColor(1);
@@ -342,6 +437,7 @@ ALGOSCENE.setAction('selection', () => {
             }
             array.get(array.length - 1).setBackgroundColor();
             await array.swap(min, i);
+            if (min == i) array.get(min).setBackgroundColor();
         }
         await array.end();
     };
@@ -354,7 +450,7 @@ ALGOSCENE.setAction('insertion', () => {
             let j = i,
                 current = array.get(i);
             await current.setBackgroundColor(1);
-            await current.goOut();
+            if (j - 1 >= 0 && array.get(j - 1).value > current.value) await current.goOut();
             while (--j >= 0 && array.get(j).value > current.value) {
                 array.get(j).setBackgroundColor(2);
                 await array.get(j).moveTo(j + 1);
@@ -372,6 +468,8 @@ ALGOSCENE.setAction('quick', () => {
     array.regetElm();
     const quickSort = async (left = 0, right = array.length - 1) => {
         if (left >= right) return;
+        for (let i = left; i <= right; i++) array.get(i).setBackgroundColor(3);
+        await ALGOSCENE.delay();
         const pivot = array.get(Math.floor((left + right) / 2));
         await pivot.setBackgroundColor(2);
         let i = left,
@@ -386,11 +484,54 @@ ALGOSCENE.setAction('quick', () => {
             }
         }
         await pivot.setBackgroundColor();
+        for (let i = left; i <= right; i++) array.get(i).setBackgroundColor();
+        await ALGOSCENE.delay();
         await quickSort(left, j);
         await quickSort(i, right);
     };
     ALGOSCENE.playPauseBtn.click = async () => {
         await quickSort();
+        await array.end();
+    };
+});
+
+ALGOSCENE.setAction('merge', () => {
+    array.regetElm();
+    const merge = async (left, middle, right) => {
+        const leftSize = middle - left + 1;
+        const rightSize = right - middle;
+        const leftArray = new Array(leftSize);
+        const rightArray = new Array(rightSize);
+        for (let i = 0; i < leftSize; i++) {
+            leftArray[i] = array.get(left + i);
+            leftArray[i].setBackgroundColor(3);
+        }
+        for (let j = 0; j < rightSize; j++) {
+            rightArray[j] = array.get(middle + 1 + j);
+            rightArray[j].setBackgroundColor(3);
+        }
+        await ALGOSCENE.delay();
+        let i = 0,
+            j = 0;
+        let k = left;
+        while (i < leftSize && j < rightSize)
+            if (leftArray[i].value <= rightArray[j].value)
+                await array.swap(k++, leftArray[i++].index);
+            else await array.swap(k++, rightArray[j++].index);
+        while (i < leftSize) await array.swap(k++, leftArray[i++].index);
+        while (j < rightSize) await array.swap(k++, rightArray[j++].index);
+        for (; left <= right; left++) array.get(left).setBackgroundColor();
+        await ALGOSCENE.delay();
+    };
+    const mergeSort = async (left = 0, right = array.length - 1) => {
+        if (left >= right) return;
+        const middle = Math.floor((left + right) / 2);
+        await mergeSort(left, middle);
+        await mergeSort(middle + 1, right);
+        await merge(left, middle, right);
+    };
+    ALGOSCENE.playPauseBtn.click = async () => {
+        await mergeSort();
         await array.end();
     };
 });

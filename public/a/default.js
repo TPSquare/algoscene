@@ -1310,7 +1310,7 @@ new (class {
                         html = html.replaceAll('&nbsp;', '</span> <span class="mtk1">');
                         r.push(html);
                     });
-                    console.log(r);
+                    return r;
                 },
                 turnOnFrameCaptureMode: () => {
                     document.body.main.frame.style.setProperty('border-radius', '0');

@@ -10,12 +10,14 @@
             ],
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
-                "Hiệu quả với mảng nhỏ"
+                "Hiệu quả với mảng nhỏ",
+                "Là một thuật toán sắp xếp ổn định"
             ],
             "disadvantage": "Hiệu suất kém đối với các mảng lớn",
             "application": [
                 "Thường được sử dụng để giảng dạy và minh họa cơ bản về thuật toán sắp xếp",
-                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ"
+                "Sắp xếp dữ liệu nhỏ",
+                "Kiểm tra sự sắp xếp đúng đắn của các thuật toán khác"
             ]
         },
         "comments": {
@@ -54,10 +56,14 @@
                 "Đơn giản, trực quan, dễ hiểu",
                 "Hiệu quả với mảng nhỏ"
             ],
-            "disadvantage": "Hiệu suất kém đối với các mảng lớn",
+            "disadvantage": [
+                "Hiệu suất kém đối với các mảng lớn",
+                "Là một thuật toán sắp xếp không ổn định"
+            ],
             "application": [
-                "Thường được sử dụng để giảng dạy và minh họa các khái niệm cơ bản về thuật toán sắp xếp",
-                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ"
+                "Sắp xếp dữ liệu nhỏ",
+                "Khi dữ liệu không gian bộ nhớ hạn chế",
+                "Sắp xếp một phần nhỏ của dữ liệu"
             ]
         },
         "comments": {
@@ -99,13 +105,14 @@
             "advantage": [
                 "Đơn giản, trực quan, dễ hiểu",
                 "Hiệu quả với mảng nhỏ",
-                "Hoạt động tốt với mảng gần như đã được sắp xếp"
+                "Hoạt động tốt với mảng gần như đã được sắp xếp",
+                "Là một thuật toán sắp xếp ổn định"
             ],
             "disadvantage": "Hiệu suất kém đối với các mảng lớn",
             "application": [
-                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ",
-                "Hữu ích khi dữ liệu đầu vào là một mảng gần như đã được sắp xếp",
-                "Trong thực tế, thuật toán này thường được sử dụng như một phần của các thuật toán sắp xếp phức tạp hơn"
+                "Sắp xếp dữ liệu nhỏ hoặc gần như đã sắp xếp",
+                "Sắp xếp dữ liệu trong các ứng dụng desktop và di động",
+                "Thuật toán trung gian trong các thuật toán phức tạp hơn"
             ]
         },
         "comments": {
@@ -148,9 +155,13 @@
                 "Các mảng con đã được sắp xếp và gộp lại với nhau sẽ tạo thành mảng đã sắp xếp hoàn chỉnh"
             ],
             "advantage": "Hiệu suất tốt, kể cả với mảng lớn",
+            "disadvantage": "Là một thuật toán sắp xếp không ổn định",
             "application": [
-                "Được sử dụng trong các ứng dụng thực tế để sắp xếp các mảng lớn",
-                "Được sử dụng trong các thuật toán tìm kiếm và phân loại dữ liệu"
+                "Sắp xếp dữ liệu trong ngôn ngữ lập trình và thư viện",
+                "Sắp xếp cơ sở dữ liệu",
+                "Sử dụng trong ứng dụng web và di động",
+                "Xử lý dữ liệu trong các thuật toán phân tán",
+                "Phân tích và chế biến dữ liệu lớn"
             ]
         },
         "comments": {
@@ -159,7 +170,7 @@
                 "Nếu {left} lớn hơn hoặc bằng {right}, nghĩa là đoạn mảng cần sắp xếp chỉ có một phần tử hoặc không còn phần tử nào để sắp xếp, hàm sẽ dừng lại và không thực hiện gì thêm",
                 "Khởi tạo {pivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
                 "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}",
-                "Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}",
+                "Khởi tạo {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}",
                 "Đảm bảo {i} không vượt quá {j} trong quá trình tìm và hoán đổi các phần tử",
                 "Tăng {i} cho đến khi tìm thấy phần tử lớn hơn hoặc bằng {pivot}",
                 "Giảm {j} cho đến khi tìm thấy phần tử nhỏ hơn hoặc bằng {pivot}",
@@ -174,7 +185,7 @@
                 "{{{cpp,1}}}",
                 "Khởi tạo {jspivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
                 "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {jspivot}",
-                "Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {jspivot}",
+                "Khởi tạo {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {jspivot}",
                 "{{{cpp,5}}}",
                 "Tăng {i} cho đến khi tìm thấy phần tử lớn hơn hoặc bằng {jspivot}",
                 "Giảm {j} cho đến khi tìm thấy phần tử nhỏ hơn hoặc bằng {jspivot}",
@@ -192,7 +203,7 @@
                 "{{{cpp,1}}}",
                 "Thoát khỏi hàm",
                 "{{{cpp,2}}}",
-                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
+                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tạo {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
                 "{{{cpp,5}}}",
                 "Khi {i} chưa tìm thấy phần tử lớn hơn hoặc bằng {pivot}",
                 "Tăng {i}",
@@ -204,6 +215,111 @@
                 "{{{js,11}}}",
                 "{{{cpp,11}}}",
                 "{{{cpp,12}}}"
+            ]
+        }
+    },
+    "merge": {
+        "name": "Sắp xếp trộn",
+        "informations": {
+            "idea": [
+                "Mảng được chia thành các phần nhỏ hơn, cho đến khi mỗi phần tử được coi là một mảng con",
+                "Mỗi mảng con được sắp xếp bằng cách sử dụng đệ quy",
+                "Các mảng con đã sắp xếp được gộp lại thành một mảng lớn hơn theo thứ tự",
+                "Lặp lại quá trình cho đến khi mảng ban đầu được sắp xếp hoàn toàn"
+            ],
+            "advantage": [
+                "Hiệu suất tốt, kể cả với mảng lớn",
+                "Là một thuật toán sắp xếp ổn định"
+            ],
+            "disadvantage": [
+                "Không phải là thuật toán tốt nhất cho các mảng nhỏ"
+            ],
+            "application": [
+                "Sắp xếp dữ liệu trong cơ sở dữ liệu",
+                "Sắp xếp danh sách trong ứng dụng web",
+                "Sắp xếp tập tin",
+                "Sắp xếp dữ liệu trong ứng dụng desktop hoặc di động",
+                "Sắp xếp dữ liệu trong các thuật toán khác"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {merge} dùng để hợp nhất hai mảng con đã được sắp xếp thành một mảng con lớn đã sắp xếp",
+                "Tính kích thước của mảng con trái",
+                "Tính kích thước của mảng con phải",
+                "Tạo một {vector} tạm để lưu mảng con trái",
+                "Tạo một {vector} tạm để lưu mảng con phải",
+                "Sao chép các phần tử từ mảng gốc vào mảng con trái",
+                "Sao chép các phần tử từ mảng gốc vào mảng con phải",
+                "Khởi tạo {i} và {j} để duyệt cho mảng con trái và mảng con phải",
+                "Khởi tạo {k} để duyệt cho mảng gốc",
+                "Trộn đồng thời từ cả hai mảng con đến khi một trong hai mảng hết phần tử",
+                "Nếu phần tử hiện tại của mảng con bên trái nhỏ hơn hoặc bằng phần tử hiện tại của mảng con bên phải, đẩy phần tử đó vào mảng gốc và tăng chỉ số cho hai mảng",
+                "Ngược lại, đẩy phần tử hiện tại của mảng con bên phải vào mảng gốc và tăng chỉ số cho hai mảng",
+                "Sao chép các phần tử còn lại của mảng con bên trái vào mảng gốc",
+                "Sao chép các phần tử còn lại của mảng con bên phải vào mảng gốc",
+                "",
+                "",
+                "Khai báo hàm {ms}",
+                "Nếu {left} lớn hơn hoặc bằng {right}, nghĩa là đoạn mảng cần sắp xếp chỉ có một phần tử hoặc không còn phần tử nào để sắp xếp, hàm sẽ dừng lại và không thực hiện gì thêm",
+                "Tìm chỉ số giữa của mảng",
+                "Gọi đệ quy để sắp xếp mảng con bên trái từ {left} đến {middle}",
+                "Gọi đệ quy để sắp xếp mảng con bên phải từ {middle_ _+_ _1} đến {right}",
+                "Gọi hàm {merge} để trộn hai mảng con đã sắp xếp thành một mảng có thứ tự"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "Tạo mảng con bên trái từ mảng gốc",
+                "Tạo mảng con bên phải từ mảng gốc",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "{{{cpp,10}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}",
+                "{{{cpp,13}}}",
+                "{{{cpp,14}}}",
+                "{{{cpp,15}}}",
+                "{{{cpp,16}}}",
+                "{{{cpp,17}}}",
+                "{{{cpp,18}}}",
+                "Gọi đệ quy để sắp xếp mảng con bên trái từ {left} đến {middlejs}",
+                "Gọi đệ quy để sắp xếp mảng con bên phải từ {middlejs_ _+_ _1} đến {right}",
+                "{{{cpp,21}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{js,3}}}",
+                "{{{js,4}}}",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "Kiểm tra xem phần tử hiện tại của mảng con bên trái có nhỏ hơn hoặc bằng phần tử hiện tại của mảng con bên phải hay không. Nếu đúng, đẩy phần tử đó vào mảng gốc.",
+                "Đẩy phần tử hiện tại của mảng con bên trái vào mảng gốc",
+                "Tăng {i} cho lần duyệt tiếp theo",
+                "Ngược lại",
+                "Đẩy phần tử hiện tại của mảng con bên phải vào mảng gốc",
+                "Tăng {j} cho lần duyệt tiếp theo",
+                "Tăng {k} cho lần duyệt tiếp theo",
+                "Duyệt qua các phần tử còn lại của mảng con bên trái",
+                "Thêm phần tử còn lại vào mảng gốc",
+                "{{{py,10}}}",
+                "{{{py,14}}}",
+                "Duyệt qua các phần tử còn lại của mảng con bên phải",
+                "{{{py,16}}}",
+                "{{{py,10}}}",
+                "{{{py,14}}}",
+                "",
+                "{{{cpp,16}}}",
+                "{{{cpp,17}}}",
+                "{{{cpp,18}}}",
+                "{{{cpp,19}}}",
+                "{{{cpp,20}}}",
+                "{{{cpp,21}}}"
             ]
         }
     },

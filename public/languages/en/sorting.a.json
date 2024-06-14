@@ -5,25 +5,27 @@
         "informations": {
             "idea": [
                 "Iterate through the array multiple times",
-                "During each iteration, compare adjacent pairs of elements and swap them if necessary",
+                "Each iteration, compare adjacent pairs of elements and swap them if necessary",
                 "The largest element {{bubbles up}} to the end of the array after each iteration, similar to bubbles rising to the surface of water"
             ],
             "advantage": [
                 "Simple, intuitive, easy to understand",
-                "Effective for small arrays"
+                "Effective for small arrays",
+                "A stable sorting algorithm"
             ],
             "disadvantage": "Poor performance for large arrays",
             "application": [
-                "Commonly used for teaching and illustrating basic sorting algorithms",
-                "Simple and effective, suitable for small data arrays"
+                "Often used for teaching and illustrating basic sorting algorithms",
+                "Sorting small data sets",
+                "Checking the correctness of other sorting algorithms"
             ]
         },
         "comments": {
             "cpp": [
-                "Declare the {bbs} function",
-                "The outer loop helps to iterate through the array multiple times to push the largest (for ascending order) or smallest (for descending order) element to the end of the array",
-                "The inner loop is used to compare adjacent pairs of elements and swap them if they are out of order",
-                "Check if two adjacent elements in the array are in the wrong order. If so, these elements need to be swapped to move the larger element towards the end (for ascending order).",
+                "Declare the function {bbs}",
+                "The outer loop allows iterating through the array multiple times to push the largest (ascending order) or smallest (descending order) element to the end of the array",
+                "The inner loop compares adjacent pairs of elements and swaps them if they are not in order",
+                "Check if two adjacent elements in the array are in the wrong order. If true, these two elements need to be swapped to bring the larger element to the back (ascending order).",
                 "Swap two elements"
             ],
             "js": [
@@ -54,17 +56,21 @@
                 "Simple, intuitive, easy to understand",
                 "Effective for small arrays"
             ],
-            "disadvantage": "Poor performance for large arrays",
+            "disadvantage": [
+                "Poor performance for large arrays",
+                "An unstable sorting algorithm"
+            ],
             "application": [
-                "Commonly used for teaching and illustrating basic sorting concepts",
-                "Simple and effective, suitable for small data arrays"
+                "Sorting small data sets",
+                "When memory space is limited",
+                "Sorting a small portion of data"
             ]
         },
         "comments": {
             "cpp": [
-                "Declare the {slts} function",
-                "The outer loop helps to iterate through the array multiple times to find and place the smallest or largest element of the unsorted part of the array in its correct position",
-                "Initialize the {min} variable to hold the position of the smallest element in the unsorted part of the array",
+                "Declare the function {slts}",
+                "The outer loop helps iterate through the array multiple times to find and place the smallest or largest element of the unsorted part of the array in its correct position",
+                "Initialize the variable {min} to hold the position of the smallest element in the unsorted part of the array",
                 "The inner loop is used to find the smallest element in the unsorted part of the array",
                 "Check if the element at position {j} is smaller than the element at position {min}. If true, update {min} to hold the position of the current smallest element.",
                 "Swap two elements"
@@ -99,22 +105,23 @@
             "advantage": [
                 "Simple, intuitive, easy to understand",
                 "Effective for small arrays",
-                "Works well with nearly sorted arrays"
+                "Works well with nearly sorted arrays",
+                "A stable sorting algorithm"
             ],
             "disadvantage": "Poor performance for large arrays",
             "application": [
-                "Simple and effective, suitable for small data arrays",
-                "Useful when input array is almost sorted",
-                "In practice, this algorithm is often used as part of more complex sorting algorithms"
+                "Sorting small or nearly sorted data sets",
+                "Sorting data in desktop and mobile applications",
+                "Intermediate algorithm in more complex algorithms"
             ]
         },
         "comments": {
             "cpp": [
-                "Declare the {ists} function",
-                "The outer loop is used to iterate through the positions of the array. The first element is considered sorted.",
+                "Declare the function {ists}",
+                "The outer loop to iterate through the positions of the array. The first element is considered sorted.",
                 "Initialize {j} to iterate backward through the sorted elements",
-                "Initialize {current} to hold the value of the element currently being placed in the correct position",
-                "The inner loop is used to iterate from right to left, finding the correct position to insert the {current} element into the sorted part of the array. Compare to check if the element at position {j} is greater than {current}, if true, shift the element at {j} to the right to create a space for {current}.",
+                "Initialize {current} to hold the value of the element currently needing a position",
+                "The inner loop is used to iterate from right to left, finding the correct position to insert the {current} element into the sorted part of the array. Compare to check if the element at position {j} is greater than {current}, if true, shift the element at {j} to the right to make room for {current}.",
                 "Shift the element at position {j} to the right",
                 "Insert {current} into the correct position"
             ],
@@ -130,10 +137,10 @@
             "py": [
                 "{{{cpp,0}}}",
                 "{{{cpp,1}}}",
-                "Initialize {j} to iterate backward through the sorted elements. Initialize {current} to hold the value of the element currently being placed in the correct position.",
+                "Initialize {j} to iterate backward through the sorted elements. Initialize {current} to hold the value of the element currently needing a position.",
                 "{{{cpp,4}}}",
                 "{{{cpp,5}}}",
-                "Decrement {j} to continue iterating left",
+                "Decrease {j} to continue iterating left",
                 "{{{cpp,6}}}"
             ]
         }
@@ -142,29 +149,33 @@
         "name": "Quick Sort",
         "informations": {
             "idea": [
-                "Select an element from the array as a pivot point",
-                "Partition the array into two parts: one containing elements smaller than or equal to the pivot and the other containing elements larger than or equal to the pivot",
+                "Select an element from the array as the pivot point",
+                "Partition the array into two parts: one containing elements smaller than or equal to the pivot and the other containing elements greater than or equal to the pivot",
                 "Recursively sort the two subarrays",
-                "The sorted subarrays merged together will form the complete sorted array"
+                "The sorted subarrays are then combined to form the complete sorted array"
             ],
             "advantage": "Good performance, even with large arrays",
+            "disadvantage": "An unstable sorting algorithm",
             "application": [
-                "Used in real-world applications to sort large arrays",
-                "Used in searching and classification algorithms"
+                "Sorting data in programming languages and libraries",
+                "Sorting databases",
+                "Used in web and mobile applications",
+                "Processing data in distributed algorithms",
+                "Analysis and processing of big data"
             ]
         },
         "comments": {
             "cpp": [
-                "Declare the {qs} function",
-                "If {left} is greater than or equal to {right}, indicating that the array segment to be sorted has only one element or no elements left to sort, the function stops and does nothing more",
-                "Initialize {pivot} to hold the value of the middle element of the array segment. This element is used to partition the segment into two parts.",
-                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {pivot}",
-                "Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {pivot}",
-                "Ensure that {i} does not exceed {j} during the process of finding and swapping elements",
-                "Increment {i} until finding an element greater than or equal to {pivot}",
-                "Decrement {j} until finding an element less than or equal to {pivot}",
+                "Declare the function {qs}",
+                "If {left} is greater than or equal to {right}, meaning the array segment to be sorted has only one element or no elements left to sort, the function will stop and do nothing further",
+                "Initialize {pivot} to store the pivot value as the middle element of the array segment. This element will be used to partition the array segment into two parts.",
+                "Initialize {i} to traverse from the beginning to the middle of the array segment, finding elements greater than or equal to the {pivot}",
+                "Initialize {j} to traverse from the end to the middle of the array segment, finding elements less than or equal to the {pivot}",
+                "Ensure {i} does not exceed {j} during the process of finding and swapping elements",
+                "Increase {i} until finding an element greater than or equal to {pivot}",
+                "Decrease {j} until finding an element less than or equal to {pivot}",
                 "Check again if {i} exceeds {j}",
-                "Swap two elements so that on the left are elements less than or equal to {pivot}, and on the right are elements greater than or equal to {pivot}. Increment {i} and decrement {j} for the next search.",
+                "Swap two elements so that the left side contains elements less than or equal to {pivot} and the right side contains elements greater than or equal to {pivot}. Then increase {i} and decrease {j} for the next search.",
                 "",
                 "Continue sorting the array segment from {left} to {j}",
                 "Continue sorting the array segment from {i} to {right}"
@@ -172,16 +183,16 @@
             "js": [
                 "{{{cpp,0}}}",
                 "{{{cpp,1}}}",
-                "Initialize {jspivot} to hold the value of the middle element of the array segment. This element is used to partition the segment into two parts.",
-                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {jspivot}",
-                "Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {jspivot}",
+                "Initialize {jspivot} to store the pivot value as the middle element of the array segment. This element will be used to partition the array segment into two parts.",
+                "Initialize {i} to traverse from the beginning to the middle of the array segment, finding elements greater than or equal to {jspivot}",
+                "Initialize {j} to traverse from the end to the middle of the array segment, finding elements less than or equal to {jspivot}",
                 "{{{cpp,5}}}",
-                "Increment {i} until finding an element greater than or equal to {jspivot}",
-                "Decrement {j} until finding an element less than or equal to {jspivot}",
+                "Increase {i} until finding an element greater than or equal to {jspivot}",
+                "Decrease {j} until finding an element less than or equal to {jspivot}",
                 "{{{cpp,8}}}",
-                "Swap two elements so that on the left are elements less than or equal to {jspivot}, and on the right are elements greater than or equal to {jspivot}",
-                "Increment {i} for the next search",
-                "Decrement {j} for the next search",
+                "Swap two elements so that the left side contains elements less than or equal to {jspivot} and the right side contains elements greater than or equal to {jspivot}",
+                "Increase {i} for the next search",
+                "Decrease {j} for the next search",
                 "",
                 "",
                 "Continue sorting the array segment from {left} to {j}",
@@ -192,14 +203,14 @@
                 "{{{cpp,1}}}",
                 "Exit the function",
                 "{{{cpp,2}}}",
-                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {pivot}. Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {pivot}.",
+                "Initialize {i} to traverse from the beginning to the middle of the array segment, finding elements greater than or equal to {pivot}. Initialize {j} to traverse from the end to the middle of the array segment, finding elements less than or equal to {pivot}.",
                 "{{{cpp,5}}}",
-                "While {i} hasn't found an element greater than or equal to {pivot}",
-                "Increment {i}",
-                "While {j} hasn't found an element less than or equal to {pivot}",
-                "Decrement {j}",
+                "When {i} has not found an element greater than or equal to {pivot}",
+                "Increase {i}",
+                "When {j} has not found an element less than or equal to {pivot}",
+                "Decrease {j}",
                 "{{{cpp,8}}}",
-                "Swap two elements so that on the left are elements less than or equal to {pivot}, and on the right are elements greater than or equal to {pivot}",
+                "Swap two elements so that the left side contains elements less than or equal to {pivot} and the right side contains elements greater than or equal to {pivot}",
                 "{{{js,10}}}",
                 "{{{js,11}}}",
                 "{{{cpp,11}}}",
@@ -207,11 +218,116 @@
             ]
         }
     },
+    "merge": {
+        "name": "Merge Sort",
+        "informations": {
+            "idea": [
+                "The array is divided into smaller parts until each element is considered as a subarray",
+                "Each subarray is sorted using recursion",
+                "The sorted subarrays are merged into a larger array in order",
+                "Repeat the process until the original array is completely sorted"
+            ],
+            "advantage": [
+                "Good performance, even with large arrays",
+                "A stable sorting algorithm"
+            ],
+            "disadvantage": [
+                "Not the best algorithm for small arrays"
+            ],
+            "application": [
+                "Sorting data in databases",
+                "Sorting lists in web applications",
+                "Sorting files",
+                "Sorting data in desktop or mobile applications",
+                "Sorting data in other algorithms"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the function {merge} to merge two sorted subarrays into one sorted subarray",
+                "Calculate the size of the left subarray",
+                "Calculate the size of the right subarray",
+                "Create a temporary {vector} to store the left subarray",
+                "Create a temporary {vector} to store the right subarray",
+                "Copy elements from the original array to the left subarray",
+                "Copy elements from the original array to the right subarray",
+                "Initialize {i} and {j} to traverse for the left and right subarrays",
+                "Initialize {k} to traverse for the original array",
+                "Merge simultaneously from both subarrays until one of the subarrays runs out of elements",
+                "If the current element of the left subarray is less than or equal to the current element of the right subarray, push that element into the original array and increase the indices for both subarrays",
+                "Otherwise, push the current element of the right subarray into the original array and increase the indices for both subarrays",
+                "Copy the remaining elements of the left subarray into the original array",
+                "Copy the remaining elements of the right subarray into the original array",
+                "",
+                "",
+                "Declare the function {ms}",
+                "If {left} is greater than or equal to {right}, meaning the array segment to be sorted has only one element or no elements left to sort, the function will stop and do nothing further",
+                "Find the middle index of the array",
+                "Call recursion to sort the left subarray from {left} to {middle}",
+                "Call recursion to sort the right subarray from {middle + 1} to {right}",
+                "Call the {merge} function to merge two sorted subarrays into one ordered array"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "Create the left subarray from the original array",
+                "Create the right subarray from the original array",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "{{{cpp,10}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}",
+                "{{{cpp,13}}}",
+                "{{{cpp,14}}}",
+                "{{{cpp,15}}}",
+                "{{{cpp,16}}}",
+                "{{{cpp,17}}}",
+                "{{{cpp,18}}}",
+                "Call recursion to sort the left subarray from {left} to {middlejs}",
+                "Call recursion to sort the right subarray from {middlejs + 1} to {right}",
+                "{{{cpp,21}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{js,3}}}",
+                "{{{js,4}}}",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "Check if the current element of the left subarray is less than or equal to the current element of the right subarray. If true, push that element into the original array.",
+                "Push the current element of the left subarray into the original array",
+                "Increase {i} for the next traversal",
+                "Otherwise",
+                "Push the current element of the right subarray into the original array",
+                "Increase {j} for the next traversal",
+                "Increase {k} for the next traversal",
+                "Traverse through the remaining elements of the left subarray",
+                "Append the remaining elements into the original array",
+                "{{{py,10}}}",
+                "{{{py,14}}}",
+                "Traverse through the remaining elements of the right subarray",
+                "{{{py,16}}}",
+                "{{{py,10}}}",
+                "{{{py,14}}}",
+                "",
+                "{{{cpp,16}}}",
+                "{{{cpp,17}}}",
+                "{{{cpp,18}}}",
+                "{{{cpp,19}}}",
+                "{{{cpp,20}}}",
+                "{{{cpp,21}}}"
+            ]
+        }
+    },
     "_": {
         "constraints": [
             "Values separated by whitespace",
-            "Value is an integer in the range from -9 to 99",
-            "Minimum of 7 values"
+            "Values are integers ranging from -9 to 99",
+            "Minimum 7 values"
         ]
     }
 }
