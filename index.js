@@ -23,6 +23,10 @@ app.get('/version', (req, res) => {
     });
 });
 
+app.get('/localdata-key', (req, res) => res.json(process.env.LOCALDATA_KEY));
+
+app.languages = ['vi', 'en'];
+
 import HomePage from './source/homepage.js';
 new HomePage(app);
 

@@ -3,15 +3,17 @@
 import localData from '/local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
+const LANG = document.querySelector('html').lang;
+
 const langData = Object.assign(
-    await fetch(`/languages/${localData.lang}/index.json`).then(async (r) => r.json()),
-    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
+    await fetch(`/languages/${LANG}/index.json`).then(async (r) => r.json()),
+    await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
 
 const A = {names: await fetch('/listA').then((res) => res.json())};
 A.data = await Promise.all(
     A.names.map(async (fileName) => {
-        const url = `/languages/${localData.lang}/${fileName}.a.json`;
+        const url = `/languages/${LANG}/${fileName}.a.json`;
         return await fetch(url).then((res) => res.json());
     })
 );
@@ -26,8 +28,6 @@ new (class {
         this.algorithms();
     }
     document() {
-        document.querySelector('html').lang = localData.lang;
-
         MODULES.upgradeDocument();
     }
     window() {
@@ -47,11 +47,13 @@ new (class {
                 type: 'button',
                 className: 'lang',
                 title: langData.language,
-                innerHTML: localData.lang,
+                innerHTML: LANG,
                 onclick() {
-                    if (this.innerHTML == 'en') this.innerHTML = 'vi';
-                    else this.innerHTML = 'en';
-                    localData.setLanguage(this.innerHTML);
+                    if (this.innerHTML == 'en') this.goTo('vi');
+                    else this.goTo('en');
+                },
+                goTo(lang) {
+                    window.location.href = this.baseURI.replace(`/${LANG}`, `/${lang}`);
                 },
             }),
             infoBtn = document.createElement({
@@ -79,7 +81,7 @@ new (class {
         A.names.forEach(
             (key, index) =>
                 (html +=
-                    `<a href="/a/${key}">` +
+                    `<a href="/${LANG}/a/${key}">` +
                     `<img src="/jpg/${key}.a.jpg" alt="">` +
                     `<span>${A.data[index].NAME}</span>` +
                     `</a>`)
@@ -161,7 +163,7 @@ new (class {
             },
         });
         autoCompleteJS.input.addEventListener('selection', function (e) {
-            window.location.href = `/a/${e.detail.selection.value.key}`;
+            window.location.href = `/${LANG}/a/${e.detail.selection.value.key}`;
         });
     }
     popup() {
@@ -195,7 +197,7 @@ new (class {
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
-            switch (localData.lang) {
+            switch (LANG) {
                 case 'vi':
                     return `<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${content}</span>`;
                 case 'en':

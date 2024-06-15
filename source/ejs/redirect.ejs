@@ -1,0 +1,4 @@
+<script type="module">
+    const key = await fetch('/localdata-key').then((res) => res.json());
+    window.location.href = `/${JSON.parse(localStorage.getItem(key))?.lang || 'en'}`;
+</script>

@@ -3,9 +3,11 @@
 import localData from '/local-data.js';
 import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
 
+const LANG = document.querySelector('html').lang;
+
 const langData = Object.assign(
-    await fetch(`/languages/${localData.lang}/default.json`).then(async (r) => r.json()),
-    await fetch(`/languages/${localData.lang}/general.json`).then(async (r) => r.json())
+    await fetch(`/languages/${LANG}/default.json`).then(async (r) => r.json()),
+    await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
 // desktopOS = (() => {
 //     const userAgent = navigator.userAgent;
@@ -36,6 +38,7 @@ new (class {
                 this.frameElm = document.body.main.frame;
                 this.playPauseBtn = document.body.main.bottombar.right.playPauseBtn;
                 this.customInput = document.body.popup.customInput;
+                this.key = key;
 
                 const lang = await window.importLanguage(key),
                     algos = {},
@@ -60,8 +63,6 @@ new (class {
 
                 // this.langData = lang._;
                 this.customInput.setConstraints(lang._.constraints);
-
-                this.firstAction = Object.keys(algos)[0];
             },
             delayDuration: localData.delay,
             updateDelayDuration() {
@@ -78,7 +79,8 @@ new (class {
             actions: {},
             setAction(key, action) {
                 this.actions[key] = action;
-                if (key == this.firstAction) this.runAction(key);
+                if (key == document.body.main.bottombar.left.algoListWrapper.algoList.value)
+                    window.ALGOSCENE.runAction(key);
             },
             runAction(key) {
                 this.currentAction = key;
@@ -87,6 +89,7 @@ new (class {
                 else console.warn(`There are no actions for '${key}'`);
                 this.frameElm.className = key;
                 ALGOSCENE.playPauseBtn.reset();
+                localData.history.a.update(key);
             },
             resetAction() {
                 this.frameElm.innerHTML = this.frameHTML;
@@ -109,13 +112,11 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `/languages/${localData.lang}/${key}.a.json`;
+            const url = `/languages/${LANG}/${key}.a.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
     document() {
-        document.querySelector('html').lang = localData.lang;
-
         document.update = function () {
             const lang = this.body.codeBox.top.prolangList.querySelector('.active').classList[0],
                 algo = this.body.main.bottombar.left.algoListWrapper.algoList.value;
@@ -168,11 +169,13 @@ new (class {
                 type: 'button',
                 className: 'lang',
                 title: langData.language,
-                innerHTML: localData.lang,
+                innerHTML: LANG,
                 onclick() {
-                    if (this.innerHTML == 'en') this.innerHTML = 'vi';
-                    else this.innerHTML = 'en';
-                    localData.setLanguage(this.innerHTML);
+                    if (this.innerHTML == 'en') this.goTo('vi');
+                    else this.goTo('en');
+                },
+                goTo(lang) {
+                    window.location.href = this.baseURI.replace(`/${LANG}`, `/${lang}`);
                 },
             }),
             infoBtn = document.createElement({
@@ -251,7 +254,7 @@ new (class {
                 createList(algos) {
                     for (const key in algos)
                         this.innerHTML += `<option value="${key}">${algos[key]}</option>`;
-                    this.value = Object.keys(algos)[0];
+                    this.value = localData.history.a[ALGOSCENE.key] || Object.keys(algos)[0];
                 },
                 up() {
                     this.selectedIndex =
@@ -261,8 +264,7 @@ new (class {
                             1 +
                             this.children.length) %
                         this.children.length;
-                    document.update();
-                    window.ALGOSCENE.runAction(this.value);
+                    this.onchange();
                 },
                 down() {
                     this.selectedIndex =
@@ -271,8 +273,7 @@ new (class {
                         ) +
                             1) %
                         this.children.length;
-                    document.update();
-                    window.ALGOSCENE.runAction(this.value);
+                    this.onchange();
                 },
             }),
             algoListWrapper = document.createElement({
@@ -443,7 +444,7 @@ new (class {
                     for (const l in t)
                         if (typeof t[l] == 'string') t[l] = [t[l]];
                         else t[l] = t[l].map((e) => '- ' + e);
-                    switch (localData.lang) {
+                    switch (LANG) {
                         case 'vi':
                             for (const l in t) t[l] = tab2 + t[l].join('<br>' + tab2);
                             break;
@@ -565,6 +566,7 @@ new (class {
             setActive(lang) {
                 this.querySelector('.active')?.classList?.remove('active');
                 this.querySelector('.' + lang).classList.add('active');
+                localData.history.lang.update(lang);
             },
             createList(prolangs) {
                 prolangs = prolangs.split(',').sort();
@@ -586,7 +588,13 @@ new (class {
                         })
                     )
                 );
-                this.setActive(prolangs[0]);
+                let i = localData.history.lang.length - 1;
+                for (; i >= 0; i--)
+                    if (prolangs.includes(localData.history.lang[i])) {
+                        this.setActive(localData.history.lang[i]);
+                        break;
+                    }
+                if (i < 0) this.setActive(prolangs[0]);
             },
             prolangConfig: {
                 name: {js: 'JavaScript', cpp: 'C++', py: 'Python'},
@@ -712,18 +720,17 @@ new (class {
                         (k) => (shortcuts[k[1]] = `<span class="mtk${k[0]}">${k[2] || k[1]}</span>`)
                     );
 
-                ['()|1,2,3']
-                    .forEach((k) => {
-                        k = k.split('|');
-                        k[1].split(',').forEach((n) => {
-                            shortcuts[
-                                k[0][0] + n
-                            ] = `<span class="bracket-highlighting-${n}">${k[0][0]}</span>`;
-                            shortcuts[
-                                k[0][1] + n
-                            ] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
-                        });
-                    })
+                ['()|1,2,3'].forEach((k) => {
+                    k = k.split('|');
+                    k[1].split(',').forEach((n) => {
+                        shortcuts[
+                            k[0][0] + n
+                        ] = `<span class="bracket-highlighting-${n}">${k[0][0]}</span>`;
+                        shortcuts[
+                            k[0][1] + n
+                        ] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
+                    });
+                });
                 let i, r, l;
                 for (const f in codes) {
                     {
@@ -856,7 +863,7 @@ new (class {
             lineHTML = '<div class="line"></div>';
 
         const newParagraph = (content) => {
-            switch (localData.lang) {
+            switch (LANG) {
                 case 'vi':
                     return `<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${content}</span>`;
                 case 'en':
@@ -1315,7 +1322,7 @@ new (class {
                 turnOnFrameCaptureMode: () => {
                     document.body.main.frame.style.setProperty('border-radius', '0');
                     document.openFullScreen(document.body.main.frame);
-                }
+                },
             };
         } else {
             document.head.innerHTML += '<style>*{pointer-events:none;}</style>';

@@ -1,27 +1,35 @@
+import fs from 'fs';
 export default class {
     constructor(app) {
-        this.algorithms = {
-            sorting: {
-                description: 'Depth-First Search (DFS), Breadth-First Search (BFS)',
-            },
-            searching: {
-                description: 'Sequential Search, Binary Search',
-            },
-            pathfinding: {
-                description: 'Bubble Sort, Selection Sort, Insertion Sort, Quick Sort',
-            },
-        };
+        this.algorithms = ['sorting', 'searching', 'pathfinding'];
 
-        app.get('/listA', (req, res) => res.json(Object.keys(this.algorithms)));
+        app.get('/listA', (req, res) => res.json(this.algorithms));
 
-        Object.keys(this.algorithms).forEach((key) =>
-            app.get(`/a/${key}`, (req, res) =>
-                res.render('a', {
-                    title: key.charAt(0).toUpperCase() + key.substring(1),
-                    description: this.algorithms[key].description,
-                    key,
-                })
-            )
-        );
+        app.languages.forEach((lang) => {
+            this.algorithms.forEach((key) => {
+                fs.readFile(`./public/languages/${lang}/${key}.a.json`, (err, dt) => {
+                    const data = JSON.parse(dt);
+                    const list = Object.keys(data);
+                    list.splice(
+                        list.findIndex((e) => e == '_'),
+                        1
+                    );
+                    list.splice(
+                        list.findIndex((e) => e == 'NAME'),
+                        1
+                    );
+                    const description = list.map((e) => data[e].name).join(', ');
+                    app.get(`/${lang}/a/${key}`, (req, res) =>
+                        res.render('a', {
+                            title: data.NAME,
+                            description,
+                            key,
+                            lang,
+                        })
+                    );
+                    app.get(`/${lang}/a`, (req, res) => res.render('redirect'));
+                });
+            });
+        });
     }
 }

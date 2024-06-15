@@ -1,44 +1,51 @@
 'use strict';
 
-const version = await fetch('/version').then(res => res.json());
+const version = await fetch('/version').then((res) => res.json());
+const key = await fetch('/localdata-key').then((res) => res.json());
 
 const localData = new (class {
     constructor() {
         this.version = version;
         this.debug = false;
-        this.key = 'azlfgvoestczednteu';
+        this.key = key;
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);
-        this.keys = {};
-        this.check('lang', 'en');
+        this.keys = {lang: true};
+        this.lang = document.querySelector('html')?.lang || this.lang;
         this.check('delay', 500);
+        this.check('history', {a: {}, lang: []}, () => {
+            this.history.a.update = (e) => {
+                this.history.a[ALGOSCENE.key] = e;
+                this.upload();
+            };
+            this.history.lang.update = (e) => {
+                if (this.history.lang.includes(e))
+                    this.history.lang.push(
+                        this.history.lang.splice(
+                            this.history.lang.findIndex((t) => t == e),
+                            1
+                        )[0]
+                    );
+                else this.history.lang.push(e);
+                this.upload();
+            };
+        });
         this.upload();
-        this.getText();
-    }
-    async setLanguage(value) {
-        this.lang = value;
-        this.upload();
-        await window.delay(100);
-        if (confirm(this.reload___ + '?')) window.location.reload();
     }
     setDelay(value) {
         this.delay = Number(value);
         this.upload();
     }
-    check(key, value) {
+    check(key, value, callback = () => {}) {
         this.keys[key] = true;
         if (!this[key]) this[key] = value;
+        callback();
     }
     upload() {
         const keys = Object.keys(this.keys),
             data = {};
         keys.forEach((key) => (data[key] = this[key]));
         localStorage.setItem(this.key, JSON.stringify(data));
-    }
-    async getText() {
-        const url = `/languages/${this.lang}/default.json`,
-            {reload___} = await fetch(url).then(async (r) => r.json());
-        this.reload___ = reload___;
     }
 })();
 
