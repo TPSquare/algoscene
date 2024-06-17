@@ -380,6 +380,7 @@ main {
         .footer {
             display: flex;
             justify-content: space-around;
+            font-size: 0.7em;
         }
     }
 }
@@ -511,7 +512,7 @@ main {
             font-size: 16px;
         }
 
-        >.info {
+        .info {
             font-size: 14px;
             width: 80%;
         }
@@ -577,10 +578,6 @@ main {
                     height: 3vw;
                     margin-right: 1vw;
                 }
-            }
-
-            .footer {
-                font-size: 2vw;
             }
 
             .line {

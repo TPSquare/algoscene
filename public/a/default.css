@@ -988,6 +988,7 @@ footer {
         .footer {
             display: flex;
             justify-content: space-around;
+            font-size: 0.7em;
         }
     }
 
@@ -1661,10 +1662,6 @@ footer {
                     height: 3vw;
                     margin-right: 1vw;
                 }
-            }
-
-            .footer {
-                font-size: 2vw;
             }
         }
 
