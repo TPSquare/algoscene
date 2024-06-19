@@ -1,7 +1,6 @@
 'use strict';
 
 await ALGOSCENE.init(
-    'searching',
     'js,cpp,py',
     {
         sequential: {

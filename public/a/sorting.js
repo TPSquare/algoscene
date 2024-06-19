@@ -1,7 +1,6 @@
 'use strict';
 
 await ALGOSCENE.init(
-    'sorting',
     'cpp,js,py',
     {
         bubble: {

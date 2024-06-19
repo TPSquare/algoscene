@@ -1,21 +1,14 @@
 'use strict';
 
-import localData from '/local-data.js';
-import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
+import MODULES from '/modules.js';
 
-const LANG = document.querySelector('html').lang;
+window.LANG = document.querySelector('html').lang;
+document.TYPE = document.body.getAttribute('type');
 
-const langData = Object.assign(
+window.langData = Object.assign(
     await fetch(`/languages/${LANG}/default.json`).then(async (r) => r.json()),
     await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
-// desktopOS = (() => {
-//     const userAgent = navigator.userAgent;
-//     if (userAgent.includes('Win')) return 'Windows';
-//     if (userAgent.includes('Mac')) return 'MacOS';
-//     if (userAgent.includes('Linux')) return 'Linux';
-//     return 'Mobile';
-// })();
 
 new (class {
     constructor() {
@@ -34,13 +27,12 @@ new (class {
         MODULES.upgradeWindow();
 
         window.ALGOSCENE = {
-            async init(key, prolangs, algoConfigs, shortcuts) {
+            async init(prolangs, algoConfigs, shortcuts) {
                 this.frameElm = document.body.main.frame;
                 this.playPauseBtn = document.body.main.bottombar.right.playPauseBtn;
                 this.customInput = document.body.popup.customInput;
-                this.key = key;
 
-                const lang = await window.importLanguage(key),
+                const lang = await window.importLanguage(this.key),
                     algos = {},
                     info = {},
                     codes = {},
@@ -55,7 +47,7 @@ new (class {
                     cmts[key] = lang[key].comments;
                 }
                 document.body.codeBox.top.prolangList.createList(prolangs);
-                document.body.main.bottombar.left.algoListWrapper.algoList.createList(algos);
+                document.body.main.bottombar.left.listWrapper.list.createList(algos);
                 document.body.rightBox.informations.save(info, algos);
                 document.body.codeBox.code.save(codes, cmts, shortcuts);
                 document.body.rightBox.complexity.save(coms);
@@ -79,7 +71,7 @@ new (class {
             actions: {},
             setAction(key, action) {
                 this.actions[key] = action;
-                if (key == document.body.main.bottombar.left.algoListWrapper.algoList.value)
+                if (key == document.body.main.bottombar.left.listWrapper.list.value)
                     window.ALGOSCENE.runAction(key);
             },
             runAction(key) {
@@ -112,14 +104,14 @@ new (class {
         };
 
         window.importLanguage = async (key) => {
-            const url = `/languages/${LANG}/${key}.a.json`;
+            const url = `/languages/${LANG}/${key}.${document.TYPE}.json`;
             return await fetch(url).then((r) => r.json());
         };
     }
     document() {
         document.update = function () {
             const lang = this.body.codeBox.top.prolangList.querySelector('.active').classList[0],
-                algo = this.body.main.bottombar.left.algoListWrapper.algoList.value;
+                algo = this.body.main.bottombar.left.listWrapper.list.value;
 
             this.updatePageTitle(algo);
             this.body.codeBox.code.update(algo, lang);
@@ -129,7 +121,7 @@ new (class {
         };
 
         document.updatePageTitle = function (algo) {
-            const t = this.body.main.bottombar.left.algoListWrapper.algoList;
+            const t = this.body.main.bottombar.left.listWrapper.list;
             algo = t.querySelector(`option[value="${algo}"]`).innerHTML;
             this.head.querySelector('title').innerHTML =
                 algo + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene';
@@ -242,10 +234,10 @@ new (class {
         });
         window.addEventListener('resize', () => frame.onresize());
 
-        const algoList = document.createElement({
+        const list = document.createElement({
                 tag: 'select',
-                key: 'algoList',
-                className: 'algo-list',
+                key: 'list',
+                className: 'list',
                 title: langData.algorithms,
                 onchange() {
                     document.update();
@@ -276,15 +268,15 @@ new (class {
                     this.onchange();
                 },
             }),
-            algoListWrapper = document.createElement({
-                className: 'algo-list-wrapper',
-                key: 'algoListWrapper',
-                children: [algoList, document.createElement({innerText: '▾'})],
+            listWrapper = document.createElement({
+                className: 'list-wrapper',
+                key: 'listWrapper',
+                children: [list, document.createElement({innerText: '▾'})],
             }),
             left = document.createElement({
                 className: 'left',
                 key: 'left',
-                children: [algoListWrapper],
+                children: [listWrapper],
             });
 
         const playPauseBtn = document.createElement({
@@ -810,6 +802,7 @@ new (class {
         const overlay = document.createElement({
             tag: 'span',
             className: 'overlay',
+            key: 'overlay',
             children: ['top', 'right', 'bottom', 'left'].map((e) =>
                 document.createElement({
                     className: 'elm-' + e,
@@ -848,17 +841,6 @@ new (class {
             },
         });
 
-        const closeConfig = {
-            tag: 'button',
-            type: 'button',
-            className: 'close',
-            title: langData.close,
-            innerHTML: '&times;',
-            onclick() {
-                this.parentNode.handle();
-            },
-        };
-
         const logoHTML = '<div class="logo"><img src="/svg/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
 
@@ -875,7 +857,16 @@ new (class {
             className: 'info',
             key: 'info',
             children: [
-                document.createElement(closeConfig),
+                document.createElement({
+                    tag: 'button',
+                    type: 'button',
+                    className: 'close',
+                    title: langData.close,
+                    innerHTML: '&times;',
+                    onclick() {
+                        this.parentNode.handle();
+                    },
+                }),
                 document.createElement({
                     tag: 'fieldset',
                     innerHTML:
@@ -886,47 +877,25 @@ new (class {
                         lineHTML +
                         newParagraph(langData.paragraph3) +
                         `<ul class="contact-box">
-                            <li class="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg><a href="mailto:tps201cn@gmail.com">tps201cn@gmail.com</a></li>
-                            <li class="form"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg><a href="https://forms.gle/3AuzDd1ELquCPyWy8" target="_blank">${langData.googleForms}</a></li>
-                        </ul>` +
+                        <li class="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg><a href="mailto:tps201cn@gmail.com">tps201cn@gmail.com</a></li>
+                        <li class="form"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg><a href="https://forms.gle/3AuzDd1ELquCPyWy8" target="_blank">${langData.googleForms}</a></li>
+                    </ul>` +
                         lineHTML +
                         newParagraph(langData.developmentTeam + ':') +
                         `<ul class="development-team">
-                            <li>TPSquare - ${langData.leadDeveloper}</li>
-                            <li>Hbat - ${langData.graphicDesigner}</li>
-                        </ul>` +
+                        <li>TPSquare - ${langData.leadDeveloper}</li>
+                        <li>Hbat - ${langData.graphicDesigner}</li>
+                    </ul>` +
                         lineHTML +
                         `<div class="footer"><span>© ${langData.copyright___} TPSquare</span><span>${langData.version}: ${localData.version}</span></div>`,
                 }),
             ],
-            handle() {
+            handle: function () {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else this.classList.add('show');
-                overlay.handle();
+                document.body.popup.overlay.handle();
             },
         });
-
-        // const guide = document.createElement({
-        //     className: 'guide',
-        //     key: 'guide',
-        //     children: [
-        //         document.createElement(closeConfig),
-        //         document.createElement({
-        //             tag: 'fieldset',
-        //             innerHTML:
-        //                 `<legend>${langData.___guide}</legend>` +
-        //                 logoHTML +
-        //                 `<div class="start-guide-wrapper"><span>${langData.startGuide}:</span><button class="start-guide" type="button" title="${langData.startGuide}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg></button></div>`,
-        //         }),
-        //     ],
-        //     handle,
-        // });
-        // guide.querySelector('.start-guide').set('onclick', function () {
-        //     guide.handle();
-        //     overlay.handleElms();
-        //     guideMessageElm.handle();
-        //     guideController.run();
-        // });
 
         const message = document.createElement({
                 className: 'message',
@@ -1025,7 +994,7 @@ new (class {
                                 ),
                             () =>
                                 this.focusTo(
-                                    document.body.main.bottombar.left.algoListWrapper,
+                                    document.body.main.bottombar.left.listWrapper,
                                     langData.guideMessage.select___
                                 ),
                             () =>

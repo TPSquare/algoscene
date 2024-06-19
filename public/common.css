@@ -215,7 +215,7 @@ main {
         border-radius: 10px;
         background-color: #2f3453;
 
-        .algo-list-wrapper {
+        .list-wrapper {
             position: relative;
             background-color: #3e456e;
             height: 35px;
@@ -223,12 +223,12 @@ main {
             border: 1.5px solid #ffffff;
         }
 
-        .algo-list-wrapper>* {
+        .list-wrapper>* {
             color: #ffffff;
             height: 100%;
         }
 
-        .algo-list {
+        .list {
             padding-left: 10px;
             padding-right: 30px;
             border: none;
@@ -241,11 +241,11 @@ main {
             appearance: none;
         }
 
-        .algo-list:focus-visible {
+        .list:focus-visible {
             outline: none;
         }
 
-        .algo-list-wrapper div {
+        .list-wrapper div {
             position: absolute;
             right: 5px;
             top: 3px;
@@ -858,8 +858,7 @@ footer {
         }
     }
 
-    >.guide,
-    >.info {
+    .info {
         position: absolute;
         left: 50%;
         top: 100%;
@@ -908,8 +907,7 @@ footer {
         }
     }
 
-    >.guide.show,
-    >.info.show {
+    .info.show {
         opacity: 1;
         bottom: 0;
         top: 70px;
@@ -989,51 +987,6 @@ footer {
             display: flex;
             justify-content: space-around;
             font-size: 0.7em;
-        }
-    }
-
-    .guide {
-        .start-guide-wrapper {
-            display: flex;
-            align-items: center;
-            margin-left: 32px;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .start-guide {
-            display: flex;
-            padding: 2px;
-            background-color: #1D95C9;
-            border-radius: 50%;
-            margin-left: 5px;
-        }
-
-        .start-guide svg {
-            margin: auto;
-            height: 40px;
-            fill: white;
-        }
-
-        .shortcuts {
-            --left-width: 200px;
-            text-align: right;
-
-            li {
-                margin-top: 10px;
-            }
-
-            section {
-                display: inline-block;
-                width: calc(100% - var(--left-width));
-                text-align: left;
-            }
-
-            span {
-                border: 1px solid black;
-                padding: 0 5px;
-                border-radius: 5px;
-            }
         }
     }
 
@@ -1303,8 +1256,8 @@ footer {
             font-size: 20px;
         }
 
-        >.guide,
-        >.info {
+
+        .info {
             >.close {
                 top: 10px;
                 right: auto;
@@ -1361,17 +1314,17 @@ footer {
         height: 40px;
         padding: 0 10px;
 
-        .algo-list-wrapper {
+        .list-wrapper {
             height: 25px;
         }
 
-        .algo-list {
+        .list {
             font-size: 16px;
             padding-left: 8px;
             padding-right: 22px;
         }
 
-        .algo-list-wrapper div {
+        .list-wrapper div {
             font-size: 20px;
             top: 1px;
             right: 3px;
@@ -1408,32 +1361,10 @@ footer {
             font-size: 16px;
         }
 
-        >.guide,
-        >.info {
+
+        .info {
             font-size: 14px;
             width: 80%;
-        }
-
-        .guide {
-            .start-guide-wrapper {
-                font-size: 14px;
-                margin-left: 30px;
-            }
-
-            .shortcuts {
-                --left-width: abc;
-                text-align: left;
-
-                li {
-                    margin-left: 20px;
-                    list-style-type: none;
-                }
-
-                section {
-                    display: block;
-                    margin-left: inherit;
-                }
-            }
         }
 
         .custom-input {
@@ -1487,7 +1418,7 @@ footer {
             padding: 0 2vw;
             margin-top: 2vw;
 
-            .algo-list-wrapper {
+            .list-wrapper {
                 height: 8vw;
                 border-radius: 2vw;
 
@@ -1498,7 +1429,7 @@ footer {
                 }
             }
 
-            .algo-list {
+            .list {
                 font-size: 5vw;
                 padding-left: 2.5vw;
                 padding-right: 5vw;
@@ -1665,8 +1596,8 @@ footer {
             }
         }
 
-        >.guide,
-        >.info {
+
+        .info {
             .line {
                 height: 0.1vw;
                 margin: 2vw 0;
@@ -1686,8 +1617,8 @@ footer {
             }
         }
 
-        >.guide.show,
-        >.info.show {
+
+        .info.show {
             top: 20vw;
             border-top-left-radius: 2vw;
             border-top-right-radius: 2vw;
@@ -1755,4 +1686,3 @@ footer {
         }
     }
 }
-

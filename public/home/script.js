@@ -1,11 +1,10 @@
 'use strict';
 
-import localData from '/local-data.js';
-import MODULES from 'https://tpsw.000webhostapp.com/modules.js';
+import MODULES from '/modules.js';
 
-const LANG = document.querySelector('html').lang;
+window.LANG = document.querySelector('html').lang;
 
-const langData = Object.assign(
+window.langData = Object.assign(
     await fetch(`/languages/${LANG}/index.json`).then(async (r) => r.json()),
     await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
@@ -170,28 +169,12 @@ new (class {
         const overlay = document.createElement({
             tag: 'span',
             className: 'overlay',
+            key: 'overlay',
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else this.classList.add('show');
             },
         });
-
-        function handle() {
-            if (this.classList.contains('show')) this.classList.remove('show');
-            else this.classList.add('show');
-            overlay.handle();
-        }
-
-        const closeConfig = {
-            tag: 'button',
-            type: 'button',
-            className: 'close',
-            title: langData.close,
-            innerHTML: '&times;',
-            onclick() {
-                this.parentNode.handle();
-            },
-        };
 
         const logoHTML = '<div class="logo"><img src="/svg/logo-with-name.svg" alt=""></div>',
             lineHTML = '<div class="line"></div>';
@@ -209,7 +192,16 @@ new (class {
             className: 'info',
             key: 'info',
             children: [
-                document.createElement(closeConfig),
+                document.createElement({
+                    tag: 'button',
+                    type: 'button',
+                    className: 'close',
+                    title: langData.close,
+                    innerHTML: '&times;',
+                    onclick() {
+                        this.parentNode.handle();
+                    },
+                }),
                 document.createElement({
                     tag: 'fieldset',
                     innerHTML:
@@ -220,20 +212,24 @@ new (class {
                         lineHTML +
                         newParagraph(langData.paragraph3) +
                         `<ul class="contact-box">
-                            <li class="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg><a href="mailto:tps201cn@gmail.com">tps201cn@gmail.com</a></li>
-                            <li class="form"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg><a href="https://forms.gle/3AuzDd1ELquCPyWy8" target="_blank">${langData.googleForms}</a></li>
-                        </ul>` +
+                        <li class="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg><a href="mailto:tps201cn@gmail.com">tps201cn@gmail.com</a></li>
+                        <li class="form"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg><a href="https://forms.gle/3AuzDd1ELquCPyWy8" target="_blank">${langData.googleForms}</a></li>
+                    </ul>` +
                         lineHTML +
                         newParagraph(langData.developmentTeam + ':') +
                         `<ul class="development-team">
-                            <li>TPSquare - ${langData.leadDeveloper}</li>
-                            <li>Hbat - ${langData.graphicDesigner}</li>
-                        </ul>` +
+                        <li>TPSquare - ${langData.leadDeveloper}</li>
+                        <li>Hbat - ${langData.graphicDesigner}</li>
+                    </ul>` +
                         lineHTML +
                         `<div class="footer"><span>© ${langData.copyright___} TPSquare</span><span>${langData.version}: ${localData.version}</span></div>`,
                 }),
             ],
-            handle,
+            handle: function () {
+                if (this.classList.contains('show')) this.classList.remove('show');
+                else this.classList.add('show');
+                document.body.popup.overlay.handle();
+            },
         });
 
         const popup = document.createElement({

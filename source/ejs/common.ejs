@@ -7,12 +7,16 @@
     <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
     <meta name="description" content="<%= description %>">
     <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/a/default.css">
-    <link rel="stylesheet" href="/a/<%= key %>.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/<%= type %>/<%= key %>.css">
 </head>
 
-<body>
-    <script type="module">import('/a/default.js').then(() => import('/a/<%= key %>.js'))</script>
+<body type="<%= type %>">
+    <script type="module" src="/local-data.js"></script>
+    <script type="module">import('/common.js').then(() => {
+        ALGOSCENE.key = '<%= key %>';
+        import('/<%= type %>/<%= key %>.js');
+    })</script>
 </body>
 
 </html>

@@ -1,7 +1,6 @@
 'use strict';
 
 await ALGOSCENE.init(
-    'pathfinding',
     'js,cpp',
     {
         dfs: {

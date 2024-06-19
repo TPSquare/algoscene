@@ -252,7 +252,7 @@ main {
         pointer-events: all;
     }
 
-    >.info {
+    .info {
         position: absolute;
         left: 50%;
         top: 100%;
@@ -301,7 +301,7 @@ main {
         }
     }
 
-    >.info.show {
+    .info.show {
         opacity: 1;
         bottom: 0;
         top: 70px;
@@ -447,7 +447,7 @@ main {
             font-size: 20px;
         }
 
-        >.info {
+        .info {
             >.close {
                 top: 10px;
                 right: auto;
@@ -600,7 +600,7 @@ main {
         }
 
 
-        >.info.show {
+        .info.show {
             top: 20vw;
             border-top-left-radius: 2vw;
             border-top-right-radius: 2vw;

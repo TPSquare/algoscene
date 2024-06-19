@@ -3,7 +3,7 @@
 const version = await fetch('/version').then((res) => res.json());
 const key = await fetch('/localdata-key').then((res) => res.json());
 
-const localData = new (class {
+window.localData = new (class {
     constructor() {
         this.version = version;
         this.debug = false;
@@ -48,5 +48,3 @@ const localData = new (class {
         localStorage.setItem(this.key, JSON.stringify(data));
     }
 })();
-
-export default localData;
