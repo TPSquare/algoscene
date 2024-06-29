@@ -37,8 +37,9 @@ const localData = new (class {
     }
     async getText(root) {
         const url = `${root}languages/${this.lang}/default.json`,
-            {reload___} = await fetch(url).then(async (r) => r.json());
+            {reload___, only100} = await fetch(url).then(async (r) => r.json());
         this.reload___ = reload___;
+        setTimeout(() => alert(only100), 1000);
     }
 })();
 
