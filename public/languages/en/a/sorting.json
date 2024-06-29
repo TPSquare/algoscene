@@ -1,0 +1,217 @@
+{
+    "NAME": "Sorting",
+    "bubble": {
+        "name": "Bubble Sort",
+        "informations": {
+            "idea": [
+                "Iterate through the array multiple times",
+                "During each iteration, compare adjacent pairs of elements and swap them if necessary",
+                "The largest element {{bubbles up}} to the end of the array after each iteration, similar to bubbles rising to the surface of water"
+            ],
+            "advantage": [
+                "Simple, intuitive, easy to understand",
+                "Effective for small arrays"
+            ],
+            "disadvantage": "Poor performance for large arrays",
+            "application": [
+                "Commonly used for teaching and illustrating basic sorting algorithms",
+                "Simple and effective, suitable for small data arrays"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {bbs} function",
+                "The outer loop helps to iterate through the array multiple times to push the largest (for ascending order) or smallest (for descending order) element to the end of the array",
+                "The inner loop is used to compare adjacent pairs of elements and swap them if they are out of order",
+                "Check if two adjacent elements in the array are in the wrong order. If so, these elements need to be swapped to move the larger element towards the end (for ascending order).",
+                "Swap two elements"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ]
+        }
+    },
+    "selection": {
+        "name": "Selection Sort",
+        "informations": {
+            "idea": [
+                "Divide the array into two parts: the sorted part and the unsorted part",
+                "Initially, the sorted part is empty and the unsorted part is the entire array",
+                "Iterate multiple times, with each iteration, find the smallest (or largest) element in the unsorted part, then swap it with the first element in the unsorted part, expanding the sorted part"
+            ],
+            "advantage": [
+                "Simple, intuitive, easy to understand",
+                "Effective for small arrays"
+            ],
+            "disadvantage": "Poor performance for large arrays",
+            "application": [
+                "Commonly used for teaching and illustrating basic sorting concepts",
+                "Simple and effective, suitable for small data arrays"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {slts} function",
+                "The outer loop helps to iterate through the array multiple times to find and place the smallest or largest element of the unsorted part of the array in its correct position",
+                "Initialize the {min} variable to hold the position of the smallest element in the unsorted part of the array",
+                "The inner loop is used to find the smallest element in the unsorted part of the array",
+                "Check if the element at position {j} is smaller than the element at position {min}. If true, update {min} to hold the position of the current smallest element.",
+                "Swap two elements"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "Update {min}",
+                "{{{cpp,5}}}"
+            ]
+        }
+    },
+    "insertion": {
+        "name": "Insertion Sort",
+        "informations": {
+            "idea": [
+                "Divide the array into two parts: the sorted part and the unsorted part",
+                "Initially, the sorted part contains only the first element, and the rest of the array is the unsorted part",
+                "Repeat the process of taking the next element from the unsorted part and inserting it into the correct position in the sorted part"
+            ],
+            "advantage": [
+                "Simple, intuitive, easy to understand",
+                "Effective for small arrays",
+                "Works well with nearly sorted arrays"
+            ],
+            "disadvantage": "Poor performance for large arrays",
+            "application": [
+                "Simple and effective, suitable for small data arrays",
+                "Useful when input array is almost sorted",
+                "In practice, this algorithm is often used as part of more complex sorting algorithms"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {ists} function",
+                "The outer loop is used to iterate through the positions of the array. The first element is considered sorted.",
+                "Initialize {j} to iterate backward through the sorted elements",
+                "Initialize {current} to hold the value of the element currently being placed in the correct position",
+                "The inner loop is used to iterate from right to left, finding the correct position to insert the {current} element into the sorted part of the array. Compare to check if the element at position {j} is greater than {current}, if true, shift the element at {j} to the right to create a space for {current}.",
+                "Shift the element at position {j} to the right",
+                "Insert {current} into the correct position"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Initialize {j} to iterate backward through the sorted elements. Initialize {current} to hold the value of the element currently being placed in the correct position.",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "Decrement {j} to continue iterating left",
+                "{{{cpp,6}}}"
+            ]
+        }
+    },
+    "quick": {
+        "name": "Quick Sort",
+        "informations": {
+            "idea": [
+                "Select an element from the array as a pivot point",
+                "Partition the array into two parts: one containing elements smaller than or equal to the pivot and the other containing elements larger than or equal to the pivot",
+                "Recursively sort the two subarrays",
+                "The sorted subarrays merged together will form the complete sorted array"
+            ],
+            "advantage": "Good performance, even with large arrays",
+            "application": [
+                "Used in real-world applications to sort large arrays",
+                "Used in searching and classification algorithms"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Declare the {qs} function",
+                "If {left} is greater than or equal to {right}, indicating that the array segment to be sorted has only one element or no elements left to sort, the function stops and does nothing more",
+                "Initialize {pivot} to hold the value of the middle element of the array segment. This element is used to partition the segment into two parts.",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {pivot}",
+                "Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {pivot}",
+                "Ensure that {i} does not exceed {j} during the process of finding and swapping elements",
+                "Increment {i} until finding an element greater than or equal to {pivot}",
+                "Decrement {j} until finding an element less than or equal to {pivot}",
+                "Check again if {i} exceeds {j}",
+                "Swap two elements so that on the left are elements less than or equal to {pivot}, and on the right are elements greater than or equal to {pivot}. Increment {i} and decrement {j} for the next search.",
+                "",
+                "Continue sorting the array segment from {left} to {j}",
+                "Continue sorting the array segment from {i} to {right}"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Initialize {jspivot} to hold the value of the middle element of the array segment. This element is used to partition the segment into two parts.",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {jspivot}",
+                "Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {jspivot}",
+                "{{{cpp,5}}}",
+                "Increment {i} until finding an element greater than or equal to {jspivot}",
+                "Decrement {j} until finding an element less than or equal to {jspivot}",
+                "{{{cpp,8}}}",
+                "Swap two elements so that on the left are elements less than or equal to {jspivot}, and on the right are elements greater than or equal to {jspivot}",
+                "Increment {i} for the next search",
+                "Decrement {j} for the next search",
+                "",
+                "",
+                "Continue sorting the array segment from {left} to {j}",
+                "Continue sorting the array segment from {i} to {right}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Exit the function",
+                "{{{cpp,2}}}",
+                "Initialize {i} to iterate from the beginning to the middle of the segment, finding elements greater than or equal to {pivot}. Initialize {j} to iterate from the end to the middle of the segment, finding elements less than or equal to {pivot}.",
+                "{{{cpp,5}}}",
+                "While {i} hasn't found an element greater than or equal to {pivot}",
+                "Increment {i}",
+                "While {j} hasn't found an element less than or equal to {pivot}",
+                "Decrement {j}",
+                "{{{cpp,8}}}",
+                "Swap two elements so that on the left are elements less than or equal to {pivot}, and on the right are elements greater than or equal to {pivot}",
+                "{{{js,10}}}",
+                "{{{js,11}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}"
+            ]
+        }
+    },
+    "_": {
+        "constraints": [
+            "Values separated by whitespace",
+            "Value is an integer in the range from -9 to 99",
+            "Minimum of 7 values"
+        ]
+    }
+}

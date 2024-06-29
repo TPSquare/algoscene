@@ -1,0 +1,189 @@
+{
+    "NAME": "Tìm đường",
+    "bfs": {
+        "name": "Breadth-First Search (BFS)",
+        "informations": {
+            "idea": [
+                "Bắt đầu tại điểm bắt đầu và mở rộng ra từng cấp độ kề tiếp theo",
+                "Duyệt qua tất cả các điểm kề với điểm hiện tại trước khi di chuyển đến các điểm kề với những điểm đã được duyệt ở cấp độ trước đó"
+            ],
+            "advantage": [
+                "Đảm bảo tìm được đường đi ngắn nhất",
+                "Đơn giản và dễ triển khai",
+                "Khám phá toàn diện đồ thị, ma trận"
+            ],
+            "disadvantage": [
+                "Yêu cầu bộ nhớ lớn",
+                "Không hiệu quả cho đồ thị, ma trận lớn",
+                "Không tối ưu cho đồ thị, ma trận có trọng số",
+                "Khó khăn khi làm việc với đồ thị, ma trận vô hạn"
+            ],
+            "application": [
+                "Tìm đường đi ngắn nhất trong đồ thị, ma trận không có trọng số",
+                "Tìm kiếm trong trò chơi và thuật toán AI",
+                "Kiểm tra tính kết nối của đồ thị, ma trận",
+                "Xử lý cấu trúc dữ liệu như cây",
+                "Phân loại đồ thị, ma trận",
+                "Tạo ra các hệ thống GPS và tìm kiếm đường đi",
+                "Kiểm tra chu trình trong đồ thị, ma trận"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {bfs}",
+                "Lấy số lượng hàng của ma trận",
+                "Lấy số lượng cột của ma trận",
+                "Khởi tạo ma trận để đánh dấu các điểm đã được thăm",
+                "Khởi tạo ma trận để lưu trữ thông tin về điểm trước đó trong đường đi",
+                "Khởi tạo hàng đợi để lưu trữ các điểm cần thăm",
+                "Đưa điểm bắt đầu vào hàng đợi",
+                "Đánh dấu điểm bắt đầu đã được thăm",
+                "Định nghĩa các hướng di chuyển (lên, xuống, trái, phải)",
+                "Khi mà hàng đợi vẫn còn điểm cần duyệt",
+                "Lấy điểm hiện tại (đầu tiên) từ hàng đợi",
+                "Loại bỏ điểm hiện tại khỏi hàng đợi",
+                "Lấy tọa độ {x} của điểm hiện tại",
+                "Lấy tọa độ {y} của điểm hiện tại",
+                "Kiểm tra xem điểm hiện tại có phải là điểm kết thúc hay không. Nếu đúng, tái tạo đường đi và trả về.",
+                "Khởi tạo {vector} để lưu đường đi",
+                "Tái tạo đường đi từ điểm kết thúc về điểm bắt đầu",
+                "Thêm điểm hiện tại vào đường đi",
+                "Đảo ngược đường đi để có thứ tự đúng",
+                "Trả về đường đi",
+                "",
+                "Nếu chưa đến điểm kết thúc, duyệt qua các hướng di chuyển",
+                "Tính tọa độ {x} mới",
+                "Tính tọa độ {y} mới",
+                "Kiểm tra xem tọa độ mới có hợp lệ và chưa được đến thăm hay không. Nếu thỏa mãn, cập nhật trạng thái và thông tin của điểm đó.",
+                "Đưa điểm mới vào hàng đợi",
+                "Đánh dấu điểm mới đã được thăm",
+                "Lưu điểm hiện tại là điểm trước đó của điểm mới",
+                "",
+                "",
+                "",
+                "Trả về {vector} rỗng nếu không tìm thấy đường đi"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "Khởi tạo hàng đợi để lưu trữ các điểm cần thăm. Đưa điểm bắt đầu vào hàng đợi.",
+                "{{{cpp,7}}}",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "Lấy tọa độ điểm hiện tại (đầu tiên) ra khỏi hàng đợi",
+                "{{{cpp,14}}}",
+                "Khởi tạo mảng để lưu đường đi",
+                "{{{cpp,16}}}",
+                "{{{cpp,17}}}",
+                "Trả về đường đi sau khi đã đảo ngược thứ tự",
+                "",
+                "{{{cpp,21}}}",
+                "Tính tọa độ {xjs} mới",
+                "Tính tọa độ {yjs} mới",
+                "{{{cpp,24}}}",
+                "{{{cpp,25}}}",
+                "{{{cpp,26}}}",
+                "{{{cpp,27}}}",
+                "",
+                "",
+                "",
+                "Trả về mảng rỗng nếu không tìm thấy đường đi"
+            ]
+        }
+    },
+    "dfs": {
+        "name": "Depth-First Search (DFS)",
+        "informations": {
+            "idea": [
+                "Khám phá một nhánh của đồ thị, ma trận càng sâu càng tốt trước khi quay lại khám phá các nhánh khác",
+                "Duyệt qua một nhánh đến khi không còn điểm nào có thể được duyệt tiếp, sau đó quay lui lại và duyệt các nhánh còn lại"
+            ],
+            "advantage": [
+                "Sử dụng bộ nhớ hiệu quả",
+                "Tìm kiếm sâu hơn một cách nhanh chóng",
+                "Đơn giản và dễ triển khai"
+            ],
+            "disadvantage": "Không đảm bảo sẽ tìm được đường đi ngắn nhất",
+            "application": [
+                "Tìm kiếm và đánh dấu đường đi trong đồ thị, ma trận",
+                "Kiểm tra chu trình trong đồ thị, ma trận",
+                "Kiểm tra tính kết nối của đồ thị, ma trận",
+                "Xử lý cấu trúc dữ liệu như cây",
+                "Tìm kiếm trong trò chơi và thuật toán AI"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {dfs}",
+                "Lấy số lượng hàng của ma trận",
+                "Lấy số lượng cột của ma trận",
+                "Khởi tạo ma trận để đánh dấu các điểm đã được thăm",
+                "Khởi tạo ngăn xếp {s} để lưu trữ các điểm cần thăm",
+                "Khởi tại ngăn xếp {paths} để lưu các đường đi tương ứng với các điểm",
+                "Đưa điểm bắt đầu vào ngăn xếp {s}",
+                "Đưa đường đi bắt đầu (chỉ chứa điểm bắt đầu) vào ngăn xếp {paths}",
+                "Đánh dấu điểm bắt đầu đã được thăm",
+                "Định nghĩa các hướng di chuyển (lên, xuống, trái, phải)",
+                "Khi mà ngăn xếp vẫn còn điểm cần duyệt",
+                "Lấy điểm hiện tại từ đỉnh ngăn xếp {s}",
+                "Lấy đường đi tương ứng với điểm hiện tại từ ngăn xếp {paths}",
+                "Loại bỏ điểm hiện tại khỏi ngăn xếp {s}",
+                "Loại bỏ đường đi hiện tại khỏi ngăn xếp {paths}",
+                "Lấy tọa độ {x} của điểm hiện tại",
+                "Lấy tọa độ {y} của điểm hiện tại",
+                "Kiểm tra xem điểm hiện tại có phải là điểm kết thúc hay không. Nếu đúng, trả về đường đi.",
+                "Trả về đường đi",
+                "Nếu chưa đến điểm kết thúc, duyệt qua các hướng di chuyển",
+                "Tính tọa độ {x} mới",
+                "Tính tọa độ {y} mới",
+                "Kiểm tra xem tọa độ mới có hợp lệ và chưa được đến thăm hay không. Nếu thỏa mãn, cập nhật trạng thái và thông tin của điểm đó.",
+                "Đánh dấu điểm mới đã được thăm",
+                "Đưa điểm mới vào ngăn xếp {s}",
+                "Khởi tạo đường đi mới từ đường đi hiện tại",
+                "Đưa điểm mới vào đường đi mới",
+                "Đưa đường đi mới vào ngăn xếp {paths}",
+                "",
+                "",
+                "",
+                "Trả về {vector} rỗng nếu không tìm thấy đường đi"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "Khởi tạo {stackjs} để lưu trữ các điểm cần thăm. Đưa điểm bắt đầu vào {stackjs}.",
+                "Khởi tại {pathsjs} để lưu các đường đi tương ứng với các điểm. Đưa đường đi bắt đầu (chỉ chứa điểm bắt đầu) vào {pathsjs}.",
+                "{{{cpp,8}}}",
+                "{{{cpp,9}}}",
+                "Khi mà trong {stackjs} vẫn còn điểm cần duyệt",
+                "Lấy điểm hiện tại (cuối cùng) ra khỏi {stackjs}",
+                "Lấy đường đi tương ứng với điểm hiện tại từ {pathsjs}",
+                "Nếu điểm hiện tại là điểm kết thúc, trả về đường đi",
+                "Nếu chưa đến điểm kết thúc, duyệt qua các hướng di chuyển",
+                "Tính tọa độ {xjs} mới",
+                "Tính tọa độ {yjs} mới",
+                "Kiểm tra xem tọa độ mới có hợp lệ và chưa được đến thăm hay không. Nếu thỏa mãn, cập nhật trạng thái và thông tin của điểm đó.",
+                "Đánh dấu điểm mới đã được thăm",
+                "Đưa điểm mới vào {stackjs}",
+                "Đưa đường đi có thêm điểm mới vào {pathsjs}",
+                "",
+                "",
+                "",
+                "Trả về mảng rỗng nếu không tìm thấy đường đi"
+            ]
+        }
+    },
+    "_": {
+        "constraints": [
+            "Ô màu vàng là ô bắt đầu, nhấn đúp để đổi chỗ với ô kết thúc",
+            "Ô màu xanh lá là ô kết thúc, nhấn đúp để đổi chỗ với ô bắt đầu",
+            "Ô trắng là có thể đi được, nhấn để chuyển thành ô không thể đi được",
+            "Ô đen là không thể đi được, nhấn để chuyển thành ô có thể đi được",
+            "Nhấn đúp vào ô trắng hoặc ô đen để đổi thành ô bắt đầu"
+        ]
+    }
+}

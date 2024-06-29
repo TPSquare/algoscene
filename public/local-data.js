@@ -1,46 +1,33 @@
 'use strict';
 
-const version = await fetch('/version').then((res) => res.json());
-const key = await fetch('/localdata-key').then((res) => res.json());
-const debug = await fetch('/debugging').then((res) => res.json());
-
-window.localData = new (class {
+const localData = new (class {
     constructor() {
-        this.version = version;
-        this.debug = debug;
-        this.key = key;
+        this.version = '1.0.0';
+        this.debug = false;
+        this.key = 'azlfgvoestczednteu';
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);
-        this.keys = {lang: true};
-        this.lang = document.querySelector('html')?.lang || this.lang;
+        this.keys = {};
+        this.check('lang', 'en');
         this.check('delay', 500);
-        this.check('history', {a: {}, lang: []}, () => {
-            this.history.a.update = (e) => {
-                this.history.a[ALGOSCENE.key] = e;
-                this.upload();
-            };
-            this.history.lang.update = (e) => {
-                if (this.history.lang.includes(e))
-                    this.history.lang.push(
-                        this.history.lang.splice(
-                            this.history.lang.findIndex((t) => t == e),
-                            1
-                        )[0]
-                    );
-                else this.history.lang.push(e);
-                this.upload();
-            };
-        });
         this.upload();
+    }
+    init(root) {
+        this.getText(root);
+    }
+    async setLanguage(value) {
+        this.lang = value;
+        this.upload();
+        await window.delay(100);
+        if (confirm(this.reload___ + '?')) window.location.reload();
     }
     setDelay(value) {
         this.delay = Number(value);
         this.upload();
     }
-    check(key, value, callback = () => {}) {
+    check(key, value) {
         this.keys[key] = true;
         if (!this[key]) this[key] = value;
-        callback();
     }
     upload() {
         const keys = Object.keys(this.keys),
@@ -48,4 +35,11 @@ window.localData = new (class {
         keys.forEach((key) => (data[key] = this[key]));
         localStorage.setItem(this.key, JSON.stringify(data));
     }
+    async getText(root) {
+        const url = `${root}languages/${this.lang}/default.json`,
+            {reload___} = await fetch(url).then(async (r) => r.json());
+        this.reload___ = reload___;
+    }
 })();
+
+export default localData;
