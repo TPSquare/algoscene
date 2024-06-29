@@ -2,11 +2,12 @@
 
 const version = await fetch('/version').then((res) => res.json());
 const key = await fetch('/localdata-key').then((res) => res.json());
+const debug = await fetch('/debugging').then((res) => res.json());
 
 window.localData = new (class {
     constructor() {
         this.version = version;
-        this.debug = false;
+        this.debug = debug;
         this.key = key;
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);

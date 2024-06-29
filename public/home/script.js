@@ -9,14 +9,6 @@ window.langData = Object.assign(
     await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
 
-const A = {names: await fetch('/listA').then((res) => res.json())};
-A.data = await Promise.all(
-    A.names.map(async (fileName) => {
-        const url = `/languages/${LANG}/${fileName}.a.json`;
-        return await fetch(url).then((res) => res.json());
-    })
-);
-
 new (class {
     constructor() {
         this.document();
@@ -75,21 +67,30 @@ new (class {
 
         document.body.appendChild(header);
     }
-    algorithms() {
-        let html = '';
-        A.names.forEach(
-            (key, index) =>
-                (html +=
-                    `<a href="/${LANG}/a/${key}">` +
-                    `<img src="/jpg/${key}.a.jpg" alt="">` +
-                    `<span>${A.data[index].NAME}</span>` +
-                    `</a>`)
-        );
+    async algorithms() {
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
 
         const algorithms = document.createElement({
             tag: 'section',
             id: 'algorithms',
-            innerHTML: html,
+            innerHTML: await (async () => {
+                const data = await fetch(LANG + '/home-data-bottom').then((res) => res.json());
+                return shuffleArray(
+                    data.map(
+                        (e) =>
+                            `<a href="/${LANG}/${e[1]}/${e[0]}">` +
+                            `<img src="/jpg/${e[0]}.${e[1]}.jpg" alt="">` +
+                            `<span>${e[2]}</span>` +
+                            `</a>`
+                    )
+                ).join('');
+            })(),
         });
 
         document.body.appendChild(algorithms);
@@ -130,30 +131,8 @@ new (class {
             placeHolder: langData.search,
             data: {
                 src: (async () => {
-                    const fileList = A.names;
-                    const res = A.data;
-                    const LIST = res.map((obj, index) => {
-                        const keys = Object.keys(obj);
-                        keys.splice(
-                            keys.findIndex((key) => key == '_'),
-                            1
-                        );
-                        keys.splice(
-                            keys.findIndex((key) => key == 'NAME'),
-                            1
-                        );
-                        return keys
-                            .map((key) => {
-                                obj[key].name = Object.assign(obj[key].name, {
-                                    key: fileList[index],
-                                });
-                                return obj[key].name;
-                            })
-                            .concat([Object.assign(fileList[index], {key: fileList[index]})]);
-                    });
-                    let data = [];
-                    LIST.forEach((list) => (data = data.concat(list)));
-                    return data;
+                    const data = await fetch(LANG + '/home-data-search').then((res) => res.json());
+                    return data.map((e) => Object.assign(e[0], {path: e[1]}));
                 })(),
                 cache: true,
             },
@@ -162,7 +141,7 @@ new (class {
             },
         });
         autoCompleteJS.input.addEventListener('selection', function (e) {
-            window.location.href = `/${LANG}/a/${e.detail.selection.value.key}`;
+            window.location.href = `/${LANG}/${e.detail.selection.value.path}`;
         });
     }
     popup() {

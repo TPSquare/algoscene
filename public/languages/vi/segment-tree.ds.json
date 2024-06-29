@@ -1,1 +1,203 @@
-{}
+{
+    "NAME": "Cây phân đoạn",
+    "INFORMATIONS": {
+        "definition": "Segment tree là một cấu trúc dữ liệu sử dụng để lưu trữ thông tin về các đoạn con của một mảng, cho phép thực hiện nhanh chóng các thao tác truy vấn và cập nhật trên các đoạn đó, chẳng hạn như tìm tổng, giá trị lớn nhất, giá trị nhỏ nhất, v.v. của một đoạn con.",
+        "advantage": [
+            "Tốc độ truy vấn và cập nhật nhanh chóng",
+            "Hỗ trợ nhiều loại truy vấn khác nhau"
+        ],
+        "disadvantage": [
+            "Cần thêm bộ nhớ để lưu trữ cây",
+            "Cài đặt hơi phức tạp"
+        ]
+    },
+    "list": {
+        "sum": {
+            "name": "Tính tổng của đoạn",
+            "comments": {
+                "cpp": [
+                    "Khai báo kích thước tối đa của mảng đầu vào",
+                    "Khởi tạo cây phân đoạn cần kích thước gấp 4 lần kích thước mảng đầu vào (đã được chứng minh)",
+                    "Khởi tạo mảng đầu vào chứa dữ liệu gốc",
+                    "",
+                    "Định nghĩa hàm xây dựng cây phân đoạn từ mảng đầu vào",
+                    "Nếu đoạn chỉ có một phần tử, gán giá trị cho phần tử tương ứng trong cây phân đoạn",
+                    "Ngược lại, tiếp tục chia nhỏ đoạn",
+                    "Tính vị trí giữa",
+                    "Xây dựng cây phân đoạn cho nửa bên trái",
+                    "Xây dựng cây phân đoạn cho nửa bên phải",
+                    "Gán giá trị tổng từ hai nửa vào phần tử hiện tại",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm cập nhật giá trị cho một phần tử cụ thể",
+                    "Nếu phần tử cần cập nhật nằm ngoài đoạn hiện tại, thoát khỏi hàm",
+                    "Nếu đã đến phần tử cần cập nhật, gán giá trị mới cho phần tử đó",
+                    "Ngược lại, tiếp tục chia nhỏ đoạn và cập nhật cây phân đoạn",
+                    "{{{cpp,7}}}",
+                    "Cập nhật giá trị cho nửa bên trái",
+                    "Cập nhật giá trị cho nửa bên phải",
+                    "{{{cpp,10}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm cập nhật giá trị trong một đoạn",
+                    "Nếu đoạn cần cập nhật nằm ngoài đoạn hiện tại, thoát khỏi hàm",
+                    "Nếu đoạn cần cập nhật gồm một phần tử, cập nhật giá trị trong cây phân đoạn cho phần tử đó bằng cách cộng thêm giá trị vào",
+                    "{{{cpp,17}}}",
+                    "{{{cpp,7}}}",
+                    "{{{cpp,19}}}",
+                    "{{{cpp,20}}}",
+                    "{{{cpp,10}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm lấy giá trị tổng của một đoạn",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về tổng là {0} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "Nếu đoạn cần tìm kiếm chứa đoạn hiện tại, trả về giá trị tổng là phần tử hiện tại trong cây phân đoạn",
+                    "{{{cpp,7}}}",
+                    "Lấy giá trị tổng từ nửa bên trái",
+                    "Lấy giá trị tổng từ nửa bên phải",
+                    "Trả về tổng của hai nửa"
+                ],
+                "js": "{{{all(cpp)}}}"
+            }
+        },
+        "min": {
+            "name": "Tìm giá trị nhỏ nhất của đoạn",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Gán giá trị nhỏ nhất từ hai nửa vào phần tử hiện tại",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm lấy giá trị nhỏ nhất của một đoạn",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về giá trị nhỏ nhất là {INTMAX} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "Nếu đoạn cần tìm kiếm chứa đoạn hiện tại, trả về giá trị nhỏ nhất là phần tử hiện tại trong cây phân đoạn",
+                    "{{{cpp,10}}}",
+                    "Lấy giá trị nhỏ nhất từ nửa bên trái",
+                    "Lấy giá trị nhỏ nhất từ nửa bên phải",
+                    "Trả về giá trị nhỏ nhất của hai nửa"
+                ],
+                "js": [
+                    "{{{cpp,3-39}}}",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về giá trị nhỏ nhất là {Infinity} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "{{{cpp,41-45}}}"
+                ]
+            }
+        },
+        "max": {
+            "name": "Tìm giá trị lớn nhất của đoạn",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Gán giá trị lớn nhất từ hai nửa vào phần tử hiện tại",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm lấy giá trị lớn nhất của một đoạn",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về giá trị lớn nhất là {INTMIN} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "Nếu đoạn cần tìm kiếm chứa đoạn hiện tại, trả về giá trị lớn nhất là phần tử hiện tại trong cây phân đoạn",
+                    "{{{cpp,10}}}",
+                    "Lấy giá trị lớn nhất từ nửa bên trái",
+                    "Lấy giá trị lớn nhất từ nửa bên phải",
+                    "Trả về giá trị lớn nhất của hai nửa"
+                ],
+                "js": [
+                    "{{{cpp,3-39}}}",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về giá trị lớn nhất là {-_Infinity} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "{{{cpp,41-45}}}"
+                ]
+            }
+        },
+        "gcd": {
+            "name": "Tìm ước chung lớn nhất của đoạn",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Gán ước chung lớn nhất từ hai nửa vào phần tử hiện tại",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm lấy ước chung lớn nhất của một đoạn",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về ước chung lớn nhất là {0} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "Nếu đoạn cần tìm kiếm chứa đoạn hiện tại, trả về ước chung lớn nhất là phần tử hiện tại trong cây phân đoạn",
+                    "{{{cpp,10}}}",
+                    "Lấy ước chung lớn nhất từ nửa bên trái",
+                    "Lấy ước chung lớn nhất từ nửa bên phải",
+                    "Trả về ước chung lớn nhất của hai nửa"
+                ],
+                "js": [
+                    "Định nghĩa hàm tính ước chung lớn nhất",
+                    "",
+                    "{{{cpp,3-45}}}"
+                ]
+            }
+        },
+        "lcm": {
+            "name": "Tìm bội chung nhỏ nhất của đoạn",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Gán bội chung nhỏ nhất từ hai nửa vào phần tử hiện tại",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm lấy bội chung nhỏ nhất của một đoạn",
+                    "Nếu đoạn cần tìm kiếm nằm ngoài đoạn hiện tại, trả về bội chung nhỏ nhất là {1} (đảm bảo không ảnh hưởng đến kết quả)",
+                    "Nếu đoạn cần tìm kiếm chứa đoạn hiện tại, trả về bội chung nhỏ nhất là phần tử hiện tại trong cây phân đoạn",
+                    "{{{cpp,10}}}",
+                    "Lấy bội chung nhỏ nhất từ nửa bên trái",
+                    "Lấy bội chung nhỏ nhất từ nửa bên phải",
+                    "Trả về bội chung nhỏ nhất của hai nửa"
+                ],
+                "js": [
+                    "{{{gcd-js,0}}}",
+                    "Định nghĩa hàm tính bội chung nhỏ nhất",
+                    "",
+                    "{{{cpp,3-45}}}"
+                ]
+            }
+        }
+    },
+    "constraints": [
+        "Các giá trị cách nhau bởi khoảng trắng",
+        "Giá trị là một số nguyên nằm trong đoạn từ 1 đến 100",
+        "Có tối thiểu 2 giá trị (tối đa 8 giá trị sẽ được sử dụng)"
+    ],
+    "complexity": {
+        "build": "Xây dựng",
+        "update": "Cập nhật một phần tử",
+        "rangeUpdate": "Cập nhật một đoạn",
+        "get": "Truy vấn"
+    }
+}

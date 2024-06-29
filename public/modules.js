@@ -102,28 +102,27 @@ export function upgradeDocument() {
         elm.qs = elm.querySelector;
         elm.querySelector = querySelector;
         children?.forEach((child) => elm.appendChild(child));
-        return Object.assign(elm, {
-            set(k, f) {
-                if (typeof k == 'string') this[k] = f;
-                else k.forEach((key) => (this[key] = f));
-                return this;
-            },
-            sa: elm.setAttribute,
-            setAttribute(q, v) {
-                this.sa(q, v);
-                return this;
-            },
-            ael: elm.addEventListener,
-            addEventListener(t, f) {
-                this.ael(t, f);
-                return this;
-            },
-            setStyle,
-            combine(obj) {
-                for (const key in obj) this[key] = obj[key];
-                return this;
-            },
-        });
+        elm.set = function (k, f) {
+            if (typeof k == 'string') this[k] = f;
+            else k.forEach((key) => (this[key] = f));
+            return this;
+        };
+        elm.sa = elm.setAttribute;
+        elm.setAttribute = function (q, v) {
+            this.sa(q, v);
+            return this;
+        };
+        elm.ael = elm.addEventListener;
+        elm.addEventListener = function (t, f) {
+            this.ael(t, f);
+            return this;
+        };
+        elm.setStyle = setStyle;
+        elm.combine = function (obj) {
+            for (const key in obj) this[key] = obj[key];
+            return this;
+        };
+        return elm;
     };
 
     document.generalStyle = new (class {
@@ -180,6 +179,20 @@ export function upgradeDocument() {
         else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         else if (document.msExitFullscreen) document.msExitFullscreen();
+    };
+
+    document.removeExtraWhitespace = (value) => {
+        value = value
+            .split('\n')
+            .map((e) => {
+                e = e.trim();
+                while (e.includes('  ')) e = e.replaceAll('  ', ' ');
+                return e;
+            })
+            .join(' ')
+            .trim();
+        while (value.includes('  ')) value = value.replaceAll('  ', ' ');
+        return value;
     };
 }
 

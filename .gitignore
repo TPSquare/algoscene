@@ -1,9 +1,11 @@
 /node_modules
 package-lock.json
 nodemon.json
+/.vscode
 
 # dev
 js.js
-cpp.cpp
-cpp.exe
+tempCodeRunnerFile.cpp
+tempCodeRunnerFile.exe
 py.py
+svg.svg

@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
+    <title>
+        <%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene
+    </title>
     <meta name="description" content="<%= description %>">
     <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/common.css">
@@ -13,10 +15,12 @@
 
 <body type="<%= type %>">
     <script type="module" src="/local-data.js"></script>
-    <script type="module">import('/common.js').then(() => {
-        ALGOSCENE.key = '<%= key %>';
+    <script type="module">
+        await import('/local-data.js');
+        await import('/common.js');
+        window.ALGOSCENE.key = '<%= key %>';
         import('/<%= type %>/<%= key %>.js');
-    })</script>
+    </script>
 </body>
 
 </html>

@@ -303,7 +303,6 @@ ALGOSCENE.customInput.onApply = function (value) {
     if (isValid) {
         ARRAY = value.slice(0, 7);
         ALGOSCENE.frameHTML = getframeHTML();
-        ALGOSCENE.resetAction();
         ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
         ALGOSCENE.customInput.notify.success();
     } else ALGOSCENE.customInput.notify.failure();

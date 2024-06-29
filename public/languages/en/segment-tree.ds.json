@@ -1,1 +1,203 @@
-{}
+{
+    "NAME": "Segment Tree",
+    "INFORMATIONS": {
+        "definition": "Segment tree is a data structure used to store information about subsegments of an array, allowing for quick query and update operations on those segments, such as finding the sum, maximum value, minimum value, etc., of a subsegment.",
+        "advantage": [
+            "Fast query and update speed",
+            "Supports various types of queries"
+        ],
+        "disadvantage": [
+            "Requires additional memory to store the tree",
+            "Implementation is somewhat complex"
+        ]
+    },
+    "list": {
+        "sum": {
+            "name": "Calculate the sum of a segment",
+            "comments": {
+                "cpp": [
+                    "Declare the maximum size of the input array",
+                    "Initialize the segment tree with a size 4 times the size of the input array (proven)",
+                    "Initialize the input array with original data",
+                    "",
+                    "Define the function to build the segment tree from the input array",
+                    "If the segment has only one element, assign the value to the corresponding element in the segment tree",
+                    "Otherwise, continue dividing the segment",
+                    "Calculate the middle position",
+                    "Build the segment tree for the left half",
+                    "Build the segment tree for the right half",
+                    "Assign the sum value from the two halves to the current element",
+                    "",
+                    "",
+                    "",
+                    "Define the function to update the value of a specific element",
+                    "If the element to be updated is outside the current segment, exit the function",
+                    "If it has reached the element to be updated, assign the new value to that element",
+                    "Otherwise, continue dividing the segment and update the segment tree",
+                    "{{{cpp,7}}}",
+                    "Update the value for the left half",
+                    "Update the value for the right half",
+                    "{{{cpp,10}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to update the value in a segment",
+                    "If the segment to be updated is outside the current segment, exit the function",
+                    "If the segment to be updated consists of one element, update the value in the segment tree for that element by adding the value",
+                    "{{{cpp,17}}}",
+                    "{{{cpp,7}}}",
+                    "{{{cpp,19}}}",
+                    "{{{cpp,20}}}",
+                    "{{{cpp,10}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to get the sum value of a segment",
+                    "If the segment to be searched is outside the current segment, return the sum as {0} (to ensure it does not affect the result)",
+                    "If the segment to be searched contains the current segment, return the sum value as the current element in the segment tree",
+                    "{{{cpp,7}}}",
+                    "Get the sum value from the left half",
+                    "Get the sum value from the right half",
+                    "Return the sum of the two halves"
+                ],
+                "js": "{{{all(cpp)}}}"
+            }
+        },
+        "min": {
+            "name": "Find the minimum value of a segment",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Assign the minimum value from the two halves to the current element",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to get the minimum value of a segment",
+                    "If the segment to be searched is outside the current segment, return the minimum value as {INTMAX} (to ensure it does not affect the result)",
+                    "If the segment to be searched contains the current segment, return the minimum value as the current element in the segment tree",
+                    "{{{cpp,10}}}",
+                    "Get the minimum value from the left half",
+                    "Get the minimum value from the right half",
+                    "Return the minimum value of the two halves"
+                ],
+                "js": [
+                    "{{{cpp,3-39}}}",
+                    "If the segment to be searched is outside the current segment, return the minimum value as {Infinity} (to ensure it does not affect the result)",
+                    "{{{cpp,41-45}}}"
+                ]
+            }
+        },
+        "max": {
+            "name": "Find the maximum value of a segment",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Assign the maximum value from the two halves to the current element",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to get the maximum value of a segment",
+                    "If the segment to be searched is outside the current segment, return the maximum value as {INTMIN} (to ensure it does not affect the result)",
+                    "If the segment to be searched contains the current segment, return the maximum value as the current element in the segment tree",
+                    "{{{cpp,10}}}",
+                    "Get the maximum value from the left half",
+                    "Get the maximum value from the right half",
+                    "Return the maximum value of the two halves"
+                ],
+                "js": [
+                    "{{{cpp,3-39}}}",
+                    "If the segment to be searched is outside the current segment, return the maximum value as {-_Infinity} (to ensure it does not affect the result)",
+                    "{{{cpp,41-45}}}"
+                ]
+            }
+        },
+        "gcd": {
+            "name": "Find the greatest common divisor of a segment",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Assign the greatest common divisor from the two halves to the current element",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to get the greatest common divisor of a segment",
+                    "If the segment to be searched is outside the current segment, return the greatest common divisor as {0} (to ensure it does not affect the result)",
+                    "If the segment to be searched contains the current segment, return the greatest common divisor as the current element in the segment tree",
+                    "{{{cpp,10}}}",
+                    "Get the greatest common divisor from the left half",
+                    "Get the greatest common divisor from the right half",
+                    "Return the greatest common divisor of the two halves"
+                ],
+                "js": [
+                    "Define the function to calculate the greatest common divisor",
+                    "",
+                    "{{{cpp,3-45}}}"
+                ]
+            }
+        },
+        "lcm": {
+            "name": "Find the least common multiple of a segment",
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "{{{sum-cpp,0-9}}}",
+                    "Assign the least common multiple from the two halves to the current element",
+                    "{{{sum-cpp,11-20}}}",
+                    "{{{cpp,13}}}",
+                    "{{{sum-cpp,22-31}}}",
+                    "{{{cpp,13}}}",
+                    "",
+                    "",
+                    "",
+                    "Define the function to get the least common multiple of a segment",
+                    "If the segment to be searched is outside the current segment, return the least common multiple as {1} (to ensure it does not affect the result)",
+                    "If the segment to be searched contains the current segment, return the least common multiple as the current element in the segment tree",
+                    "{{{cpp,10}}}",
+                    "Get the least common multiple from the left half",
+                    "Get the least common multiple from the right half",
+                    "Return the least common multiple of the two halves"
+                ],
+                "js": [
+                    "{{{gcd-js,0}}}",
+                    "Define the function to calculate the least common multiple",
+                    "",
+                    "{{{cpp,3-45}}}"
+                ]
+            }
+        }
+    },
+    "constraints": [
+        "Values separated by spaces",
+        "Values are integers in the range from 1 to 100",
+        "There are at least 2 values (a maximum of 8 values will be used)"
+    ],
+    "complexity": {
+        "build": "Build",
+        "update": "Update an element",
+        "rangeUpdate": "Update a segment",
+        "get": "Query"
+    }
+}

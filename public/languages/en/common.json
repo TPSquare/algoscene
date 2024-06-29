@@ -7,6 +7,7 @@
     "pause": "Pause",
     "continue": "Continue",
     "repeat": "Repeat",
+    "select": "Select action",
     "fullScreen": "Full Screen",
     "expand": "Expand",
     "exitFullScreen": "Exit Full Screen mode",
@@ -21,7 +22,8 @@
         "idea": "Idea",
         "advantage": "Advantage",
         "disadvantage": "Disadvantage",
-        "application": "Application"
+        "application": "Application",
+        "definition": "Definition"
     },
     "complexity": {
         "average": "Average Complexity",

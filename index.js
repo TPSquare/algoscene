@@ -28,17 +28,13 @@ app.get('/localdata-key', (req, res) => res.json(process.env.LOCALDATA_KEY));
 app.languages = ['vi', 'en'];
 app.get('/first-language', (req, res) => res.json(process.env.FIRST_LANGUAGE));
 
-import renderCommonPage from './source/functions/render-common-page.js';
-app.renderCommonPage = renderCommonPage;
+app.get('/debugging', (req, res) => res.json(process.env.DEBUGGING == 'on' ? true : false));
 
 import HomePage from './source/homepage.js';
-new HomePage(app);
+new HomePage(app, fs);
 
-import APages from './source/apages.js';
-new APages(app);
-
-import DSPages from './source/dspages.js';
-new DSPages(app);
+import CommonPages from './source/commonpages.js';
+new CommonPages(app, fs);
 
 const port = process.env.PORT || 8002;
 app.listen(port, () => console.log(`   =====   http://localhost:${port}   =====`));

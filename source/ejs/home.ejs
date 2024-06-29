@@ -13,8 +13,10 @@
 
 <body>
     <script src="/autocompletejs/script.js"></script>
-    <script type="module" src="/local-data.js"></script>
-    <script type="module" src="/home/script.js"></script>
+    <script type="module">
+        await import('/local-data.js');
+        import('/home/script.js')
+    </script>
 </body>
 
 </html>

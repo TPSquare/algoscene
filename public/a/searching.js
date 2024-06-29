@@ -109,7 +109,6 @@ ALGOSCENE.customInput.onApply = function (value) {
         TARGET = value[0];
         ARRAY = value.slice(1, 13);
         ALGOSCENE.frameHTML = getframeHTML();
-        ALGOSCENE.resetAction();
         ALGOSCENE.customInput.setCurrentValue(`${String(TARGET)}\n${ARRAY.join(' ')}`);
         ALGOSCENE.customInput.notify.success();
     } else ALGOSCENE.customInput.notify.failure();

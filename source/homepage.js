@@ -1,6 +1,5 @@
-import fs from 'fs';
 export default class {
-    constructor(app) {
+    constructor(app, fs) {
         app.get('/', (req, res) => res.render('redirect'));
         app.languages.forEach((lang) => {
             fs.readFile(`./public/languages/${lang}/index.json`, (err, dt) => {

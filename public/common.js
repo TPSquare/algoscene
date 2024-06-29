@@ -6,7 +6,7 @@ window.LANG = document.querySelector('html').lang;
 document.TYPE = document.body.getAttribute('type');
 
 window.langData = Object.assign(
-    await fetch(`/languages/${LANG}/default.json`).then(async (r) => r.json()),
+    await fetch(`/languages/${LANG}/common.json`).then(async (r) => r.json()),
     await fetch(`/languages/${LANG}/general.json`).then(async (r) => r.json())
 );
 
@@ -27,35 +27,6 @@ new (class {
         MODULES.upgradeWindow();
 
         window.ALGOSCENE = {
-            async init(prolangs, algoConfigs, shortcuts) {
-                this.frameElm = document.body.main.frame;
-                this.playPauseBtn = document.body.main.bottombar.right.playPauseBtn;
-                this.customInput = document.body.popup.customInput;
-
-                const lang = await window.importLanguage(this.key),
-                    algos = {},
-                    info = {},
-                    codes = {},
-                    coms = {},
-                    cmts = {};
-
-                for (const key in algoConfigs) {
-                    algos[key] = lang[key].name;
-                    info[key] = lang[key].informations;
-                    codes[key] = algoConfigs[key].code;
-                    coms[key] = algoConfigs[key].complexity;
-                    cmts[key] = lang[key].comments;
-                }
-                document.body.codeBox.top.prolangList.createList(prolangs);
-                document.body.main.bottombar.left.listWrapper.list.createList(algos);
-                document.body.rightBox.informations.save(info, algos);
-                document.body.codeBox.code.save(codes, cmts, shortcuts);
-                document.body.rightBox.complexity.save(coms);
-                document.update();
-
-                // this.langData = lang._;
-                this.customInput.setConstraints(lang._.constraints);
-            },
             delayDuration: localData.delay,
             updateDelayDuration() {
                 this.delayDuration = localData.delay;
@@ -75,20 +46,19 @@ new (class {
                     window.ALGOSCENE.runAction(key);
             },
             runAction(key) {
+                ALGOSCENE.playPauseBtn.reset();
                 this.currentAction = key;
                 this.frameElm.innerHTML = this.frameHTML;
                 if (this.actions[key]) this.actions[key]();
                 else console.warn(`There are no actions for '${key}'`);
                 this.frameElm.className = key;
-                ALGOSCENE.playPauseBtn.reset();
                 localData.history.a.update(key);
             },
+            endAction() {},
             resetAction() {
-                this.frameElm.innerHTML = this.frameHTML;
-                this.actions[this.currentAction]();
-                ALGOSCENE.playPauseBtn.reset();
+                this.runAction(this.currentAction);
             },
-            createComplexity: (a, b, w, s) => ({a, b, w, s}),
+            createComplexity: (a, b, w, s) => ({average: a, best: b, worst: w, space: s}),
             resetFrame: new (class {
                 constructor() {
                     this.identifier = 1106;
@@ -101,7 +71,71 @@ new (class {
                     for (const key in this.actions) this.actions[key]();
                 }
             })(),
+            enableSelectAction(config) {
+                this.playPauseBtn.enableSelection(config);
+                document.body.popup.createSelectAction(config);
+            },
+            setElms() {
+                this.frameElm = document.body.main.frame;
+                this.playPauseBtn = document.body.main.bottombar.right.playPauseBtn;
+                this.customInput = document.body.popup.customInput;
+            },
         };
+
+        if (document.TYPE == 'a')
+            window.ALGOSCENE.init = async function (prolangs, configs, shortcuts) {
+                this.setElms();
+
+                const lang = await window.importLanguage(this.key),
+                    algos = {},
+                    info = {},
+                    codes = {},
+                    coms = {},
+                    cmts = {};
+
+                for (const key in lang.list) {
+                    algos[key] = lang.list[key].name;
+                    info[key] = lang.list[key].informations;
+                    codes[key] = configs[key].code;
+                    coms[key] = configs[key].complexity;
+                    cmts[key] = lang.list[key].comments;
+                }
+                document.body.codeBox.top.prolangList.createList(prolangs);
+                document.body.main.bottombar.left.listWrapper.list.createList(algos);
+                document.body.rightBox.informations.save(info, algos);
+                document.body.codeBox.code.save(codes, cmts, shortcuts);
+                document.body.rightBox.complexity.save(coms);
+                document.update();
+
+                // this.langData = lang._;
+                this.customInput.setConstraints(lang.constraints);
+            };
+        else
+            window.ALGOSCENE.init = async function (prolangs, configs, shortcuts) {
+                this.setElms();
+
+                const lang = await window.importLanguage(this.key),
+                    algos = {},
+                    cmts = {};
+
+                langData.complexity = lang.complexity;
+
+                for (const key in lang.list) {
+                    algos[key] = lang.list[key].name;
+                    cmts[key] = lang.list[key].comments;
+                }
+                document.body.codeBox.top.prolangList.createList(prolangs);
+                document.body.main.bottombar.left.listWrapper.list.createList(algos);
+                document.body.codeBox.code.save(configs.list, cmts, shortcuts);
+
+                document.body.rightBox.informations.save(lang.INFORMATIONS, lang.NAME);
+                document.body.rightBox.complexity.save(configs.complexity);
+
+                document.update();
+
+                // this.langData = lang._;
+                this.customInput.setConstraints(lang.constraints);
+            };
 
         window.importLanguage = async (key) => {
             const url = `/languages/${LANG}/${key}.${document.TYPE}.json`;
@@ -109,16 +143,27 @@ new (class {
         };
     }
     document() {
-        document.update = function () {
-            const lang = this.body.codeBox.top.prolangList.querySelector('.active').classList[0],
-                algo = this.body.main.bottombar.left.listWrapper.list.value;
+        if (document.TYPE == 'a')
+            document.update = function () {
+                const lang =
+                        this.body.codeBox.top.prolangList.querySelector('.active').classList[0],
+                    algo = this.body.main.bottombar.left.listWrapper.list.value;
 
-            this.updatePageTitle(algo);
-            this.body.codeBox.code.update(algo, lang);
-            this.body.rightBox.informations.update(algo);
-            this.body.rightBox.complexity.update(algo);
-            this.body.rightBox.complexity.onresize();
-        };
+                this.updatePageTitle(algo);
+                this.body.codeBox.code.update(algo, lang);
+                this.body.rightBox.informations.update(algo);
+                this.body.rightBox.complexity.update(algo);
+            };
+        else {
+            document.update = function () {
+                const lang =
+                        this.body.codeBox.top.prolangList.querySelector('.active').classList[0],
+                    algo = this.body.main.bottombar.left.listWrapper.list.value;
+
+                this.updatePageTitle(algo);
+                this.body.codeBox.code.update(algo, lang);
+            };
+        }
 
         document.updatePageTitle = function (algo) {
             const t = this.body.main.bottombar.left.listWrapper.list;
@@ -215,10 +260,11 @@ new (class {
                 if ((w * 9) / 16 <= h) this.width = w;
                 else this.width = (h * 16) / 9;
                 this.height = (this.width * 9) / 16;
+                this.em = this.height / 100;
                 this.setStyle({
                     width: this.width + 'px',
                     height: this.height + 'px',
-                    '--size': this.height + 'px',
+                    '--em': this.em + 'px',
                 });
             },
             setDelay(value) {
@@ -284,46 +330,68 @@ new (class {
                 type: 'button',
                 key: 'playPauseBtn',
                 className: 'play-pause',
-                title: langData.play,
-                innerHTML:
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
                 playIcon:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
                 resetIcon:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>',
                 pauseIcon:
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>',
+                selectIcon:
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>',
+                titleConfig: {
+                    pause: 'pauseIcon',
+                    continue: 'playIcon',
+                    repeat: 'resetIcon',
+                    play: 'playIcon',
+                    select: 'selectIcon',
+                },
+                defaultStatus: 'play',
+                setStatus(status) {
+                    this.title = langData[status];
+                    this.innerHTML = this[this.titleConfig[status]];
+                },
                 async onclick() {
                     if (this.isPlaying) {
                         if (this.isPausing) {
                             this.isPausing = false;
-                            this.innerHTML = this.pauseIcon;
-                            this.title = langData.pause;
+                            this.setStatus('pause');
                         } else {
                             this.isPausing = true;
-                            this.innerHTML = this.playIcon;
-                            this.title = langData.continue;
+                            this.setStatus('continue');
                         }
                     } else {
                         this.isPlaying = true;
-                        this.innerHTML = this.pauseIcon;
-                        this.title = langData.pause;
-                        await this.click();
-                        this.isPausing = true;
-                        this.innerHTML = this.resetIcon;
-                        this.title = langData.repeat;
-                        await ALGOSCENE.delay(0);
-                        this.isPausing = false;
-                        this.isPlaying = false;
-                        this.innerHTML = this.playIcon;
-                        this.title = langData.play;
-                        ALGOSCENE.resetFrame.reset();
+                        this.setStatus('pause');
+                        await this.click(this.actionInput);
+                        await this.endAction();
+                        this.reset();
                     }
+                },
+                async endAction() {
+                    this.isPausing = true;
+                    this.setStatus('repeat');
+                    await ALGOSCENE.delay(0);
+                    ALGOSCENE.resetFrame.reset();
                 },
                 reset() {
                     this.isPlaying = false;
                     this.isPausing = false;
-                    this.innerHTML = this.playIcon;
+                    this.setStatus(this.defaultStatus);
+                },
+                enableSelection(config) {
+                    this.defaultStatus = 'select';
+                    this.clickConfig = config.actions;
+                    this.endAction = async () => {
+                        this.click = () => {
+                            document.body.popup.selectAction.handle();
+                        };
+                    };
+                },
+                setClick(key, input) {
+                    ALGOSCENE.resetFrame.reset();
+                    this.actionInput = input;
+                    this.click = this.clickConfig[key].action;
+                    this.setStatus('play');
                 },
             }),
             screenBtn = document.createElement({
@@ -338,11 +406,15 @@ new (class {
                     document.openFullScreen(document.body.main);
                     this.onclick = this.close;
                     this.title = langData.exitFullScreen;
+                    this.innerHTML =
+                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z"/></svg>';
                 },
                 close() {
                     document.closeFullScreen();
                     this.onclick = this.open;
                     this.title = langData.fullScreen;
+                    this.innerHTML =
+                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z"></path></svg>';
                 },
             });
         screenBtn.onclick = screenBtn.open;
@@ -430,6 +502,10 @@ new (class {
             },
             save(dess = {}, names = {}) {
                 const tab2 = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                if (document.TYPE == 'ds') {
+                    dess = {ds: dess};
+                    names = {ds: names};
+                }
                 for (const k in dess) {
                     let t = dess[k];
                     dess[k] = '';
@@ -454,6 +530,7 @@ new (class {
                     dess[k] = `<span class="name">${names[k]}</span>` + dess[k];
                 }
                 this.dess = dess;
+                if (document.TYPE == 'ds') this.update('ds');
             },
         });
 
@@ -466,25 +543,30 @@ new (class {
                 children: [tbody],
                 save(com = {}) {
                     let t, s;
-                    for (const k in com)
+                    if (document.TYPE == 'ds') com = {ds: com};
+                    for (const k in com) {
                         for (const key in com[k]) {
                             if (com[k][key] == '{none}') {
                                 com[k][key] = langData.none;
                                 continue;
                             }
                             t = com[k][key];
+                            com[k][key] = `<tr><td>${langData.complexity[key]}</td>`;
                             t = t?.replaceAll('{x}', '&times;');
                             while (t?.includes('{^')) {
                                 s = t.substring(t.indexOf('{^') + 2, t.indexOf('}'));
                                 t = t.replace(`{^${s}}`, `<sup>${s}</sup>`);
                             }
-                            t = `<span>${t
-                                .split('{el}')
-                                .map((e) => `O(${e})`)
-                                .join('<br>')}</span>`;
-                            com[k][key] = t;
+                            t = t.split('{el}');
+                            t = t.map((e) => `O(${e})`).join('<br>');
+                            com[k][key] += `<td><span>${t}</span></td></tr>`;
                         }
+                        com[k] = Object.keys(com[k])
+                            .map((key) => com[k][key])
+                            .join('');
+                    }
                     this.com = com;
+                    if (document.TYPE == 'ds') this.update('ds');
                 },
                 onresize() {
                     const elm = Array.from(this.querySelectorAll('tr')).map((e) => {
@@ -502,21 +584,11 @@ new (class {
                     });
                 },
                 value: {},
-                update(algo) {
-                    ['average', 'best', 'worst', 'space'].forEach(
-                        (key) => (this.value[key].innerHTML = this.com[algo][key.charAt(0)])
-                    );
+                update(key) {
+                    tbody.innerHTML = this.com[key];
+                    this.onresize();
                 },
             });
-        ['average', 'best', 'worst', 'space'].forEach((key) => {
-            complexity.value[key] = document.createElement({tag: 'td'});
-            const tr = document.createElement({
-                tag: 'tr',
-                innerHTML: `<td>${langData.complexity[key]}</td>`,
-                children: [complexity.value[key]],
-            });
-            tbody.appendChild(tr);
-        });
         window.addEventListener('resize', () =>
             window.setTimeout(() => complexity.onresize(), 1000)
         );
@@ -696,7 +768,31 @@ new (class {
         const code = document.createElement({
             tag: 'code',
             key: 'code',
-            save(codes, cmts, shortcuts = {}) {
+            save(codes, cmts, shortcuts) {
+                this.saveCmts(cmts, shortcuts);
+                let i, r, l;
+                for (const f in codes) {
+                    for (const s in codes[f]) {
+                        if (codes[f][s])
+                            codes[f][s] = codes[f][s]
+                                .map((e) => {
+                                    if (e == '<span>&empty-line;</span>')
+                                        return '<span class="line-code"><span>&nbsp;</span></span>';
+                                    if (e[0] != '&') return `<span class="line-code">${e}</span>`;
+                                    l = Number(e.substring(4, e.indexOf(';')));
+                                    r = '';
+                                    for (i = 0; i < l; i++) r += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    r = `<span class="tab">${r}</span><span class="line-code">`;
+                                    e = e.replace(`&tab${l};`, r) + '</span>';
+                                    return e;
+                                })
+                                .map((e, i) => `<span order="${++i}" class="view-line">${e}</span>`)
+                                .join('');
+                    }
+                }
+                this.codes = codes;
+            },
+            saveCmts(comments, shortcuts = {}) {
                 for (const key in shortcuts)
                     if (shortcuts[key].includes('|'))
                         shortcuts[key] =
@@ -723,60 +819,63 @@ new (class {
                         ] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
                     });
                 });
-                let i, r, l;
-                for (const f in codes) {
-                    {
-                        for (const s in codes[f]) {
-                            if (codes[f][s])
-                                codes[f][s] = codes[f][s]
-                                    .map((e) => {
-                                        if (e == '<span>&empty-line;</span>')
-                                            return '<span class="line-code"><span>&nbsp;</span></span>';
-                                        if (e[0] != '&')
-                                            return `<span class="line-code">${e}</span>`;
-                                        l = Number(e.substring(4, e.indexOf(';')));
-                                        r = '';
-                                        for (i = 0; i < l; i++) r += '&nbsp;&nbsp;&nbsp;&nbsp;';
-                                        r = `<span class="tab">${r}</span><span class="line-code">`;
-                                        e = e.replace(`&tab${l};`, r) + '</span>';
-                                        return e;
-                                    })
-                                    .map(
-                                        (e, i) =>
-                                            `<span order="${++i}" class="view-line">${e}</span>`
-                                    )
-                                    .join('');
-                            if (cmts[f] && cmts[f][s])
-                                cmts[f][s] = cmts[f][s].map((c) => {
-                                    if (c.includes('{{{') && c.includes('}}}')) {
-                                        c = c.substring(3, c.length - 3).split(',');
-                                        c = cmts[f][c[0]][Number(c[1])];
-                                    }
-                                    l = '';
-                                    while (c.includes('{')) {
-                                        i = c.indexOf('{') + 1;
-                                        l += c.substring(0, i).replace('{', '<code>');
-                                        c = c.substring(i);
-                                        i = c.indexOf('}');
-                                        r = c.substring(0, i).split('_');
-                                        l += r.map((k) => shortcuts[k]).join('') + '</code>';
-                                        c = c.substring(i + 1);
-                                    }
-                                    return l + c;
-                                });
+
+                this.comments = {};
+                for (const key in comments) {
+                    this.comments[key] = {};
+                    for (const lang in comments[key]) {
+                        this.comments[key][lang] = [];
+                        if (comments[key][lang].includes('{{{all(')) {
+                            const endQuery = comments[key][lang].length - 4;
+                            const query = comments[key][lang].substring(7, endQuery);
+                            this.comments[key][lang] = this.comments[key][query];
+                            continue;
                         }
-                        if (cmts[f].cpp) cmts[f].cpp = ['', '', '', ...cmts[f].cpp];
+                        comments[key][lang].forEach((cmt) => {
+                            let list = [];
+                            if (cmt.includes('{{{')) {
+                                const [left, right] = cmt
+                                    .replace('{{{', '')
+                                    .replace('}}}', '')
+                                    .split(',');
+                                let source, range;
+                                if (left.includes('-')) {
+                                    const [key, lang] = left.split('-');
+                                    source = this.comments[key][lang];
+                                } else source = this.comments[key][left];
+                                if (right.includes('-'))
+                                    range = right.split('-').map((e) => Number(e));
+                                else range = new Array(2).fill(Number(right));
+                                const [start, end] = range;
+                                for (let i = start; i <= end; i++) list.push(source[i]);
+                            } else list.push(cmt);
+                            list = list.map((temp) => {
+                                let cmt = '';
+                                while (temp.includes('{')) {
+                                    const startIndex = temp.indexOf('{'),
+                                        endIndex = temp.indexOf('}');
+                                    const codeOfCodes = temp.slice(startIndex + 1, endIndex);
+                                    let htmlCode = codeOfCodes
+                                        .split('_')
+                                        .map((key) => shortcuts[key])
+                                        .join('');
+                                    htmlCode = '<code>' + htmlCode + '</code>';
+                                    cmt += temp.slice(0, startIndex) + htmlCode;
+                                    temp = temp.substring(endIndex + 1);
+                                }
+                                return cmt + temp;
+                            });
+                            this.comments[key][lang].push(...list);
+                        });
                     }
                 }
-                this.codes = codes;
-                this.cmts = cmts;
             },
             update(algo, lang) {
                 this.innerHTML = this.codes[algo][lang];
-                if (this.cmts[algo] && this.cmts[algo][lang])
+                if (this.comments[algo] && this.comments[algo][lang])
                     this.querySelectorAll('.view-line').forEach((e, i) => {
-                        if (this.cmts[algo][lang][i])
-                            e.innerHTML += `<span class="cmt">${this.cmts[algo][lang][i]}</span>`;
+                        if (this.comments[algo][lang][i])
+                            e.innerHTML += `<span class="cmt">${this.comments[algo][lang][i]}</span>`;
                     });
             },
         });
@@ -1102,17 +1201,7 @@ new (class {
                 tag: 'textarea',
                 title: langData.customizeInput,
                 handle() {
-                    let value = this.value
-                        .split('\n')
-                        .map((e) => {
-                            e = e.trim();
-                            while (e.includes('  ')) e = e.replaceAll('  ', ' ');
-                            return e;
-                        })
-                        .join(' ')
-                        .trim();
-                    while (value.includes('  ')) value = value.replaceAll('  ', ' ');
-                    return value;
+                    return document.removeExtraWhitespace(this.value);
                 },
                 clearValue() {
                     this.value = '';
@@ -1190,6 +1279,7 @@ new (class {
                 },
                 notify: {
                     success: () => {
+                        ALGOSCENE.resetAction();
                         customInput.classList.add('success');
                         setTimeout(() => customInput.classList.remove('success'), 1000);
                     },
@@ -1238,6 +1328,84 @@ new (class {
             id: 'popup',
             key: 'popup',
             children: [overlay, info, guideMessageElm, customInput],
+            createSelectAction(config) {
+                const elm = document.createElement({
+                    className: 'select-action',
+                    key: 'selectAction',
+                    style: {
+                        '--span-width': config.elmSize[0] + 'em',
+                        '--input-width': config.elmSize[1] + 'em',
+                    },
+                    children: [
+                        document.createElement({
+                            className: 'title',
+                            attributes: {'data-text': langData.select},
+                        }),
+                        document.createElement({
+                            tag: 'button',
+                            type: 'button',
+                            className: 'close',
+                            title: langData.close,
+                            innerHTML: '&times;',
+                            onclick: () => elm.handle(),
+                        }),
+                        ...Object.keys(config.actions)
+                            .filter((key) => !config.actions[key].hidden)
+                            .map((key) =>
+                                document.createElement({
+                                    tag: 'section',
+                                    className: key,
+                                    key,
+                                    innerHTML: `<span>${key}:</span>`,
+                                    children: [
+                                        document.createElement({
+                                            tag: 'input',
+                                            key: 'input',
+                                            attributes: {
+                                                placeholder: config.actions[key].input || '',
+                                            },
+                                        }),
+                                        document.createElement({
+                                            tag: 'button',
+                                            type: 'button',
+                                            title: langData.select,
+                                            innerHTML:
+                                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
+                                            onclick() {
+                                                const input = document
+                                                    .removeExtraWhitespace(
+                                                        this.parentNode.input.value
+                                                    )
+                                                    .split(' ')
+                                                    .map((e) => Number(e));
+                                                if (config.actions[key].checkInput(input)) {
+                                                    document.body.main.bottombar.right.playPauseBtn.setClick(
+                                                        key,
+                                                        input
+                                                    );
+                                                    this.parentNode.input.value = '';
+                                                    elm.handle();
+                                                } else {
+                                                    this.classList.add('error');
+                                                    setTimeout(
+                                                        () => this.classList.remove('error'),
+                                                        200
+                                                    );
+                                                }
+                                            },
+                                        }),
+                                    ],
+                                })
+                            ),
+                    ],
+                    handle() {
+                        if (this.classList.contains('show')) this.classList.remove('show');
+                        else this.classList.add('show');
+                        overlay.handle();
+                    },
+                });
+                this.appendChild(elm);
+            },
         });
 
         document.body.appendChild(popup);

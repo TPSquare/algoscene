@@ -7,6 +7,7 @@
     "pause": "Tạm ngừng",
     "continue": "Tiếp tục",
     "repeat": "Lặp lại",
+    "select": "Chọn hành động",
     "fullScreen": "Toàn màn hình",
     "expand": "Mở rộng",
     "exitFullScreen": "Thoát khỏi chế độ toàn màn hình",
@@ -21,7 +22,8 @@
         "idea": "Ý tưởng",
         "advantage": "Ưu điểm",
         "disadvantage": "Nhược điểm",
-        "application": "Ứng dụng"
+        "application": "Ứng dụng",
+        "definition": "Định nghĩa"
     },
     "complexity": {
         "average": "Độ phức tạp trung bình",
