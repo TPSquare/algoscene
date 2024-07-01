@@ -1,0 +1,168 @@
+{
+    "NAME": "Tìm đường",
+    "list": {
+        "bfs": {
+            "name": "Breadth-First Search (BFS)",
+            "informations": {
+                "idea": [
+                    "Bắt đầu tại điểm bắt đầu và mở rộng ra từng cấp độ kề tiếp theo",
+                    "Duyệt qua tất cả các điểm kề với điểm hiện tại trước khi di chuyển đến các điểm kề với những điểm đã được duyệt ở cấp độ trước đó"
+                ],
+                "advantage": [
+                    "Đảm bảo tìm được đường đi ngắn nhất",
+                    "Đơn giản và dễ triển khai",
+                    "Khám phá toàn diện đồ thị, ma trận"
+                ],
+                "disadvantage": [
+                    "Yêu cầu bộ nhớ lớn",
+                    "Không hiệu quả cho đồ thị, ma trận lớn",
+                    "Không tối ưu cho đồ thị, ma trận có trọng số",
+                    "Khó khăn khi làm việc với đồ thị, ma trận vô hạn"
+                ],
+                "application": [
+                    "Tìm đường đi ngắn nhất trong đồ thị, ma trận không có trọng số",
+                    "Tìm kiếm trong trò chơi và thuật toán AI",
+                    "Kiểm tra tính kết nối của đồ thị, ma trận",
+                    "Xử lý cấu trúc dữ liệu như cây",
+                    "Phân loại đồ thị, ma trận",
+                    "Tạo ra các hệ thống GPS và tìm kiếm đường đi",
+                    "Kiểm tra chu trình trong đồ thị, ma trận"
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm {bfs}",
+                    "Lấy số lượng hàng của ma trận",
+                    "Lấy số lượng cột của ma trận",
+                    "Khởi tạo ma trận để đánh dấu các điểm đã được thăm",
+                    "Khởi tạo ma trận để lưu trữ thông tin về điểm trước đó trong đường đi",
+                    "Khởi tạo hàng đợi để lưu trữ các điểm cần thăm",
+                    "Đưa điểm bắt đầu vào hàng đợi",
+                    "Đánh dấu điểm bắt đầu đã được thăm",
+                    "Định nghĩa các hướng di chuyển (lên, xuống, trái, phải)",
+                    "Khi mà hàng đợi vẫn còn điểm cần duyệt",
+                    "Lấy điểm hiện tại (đầu tiên) từ hàng đợi",
+                    "Loại bỏ điểm hiện tại khỏi hàng đợi",
+                    "Lấy tọa độ {x} của điểm hiện tại",
+                    "Lấy tọa độ {y} của điểm hiện tại",
+                    "Kiểm tra xem điểm hiện tại có phải là điểm kết thúc hay không. Nếu đúng, tái tạo đường đi và trả về.",
+                    "Khởi tạo {vector} để lưu đường đi",
+                    "Tái tạo đường đi từ điểm kết thúc về điểm bắt đầu",
+                    "Thêm điểm hiện tại vào đường đi",
+                    "Đảo ngược đường đi để có thứ tự đúng",
+                    "Trả về đường đi",
+                    "",
+                    "Nếu chưa đến điểm kết thúc, duyệt qua các hướng di chuyển",
+                    "Tính tọa độ {x} mới",
+                    "Tính tọa độ {y} mới",
+                    "Kiểm tra xem tọa độ mới có hợp lệ và chưa được đến thăm hay không. Nếu thỏa mãn, cập nhật trạng thái và thông tin của điểm đó.",
+                    "Đưa điểm mới vào hàng đợi",
+                    "Đánh dấu điểm mới đã được thăm",
+                    "Lưu điểm hiện tại là điểm trước đó của điểm mới",
+                    "",
+                    "",
+                    "",
+                    "Trả về {vector} rỗng nếu không tìm thấy đường đi"
+                ],
+                "js": [
+                    "{{{cpp,3-7}}}",
+                    "Khởi tạo hàng đợi để lưu trữ các điểm cần thăm. Đưa điểm bắt đầu vào hàng đợi.",
+                    "{{{cpp,10-12}}}",
+                    "Lấy tọa độ điểm hiện tại (đầu tiên) ra khỏi hàng đợi",
+                    "{{{cpp,17}}}",
+                    "Khởi tạo mảng để lưu đường đi",
+                    "{{{cpp,19-20}}}",
+                    "Trả về đường đi sau khi đã đảo ngược thứ tự",
+                    "",
+                    "{{{cpp,24}}}",
+                    "Tính tọa độ {xjs} mới",
+                    "Tính tọa độ {yjs} mới",
+                    "{{{cpp,27-30}}}",
+                    "",
+                    "",
+                    "",
+                    "Trả về mảng rỗng nếu không tìm thấy đường đi"
+                ]
+            }
+        },
+        "dfs": {
+            "name": "Depth-First Search (DFS)",
+            "informations": {
+                "idea": [
+                    "Khám phá một nhánh của đồ thị, ma trận càng sâu càng tốt trước khi quay lại khám phá các nhánh khác",
+                    "Duyệt qua một nhánh đến khi không còn điểm nào có thể được duyệt tiếp, sau đó quay lui lại và duyệt các nhánh còn lại"
+                ],
+                "advantage": [
+                    "Sử dụng bộ nhớ hiệu quả",
+                    "Tìm kiếm sâu hơn một cách nhanh chóng",
+                    "Đơn giản và dễ triển khai"
+                ],
+                "disadvantage": "Không đảm bảo sẽ tìm được đường đi ngắn nhất",
+                "application": [
+                    "Tìm kiếm và đánh dấu đường đi trong đồ thị, ma trận",
+                    "Kiểm tra chu trình trong đồ thị, ma trận",
+                    "Kiểm tra tính kết nối của đồ thị, ma trận",
+                    "Xử lý cấu trúc dữ liệu như cây",
+                    "Tìm kiếm trong trò chơi và thuật toán AI"
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "",
+                    "",
+                    "",
+                    "Định nghĩa hàm {dfs}",
+                    "Nếu đã tìm thấy đường đi, dừng hàm",
+                    "Lấy số lượng hàng của ma trận",
+                    "Lấy số lượng cột của ma trận",
+                    "Định nghĩa các hướng di chuyển (lên, xuống, trái, phải)",
+                    "Đánh dấu điểm {(1_x_,_ _y_)1} đã được thăm",
+                    "Thêm {(2_x_,_ _y_)2} vào đường đi",
+                    "Duyệt qua các hướng di chuyển",
+                    "Tính tọa độ {x} mới",
+                    "Tính tọa độ {y} mới",
+                    "Kiểm tra xem tọa độ mới có hợp lệ và chưa được đến thăm hay không",
+                    "Tiến hành duyệt {dfs} từ điểm mới",
+                    "",
+                    "Nếu điểm hiện tại không phải là điểm kết thúc, loại bỏ nó khỏi đường đi",
+                    "Nếu điểm hiện tại là điểm kết thúc, đánh dấu đã tìm thấy đường đi",
+                    "",
+                    "",
+                    "Định nghĩa hàm {findPath} để tìm đường đi dựa trên {dfs}",
+                    "Lấy số lượng hàng của ma trận",
+                    "Lấy số lượng cột của ma trận",
+                    "Khởi tạo ma trận để đánh dấu các điểm đã được thăm",
+                    "Khởi tạo {vector} để lưu trữ đường đi",
+                    "Khởi tạo biến dùng để đánh dấu xem đã tìm thấy đường đi hay chưa",
+                    "Bắt đầu duyệt {dfs} từ điểm bắt đầu",
+                    "Nếu đã tìm thấy đường đi, trả về đường đi đó",
+                    "Trả về {vector} rỗng nếu không tìm thấy đường đi"
+                ],
+                "js": [
+                    "{{{cpp,20}}}",
+                    "{{{cpp,3-4}}}",
+                    "Đánh dấu điểm {(2_x_,_ _y_)2} đã được thăm",
+                    "Thêm {(3_x_,_ _y_)3} vào đường đi",
+                    "{{{cpp,10-17}}}",
+                    "",
+                    "{{{cpp,5-6}}}",
+                    "{{{cpp,23}}}",
+                    "Khởi tạo mảng để lưu trữ đường đi",
+                    "{{{cpp,7}}}",
+                    "{{{cpp,25-27}}}",
+                    "Trả về mảng rỗng nếu không tìm thấy đường đi"
+                ]
+            }
+        }
+    },
+    "constraints": [
+        "Ô màu vàng là ô bắt đầu, nhấn đúp để đổi chỗ với ô kết thúc",
+        "Ô màu xanh lá là ô kết thúc, nhấn đúp để đổi chỗ với ô bắt đầu",
+        "Ô trắng là có thể đi được, nhấn để chuyển thành ô không thể đi được",
+        "Ô đen là không thể đi được, nhấn để chuyển thành ô có thể đi được",
+        "Nhấn đúp vào ô trắng hoặc ô đen để đổi thành ô bắt đầu"
+    ]
+}
