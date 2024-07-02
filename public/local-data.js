@@ -20,8 +20,8 @@ window.localData = new (class {
             typeList.forEach(
                 (type) =>
                     (tempHistory[type] = Object.assign(this.history[type] || {}, {
-                        update: (e) => {
-                            this.history[type][ALGOSCENE.key] = e;
+                        update: (key, value) => {
+                            this.history[type][key] = value;
                             this.upload();
                         },
                     }))

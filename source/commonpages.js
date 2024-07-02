@@ -52,8 +52,16 @@ export default class {
                 this.config[type].forEach((key) => {
                     const data = this.data[lang][type][key];
                     app.get(`/${lang}/${type}/${key}`, (req, res) => {
-                        if (req.query.s) res.render('goto');
-                        else
+                        if (req.query[selectKey]) {
+                            const title = data.list[req.query[selectKey]]?.name || data.NAME;
+                            res.render('goto', {
+                                ...{key, lang, type},
+                                selector: req.query[selectKey],
+                                keys: Object.keys(data.list),
+                                title,
+                                description: title,
+                            });
+                        } else
                             res.render('common', {
                                 title: data.NAME,
                                 description: Object.keys(data.list)

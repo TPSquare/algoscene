@@ -52,7 +52,7 @@ new (class {
                 if (this.actions[key]) this.actions[key]();
                 else console.warn(`There are no actions for '${key}'`);
                 this.frameElm.className = key;
-                localData.history[document.TYPE].update(key);
+                localData.history[document.TYPE].update(ALGOSCENE.key, key);
             },
             endAction() {},
             resetAction() {

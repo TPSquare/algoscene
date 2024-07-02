@@ -326,7 +326,7 @@ const segmentTree = new (class {
         ARRAY.forEach((value, index) => {
             const elm = document.createElement({
                 tag: 'span',
-                innerText: value,
+                attributes: {'data-value': value},
                 arrayIndex: index,
                 className: 'array-value pre-build',
                 setPos: this.setPositionElm,
@@ -434,7 +434,7 @@ const segmentTree = new (class {
     }
     async updateValue(id, value) {
         this.tree[id] = value;
-        this.getElmByIdx(id).innerText = value;
+        this.getElmByIdx(id).setAttribute('data-value', value);
         await ALGOSCENE.delay();
     }
     async render() {
@@ -589,11 +589,7 @@ ALGOSCENE.enableSelectAction({
             input: 'leftRange rightRange',
             checkInput: (value) => {
                 let isValid = true;
-                value.forEach((e) =>
-                    isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e)
-                        ? (isValid = false)
-                        : null
-                );
+                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
                 if (value.length < 2 || value[0] > value[1]) isValid = false;
                 return isValid;
             },
@@ -603,11 +599,8 @@ ALGOSCENE.enableSelectAction({
             input: 'index value',
             checkInput: (value) => {
                 let isValid = true;
-                value.forEach((e) =>
-                    isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e)
-                        ? (isValid = false)
-                        : null
-                );
+                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
+                if (value[1] < MINVALUE || value[1] > MAXVALUE) isValid = false;
                 if (value.length < 2) isValid = false;
                 return isValid;
             },
@@ -618,11 +611,8 @@ ALGOSCENE.enableSelectAction({
             input: 'leftRange rightRange value',
             checkInput: (value) => {
                 let isValid = true;
-                value.forEach((e) =>
-                    isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e)
-                        ? (isValid = false)
-                        : null
-                );
+                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
+                if (value[2] < MINVALUE || value[2] > MAXVALUE) isValid = false;
                 if (value.length < 2 || value[0] > value[1]) isValid = false;
                 for (let i = value[0]; i <= value[1]; i++)
                     if (ARRAY[i] + value[2] > MAXVALUE || ARRAY[i] + value[2] < MINVALUE)

@@ -52,6 +52,10 @@
         transition: background-color var(--delay), top var(--delay), left var(--delay), color var(--delay), border-color var(--delay);
     }
 
+    .array-value::before {
+        content: attr(data-value);
+    }
+
     .array-value.pre-build {
         background-color: transparent;
         color: #333333;

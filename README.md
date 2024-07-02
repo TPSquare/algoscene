@@ -6,6 +6,7 @@
 -   Added feature to save history of selected programming languages and algorithms
 -   Separate paths for displaying different languages
 -   Support for learning algorithms and data structures
+-   Support query strings to access the simulator
 
 ## VERSION HISTORY
 
