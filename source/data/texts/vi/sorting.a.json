@@ -73,7 +73,7 @@
                     "Hoán đổi hai phần tử"
                 ],
                 "js": [
-                    "{{{cpp,8}}}"
+                    "{{{cpp,3-8}}}"
                 ],
                 "py": [
                     "{{{cpp,3-7}}}",
@@ -249,7 +249,7 @@
                     "Nếu {left} lớn hơn hoặc bằng {right}, nghĩa là đoạn mảng cần sắp xếp chỉ có một phần tử hoặc không còn phần tử nào để sắp xếp, hàm sẽ dừng lại và không thực hiện gì thêm",
                     "Tìm chỉ số giữa của mảng",
                     "Gọi đệ quy để sắp xếp mảng con bên trái từ {left} đến {middle}",
-                    "Gọi đệ quy để sắp xếp mảng con bên phải từ {middle_ _+_ _1} đến {right}",
+                    "Gọi đệ quy để sắp xếp mảng con bên phải từ {middleplus1} đến {right}",
                     "Gọi hàm {merge} để trộn hai mảng con đã sắp xếp thành một mảng có thứ tự"
                 ],
                 "js": [
@@ -258,7 +258,7 @@
                     "Tạo mảng con bên phải từ mảng gốc",
                     "{{{cpp,10-21}}}",
                     "Gọi đệ quy để sắp xếp mảng con bên trái từ {left} đến {middlejs}",
-                    "Gọi đệ quy để sắp xếp mảng con bên phải từ {middlejs_ _+_ _1} đến {right}",
+                    "Gọi đệ quy để sắp xếp mảng con bên phải từ {middleplus1js} đến {right}",
                     "{{{cpp,24}}}"
                 ],
                 "py": [

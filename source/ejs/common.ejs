@@ -7,16 +7,110 @@
     <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
     <meta name="description" content="<%= description %>">
     <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/info.css">
     <link rel="stylesheet" href="/common.css">
     <link rel="stylesheet" href="/<%= type %>/<%= key %>.css">
 </head>
 
-<body type="<%= type %>">
+<body type="<%= type %>" key="<%= key %>">
+    <div id="bg"><img class="brc" src="/svg/bottom-right-decoration.svg" alt="decoration"></div>
+    <header>
+        <div class="left">
+            <a href="/" class="home" title="<%= returnText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg></a>
+            <div class="title">ALGOSCENE<img src="/svg/name.svg" alt="AlgoScene"></div>
+        </div>
+        <div class="right">
+            <button type="button" class="lang" title="<%= languageText %>"><%= lang %></button>
+            <button type="button" class="guide" title="<%= guideText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path></svg></button>
+            <button type="button" class="info" title="<%= infoText %>">
+                <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="64" cy="64" stroke-width="6.67279" style="fill:none;stroke-width:12.073;stroke-dasharray:none" id="circle1" r="57.963501"></circle>
+                    <path stroke-linecap="round" stroke-width="6.67279" d="m 55.368515,92.095025 h 9.578464 m 0,0 V 60.965039 c 0,-1.76346 0.622361,-2.877238 -1.141033,-2.877238 h -3.684424 m 4.825457,34.007224 h 9.578463" id="path1" sodipodi:nodetypes="cccssccc" style="stroke-width:11.273;stroke-dasharray:none"></path>
+                    <ellipse cx="63.526512" cy="37.510479" id="circle2" style="stroke-width:3.3;stroke-dasharray:none" rx="7.9820528" ry="7.9820533"></ellipse>
+                </svg>
+            </button>
+        </div>
+    </header>
+    <main>
+        <div id="frame"></div>
+        <div class="bottombar">
+            <div class="left">
+                <div class="list-wrapper">
+                    <select class="list" title="<%= selectTitleText %>"><%- selectOptionsHTML %></select>
+                    <div>▾</div>
+                </div>
+            </div>
+            <div class="right">
+                <button type="button" class="play-pause" data="<%= playPauseBtnDataText %>"></button>
+                <button type="button" class="custom-input" title="<%= customizeInputText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm16 64h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm80-176c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V144zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zM160 336c0-8.8 7.2-16 16-16H400c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V336zM272 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM256 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM368 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM352 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V240zM464 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM448 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V240zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16z"></path></svg></button>
+                <button type="button" class="setting" title="<%= settingText %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"></path></svg>
+                    <ul>
+                        <li class="delay">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V75c0 42.4 16.9 83.1 46.9 113.1L146.7 256 78.9 323.9C48.9 353.9 32 394.6 32 437v11c-17.7 0-32 14.3-32 32s14.3 32 32 32H64 320h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V437c0-42.4-16.9-83.1-46.9-113.1L237.3 256l67.9-67.9c30-30 46.9-70.7 46.9-113.1V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320 64 32zM288 437v11H96V437c0-25.5 10.1-49.9 28.1-67.9L192 301.3l67.9 67.9c18 18 28.1 42.4 28.1 67.9z"></path></svg>
+                            <span><%= delayText %></span>:<input maxlength="4" type="text" class="value"><span>ms</span>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="screen" data="<%= screenBtnDataText %>"></button>
+            </div>
+        </div>
+    </main>
+    <div id="informations">
+        <button type="button" class="expand" title="<%= expandText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></button>
+        <%- informationsHTML %>
+    </div>
+    <div id="code-box">
+        <div class="top">
+            <div class="prolang-list"><%- prolangsHTML %></div>
+            <div class="right">
+                <button type="button" class="copy-code" title="<%= copyCodeText %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"></path></svg>
+                    <span class="status" data="<%= copyCodeBtnStatusText %>"></span>
+                    <textarea style="position: absolute; opacity: 0; pointer-events: none;"></textarea>
+                </button>
+            </div>
+        </div>
+        <%- codesHTML %>
+    </div>
+    
+    <footer>
+        <span>© 2024 TPSquare</span>
+        <span>v2.0.0</span>
+    </footer>
+    <div id="popup">
+        <span class="overlay"></span>
+        <%- infoHTML %>
+        <section class="guide-box">
+            <div style="display: none;" class="data"><%= guideMessageTexts %></div>
+            <div class="message"></div>
+            <div class="bottombar">
+                <button type="button" class="previous" title="previousText"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 256a208 208 0 1 1 416 0A208 208 0 1 1 48 256zm464 0A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM217.4 376.9c4.2 4.5 10.1 7.1 16.3 7.1c12.3 0 22.3-10 22.3-22.3V304h96c17.7 0 32-14.3 32-32V240c0-17.7-14.3-32-32-32H256V150.3c0-12.3-10-22.3-22.3-22.3c-6.2 0-12.1 2.6-16.3 7.1L117.5 242.2c-3.5 3.8-5.5 8.7-5.5 13.8s2 10.1 5.5 13.8l99.9 107.1z"></path></svg></button>
+                <div class="line"></div>
+                <button type="button" class="next" title="nextText"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1c-4.2-4.5-10.1-7.1-16.3-7.1C266 128 256 138 256 150.3V208H160c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h96v57.7c0 12.3 10 22.3 22.3 22.3c6.2 0 12.1-2.6 16.3-7.1l99.9-107.1c3.5-3.8 5.5-8.7 5.5-13.8s-2-10.1-5.5-13.8L294.6 135.1z"></path></svg></button>
+            </div>
+            <button type="button" class="close" title="<%= closeText %>">×</button>
+        </section>
+        <section class="custom-input">
+            <div data-text="<%= customizeInputText %>" class="title"></div>
+            <i class="constraints"><%- constraintsTexts %></i>
+            <textarea title="<%= customizeInputText %>"></textarea>
+            <div class="btns">
+                <button type="button" class="close" title="<%= closeText %>"><%= closeText %></button>
+                <button type="button" class="custom" data="<%= editText %>" title="<%= applyText %>"><%= applyText %></button>
+            </div>
+        </section>
+        <span class="multi-overlay"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></span>
+        <button type="button" class="apply-frame-editing" style="display: none;" title="<%= applyText %>"><%= applyText %></button>
+        <div class="select-action" style="display: none;">
+            <div data-text="<%= selectText %>" class="title"></div>
+            <button type="button" class="close" title="<%= closeText %>">×</button>
+        </div>
+    </div>
     <script type="module" src="/local-data.js"></script>
     <script type="module">
         await import('/local-data.js');
         await import('/common.js');
-        window.ALGOSCENE.key = '<%= key %>';
         import('/<%= type %>/<%= key %>.js');
     </script>
 </body>

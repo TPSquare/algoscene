@@ -73,7 +73,7 @@
                     "Swap two elements"
                 ],
                 "js": [
-                    "{{{cpp,8}}}"
+                    "{{{cpp,3-8}}}"
                 ],
                 "py": [
                     "{{{cpp,3-7}}}",
@@ -249,7 +249,7 @@
                     "If {left} is greater than or equal to {right}, meaning the subarray to be sorted contains only one element or no elements, the function will stop and do nothing more",
                     "Find the middle index of the array",
                     "Recursively call to sort the left subarray from {left} to {middle}",
-                    "Recursively call to sort the right subarray from {middle_ _+_ _1} to {right}",
+                    "Recursively call to sort the right subarray from {middleplus1} to {right}",
                     "Call the {merge} function to merge the two sorted subarrays into an ordered array"
                 ],
                 "js": [
@@ -258,7 +258,7 @@
                     "Create the right subarray from the original array",
                     "{{{cpp,10-21}}}",
                     "Recursively call to sort the left subarray from {left} to {middlejs}",
-                    "Recursively call to sort the right subarray from {middlejs_ _+_ _1} to {right}",
+                    "Recursively call to sort the right subarray from {middleplus1js} to {right}",
                     "{{{cpp,24}}}"
                 ],
                 "py": [

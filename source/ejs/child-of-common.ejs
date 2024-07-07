@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= description %>">
+    <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
+    <link rel="icon" href="/svg/favicon.svg">
+    <style>html{scrollbar-width:none;-ms-overflow-style:none;}html::-webkit-scrollbar{display:none;}#overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(#2e334f 0%,#4f547d 100%);}</style>
+</head>
+
+<body>
+    <%- informationHTML %>
+        <div id="overlay"></div>
+        <script type="module">
+            await import('/local-data.js');
+            const type = '<%= type %>';
+            const key = '<%= key %>';
+            const child = '<%= child %>';
+            const keys = '<%= keys %>'.split(',');
+            if (keys.includes(child))
+                localData.history[type].update(key, child);
+            window.location.href = `/${localData.lang}/${type}/${key}`;
+        </script>
+</body>
+
+</html>

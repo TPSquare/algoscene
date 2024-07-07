@@ -8,7 +8,7 @@ export function defaultHandle() {
         document.createElement({
             tag: 'meta',
             name: 'author',
-            content: 'TPSquare',
+            content: 'TPSquare'
         }),
         title
     );
@@ -23,30 +23,32 @@ export function upgradeDocument() {
     };
 
     const querySelector = function (s) {
-        const elm = Object.assign(this.qs(s) || {}, {
+        const elm = this.qs(s);
+        if (!elm) return undefined;
+        Object.assign(elm, {
             set(k, f) {
                 if (typeof k == 'string') this[k] = f;
                 else k.forEach((key) => (this[key] = f));
-                return this;
-            },
-            sa: this.setAttribute,
-            setAttribute(q, v) {
-                this.sa(q, v);
-                return this;
-            },
-            ael: this.addEventListener,
-            addEventListener(t, f) {
-                this.ael(t, f);
                 return this;
             },
             setStyle,
             combine(obj) {
                 for (const key in obj) this[key] = obj[key];
                 return this;
-            },
+            }
         });
         elm.qs = elm.querySelector;
         elm.querySelector = querySelector;
+        elm.sa = elm.setAttribute;
+        elm.setAttribute = function (q, v) {
+            this.sa(q, v);
+            return this;
+        };
+        elm.ael = this.addEventListener;
+        elm.addEventListener = function (t, f) {
+            this.ael(t, f);
+            return this;
+        };
         return elm;
     };
 
@@ -68,8 +70,7 @@ export function upgradeDocument() {
             }
             value = String(style[key]).replace('!', '!important');
             for (i = 0; i < key.length; i++)
-                if (key.charAt(i) >= 'A' && key.charAt(i) <= 'Z')
-                    code += '-' + key.charAt(i).toLowerCase();
+                if (key.charAt(i) >= 'A' && key.charAt(i) <= 'Z') code += '-' + key.charAt(i).toLowerCase();
                 else code += key.charAt(i);
             code += ':' + value + ';';
         }
@@ -148,8 +149,7 @@ export function upgradeDocument() {
         disableUserSelect(s) {
             const id = 'disableUserSelect';
             this.push(id, s);
-            this.html[id] =
-                this.selectors[id].join(',') + '{-webkit-user-select:none;user-select:none;}';
+            this.html[id] = this.selectors[id].join(',') + '{-webkit-user-select:none;user-select:none;}';
             this.render();
         }
         push(id, s) {
@@ -167,7 +167,7 @@ export function upgradeDocument() {
         }
     })();
 
-    document.openFullScreen = function openFullscreen(elm) {
+    document.openFullScreen = (elm) => {
         if (elm.requestFullscreen) elm.requestFullscreen();
         else if (elm.mozRequestFullScreen) elm.mozRequestFullScreen();
         else if (elm.webkitRequestFullscreen) elm.webkitRequestFullscreen();
@@ -175,10 +175,11 @@ export function upgradeDocument() {
     };
 
     document.closeFullScreen = function closeFullScreen() {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
+        if (!this.fullscreenElement) return;
+        if (this.exitFullscreen) this.exitFullscreen();
+        else if (this.mozCancelFullScreen) this.mozCancelFullScreen();
+        else if (this.webkitExitFullscreen) this.webkitExitFullscreen();
+        else if (this.msExitFullscreen) this.msExitFullscreen();
     };
 
     document.removeExtraWhitespace = (value) => {
@@ -208,7 +209,7 @@ export function upgradeWindow() {
             t.aspect.height = (t.aspect.width * h) / w;
             t.style = document.createStyle({
                 '--ar-width': t.aspect.width + 'px',
-                '--ar-height': t.aspect.height + 'px',
+                '--ar-height': t.aspect.height + 'px'
             });
         };
         t.aspect = {};
@@ -236,6 +237,6 @@ export function upgradeWindow() {
 const MODULES = {
     defaultHandle,
     upgradeDocument,
-    upgradeWindow,
+    upgradeWindow
 };
 export default MODULES;

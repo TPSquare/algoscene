@@ -27,7 +27,7 @@
                     "Define function {sqts}",
                     "Loop through each element of the array",
                     "If the current element is {target}, return the position {i}",
-                    "If {target} is not found, the function will return {-_1}"
+                    "If {target} is not found, the function will return {minus1}"
                 ],
                 "js": [
                     "{{{cpp,3-6}}}"
@@ -69,17 +69,17 @@
                     "Condition to ensure that the search process will continue until {target} is found or no elements are left in the search range",
                     "Initialize the {middle} variable to get the middle position in the search range",
                     "If the middle element is {target}, return the position {middle}",
-                    "When the middle element is not {target}, if {target} is on the right side of {middle}, {left} is updated to {middle_ _+_ _1}, narrowing the search range to the right half",
-                    "Otherwise, if {target} is on the left side of {middle}, {right} is updated to {middle_ _-_ _1}, narrowing the search range to the left half",
+                    "When the middle element is not {target}, if {target} is on the right side of {middle}, {left} is updated to {middleplus1}, narrowing the search range to the right half",
+                    "Otherwise, if {target} is on the left side of {middle}, {right} is updated to {middleminus1}, narrowing the search range to the left half",
                     "",
-                    "If {target} is not found, the function will return {-_1}"
+                    "If {target} is not found, the function will return {minus1}"
                 ],
                 "js": [
                     "{{{cpp,3-6}}}",
                     "Initialize the {middlejs} variable to get the middle position in the search range",
                     "If the middle element is {target}, return the position {middlejs}",
-                    "When the middle element is not {target}, if {target} is on the right side of {middlejs}, {left} is updated to {middlejs_ _+_ _1}, narrowing the search range to the right half",
-                    "Otherwise, if {target} is on the left side of {middlejs}, {right} is updated to {middlejs_ _-_ _1}, narrowing the search range to the left half",
+                    "When the middle element is not {target}, if {target} is on the right side of {middlejs}, {left} is updated to {middlejsplus1}, narrowing the search range to the right half",
+                    "Otherwise, if {target} is on the left side of {middlejs}, {right} is updated to {middlejsminus1}, narrowing the search range to the left half",
                     "",
                     "{{{cpp,12}}}"
                 ],
@@ -90,9 +90,9 @@
                     "Check if the middle element is {target}",
                     "If true, return the position {middle}",
                     "When the middle element is not {target}, check if {target} is on the right side of {middle}",
-                    "If true, {left} is updated to {middle_ _+_ _1}, narrowing the search range to the right half",
+                    "If true, {left} is updated to {middleplus1}, narrowing the search range to the right half",
                     "Otherwise, if {target} is on the left side of {middle}",
-                    "{right} is updated to {middle_ _-_ _1}, narrowing the search range to the left half",
+                    "{right} is updated to {middleminus1}, narrowing the search range to the left half",
                     "{{{cpp,12}}}"
                 ]
             }

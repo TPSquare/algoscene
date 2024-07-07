@@ -1,24 +1,24 @@
 {
-    "return___": "Return to homepage",
-    "algorithms": "Algorithms",
-    "functionalities": "Functionalities",
-    "language": "Language",
-    "setting": "Setting",
-    "play": "Play",
-    "pause": "Pause",
-    "continue": "Continue",
-    "repeat": "Repeat",
-    "select": "Select action",
-    "fullScreen": "Full Screen",
-    "expand": "Expand",
-    "exitFullScreen": "Exit Full Screen mode",
-    "none": "None",
-    "copyCode": "Copy code",
-    "success": "Success",
-    "failure": "Failure",
-    "delay": "Delay",
-    "___guide": "Usage guide",
-    "information": {
+    "returnText": "Return to homepage",
+    "selectTitleText": {
+        "a": "Algorithms",
+        "ds": "Functionalities"
+    },
+    "settingText": "Setting",
+    "playText": "Play",
+    "pauseText": "Pause",
+    "continueText": "Continue",
+    "repeatText": "Repeat",
+    "selectText": "Select action",
+    "expandText": "Expand",
+    "fullScreenText": "Full Screen",
+    "exitFullScreenText": "Exit Full Screen mode",
+    "copyCodeText": "Copy code",
+    "successText": "Success",
+    "failureText": "Failure",
+    "delayText": "Delay",
+    "guideText": "Usage guide",
+    "informationTexts": {
         "complexity": "Complexity",
         "idea": "Idea",
         "advantage": "Advantage",
@@ -26,14 +26,13 @@
         "application": "Application",
         "definition": "Definition"
     },
-    "complexity": {
+    "complexityTexts": {
         "average": "Average Complexity",
         "best": "Best Case Complexity",
         "worst": "Worst Case Complexity",
         "space": "Space Complexity"
     },
-    "startGuide": "Start Guide",
-    "guideMessage": [
+    "guideMessageTexts": [
         "Simulation program",
         "Select a specific algorithm from the available list",
         "Select a specific function from the available list",
@@ -41,7 +40,7 @@
         "Change input",
         "Install the simulation program",
         "Turn fullscreen mode on or off",
-        "Deployment code",
+        "Implementation code",
         "Select programming language",
         "Hover over the code line to get a description for that line",
         "Copy code",
@@ -54,14 +53,14 @@
         "Customization instructions",
         "Start customization",
         "Choose the next action for the simulator",
-        "Function name corresponding to its function (see in the deployment code)",
+        "Function name corresponding to its function (see in the implementation code)",
         "Pass arguments to the function",
         "Start this action"
     ],
-    "previous": "Previous",
-    "next": "Next",
-    "apply": "Apply",
-    "customizeInput": "Customize input",
-    "edit": "Edit",
+    "previousText": "Previous",
+    "nextText": "Next",
+    "applyText": "Apply",
+    "customizeInputText": "Customize input",
+    "editText": "Edit",
     "directEditing___": "Direct editing on frame"
 }

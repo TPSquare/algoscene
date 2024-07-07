@@ -1,97 +1,6 @@
 'use strict';
 
-await ALGOSCENE.init(
-    'js,cpp,py',
-    {
-        sequential: {
-            code: {
-                js: [
-                    '<span class="mtk6">const</span> <span class="mtk16">sequentialSearch</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">{</span>',
-                    '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">let</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk10">length</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-2">[</span><span class="mtk10">i</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk10">i</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
-                ],
-                cpp: [
-                    '<span class="mtk5">// include: vector</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                    '<span class="mtk6">int</span> <span class="mtk16">sequentialSearch</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-                    '&tab1;<span class="mtk18">for</span> <span class="bracket-highlighting-1">(</span><span class="mtk6">int</span> <span class="mtk10">i</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">;</span> <span class="mtk10">i</span> <span class="mtk3">&lt;</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span> <span class="mtk10">i</span><span class="mtk3">++</span><span class="bracket-highlighting-1">)</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-2">[</span><span class="mtk10">i</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk10">i</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
-                ],
-                py: [
-                    '<span class="mtk6">def</span> <span class="mtk16">sequentialSearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
-                    '&tab1;<span class="mtk18">for</span> <span class="mtk10">i</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="mtk1">:</span>',
-                    '&tab3;<span class="mtk18">return</span> <span class="mtk10">i</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span>',
-                ],
-            },
-            complexity: ALGOSCENE.createComplexity('n', '1', 'n', '1'),
-        },
-        binary: {
-            code: {
-                js: [
-                    '<span class="mtk6">const</span> <span class="mtk16">binarySearch</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">{</span>',
-                    '&tab1;<span class="mtk6">let</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span>',
-                    '&tab2;<span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk10">length</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">&lt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="bracket-highlighting-1">{</span>',
-                    '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">array</span><span class="bracket-highlighting-3">[</span><span class="mtk19">middle</span><span class="bracket-highlighting-3">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="bracket-highlighting-2">)</span> <span class="mtk18">return</span> <span class="mtk19">middle</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">array</span><span class="bracket-highlighting-3">[</span><span class="mtk19">middle</span><span class="bracket-highlighting-3">]</span> <span class="mtk3">&lt;</span> <span class="mtk10">target</span><span class="bracket-highlighting-2">)</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">else</span> <span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk19">middle</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="bracket-highlighting-1">}</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
-                ],
-                cpp: [
-                    '<span class="mtk5">// include: vector</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                    '<span class="mtk6">int</span> <span class="mtk16">binarySearch</span><span class="bracket-highlighting-0">(</span><span class="mtk17">vector</span><span class="mtk1">&lt;</span><span class="mtk6">int</span><span class="mtk1">&gt;</span> <span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-                    '&tab1;<span class="mtk6">int</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span>',
-                    '&tab2;<span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="mtk1">.</span><span class="mtk16">size</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="mtk18">while</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">&lt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="bracket-highlighting-1">{</span>',
-                    '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">array</span><span class="bracket-highlighting-3">[</span><span class="mtk10">middle</span><span class="bracket-highlighting-3">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="bracket-highlighting-2">)</span> <span class="mtk18">return</span> <span class="mtk10">middle</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">array</span><span class="bracket-highlighting-3">[</span><span class="mtk10">middle</span><span class="bracket-highlighting-3">]</span> <span class="mtk3">&lt;</span> <span class="mtk10">target</span><span class="bracket-highlighting-2">)</span> <span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab2;<span class="mtk18">else</span> <span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '&tab1;<span class="bracket-highlighting-1">}</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span><span class="mtk1">;</span>',
-                    '<span class="bracket-highlighting-0">}</span><span class="mtk1">;</span>',
-                ],
-                py: [
-                    '<span class="mtk6">def</span> <span class="mtk16">binarySearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
-                    '&tab1;<span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span>',
-                    '&tab1;<span class="mtk18">while</span> <span class="mtk10">left</span> <span class="mtk3">&lt;=</span> <span class="mtk10">right</span><span class="mtk1">:</span>',
-                    '&tab2;<span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="mtk17">int</span><span class="bracket-highlighting-0">(</span><span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-0">)</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">middle</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="mtk1">:</span>',
-                    '&tab3;<span class="mtk18">return</span> <span class="mtk10">middle</span>',
-                    '&tab2;<span class="mtk18">if</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">middle</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">&lt;</span> <span class="mtk10">target</span><span class="mtk1">:</span>',
-                    '&tab3;<span class="mtk10">left</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span>',
-                    '&tab2;<span class="mtk18">else</span><span class="mtk1">:</span>',
-                    '&tab3;<span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk10">middle</span> <span class="mtk3">-</span> <span class="mtk7">1</span>',
-                    '&tab1;<span class="mtk18">return</span> <span class="mtk3">-</span><span class="mtk7">1</span>',
-                ],
-            },
-            complexity: ALGOSCENE.createComplexity('log n', '1', 'log n', '1'),
-        },
-    },
-    {
-        sqts: 'mtk16|sequentialSearch',
-        bnrs: 'mtk16|binarySearch',
-        target: 'mtk10|target',
-        i: 'mtk10|i',
-        1: 'mtk7|1',
-        left: 'mtk10|left',
-        right: 'mtk10|right',
-        middle: 'mtk10|middle',
-        middlejs: 'mtk19|middle',
-    }
-);
+ALGOSCENE.init();
 
 let TARGET = 7,
     ARRAY = [5, 9, 2, 4, 11, 6, 8, 1, 12, 3, 7, 10];
@@ -101,9 +10,7 @@ ALGOSCENE.customInput.setCurrentValue(`${String(TARGET)}\n${ARRAY.join(' ')}`);
 ALGOSCENE.customInput.onApply = function (value) {
     let isValid = true;
     value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) =>
-        isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e) ? (isValid = false) : null
-    );
+    value.forEach((e) => (isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e) ? (isValid = false) : null));
     if (value.length < 13) isValid = false;
     if (isValid) {
         TARGET = value[0];

@@ -1,6 +1,6 @@
 <script type="module">
-    const key = await fetch('/localdata-key').then((res) => res.json());
+    const key = await fetch('/data/local-data/key').then((res) => res.json());
     let lang = JSON.parse(localStorage.getItem(key))?.lang;
-    if (!lang) lang = await fetch('/first-language').then((res) => res.json());
+    if (!lang) lang = await fetch('/data/first-language').then((res) => res.json());
     window.location.href = `/${lang}`;
 </script>

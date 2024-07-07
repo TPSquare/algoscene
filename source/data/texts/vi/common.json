@@ -1,24 +1,24 @@
 {
-    "return___": "Trở về trang chủ",
-    "algorithms": "Các thuật toán",
-    "functionalities": "Các chức năng",
-    "language": "Ngôn ngữ",
-    "setting": "Cài đặt",
-    "play": "Phát",
-    "pause": "Tạm ngừng",
-    "continue": "Tiếp tục",
-    "repeat": "Lặp lại",
-    "select": "Chọn hành động",
-    "fullScreen": "Toàn màn hình",
-    "expand": "Mở rộng",
-    "exitFullScreen": "Thoát khỏi chế độ toàn màn hình",
-    "none": "Không có",
-    "copyCode": "Sao chép mã",
-    "success": "Thành công",
-    "failure": "Thất bại",
-    "delay": "Khoảng trễ",
-    "___guide": "Hướng dẫn sử dụng",
-    "information": {
+    "returnText": "Trở về trang chủ",
+    "selectTitleText": {
+        "a": "Các thuật toán",
+        "ds": "Các chức năng"
+    },
+    "settingText": "Cài đặt",
+    "playText": "Phát",
+    "pauseText": "Tạm ngừng",
+    "continueText": "Tiếp tục",
+    "repeatText": "Lặp lại",
+    "selectText": "Chọn hành động",
+    "expandText": "Mở rộng",
+    "fullScreenText": "Toàn màn hình",
+    "exitFullScreenText": "Thoát khỏi chế độ toàn màn hình",
+    "copyCodeText": "Sao chép mã",
+    "successText": "Thành công",
+    "failureText": "Thất bại",
+    "delayText": "Khoảng trễ",
+    "guideText": "Hướng dẫn sử dụng",
+    "informationTexts": {
         "complexity": "Độ phức tạp",
         "idea": "Ý tưởng",
         "advantage": "Ưu điểm",
@@ -26,14 +26,13 @@
         "application": "Ứng dụng",
         "definition": "Định nghĩa"
     },
-    "complexity": {
+    "complexityTexts": {
         "average": "Độ phức tạp trung bình",
         "best": "Trường hợp tốt nhất",
         "worst": "Trường hợp xấu nhất",
         "space": "Độ phức tạp không gian"
     },
-    "startGuide": "Bắt đầu hướng dẫn",
-    "guideMessage": [
+    "guideMessageTexts": [
         "Chương trình mô phỏng",
         "Chọn một loại thuật toán cụ thể trong danh sách có sẵn",
         "Chọn một loại chức năng cụ thể trong danh sách có sẵn",
@@ -58,10 +57,10 @@
         "Truyền đối số cho hàm",
         "Bắt đầu hành động này"
     ],
-    "previous": "Trước đó",
-    "next": "Kế tiếp",
-    "apply": "Áp dụng",
-    "customizeInput": "Tùy chỉnh đầu vào",
-    "edit": "Chỉnh sửa",
+    "previousText": "Trước đó",
+    "nextText": "Kế tiếp",
+    "applyText": "Áp dụng",
+    "customizeInputText": "Tùy chỉnh đầu vào",
+    "editText": "Chỉnh sửa",
     "directEditing___": "Chỉnh sửa trực tiếp trên khung"
 }

@@ -8,10 +8,47 @@
     <title>AlgoScene - <%= title %></title>
     <link rel="icon" href="/svg/favicon.svg">
     <link rel="stylesheet" href="/autocompletejs/style.css">
+    <link rel="stylesheet" href="/info.css">
     <link rel="stylesheet" href="/home/style.css">
 </head>
 
 <body>
+    <header>
+        <div class="left">
+            <div class="title">
+                ALGOSCENE
+                <img src="/svg/name.svg" alt="AlgoScene">
+                <svg class="decorate" viewBox="0 0 297.5 108" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 89.421631,0 0,108 H 140.82823 L 229.83149,0.49609375 H 230 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1"></path>
+                    <path d="M 156.92163,0 67.5,108 H 208.32823 L 297.33149,0.49609375 H 297.5 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="right">
+            <svg class="decorate" viewBox="0 0 297.5 108" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 89.421631,0 0,108 H 140.82823 L 229.83149,0.49609375 H 230 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1"></path>
+                <path d="M 156.92163,0 67.5,108 H 208.32823 L 297.33149,0.49609375 H 297.5 V 0 Z" style="fill:#ffffff;fill-opacity:0.103753;stroke-width:1"></path>
+            </svg>
+            <button type="button" class="lang" title="<%= languageText %>"><%= lang %></button>
+            <button type="button" class="info" title="<%= infoText %>">
+                <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="64" cy="64" stroke-width="6.67279" style="fill:none;stroke-width:12.073;stroke-dasharray:none" r="57.963501"></circle>
+                    <path stroke-linecap="round" stroke-width="6.67279" d="m 55.368515,92.095025 h 9.578464 m 0,0 V 60.965039 c 0,-1.76346 0.622361,-2.877238 -1.141033,-2.877238 h -3.684424 m 4.825457,34.007224 h 9.578463" sodipodi:nodetypes="cccssccc" style="stroke-width:11.273;stroke-dasharray:none"></path>
+                    <ellipse cx="63.526512" cy="37.510479" style="stroke-width:3.3;stroke-dasharray:none" rx="7.9820528" ry="7.9820533"></ellipse>
+                </svg>
+            </button>
+        </div>
+    </header>
+    <main>
+        <h1 class="above"><%= aboveText %></h1>
+        <input dir="ltr" spellcheck="false" autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" id="search" type="search" placeholder="<%= searchText %>">
+        <span class="info">© 2024 TPSquare v<%= version %></span>
+    </main>
+    <section id="contents"><%- contentHTML %></section>
+    <div id="popup">
+        <span class="overlay"></span>
+        <%- infoHTML %>
+    </div>
     <script src="/autocompletejs/script.js"></script>
     <script type="module">
         await import('/local-data.js');

@@ -1,9 +1,9 @@
 'use strict';
 
-const version = await fetch('/version').then((res) => res.json());
-const key = await fetch('/localdata-key').then((res) => res.json());
-const debug = await fetch('/debugging').then((res) => res.json());
-const typeList = await fetch('/local-data-types').then((res) => res.json());
+const version = await fetch('/data/version').then((res) => res.json());
+const key = await fetch('/data/local-data/key').then((res) => res.json());
+const debug = await fetch('/data/debugging').then((res) => res.json());
+const typeList = await fetch('/data/types').then((res) => res.json());
 
 window.localData = new (class {
     constructor() {
@@ -23,7 +23,7 @@ window.localData = new (class {
                         update: (key, value) => {
                             this.history[type][key] = value;
                             this.upload();
-                        },
+                        }
                     }))
             );
             Object.assign(this.history, tempHistory);
@@ -38,6 +38,9 @@ window.localData = new (class {
                 else this.history.lang.push(e);
                 this.upload();
             };
+            this.history.lang.get = function (i = 0) {
+                return this[this.length - 1 - i];
+            };
             this.history.guide.forEach((e) => (this.history.guide[e] = true));
             this.history.guide.update = (e) => {
                 if (!this.history.guide.includes(e)) {
@@ -47,8 +50,7 @@ window.localData = new (class {
                 }
             };
             this.history.guide.reset = () => {
-                while (this.history.guide.length > 0)
-                    this.history.guide[this.history.guide.shift()] = false;
+                while (this.history.guide.length > 0) this.history.guide[this.history.guide.shift()] = false;
                 this.upload();
             };
         });

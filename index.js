@@ -16,25 +16,22 @@ app.set('view engine', 'ejs');
 app.set('views', app.joinPath('/source/ejs'));
 
 import fs from 'fs';
-app.get('/version', (req, res) => {
-    fs.readFile('package.json', (err, dt) => {
-        const data = JSON.parse(dt);
-        res.json(data.version);
-    });
-});
+const version = JSON.parse(await fs.readFileSync('package.json')).version;
+app.version = version;
+app.get('/data/version', (req, res) => res.json(version));
 
-app.get('/localdata-key', (req, res) => res.json(process.env.LOCALDATA_KEY));
+app.get('/data/local-data/key', (req, res) => res.json(process.env.LOCALDATA_KEY));
 
 app.languages = ['vi', 'en'];
-app.get('/first-language', (req, res) => res.json(process.env.FIRST_LANGUAGE));
+app.get('/data/first-language', (req, res) => res.json(process.env.FIRST_LANGUAGE));
 
-app.get('/debugging', (req, res) => res.json(process.env.DEBUGGING == 'on' ? true : false));
-
-import HomePage from './source/homepage.js';
-new HomePage(app, fs);
+app.get('/data/debugging', (req, res) => res.json(process.env.DEBUGGING == 'on' ? true : false));
 
 import CommonPages from './source/commonpages.js';
-new CommonPages(app, fs);
+await CommonPages.init(app, fs);
+
+import HomePage from './source/homepage.js';
+await HomePage.init(app, fs, CommonPages.data.home.content);
 
 const port = process.env.PORT || 8002;
 app.listen(port, () => console.log(`   =====   http://localhost:${port}   =====`));

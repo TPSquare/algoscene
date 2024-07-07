@@ -1,225 +1,6 @@
 'use strict';
 
-const code = {
-    cpp: (e, t, n, r) => [
-        '<span class="mtk6">const</span> <span class="mtk6">int</span> <span class="mtk10">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">1e5</span><span class="mtk1">;</span>',
-        '<span class="mtk6">int</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-0">[</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk10">MAXN</span><span class="bracket-highlighting-0">]</span><span class="mtk1">;</span>',
-        '<span class="mtk6">int</span> <span class="mtk10">arrayData</span><span class="bracket-highlighting-0">[</span><span class="mtk10">MAXN</span><span class="bracket-highlighting-0">]</span><span class="mtk1">;</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">void</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">arrayData</span><span class="bracket-highlighting-1">[</span><span class="mtk10">start</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">void</span> <span class="mtk16">update</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">index</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span> <span class="mtk3">||</span> <span class="mtk10">index</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">void</span> <span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">+=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">int</span> <span class="mtk16">get</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        `&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> ${t}<span class="mtk1">;</span>`,
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&lt;=</span> <span class="mtk10">start</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">rightRange</span> <span class="mtk3">&gt;=</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
-        `&tab1;<span class="mtk6">int</span> <span class="mtk10">left${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
-        `&tab1;<span class="mtk6">int</span> <span class="mtk10">right${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
-        `&tab1;<span class="mtk18">return</span> ${r}<span class="mtk1">;</span>`,
-        '<span class="bracket-highlighting-0">}</span>',
-    ],
-    js: (e, t, n, r) => [
-        '<span class="mtk6">const</span> <span class="mtk19">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">100000</span><span class="mtk1">;</span>',
-        '<span class="mtk6">const</span> <span class="mtk19">segmentTree</span> <span class="mtk3">=</span> <span class="mtk6">new</span> <span class="mtk17">Array</span><span class="bracket-highlighting-0">(</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk19">MAXN</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
-        '<span class="mtk6">const</span> <span class="mtk19">arrayData</span> <span class="mtk3">=</span> <span class="mtk6">new</span> <span class="mtk17">Array</span><span class="bracket-highlighting-0">(</span><span class="mtk19">MAXN</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">function</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">arrayData</span><span class="bracket-highlighting-1">[</span><span class="mtk10">start</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">function</span> <span class="mtk16">update</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">index</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span> <span class="mtk3">||</span> <span class="mtk10">index</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">function</span> <span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">+=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
-        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
-        `&tab2;${e}<span class="mtk1">;</span>`,
-        '&tab1;<span class="bracket-highlighting-1">}</span>',
-        '<span class="bracket-highlighting-0">}</span>',
-        '<span>&empty-line;</span>',
-        '<span class="mtk6">function</span> <span class="mtk16">get</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
-        `&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> ${t}<span class="mtk1">;</span>`,
-        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&lt;=</span> <span class="mtk10">start</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">rightRange</span> <span class="mtk3">&gt;=</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
-        '&tab1;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
-        `&tab1;<span class="mtk6">const</span> <span class="mtk19">left${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
-        `&tab1;<span class="mtk6">const</span> <span class="mtk19">right${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
-        `&tab1;<span class="mtk18">return</span> ${r}<span class="mtk1">;</span>`,
-        '<span class="bracket-highlighting-0">}</span>',
-    ],
-};
-
-await ALGOSCENE.init(
-    'cpp,js',
-    {
-        list: {
-            sum: {
-                cpp: code.cpp(
-                    '<span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">+</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-2">]</span>',
-                    '<span class="mtk7">0</span>',
-                    'Sum',
-                    '<span class="mtk10">leftSum</span> <span class="mtk3">+</span> <span class="mtk10">rightSum</span>'
-                ),
-                js: code.js(
-                    '<span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">+</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-2">]</span>',
-                    '<span class="mtk7">0</span>',
-                    'Sum',
-                    '<span class="mtk19">leftSum</span> <span class="mtk3">+</span> <span class="mtk19">rightSum</span>'
-                ),
-            },
-            min: {
-                cpp: [
-                    '<span class="mtk5">// include: algorithm</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.cpp(
-                        '<span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">min</span><span class="bracket-highlighting-2">(</span><span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk6">INT_MAX</span>',
-                        'Min',
-                        '<span class="mtk16">min</span><span class="bracket-highlighting-1">(</span><span class="mtk10">leftMin</span><span class="mtk1">,</span> <span class="mtk10">rightMin</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-                js: code.js(
-                    '<span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">min</span><span class="bracket-highlighting-2">(</span><span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                    '<span class="mtk6">Infinity</span>',
-                    'Min',
-                    '<span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">min</span><span class="bracket-highlighting-1">(</span><span class="mtk19">leftMin</span><span class="mtk1">,</span> <span class="mtk19">rightMin</span><span class="bracket-highlighting-1">)</span>'
-                ),
-            },
-            max: {
-                cpp: [
-                    '<span class="mtk5">// include: algorithm</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.cpp(
-                        '<span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">max</span><span class="bracket-highlighting-2">(</span><span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk6">INT_MIN</span>',
-                        'Max',
-                        '<span class="mtk16">max</span><span class="bracket-highlighting-1">(</span><span class="mtk10">leftMax</span><span class="mtk1">,</span> <span class="mtk10">rightMax</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-                js: code.js(
-                    '<span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">max</span><span class="bracket-highlighting-2">(</span><span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                    '<span class="mtk3">-</span><span class="mtk6">Infinity</span>',
-                    'Max',
-                    '<span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">max</span><span class="bracket-highlighting-1">(</span><span class="mtk19">leftMax</span><span class="mtk1">,</span> <span class="mtk19">rightMax</span><span class="bracket-highlighting-1">)</span>'
-                ),
-            },
-            gcd: {
-                cpp: [
-                    '<span class="mtk5">// include: numeric</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.cpp(
-                        '<span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">gcd</span><span class="bracket-highlighting-2">(</span><span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk7">0</span>',
-                        'GCD',
-                        '<span class="mtk16">gcd</span><span class="bracket-highlighting-1">(</span><span class="mtk10">leftGCD</span><span class="mtk1">,</span> <span class="mtk10">rightGCD</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-                js: [
-                    '<span class="mtk6">const</span> <span class="mtk16">gcd</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">a</span><span class="mtk1">,</span> <span class="mtk10">b</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">b</span> <span class="mtk3">==</span> <span class="mtk7">0</span> <span class="mtk3">?</span> <span class="mtk10">a</span> <span class="mtk3">:</span> <span class="mtk16">gcd</span><span class="bracket-highlighting-1">(</span><span class="mtk10">b</span><span class="mtk1">,</span> <span class="mtk10">a</span> <span class="mtk3">%</span> <span class="mtk10">b</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.js(
-                        '<span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">gcd</span><span class="bracket-highlighting-2">(</span><span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk7">0</span>',
-                        'GCD',
-                        '<span class="mtk16">gcd</span><span class="bracket-highlighting-1">(</span><span class="mtk19">leftGCD</span><span class="mtk1">,</span> <span class="mtk19">rightGCD</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-            },
-            lcm: {
-                cpp: [
-                    '<span class="mtk5">// include: numeric</span>',
-                    '<span class="mtk5">// namespace: std</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.cpp(
-                        '<span class="mtk10">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">lcm</span><span class="bracket-highlighting-2">(</span><span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk7">1</span>',
-                        'LCM',
-                        '<span class="mtk16">lcm</span><span class="bracket-highlighting-1">(</span><span class="mtk10">leftLCM</span><span class="mtk1">,</span> <span class="mtk10">rightLCM</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-                js: [
-                    '<span class="mtk6">const</span> <span class="mtk16">gcd</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">a</span><span class="mtk1">,</span> <span class="mtk10">b</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">b</span> <span class="mtk3">==</span> <span class="mtk7">0</span> <span class="mtk3">?</span> <span class="mtk10">a</span> <span class="mtk3">:</span> <span class="mtk16">gcd</span><span class="bracket-highlighting-1">(</span><span class="mtk10">b</span><span class="mtk1">,</span> <span class="mtk10">a</span> <span class="mtk3">%</span> <span class="mtk10">b</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">,</span>',
-                    '&tab1;<span class="mtk16">lcm</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">a</span><span class="mtk1">,</span> <span class="mtk10">b</span><span class="bracket-highlighting-0">)</span> <span class="mtk6">=&gt;</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">a</span> <span class="mtk3">*</span> <span class="mtk10">b</span><span class="bracket-highlighting-0">)</span> <span class="mtk3">/</span> <span class="mtk16">gcd</span><span class="bracket-highlighting-0">(</span><span class="mtk10">a</span><span class="mtk1">,</span> <span class="mtk10">b</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
-                    '<span>&empty-line;</span>',
-                ].concat(
-                    code.js(
-                        '<span class="mtk19">segmentTree</span><span class="bracket-highlighting-2">[</span><span class="mtk10">id</span><span class="bracket-highlighting-2">]</span> <span class="mtk3">=</span> <span class="mtk16">lcm</span><span class="bracket-highlighting-2">(</span><span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="bracket-highlighting-3">]</span><span class="mtk1">,</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-3">[</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-3">]</span><span class="bracket-highlighting-2">)</span>',
-                        '<span class="mtk7">1</span>',
-                        'LCM',
-                        '<span class="mtk16">lcm</span><span class="bracket-highlighting-1">(</span><span class="mtk19">leftLCM</span><span class="mtk1">,</span> <span class="mtk19">rightLCM</span><span class="bracket-highlighting-1">)</span>'
-                    )
-                ),
-            },
-        },
-        complexity: {
-            build: 'n',
-            update: 'log n',
-            rangeUpdate: 'log n',
-            get: 'log n',
-        },
-    },
-    {
-        0: 'mtk7|0',
-        1: 'mtk7|1',
-        INTMAX: 'mtk6|INT_MAX',
-        Infinity: 'mtk6|Infinity',
-        INTMIN: 'mtk6|INT_MIN',
-    }
-);
+ALGOSCENE.init();
 
 const gcd = (a, b) => (b == 0 ? a : gcd(b, a % b));
 
@@ -228,7 +9,7 @@ const config = {
     min: [(a, b) => (a < b ? a : b), Infinity],
     max: [(a, b) => (a > b ? a : b), -Infinity],
     gcd: [(a, b) => gcd(a, b), 0],
-    lcm: [(a, b) => (a * b) / gcd(a, b), 1],
+    lcm: [(a, b) => (a * b) / gcd(a, b), 1]
 };
 
 const MAXN = 8,
@@ -242,9 +23,7 @@ ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
 ALGOSCENE.customInput.onApply = function (value) {
     let isValid = true;
     value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) =>
-        isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e) ? (isValid = false) : null
-    );
+    value.forEach((e) => (isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e) ? (isValid = false) : null));
     if (value.length < MINN) isValid = false;
     if (isValid) {
         ARRAY = value.slice(0, MAXN);
@@ -263,8 +42,7 @@ const segmentTree = new (class {
         const degree = 30 * (this.currentLevelNumber / 3);
         const radian = (degree * Math.PI) / 180;
         const addTop = 6 * Math.cos(radian);
-        const addLeft =
-            7 * this.currentLevelNumber * this.currentLevelNumber * 0.2 * Math.sin(radian);
+        const addLeft = 7 * this.currentLevelNumber * this.currentLevelNumber * 0.2 * Math.sin(radian);
         return [addTop, addLeft];
     }
     setTree() {
@@ -287,8 +65,7 @@ const segmentTree = new (class {
         this.elm.style.width = width + 'em';
         this.elm.style.height = height + 'em';
         width *= ALGOSCENE.frameElm.em * 10;
-        if (width > ALGOSCENE.frameElm.width * 0.9)
-            this.setScale((ALGOSCENE.frameElm.width / width) * 0.9);
+        if (width > ALGOSCENE.frameElm.width * 0.9) this.setScale((ALGOSCENE.frameElm.width / width) * 0.9);
         height *= this.scale;
         height *= ALGOSCENE.frameElm.em * 10;
         if (height > ALGOSCENE.frameElm.height * 0.8)
@@ -299,10 +76,7 @@ const segmentTree = new (class {
         this.style.left = left + 'em';
     }
     getPositionElm() {
-        return [
-            Number(this.style.top.replace('em', '')),
-            Number(this.style.left.replace('em', '')),
-        ];
+        return [Number(this.style.top.replace('em', '')), Number(this.style.left.replace('em', ''))];
     }
     async selectedElm() {
         this.classList.add('selected');
@@ -317,10 +91,7 @@ const segmentTree = new (class {
         await ALGOSCENE.delay();
     }
     setLevelElm(id) {
-        this.getElmByIdx(id).setAttribute(
-            'data-level',
-            this.levelNumber - this.currentLevelNumber + 1
-        );
+        this.getElmByIdx(id).setAttribute('data-level', this.levelNumber - this.currentLevelNumber + 1);
     }
     createArrayNodes() {
         ARRAY.forEach((value, index) => {
@@ -332,7 +103,7 @@ const segmentTree = new (class {
                 setPos: this.setPositionElm,
                 getPos: this.getPositionElm,
                 isResult: this.isResultElm,
-                selected: this.isResultElm,
+                selected: this.isResultElm
             });
             elm.setPos(this.nodeSize / 2, index * (this.nodeSize + 0.4) + this.nodeSize / 2);
             this.elm.appendChild(elm);
@@ -351,7 +122,7 @@ const segmentTree = new (class {
             tag: 'span',
             attributes: {'data-value': this.tree[id]},
             style: {
-                '--scale': (str.length > 3 ? Math.max((10 - str.length + 3) / 10, 0.7) : 1) + 'em',
+                '--scale': (str.length > 3 ? Math.max((10 - str.length + 3) / 10, 0.7) : 1) + 'em'
             },
             idx: id,
             className: 'tree-value pre-build',
@@ -359,7 +130,7 @@ const segmentTree = new (class {
             getPos: this.getPositionElm,
             selected: this.selectedElm,
             unselected: this.unselectedElm,
-            isResult: this.isResultElm,
+            isResult: this.isResultElm
         });
         this.elm.appendChild(elm);
     }
@@ -391,13 +162,12 @@ const segmentTree = new (class {
             async show() {
                 this.classList.remove('pre-build');
                 await ALGOSCENE.delay();
-            },
+            }
         });
         const parPos = this.getElmByIdx(parentId).getPos();
         const pos = this.getElmByIdx(id).getPos();
         path.setPos(...pos);
-        const degrees =
-            Math.atan((pos[1] - parPos[1]) / (parPos[0] - pos[0])) * (180 / Math.PI) - 90;
+        const degrees = Math.atan((pos[1] - parPos[1]) / (parPos[0] - pos[0])) * (180 / Math.PI) - 90;
         path.style.setProperty('--rotation', degrees + 'deg');
         const width = Math.sqrt(Math.pow(pos[0] - parPos[0], 2) + Math.pow(pos[1] - parPos[1], 2));
         path.style.setProperty('--width', width + 'em');
@@ -466,7 +236,7 @@ const segmentTree = new (class {
         const growthTree = this.growthTree();
         const pos = {
             top: parentTop + growthTree[0],
-            left: parentLeft - growthTree[1],
+            left: parentLeft - growthTree[1]
         };
         elm.setPos(pos.top, pos.left);
         this.setLevelElm(id);
@@ -487,7 +257,7 @@ const segmentTree = new (class {
         const growthTree = this.growthTree();
         const pos = {
             top: parentTop + growthTree[0],
-            left: parentLeft + growthTree[1],
+            left: parentLeft + growthTree[1]
         };
         elm.setPos(pos.top, pos.left);
         this.setLevelElm(id);
@@ -581,18 +351,17 @@ ALGOSCENE.enableSelectAction({
                 await segmentTree.build();
                 await segmentTree.render();
             },
-            hidden: true,
+            hidden: true
         },
         get: {
-            action: async (e) =>
-                await result.show(await segmentTree.get(1, 0, ARRAY.length - 1, e[0], e[1], 1)),
+            action: async (e) => await result.show(await segmentTree.get(1, 0, ARRAY.length - 1, e[0], e[1], 1)),
             input: 'leftRange rightRange',
             checkInput: (value) => {
                 let isValid = true;
                 value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
                 if (value.length < 2 || value[0] > value[1]) isValid = false;
                 return isValid;
-            },
+            }
         },
         update: {
             action: async (e) => await segmentTree.update(1, 0, ARRAY.length - 1, e[0], e[1], 1),
@@ -603,11 +372,10 @@ ALGOSCENE.enableSelectAction({
                 if (value[1] < MINVALUE || value[1] > MAXVALUE) isValid = false;
                 if (value.length < 2) isValid = false;
                 return isValid;
-            },
+            }
         },
         rangeUpdate: {
-            action: async (e) =>
-                await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1),
+            action: async (e) => await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1),
             input: 'leftRange rightRange value',
             checkInput: (value) => {
                 let isValid = true;
@@ -615,13 +383,12 @@ ALGOSCENE.enableSelectAction({
                 if (value[2] < MINVALUE || value[2] > MAXVALUE) isValid = false;
                 if (value.length < 2 || value[0] > value[1]) isValid = false;
                 for (let i = value[0]; i <= value[1]; i++)
-                    if (ARRAY[i] + value[2] > MAXVALUE || ARRAY[i] + value[2] < MINVALUE)
-                        isValid = false;
+                    if (ARRAY[i] + value[2] > MAXVALUE || ARRAY[i] + value[2] < MINVALUE) isValid = false;
                 return isValid;
-            },
-        },
+            }
+        }
     },
-    elmSize: [7, 13],
+    elmSize: [7, 13]
 });
 
 Object.keys(config).forEach((key) =>
@@ -631,3 +398,98 @@ Object.keys(config).forEach((key) =>
         ALGOSCENE.playPauseBtn.setClick('build');
     })
 );
+
+const code = {
+    cpp: (e, t, n, r) => [
+        '<span class="mtk6">const</span> <span class="mtk6">int</span> <span class="mtk10">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">1e5</span><span class="mtk1">;</span>',
+        '<span class="mtk6">int</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-0">[</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk10">MAXN</span><span class="bracket-highlighting-0">]</span><span class="mtk1">;</span>',
+        '<span class="mtk6">int</span> <span class="mtk10">arrayData</span><span class="bracket-highlighting-0">[</span><span class="mtk10">MAXN</span><span class="bracket-highlighting-0">]</span><span class="mtk1">;</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">void</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">arrayData</span><span class="bracket-highlighting-1">[</span><span class="mtk10">start</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">void</span> <span class="mtk16">update</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">index</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span> <span class="mtk3">||</span> <span class="mtk10">index</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">void</span> <span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">+=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">int</span> <span class="mtk16">get</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        `&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> ${t}<span class="mtk1">;</span>`,
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&lt;=</span> <span class="mtk10">start</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">rightRange</span> <span class="mtk3">&gt;=</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk6">int</span> <span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="mtk1">;</span>',
+        `&tab1;<span class="mtk6">int</span> <span class="mtk10">left${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
+        `&tab1;<span class="mtk6">int</span> <span class="mtk10">right${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
+        `&tab1;<span class="mtk18">return</span> ${r}<span class="mtk1">;</span>`,
+        '<span class="bracket-highlighting-0">}</span>'
+    ],
+    js: (e, t, n, r) => [
+        '<span class="mtk6">const</span> <span class="mtk19">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">100000</span><span class="mtk1">;</span>',
+        '<span class="mtk6">const</span> <span class="mtk19">segmentTree</span> <span class="mtk3">=</span> <span class="mtk6">new</span> <span class="mtk17">Array</span><span class="bracket-highlighting-0">(</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk19">MAXN</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
+        '<span class="mtk6">const</span> <span class="mtk19">arrayData</span> <span class="mtk3">=</span> <span class="mtk6">new</span> <span class="mtk17">Array</span><span class="bracket-highlighting-0">(</span><span class="mtk19">MAXN</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">function</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk19">arrayData</span><span class="bracket-highlighting-1">[</span><span class="mtk10">start</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">build</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">function</span> <span class="mtk16">update</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">index</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span> <span class="mtk3">||</span> <span class="mtk10">index</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">update</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">index</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">function</span> <span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">start</span> <span class="mtk3">==</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span> <span class="mtk3">+=</span> <span class="mtk10">value</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk18">else</span> <span class="bracket-highlighting-1">{</span>',
+        '&tab2;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-2">(</span><span class="bracket-highlighting-3">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-3">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        '&tab2;<span class="mtk16">rangeUpdate</span><span class="bracket-highlighting-2">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="mtk1">,</span> <span class="mtk10">value</span><span class="bracket-highlighting-2">)</span><span class="mtk1">;</span>',
+        `&tab2;${e}<span class="mtk1">;</span>`,
+        '&tab1;<span class="bracket-highlighting-1">}</span>',
+        '<span class="bracket-highlighting-0">}</span>',
+        '<span>&empty-line;</span>',
+        '<span class="mtk6">function</span> <span class="mtk16">get</span><span class="bracket-highlighting-0">(</span><span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
+        `&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&gt;</span> <span class="mtk10">end</span> <span class="mtk3">||</span> <span class="mtk10">rightRange</span> <span class="mtk3">&lt;</span> <span class="mtk10">start</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> ${t}<span class="mtk1">;</span>`,
+        '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-1">(</span><span class="mtk10">leftRange</span> <span class="mtk3">&lt;=</span> <span class="mtk10">start</span> <span class="mtk3">&amp;&amp;</span> <span class="mtk10">rightRange</span> <span class="mtk3">&gt;=</span> <span class="mtk10">end</span><span class="bracket-highlighting-1">)</span> <span class="mtk18">return</span> <span class="mtk19">segmentTree</span><span class="bracket-highlighting-1">[</span><span class="mtk10">id</span><span class="bracket-highlighting-1">]</span><span class="mtk1">;</span>',
+        '&tab1;<span class="mtk6">const</span> <span class="mtk19">middle</span> <span class="mtk3">=</span> <span class="mtk10">Math</span><span class="mtk1">.</span><span class="mtk16">floor</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-2">(</span><span class="mtk10">start</span> <span class="mtk3">+</span> <span class="mtk10">end</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>',
+        `&tab1;<span class="mtk6">const</span> <span class="mtk19">left${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk19">middle</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
+        `&tab1;<span class="mtk6">const</span> <span class="mtk19">right${n}</span> <span class="mtk3">=</span> <span class="mtk16">get</span><span class="bracket-highlighting-1">(</span><span class="mtk10">id</span> <span class="mtk3">*</span> <span class="mtk7">2</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk19">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="mtk1">,</span> <span class="mtk10">leftRange</span><span class="mtk1">,</span> <span class="mtk10">rightRange</span><span class="bracket-highlighting-1">)</span><span class="mtk1">;</span>`,
+        `&tab1;<span class="mtk18">return</span> ${r}<span class="mtk1">;</span>`,
+        '<span class="bracket-highlighting-0">}</span>'
+    ]
+};
