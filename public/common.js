@@ -6,16 +6,28 @@ document.LANG = document.querySelector('html').lang;
 document.TYPE = document.body.getAttribute('type');
 document.KEY = document.body.getAttribute('key');
 
+const SHORTCUT_CONFIG = {
+    prolangList: ['a', 'd'],
+    bottombarList: ['w', 's'],
+    playPauseBtn: 'p',
+    screenBtn: 'f',
+    copyCodeBtn: 'c',
+    homeBtn: 'h',
+    expandBtn: 'e'
+};
+
 new (class {
     constructor() {
         this.developing(localData.debug);
         this.document();
         this.window();
+        this.configShortcut();
         this.header();
         this.main();
         this.informations();
         this.codeBox();
         this.popup();
+        this.shortcut();
     }
     window() {
         MODULES.upgradeWindow();
@@ -134,6 +146,14 @@ new (class {
             localData.history.guide.reset();
             document.body.popup.guideBox.run();
         };
+
+        const homeBtn = header.querySelector('.home').combine({
+            click() {
+                window.location.href = this.href;
+            }
+        });
+        homeBtn.title += ` (${SHORTCUT_CONFIG.homeBtn})`;
+        document.body.header.homeBtn = homeBtn;
     }
     main() {
         const main = document.body.querySelector('main');
@@ -196,6 +216,7 @@ new (class {
                 this.onchange();
             }
         });
+        list.title += ` (${SHORTCUT_CONFIG.bottombarList[0]})(${SHORTCUT_CONFIG.bottombarList[1]})`;
         list.setStartValue();
         document.body.main.bottombar.list = list;
 
@@ -224,6 +245,7 @@ new (class {
                     repeat: data[3],
                     select: data[4]
                 };
+                for (const key in this.textData) this.textData[key] += ` (${SHORTCUT_CONFIG.playPauseBtn})`;
             },
             defaultStatus: 'play',
             setStatus(status) {
@@ -295,8 +317,8 @@ new (class {
             getTextData() {
                 const data = this.getAttribute('data').split(',');
                 this.textData = {
-                    fullScreen: data[0],
-                    exitFullScreen: data[1]
+                    fullScreen: data[0] + ` (${SHORTCUT_CONFIG.screenBtn})`,
+                    exitFullScreen: data[1] + ` (${SHORTCUT_CONFIG.screenBtn})`
                 };
             }
         });
@@ -378,11 +400,15 @@ new (class {
                 console.warn('Unknown type: ' + document.TYPE);
         }
 
-        informations.querySelector('.expand').onclick = () => {
-            if (informations.classList.contains('expand')) informations.classList.remove('expand');
-            else informations.classList.add('expand');
-            setTimeout(() => informations.onresize(), 1000);
-        };
+        const expandBtn = informations.querySelector('.expand').combine({
+            onclick: () => {
+                if (informations.classList.contains('expand')) informations.classList.remove('expand');
+                else informations.classList.add('expand');
+                setTimeout(() => informations.onresize(), 1000);
+            }
+        });
+        expandBtn.title += ` (${SHORTCUT_CONFIG.expandBtn})`;
+        document.body.informations.expandBtn = expandBtn;
     }
     codeBox() {
         const codeBox = document.body.querySelector('#code-box').combine({
@@ -424,6 +450,7 @@ new (class {
             setButton() {
                 this.childNodes.forEach((button) => {
                     button.prolang = button.className;
+                    button.title += ` (${SHORTCUT_CONFIG.prolangList[0]})(${SHORTCUT_CONFIG.prolangList[1]})`;
                     button.onclick = function () {
                         if (this.classList.contains('active')) return;
                         this.parentNode.setActive(this.prolang);
@@ -457,6 +484,7 @@ new (class {
                 }
             }
         });
+        copyCodeBtn.title += ` (${SHORTCUT_CONFIG.copyCodeBtn})`;
         document.body.codeBox.copyCodeBtn = copyCodeBtn;
 
         const textarea = copyCodeBtn.querySelector('textarea');
@@ -883,6 +911,41 @@ new (class {
         document.body.popup.customInput.customBtn = customBtn;
 
         if (!localData.history.guide.main) guideBox.controller.run('main', 1000);
+    }
+    configShortcut() {}
+    shortcut() {
+        window.onkeydown = (e) => {
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            switch (e.key.toLowerCase()) {
+                case SHORTCUT_CONFIG.prolangList[0]:
+                    document.body.codeBox.prolangList.left();
+                    return;
+                case SHORTCUT_CONFIG.prolangList[1]:
+                    document.body.codeBox.prolangList.right();
+                    return;
+                case SHORTCUT_CONFIG.bottombarList[0]:
+                    document.body.main.bottombar.list.up();
+                    return;
+                case SHORTCUT_CONFIG.bottombarList[1]:
+                    document.body.main.bottombar.list.down();
+                    return;
+                case SHORTCUT_CONFIG.playPauseBtn:
+                    document.body.main.bottombar.playPauseBtn.onclick();
+                    return;
+                case SHORTCUT_CONFIG.screenBtn:
+                    document.body.main.bottombar.screenBtn.onclick();
+                    return;
+                case SHORTCUT_CONFIG.copyCodeBtn:
+                    document.body.codeBox.copyCodeBtn.onclick();
+                    return;
+                case SHORTCUT_CONFIG.homeBtn:
+                    document.body.header.homeBtn.click();
+                    return;
+                case SHORTCUT_CONFIG.expandBtn:
+                    document.body.informations.expandBtn.onclick();
+                    return;
+            }
+        };
     }
     developing(ok) {
         if (ok) {

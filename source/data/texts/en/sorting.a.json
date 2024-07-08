@@ -7,7 +7,7 @@
                 "idea": [
                     "Traverse the array multiple times",
                     "Each time, compare adjacent elements and swap them if necessary",
-                    "The largest element 'bubbles up' to the end of the array after each traversal, similar to a bubble rising to the surface of the water"
+                    "The largest element bubbles up to the end of the array after each traversal, similar to a bubble rising to the surface of the water"
                 ],
                 "advantage": [
                     "Simple, intuitive, and easy to understand",

@@ -8,6 +8,7 @@
 -   Render the interface from the server
 -   Structure of the links has been changed
 -   Improve SEO
+-   Support for using keyboard shortcuts
 
 ## VERSION HISTORY
 
@@ -22,7 +23,7 @@
 -   The basic interface has been completed
 -   Support two languages: English and Vietnamese
 -   Support the ability to search for and select learning content
--   Provide a user guide on the interface
+-   Provide a usage guide on the interface
 -   Provide information about the website
 -   Provide user feedback capability
 -   Provide interactive simulations for learning

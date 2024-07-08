@@ -7,7 +7,7 @@
                 "idea": [
                     "Duyệt qua mảng nhiều lần",
                     "Mỗi lần duyệt, so sánh các cặp phần tử liền kề và hoán đổi chúng nếu cần thiết",
-                    "Phần tử lớn nhất {{nổi lên}} cuối mảng sau mỗi lần duyệt, tương tự như bong bóng nổi lên mặt nước"
+                    "Phần tử lớn nhất nổi lên cuối mảng sau mỗi lần duyệt, tương tự như bong bóng nổi lên mặt nước"
                 ],
                 "advantage": [
                     "Đơn giản, trực quan, dễ hiểu",
