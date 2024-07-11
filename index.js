@@ -25,7 +25,7 @@ app.get('/data/local-data/key', (req, res) => res.json(process.env.LOCALDATA_KEY
 app.languages = ['vi', 'en'];
 app.get('/data/first-language', (req, res) => res.json(process.env.FIRST_LANGUAGE));
 
-app.get('/data/debugging', (req, res) => res.json(process.env.DEBUGGING == 'on' ? true : false));
+app.get('/data/developing', (req, res) => res.json(process.env.DEVELOPING == 'true' ? true : false));
 
 import CommonPages from './source/commonpages.js';
 await CommonPages.init(app, fs);
@@ -34,4 +34,4 @@ import HomePage from './source/homepage.js';
 await HomePage.init(app, fs, CommonPages.data.home.content);
 
 const port = process.env.PORT || 8002;
-app.listen(port, () => console.log(`   =====   http://localhost:${port}   =====`));
+app.listen(port, () => console.log(`  ===  http://localhost:${port}  ===`));

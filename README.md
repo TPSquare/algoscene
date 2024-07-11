@@ -9,12 +9,13 @@
 -   Structure of the links has been changed
 -   Improve SEO
 -   Support for using keyboard shortcuts
+-   Provide usage code for deployment code
 
 ## VERSION HISTORY
 
 ### Start project
 
-&nbsp;&nbsp;<sup>07/02/2024</sup>
+&nbsp;&nbsp;<sup>02/02/2024</sup>
 
 ### v1.0.\*
 

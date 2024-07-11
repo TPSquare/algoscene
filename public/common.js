@@ -7,18 +7,17 @@ document.TYPE = document.body.getAttribute('type');
 document.KEY = document.body.getAttribute('key');
 
 const SHORTCUT_CONFIG = {
-    prolangList: ['a', 'd'],
-    bottombarList: ['w', 's'],
-    playPauseBtn: 'p',
-    screenBtn: 'f',
-    copyCodeBtn: 'c',
-    homeBtn: 'h',
-    expandBtn: 'e'
+    prolangList: ['A', 'D'],
+    bottombarList: ['W', 'S'],
+    playPauseBtn: 'P',
+    screenBtn: 'F',
+    homeBtn: 'H',
+    expandBtn: 'E'
 };
 
 new (class {
     constructor() {
-        this.developing(localData.debug);
+        this.developing(localData.developing);
         this.document();
         this.window();
         this.configShortcut();
@@ -37,6 +36,7 @@ new (class {
                 this.setElms();
                 document.update();
             },
+            developing: localData.developing,
             delayDuration: localData.delay,
             updateDelayDuration() {
                 this.delayDuration = localData.delay;
@@ -54,14 +54,14 @@ new (class {
                 this.actions[key] = action;
                 if (key == document.body.main.bottombar.list.value) window.ALGOSCENE.runAction(key);
             },
-            runAction(key) {
+            runAction(key, save = true) {
                 ALGOSCENE.playPauseBtn.reset();
                 this.currentAction = key;
                 this.frameElm.innerHTML = this.frameHTML;
                 if (this.actions[key]) this.actions[key]();
                 else console.warn(`There are no actions for '${key}'`);
                 this.frameElm.className = key;
-                localData.history[document.TYPE].update(document.KEY, key);
+                if (save) localData.history[document.TYPE].update(document.KEY, key);
             },
             endAction() {},
             resetAction() {
@@ -414,6 +414,7 @@ new (class {
         const codeBox = document.body.querySelector('#code-box').combine({
             update(key, lang) {
                 codes.update(key, lang);
+                usage.update(key, lang);
             }
         });
         document.body.codeBox = codeBox;
@@ -463,10 +464,53 @@ new (class {
         prolangList.setActive();
         document.body.codeBox.prolangList = prolangList;
 
-        const copyCodeBtn = codeBox.querySelector('.top > .right > .copy-code').combine({
+        const textarea = codeBox.querySelector('textarea');
+
+        const codes = codeBox.querySelector('.codes').combine({
+            update(key, lang) {
+                this.querySelector('.show')?.classList?.remove('show');
+                this.querySelector(`.${key}.${lang}`).classList.add('show');
+            }
+        });
+        document.body.codeBox.codes = codes;
+
+        const usage = codeBox.querySelector('.usage').combine({
+            update(key, lang) {
+                this.querySelector('.show')?.classList?.remove('show');
+                this.querySelector(`.${key}.${lang}`).classList.add('show');
+
+                labelName.update(lang);
+            }
+        });
+        document.body.codeBox.usage = usage;
+
+        const labelName = usage.querySelector('.label-name').combine({
+            update(lang) {
+                labelNameIcon.update(lang);
+                labelNameExtension.innerText = lang;
+            }
+        });
+
+        const labelNameIcon = labelName.querySelector('.icon').combine({
+            data: (() => {
+                const data = {};
+                prolangList.childNodes.forEach((e) => (data[e.classList[0]] = e.innerHTML));
+                return data;
+            })(),
+            update(lang) {
+                this.innerHTML = this.data[lang];
+            }
+        });
+
+        const labelNameExtension = labelName.querySelector('.extension');
+
+        const copyCodeBtnConfig = {
+            innerHTML:
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"></path></svg>',
             onclick() {
+                if (this.classList.contains('success') || this.classList.contains('failure')) return;
                 try {
-                    textarea.value = [...codes.querySelectorAll('code.show .view-line')]
+                    textarea.value = [...this.parentNode.querySelectorAll('code.show .view-line')]
                         .map((e) => {
                             return (
                                 (e.querySelector('.tab')?.innerHTML?.replaceAll('&nbsp;', ' ') || '') +
@@ -478,43 +522,25 @@ new (class {
                         .join('\n');
                     textarea.select();
                     document.execCommand('copy');
-                    status.show(true);
+                    this.success();
                 } catch {
-                    status.show(false);
+                    this.failure();
                 }
+            },
+            success() {
+                this.classList.add('success');
+                setTimeout(() => this.classList.remove('success'), 1000);
+            },
+            failure() {
+                this.classList.add('failure');
+                setTimeout(() => this.classList.remove('failure'), 1000);
             }
-        });
-        copyCodeBtn.title += ` (${SHORTCUT_CONFIG.copyCodeBtn})`;
+        };
+
+        const copyCodeBtn = codes.querySelector('.copy-code').combine(copyCodeBtnConfig);
         document.body.codeBox.copyCodeBtn = copyCodeBtn;
 
-        const textarea = copyCodeBtn.querySelector('textarea');
-
-        const status = copyCodeBtn.querySelector('.status').combine({
-            show(success) {
-                if (success) {
-                    this.style.setProperty('--color', 'green');
-                    this.innerText = this.textData.success;
-                } else {
-                    this.style.setProperty('--color', 'red');
-                    this.innerText = this.textData.failure;
-                }
-                this.classList.add('show');
-                setTimeout(() => this.classList.remove('show'), 1000);
-            },
-            getTextData() {
-                const data = this.getAttribute('data').split(',');
-                this.textData = {success: data[0], failure: data[1]};
-            }
-        });
-        status.getTextData();
-
-        const codes = codeBox.querySelector('.codes').combine({
-            update(key, lang) {
-                this.querySelector('.show')?.classList?.remove('show');
-                this.querySelector(`.${key}.${lang}`).classList.add('show');
-            }
-        });
-        document.body.codeBox.codes = codes;
+        usage.querySelector('.copy-code').combine(copyCodeBtnConfig);
     }
     popup() {
         const popup = document.body.querySelector('#popup').combine({
@@ -916,7 +942,7 @@ new (class {
     shortcut() {
         window.onkeydown = (e) => {
             if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
-            switch (e.key.toLowerCase()) {
+            switch (e.key.toUpperCase()) {
                 case SHORTCUT_CONFIG.prolangList[0]:
                     document.body.codeBox.prolangList.left();
                     return;
@@ -935,9 +961,6 @@ new (class {
                 case SHORTCUT_CONFIG.screenBtn:
                     document.body.main.bottombar.screenBtn.onclick();
                     return;
-                case SHORTCUT_CONFIG.copyCodeBtn:
-                    document.body.codeBox.copyCodeBtn.onclick();
-                    return;
                 case SHORTCUT_CONFIG.homeBtn:
                     document.body.header.homeBtn.click();
                     return;
@@ -949,7 +972,6 @@ new (class {
     }
     developing(ok) {
         if (ok) {
-            console.warn('Development mode is enabled');
             window.dev = {
                 getCodeFromVSCode: (input) => {
                     const t = document.createElement('div'),
@@ -992,6 +1014,14 @@ new (class {
                     document.openFullScreen(document.body.main.frame);
                 }
             };
+            window.addEventListener('keydown', (e) => {
+                if (!e.ctrlKey) return;
+                switch (e.key.toLowerCase()) {
+                    case ',':
+                        window.dev.turnOnFrameCaptureMode();
+                        return;
+                }
+            });
         } else {
             document.head.innerHTML += '<style>*{pointer-events:none;}</style>';
         }

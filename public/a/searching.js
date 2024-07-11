@@ -24,7 +24,12 @@ ALGOSCENE.customInput.onApply = function (value) {
 const getframeHTML = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
     `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>` +
-    `<div class="target"><span>${TARGET}</span>: <span>?</span></div>`;
+    `<div class="target"><span>${TARGET}</span>: <span>?</span></div>` +
+    `<div class="array-index">${(() => {
+        let r = '';
+        for (let i = 0; i < ARRAY.length; i++) r += `<span>${i}</span>`;
+        return r;
+    })()}</div>`;
 
 ALGOSCENE.frameHTML = getframeHTML();
 

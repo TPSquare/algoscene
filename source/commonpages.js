@@ -55,7 +55,8 @@ class Page {
             selectOptionsHTML: this.getSelectOptionsHTML(),
             informationsHTML: this.getInformationsHTML(),
             prolangsHTML: this.getProlangsHTML(),
-            codesHTML: this.getCodesHTML()
+            codesHTML: this.getCodesHTML(),
+            usageHTML: this.getUsageHTML()
         };
         this.htmlTexts = {
             playPauseBtnDataText: [
@@ -66,7 +67,6 @@ class Page {
                 this.textData.selectText
             ].join(','),
             screenBtnDataText: [this.textData.fullScreenText, this.textData.exitFullScreenText].join(','),
-            copyCodeBtnStatusText: [this.textData.successText, this.textData.failureText].join(','),
             guideMessageTexts: this.textData.guideMessageTexts.join('|'),
             constraintsTexts: this.data.texts.constraints.map((text) => `*${text}`).join('<br>')
         };
@@ -106,6 +106,43 @@ class Page {
             infoHTML: infoComponent(this.lang, this.textData, this.version)
         });
     }
+    getHTMLOfCode(dataKey, comments = {}) {
+        if (Object.keys(comments).length == 0)
+            for (const key of this.list) {
+                comments[key] = {};
+                for (const prolang of this.data.prolangs) comments[key][prolang] = [];
+            }
+        return this.list
+            .map((key) =>
+                this.data.prolangs
+                    .map(
+                        (prolang) =>
+                            `<code class="${key} ${prolang}">` +
+                            this.data.codes[key][prolang][dataKey]
+                                .map((lineCode) => {
+                                    if (lineCode == '<span>&empty-line;</span>')
+                                        return '<span class="line-code"><span>&nbsp;</span></span>';
+                                    if (lineCode[0] != '&') return `<span class="line-code">${lineCode}</span>`;
+                                    let tabNumber = Number(lineCode.substring(4, lineCode.indexOf(';'))),
+                                        tabHTML = '';
+                                    for (let i = 0; i < tabNumber; i++) tabHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    tabHTML = `<span class="tab">${tabHTML}</span><span class="line-code">`;
+                                    lineCode = lineCode.replace(`&tab${tabNumber};`, tabHTML) + '</span>';
+                                    return lineCode;
+                                })
+                                .map(
+                                    (line, index) =>
+                                        `<span order="${index + 1}" class="view-line">${line}` +
+                                        (comments[key][prolang][index] || '') +
+                                        '</span>'
+                                )
+                                .join('') +
+                            '</code>'
+                    )
+                    .join('')
+            )
+            .join('');
+    }
     getCodesHTML() {
         const shortcuts = {' ': ' '};
         ['1|.', '3|-', '3|+', '3|--', '3|>', '3|<', '3|...', '3|/', '3|%', '1|,']
@@ -119,9 +156,10 @@ class Page {
             });
         });
 
-        for (const key in this.data.commentCodes)
+        for (const key in this.data.commentCodes) {
+            if (typeof this.data.commentCodes[key] === 'string')
+                this.data.commentCodes[key] = [this.data.commentCodes[key]];
             this.data.commentCodes[key] = this.data.commentCodes[key]
-                .split('_')
                 .map((code) => {
                     if (code.includes('|')) {
                         code = code.replace('mtk', '<span class="mtk');
@@ -133,6 +171,7 @@ class Page {
                     return shortcuts[code];
                 })
                 .join('');
+        }
 
         const completeComments = {};
         const comments = {};
@@ -182,40 +221,11 @@ class Page {
             for (const lang in completeComments[key])
                 completeComments[key][lang] = completeComments[key][lang].map(addHTML);
 
-        return (
-            '<div class="codes">' +
-            this.list
-                .map((key) =>
-                    this.data.prolangs
-                        .map(
-                            (prolang) =>
-                                `<code class="${key} ${prolang}">` +
-                                this.data.codes[key][prolang]
-                                    .map((lineCode) => {
-                                        if (lineCode == '<span>&empty-line;</span>')
-                                            return '<span class="line-code"><span>&nbsp;</span></span>';
-                                        if (lineCode[0] != '&') return `<span class="line-code">${lineCode}</span>`;
-                                        let tabNumber = Number(lineCode.substring(4, lineCode.indexOf(';'))),
-                                            tabHTML = '';
-                                        for (let i = 0; i < tabNumber; i++) tabHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
-                                        tabHTML = `<span class="tab">${tabHTML}</span><span class="line-code">`;
-                                        lineCode = lineCode.replace(`&tab${tabNumber};`, tabHTML) + '</span>';
-                                        return lineCode;
-                                    })
-                                    .map(
-                                        (line, index) =>
-                                            `<span order="${index + 1}" class="view-line">${line}` +
-                                            (completeComments[key][prolang][index] || '') +
-                                            '</span>'
-                                    )
-                                    .join('') +
-                                '</code>'
-                        )
-                        .join('')
-                )
-                .join('') +
-            '</div>'
-        );
+        return this.getHTMLOfCode('main', completeComments);
+    }
+
+    getUsageHTML() {
+        return this.getHTMLOfCode('usage');
     }
     getSelectOptionsHTML() {
         return this.list.map((key) => `<option value="${key}">${this.data.texts.list[key].name}</option>`).join('');

@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 
+#frame {
+    background: #0040C1;
+}
+
 #frame .background {
     position: absolute;
     top: 0;
     left: 0;
-    background: #0040C1;
+    background: inherit;
     width: 100%;
     height: 100%;
 
@@ -72,7 +76,7 @@
     position: absolute;
     height: 42em;
     width: 166.6em;
-    top: 60%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -100,7 +104,7 @@
 #frame .target {
     position: absolute;
     font-family: 'Poetsen One', sans-serif;
-    top: 20%;
+    top: 15%;
     left: 5%;
     color: #CAF4FF;
     font-size: 10em;
@@ -129,5 +133,23 @@
 #frame .target.failure {
     span:first-child {
         background-color: red;
+    }
+}
+
+#frame .array-index {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 33.3em;
+    transform: translateX(-50%);
+    font-size: 5em;
+    font-family: 'Poetsen One', sans-serif;
+    color: #CAF4FF;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        width: 2.52em;
+        text-align: center;
     }
 }

@@ -2,13 +2,15 @@
 
 const version = await fetch('/data/version').then((res) => res.json());
 const key = await fetch('/data/local-data/key').then((res) => res.json());
-const debug = await fetch('/data/debugging').then((res) => res.json());
+const developing = await fetch('/data/developing').then((res) => res.json());
 const typeList = await fetch('/data/types').then((res) => res.json());
+
+if (developing) console.warn('Development mode is enabled');
 
 window.localData = new (class {
     constructor() {
         this.version = version;
-        this.debug = debug;
+        this.developing = developing;
         this.key = key;
         const localData = JSON.parse(localStorage.getItem(this.key)) || {};
         Object.assign(this, localData);
