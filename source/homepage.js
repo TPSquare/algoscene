@@ -12,7 +12,7 @@ export default {
                 JSON.parse(await fs.readFileSync(`./source/data/texts/${lang}/general.json`))
             );
             const getAContentTag = (e) =>
-                `<a href="/${lang}/${e[1]}/${e[0]}">` +
+                `<a href="/${lang}/${e[1]}/${e[0]}" title="${e[2]}">` +
                 `<img src="/jpg/${e[0]}.${e[1]}.jpg" alt="">` +
                 `<strong>${e[2]}</strong>` +
                 `</a>`;

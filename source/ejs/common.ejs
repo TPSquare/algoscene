@@ -115,6 +115,7 @@
     </div>
     <script type="module" src="/local-data.js"></script>
     <script type="module">
+        document.settings = JSON.parse(`<%- settings %>`);
         await import('/local-data.js');
         await import('/common.js');
         import('/<%= type %>/<%= key %>.js');

@@ -92,27 +92,21 @@ new (class {
         };
     }
     document() {
-        switch (document.TYPE) {
-            case 'a':
-                document.update = function () {
-                    const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
-                        algo = this.body.main.bottombar.list.value;
-                    this.updatePageTitle(algo);
-                    this.body.codeBox.update(algo, lang);
-                    this.body.informations.update(algo);
-                };
-                break;
-            case 'ds':
-                document.update = function () {
-                    const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
-                        algo = this.body.main.bottombar.list.value;
-                    this.updatePageTitle(algo);
-                    this.body.codeBox.update(algo, lang);
-                };
-                break;
-            default:
-                console.warn('Unknown type: ' + document.TYPE);
-        }
+        if (document.settings.singleInformation)
+            document.update = function () {
+                const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
+                    algo = this.body.main.bottombar.list.value;
+                this.updatePageTitle(algo);
+                this.body.codeBox.update(algo, lang);
+            };
+        else
+            document.update = function () {
+                const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
+                    algo = this.body.main.bottombar.list.value;
+                this.updatePageTitle(algo);
+                this.body.codeBox.update(algo, lang);
+                this.body.informations.update(algo);
+            };
 
         document.updatePageTitle = function (algo) {
             const t = this.body.main.bottombar.list;
@@ -390,15 +384,7 @@ new (class {
             setTimeout(() => informations.onresize(), 1000);
         });
         document.body.informations = informations;
-        switch (document.TYPE) {
-            case 'ds':
-                informations.setComplexity();
-                break;
-            case 'a':
-                break;
-            default:
-                console.warn('Unknown type: ' + document.TYPE);
-        }
+        if (document.settings.singleInformation) informations.setComplexity();
 
         const expandBtn = informations.querySelector('.expand').combine({
             onclick: () => {

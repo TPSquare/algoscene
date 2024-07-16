@@ -1,9 +1,13 @@
 import infoComponent from './components/info.js';
 
-const CONFIG = {
-    a: ['sorting', 'searching', 'pathfinding'],
-    ds: ['segment-tree']
-};
+const CONFIG = (() => {
+        const singleInformation = true;
+        return {
+            a: {sorting: {}, searching: {}, pathfinding: {}},
+            ds: {'segment-tree': {singleInformation}}
+        };
+    })(),
+    TYPELIST = Object.keys(CONFIG);
 
 const DATA = new (class {
     async fetch(app, fs) {
@@ -15,9 +19,9 @@ const DATA = new (class {
             );
 
         this.pages = {};
-        for (const type of main.typeList) {
+        for (const type of TYPELIST) {
             this.pages[type] = {};
-            for (const key of main.config[type]) {
+            for (const key in CONFIG[type]) {
                 this.pages[type][key] = {texts: {}};
                 for (const lang of app.languages) {
                     const path = `./source/data/texts/${lang}/${key}.${type}.json`;
@@ -51,6 +55,7 @@ class Page {
         this.textData = DATA.text[lang];
         this.list = Object.keys(this.data.texts.list);
         this.data.prolangs = this.data.prolangs.split(',').sort();
+        this.settings = CONFIG[type][key];
         this.htmlCodes = {
             selectOptionsHTML: this.getSelectOptionsHTML(),
             informationsHTML: this.getInformationsHTML(),
@@ -84,16 +89,10 @@ class Page {
             title,
             description: title
         };
-        switch (this.type) {
-            case 'a':
-                config.informationHTML = this.childInfomationHTML[child];
-                break;
-            case 'ds':
-                config.informationHTML = this.informationHTML;
-                break;
-            default:
-                console.warn('Unknown type: ' + this.type);
-        }
+
+        if (this.settings.singleInformation) config.informationHTML = this.informationHTML;
+        else config.informationHTML = this.childInfomationHTML[child];
+        
         res.render('child-of-common', config);
     }
     render(res) {
@@ -103,7 +102,8 @@ class Page {
             ...{key: this.key, lang: this.lang, type: this.type},
             ...{...this.textData, ...this.htmlCodes, ...this.htmlTexts},
             selectTitleText: this.textData.selectTitleText[this.type],
-            infoHTML: infoComponent(this.lang, this.textData, this.version)
+            infoHTML: infoComponent(this.lang, this.textData, this.version),
+            settings: JSON.stringify(this.settings)
         });
     }
     getHTMLOfCode(dataKey, comments = {}) {
@@ -297,20 +297,17 @@ class Page {
                 '</tbody></table>'
         };
 
-        switch (this.type) {
-            case 'a':
-                this.childInfomationHTML = {};
-                return this.list
-                    .map((child) => {
-                        this.childInfomationHTML[child] = divInnerHTML.a(child);
-                        return `<div class="${child}">` + this.childInfomationHTML[child] + '</div>';
-                    })
-                    .join('');
-            case 'ds':
-                this.informationHTML = divInnerHTML.ds();
-                return `<div class="show">${this.informationHTML}</div>`;
-            default:
-                console.warn('Unknown type: ' + this.type);
+        if (this.settings.singleInformation) {
+            this.informationHTML = divInnerHTML.ds();
+            return `<div class="show">${this.informationHTML}</div>`;
+        } else {
+            this.childInfomationHTML = {};
+            return this.list
+                .map((child) => {
+                    this.childInfomationHTML[child] = divInnerHTML.a(child);
+                    return `<div class="${child}">` + this.childInfomationHTML[child] + '</div>';
+                })
+                .join('');
         }
     }
     getProlangsHTML() {
@@ -327,21 +324,18 @@ class Page {
 
 const main = {
     async init(app, fs) {
-        this.config = CONFIG;
-        this.typeList = Object.keys(this.config);
-
         await DATA.fetch(app, fs);
         this.renderData(app);
         this.render(app);
     },
     renderData(app) {
-        app.get('/data/types', (req, res) => res.json(this.typeList));
+        app.get('/data/types', (req, res) => res.json(TYPELIST));
 
         this.data = {};
         for (const lang of app.languages) {
             const searchData = [];
-            for (const type of this.typeList)
-                for (const key of this.config[type]) {
+            for (const type of TYPELIST)
+                for (const key in CONFIG[type]) {
                     const textData = DATA.getPageData(lang, type, key).texts;
                     searchData.push(
                         [textData.NAME, `${type}/${key}`],
@@ -357,16 +351,15 @@ const main = {
         this.data.home = {content: {}};
         for (const lang of app.languages) {
             const contentData = [];
-            for (const type of this.typeList)
-                for (const key of this.config[type])
-                    contentData.push([key, type, DATA.pages[type][key].texts[lang].NAME]);
+            for (const type of TYPELIST)
+                for (const key in CONFIG[type]) contentData.push([key, type, DATA.pages[type][key].texts[lang].NAME]);
             this.data.home.content[lang] = contentData;
         }
     },
     render(app) {
         for (const lang of app.languages) {
-            for (const type of this.typeList) {
-                for (const key of this.config[type]) new Page(app, lang, type, key);
+            for (const type of TYPELIST) {
+                for (const key in CONFIG[type]) new Page(app, lang, type, key);
                 app.get(`/${lang}/${type}`, (req, res) => res.render('redirect'));
             }
         }
