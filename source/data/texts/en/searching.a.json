@@ -33,7 +33,8 @@
                     "{{{cpp,3-6}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Define function {sqt_s}",
+                    "{{{cpp,4}}}",
                     "Check if the current element is {target}",
                     "If true, return the position {i}",
                     "{{{cpp,6}}}"
@@ -84,7 +85,7 @@
                     "{{{cpp,12}}}"
                 ],
                 "py": [
-                    "{{{cpp,3}}}",
+                    "Define function {bnr_s}",
                     "Initialize 2 variables {left} and {right} to mark the search range",
                     "{{{cpp,6-7}}}",
                     "Check if the middle element is {target}",

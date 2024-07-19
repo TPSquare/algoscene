@@ -1,0 +1,15 @@
+{
+    "NAME": "Tổng tiền tố (Mảng cộng dồn)",
+    "list": {
+        "sum": {
+            "name": "Tính tổng của đoạn",
+            "informations": {},
+            "comments": {}
+        },
+        "update-array": {
+            "name": "Cập nhật mảng trên nhiều đoạn cùng lúc",
+            "informations": {},
+            "comments": {}
+        }
+    }
+}

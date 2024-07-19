@@ -35,7 +35,10 @@
                 "js": [
                     "{{{cpp,3-7}}}"
                 ],
-                "py": "{{{all(js)}}}"
+                "py": [
+                    "Define function {bb_s}",
+                    "{{{cpp,4-7}}}"
+                ]
             }
         },
         "selection": {
@@ -76,7 +79,8 @@
                     "{{{cpp,3-8}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-7}}}",
+                    "Define function {slt_s}",
+                    "{{{cpp,4-7}}}",
                     "Update {min}",
                     "{{{cpp,8}}}"
                 ]
@@ -120,7 +124,8 @@
                     "{{{cpp,3-9}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Define function {ist_s}",
+                    "{{{cpp,4}}}",
                     "Initialize {j} to traverse backward through the sorted elements. Initialize {current} to hold the value of the element currently being positioned",
                     "{{{cpp,7-8}}}",
                     "Decrease {j} to continue traversing to the left",
@@ -184,7 +189,8 @@
                     "Continue sorting the subarray from {i} to {right}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Define function {q_s}",
+                    "{{{cpp,4}}}",
                     "Exit the function",
                     "{{{cpp,5}}}",
                     "Initialize {i} to iterate from the start to the middle of the subarray, finding elements greater than or equal to {pivot}. Initialize {j} to iterate from the end to the middle of the subarray, finding elements less than or equal to {pivot}",
@@ -280,7 +286,8 @@
                     "{{{py,16}}}",
                     "{{{py,13-14}}}",
                     "",
-                    "{{{cpp,19-24}}}"
+                    "Define the function {m_s}",
+                    "{{{cpp,20-24}}}"
                 ]
             }
         }

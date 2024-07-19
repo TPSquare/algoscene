@@ -190,4 +190,4 @@ const data = JSON.stringify({
 
 await fs.writeFileSync('./source/data/pages/pathfinding.a.json', data);
 
-console.log('OK!');
+console.log('Done!');

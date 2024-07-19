@@ -633,35 +633,39 @@ code {
     .prolang-list {
         font-size: 1em;
         display: flex;
+        position: relative;
         background-color: transparent;
         overflow-x: auto;
         overflow-y: hidden;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        z-index: 0;
 
         button {
             font-size: 1em;
             display: flex;
             width: 5em;
             height: 100%;
-        }
-
-        button:first-child {
-            border-top-left-radius: 0.5em;
-        }
-
-        button:last-child {
-            border-top-right-radius: 0.5em;
-        }
-
-        button.active {
-            background-color: var(--code-bgc);
+            z-index: 1;
         }
 
         svg {
             margin: auto;
             height: 70%;
         }
+    }
+
+    .prolang-list::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc(5em * var(--activeID));
+        height: 100%;
+        width: 5em;
+        background-color: var(--code-bgc);
+        transition: left 250ms;
+        border-radius: 0.5em 0.5em 0 0;
+        z-index: 0;
     }
 
     .prolang-list::-webkit-scrollbar {
@@ -816,7 +820,7 @@ code {
         color: #f2f2f2;
         height: 2.7em;
         font-family: var(--default-font-family);
-        
+
         >* {
             font-size: 1.35em;
             height: 2em;
@@ -827,6 +831,7 @@ code {
 
         .icon {
             padding: 0 0.8em;
+
             svg {
                 margin-top: 40%;
                 height: 60%;

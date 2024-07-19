@@ -37,7 +37,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">bubbleSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">bubble_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="mtk10">i</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk18">for</span> <span class="mtk10">j</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk10">i</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab3;<span class="mtk18">if</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">&gt;</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">]</span><span class="mtk1">:</span>',
@@ -45,7 +45,7 @@ const data = JSON.stringify({
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk16">bubbleSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk16">bubble_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         },
@@ -87,7 +87,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">selectionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">selection_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="mtk10">i</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk10">min</span> <span class="mtk3">=</span> <span class="mtk10">i</span>',
                     '&tab2;<span class="mtk18">for</span> <span class="mtk10">j</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk10">i</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
@@ -97,7 +97,7 @@ const data = JSON.stringify({
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk16">selectionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk16">selection_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         },
@@ -141,7 +141,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">insertionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">insertion_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="mtk10">i</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk10">j</span><span class="mtk1">,</span> <span class="mtk10">current</span> <span class="mtk3">=</span> <span class="mtk10">i</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span>',
                     '&tab2;<span class="mtk18">while</span> <span class="mtk10">j</span> <span class="mtk3">&gt;=</span> <span class="mtk7">0</span> <span class="mtk6">and</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">&gt;</span> <span class="mtk10">current</span><span class="mtk1">:</span>',
@@ -151,7 +151,7 @@ const data = JSON.stringify({
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk16">insertionSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk16">insertion_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         },
@@ -208,7 +208,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">quickSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">quick_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">if</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk18">return</span>',
                     '&tab1;<span class="mtk10">pivot</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk17">int</span><span class="bracket-highlighting-1">(</span><span class="bracket-highlighting-2">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-2">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">]</span>',
@@ -222,12 +222,12 @@ const data = JSON.stringify({
                     '&tab3;<span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span><span class="mtk1">,</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">=</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">j</span><span class="bracket-highlighting-0">]</span><span class="mtk1">,</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span>',
                     '&tab3;<span class="mtk10">i</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
                     '&tab3;<span class="mtk10">j</span> <span class="mtk3">-=</span> <span class="mtk7">1</span>',
-                    '&tab1;<span class="mtk16">quickSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">j</span><span class="bracket-highlighting-0">)</span>',
-                    '&tab1;<span class="mtk16">quickSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">i</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>'
+                    '&tab1;<span class="mtk16">quick_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">j</span><span class="bracket-highlighting-0">)</span>',
+                    '&tab1;<span class="mtk16">quick_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">i</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>'
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk16">quickSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk16">quick_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         },
@@ -321,29 +321,33 @@ const data = JSON.stringify({
                     '&tab2;<span class="mtk10">j</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
                     '&tab2;<span class="mtk10">k</span> <span class="mtk3">+=</span> <span class="mtk7">1</span>',
                     '<span>&empty-line;</span>',
-                    '<span class="mtk6">def</span> <span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">merge_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">if</span> <span class="mtk10">left</span> <span class="mtk3">&gt;=</span> <span class="mtk10">right</span><span class="mtk1">:</span> <span class="mtk18">return</span>',
                     '&tab1;<span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span> <span class="mtk3">//</span> <span class="mtk7">2</span>',
-                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-0">)</span>',
-                    '&tab1;<span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>',
+                    '&tab1;<span class="mtk16">merge_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="bracket-highlighting-0">)</span>',
+                    '&tab1;<span class="mtk16">merge_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">middle</span> <span class="mtk3">+</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>',
                     '&tab1;<span class="mtk16">merge</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">middle</span><span class="mtk1">,</span> <span class="mtk10">right</span><span class="bracket-highlighting-0">)</span>'
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk16">mergeSort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk16">merge_sort</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         }
     },
     commentCodes: {
         bbs: 'mtk16|bubbleSort',
+        bb_s: 'mtk16|bubble_sort',
         j: 'mtk10|j',
         i: 'mtk10|i',
         min: 'mtk10|min',
         slts: 'mtk16|selectionSort',
+        slt_s: 'mtk16|selection_sort',
         ists: 'mtk16|insertionSort',
+        ist_s: 'mtk16|insertion_sort',
         current: 'mtk10|current',
         qs: 'mtk16|quickSort',
+        q_s: 'mtk16|quick_sort',
         left: 'mtk10|left',
         right: 'mtk10|right',
         jspivot: 'mtk19|pivot',
@@ -352,6 +356,7 @@ const data = JSON.stringify({
         vector: 'mtk17|vector',
         k: 'mtk10|k',
         ms: 'mtk16|mergeSort',
+        m_s: 'mtk16|merge_sort',
         middle: 'mtk10|middle',
         middlejs: 'mtk19|middle',
         middleplus1: ['mtk10|middle', ' ', '+', ' ', 'mtk7|1'],
@@ -393,4 +398,4 @@ const data = JSON.stringify({
 
 await fs.writeFileSync('./source/data/pages/sorting.a.json', data);
 
-console.log('OK!');
+console.log('Done!');

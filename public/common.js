@@ -17,7 +17,6 @@ const SHORTCUT_CONFIG = {
 
 new (class {
     constructor() {
-        this.developing(localData.developing);
         this.document();
         this.window();
         this.configShortcut();
@@ -27,6 +26,7 @@ new (class {
         this.codeBox();
         this.popup();
         this.shortcut();
+        this.developing(localData.developing);
     }
     window() {
         MODULES.upgradeWindow();
@@ -95,17 +95,17 @@ new (class {
         if (document.settings.singleInformation)
             document.update = function () {
                 const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
-                    algo = this.body.main.bottombar.list.value;
-                this.updatePageTitle(algo);
-                this.body.codeBox.update(algo, lang);
+                    key = this.body.main.bottombar.list.value;
+                this.updatePageTitle(key);
+                this.body.codeBox.update(key, lang);
             };
         else
             document.update = function () {
                 const lang = this.body.codeBox.prolangList.querySelector('.active').classList[0],
-                    algo = this.body.main.bottombar.list.value;
-                this.updatePageTitle(algo);
-                this.body.codeBox.update(algo, lang);
-                this.body.informations.update(algo);
+                    key = this.body.main.bottombar.list.value;
+                this.updatePageTitle(key);
+                this.body.codeBox.update(key, lang);
+                this.body.informations.update(key);
             };
 
         document.updatePageTitle = function (algo) {
@@ -420,6 +420,7 @@ new (class {
                 if (ok) {
                     localData.history.lang.update(lang);
                     elm.classList.add('active');
+                    this.style.setProperty('--activeID', elm.id);
                 }
                 return ok;
             },
@@ -595,6 +596,7 @@ new (class {
                 else this.classList.add('show');
             }
         });
+        document.body.popup.overlay = overlay;
 
         const multiOverlay = popup.querySelector('.multi-overlay').combine({
             handle(enableClick = false) {
@@ -958,53 +960,96 @@ new (class {
     }
     developing(ok) {
         if (ok) {
-            window.dev = {
-                getCodeFromVSCode: (input) => {
-                    const t = document.createElement('div'),
-                        r = [];
-                    let i, s, f, h;
-                    t.innerHTML = input;
-                    t.childNodes[0].childNodes.forEach((e) => {
-                        for (i = 0; i <= 10; i++)
-                            e.childNodes[0]
-                                .querySelectorAll('.bracket-highlighting-' + i)
-                                .forEach((e) => (e.className = 'bracket-highlighting-' + i));
-                        h = '';
-                        let html = e.childNodes[0].innerHTML;
-                        for (i = 1; i <= 10; i++) {
-                            s = '&tab' + i + ';';
-                            h += '&nbsp;&nbsp;&nbsp;&nbsp;';
-                            f = `<span class="mtk1">${h}</span>`;
-                            html = html.replaceAll(f, s);
-                        }
-                        '1,6'
-                            .split(',')
-                            .forEach(
-                                (e) =>
-                                    (html = html
-                                        .replaceAll(`<span class="mtk${e}">&nbsp;</span>`, ' ')
-                                        .replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`))
-                            );
-                        html = html
-                            .replaceAll('<span></span>', '<span>&empty-line;</span>')
-                            .replaceAll('&nbsp;</span>', '</span> ');
-                        for (let i = 0; i <= 10; i++)
-                            html = html.replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`);
-                        html = html.replaceAll('&nbsp;', '</span> <span class="mtk1">');
-                        r.push(html);
-                    });
-                    return r;
+            const getCodeFromVSCode = document.createElement({
+                id: 'get-code-from-vscode',
+                style: {
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    opacity: 0,
+                    transform: 'translate(-50%, 50%)',
+                    backgroundColor: 'white',
+                    padding: '20px',
+                    transition: 'opacity 200ms, transform 200ms',
+                    borderRadius: '10px',
+                    pointerEvents: 'none'
                 },
-                turnOnFrameCaptureMode: () => {
-                    document.body.main.frame.style.setProperty('border-radius', '0');
-                    document.openFullScreen(document.body.main.frame);
+                children: [
+                    document.createElement({
+                        tag: 'input',
+                        style: {
+                            width: '300px',
+                            height: '30px',
+                            fontSize: '16px',
+                            fontFamily: 'monospace',
+                            border: '1px solid black',
+                            borderRadius: 'inherit'
+                        },
+                        onkeydown(e) {
+                            if (e.key != 'Enter') return;
+                            this.parentNode.handle();
+                            const input = this.value;
+                            this.value = '';
+                            const t = document.createElement('div'),
+                                r = [];
+                            let i, s, f, h;
+                            t.innerHTML = input;
+                            t.childNodes[0].childNodes.forEach((e) => {
+                                for (i = 0; i <= 10; i++)
+                                    e.childNodes[0]
+                                        .querySelectorAll('.bracket-highlighting-' + i)
+                                        .forEach((e) => (e.className = 'bracket-highlighting-' + i));
+                                h = '';
+                                let html = e.childNodes[0].innerHTML;
+                                for (i = 1; i <= 10; i++) {
+                                    s = '&tab' + i + ';';
+                                    h += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    f = `<span class="mtk1">${h}</span>`;
+                                    html = html.replaceAll(f, s);
+                                }
+                                '1,6'
+                                    .split(',')
+                                    .forEach(
+                                        (e) =>
+                                            (html = html
+                                                .replaceAll(`<span class="mtk${e}">&nbsp;</span>`, ' ')
+                                                .replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`))
+                                    );
+                                html = html
+                                    .replaceAll('<span></span>', '<span>&empty-line;</span>')
+                                    .replaceAll('&nbsp;</span>', '</span> ');
+                                for (let i = 0; i <= 10; i++)
+                                    html = html.replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`);
+                                html = html.replaceAll('&nbsp;', '</span> <span class="mtk1">');
+                                r.push(html);
+                            });
+                            console.log(r);
+                        }
+                    })
+                ],
+                handle() {
+                    if (this.classList.contains('show')) {
+                        this.classList.remove('show');
+                        this.setStyle({transform: 'translate(-50%, 50%)', opacity: 0, pointerEvents: 'none'});
+                    } else {
+                        this.classList.add('show');
+                        this.setStyle({transform: 'translate(-50%, -50%)', opacity: 1, pointerEvents: 'all'});
+                    }
+                    document.body.popup.overlay.handle();
                 }
-            };
+            });
+
+            document.body.popup.appendChild(getCodeFromVSCode);
+
             window.addEventListener('keydown', (e) => {
                 if (!e.ctrlKey) return;
                 switch (e.key.toLowerCase()) {
                     case ',':
-                        window.dev.turnOnFrameCaptureMode();
+                        document.body.main.frame.style.setProperty('border-radius', '0');
+                        document.openFullScreen(document.body.main.frame);
+                        return;
+                    case '.':
+                        getCodeFromVSCode.handle();
                         return;
                 }
             });

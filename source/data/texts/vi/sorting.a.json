@@ -35,7 +35,10 @@
                 "js": [
                     "{{{cpp,3-7}}}"
                 ],
-                "py": "{{{all(js)}}}"
+                "py": [
+                    "Định nghĩa hàm {bb_s}",
+                    "{{{cpp,4-7}}}"
+                ]
             }
         },
         "selection": {
@@ -76,7 +79,8 @@
                     "{{{cpp,3-8}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-7}}}",
+                    "Định nghĩa hàm {slt_s}",
+                    "{{{cpp,4-7}}}",
                     "Cập nhật {min}",
                     "{{{cpp,8}}}"
                 ]
@@ -120,7 +124,8 @@
                     "{{{cpp,3-9}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Định nghĩa hàm {ist_s}",
+                    "{{{cpp,4}}}",
                     "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp. Khởi tạo {current} để lưu giữ giá trị của phần tử hiện đang cần tìm vị trí.",
                     "{{{cpp,7-8}}}",
                     "Giảm {j} để tiếp tục duyệt sang trái",
@@ -184,7 +189,8 @@
                     "Tiếp tục sắp xếp đoạn mảng từ {i} đến {right}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Định nghĩa hàm {q_s}",
+                    "{{{cpp,4}}}",
                     "Thoát khỏi hàm",
                     "{{{cpp,5}}}",
                     "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tạo {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
@@ -280,7 +286,8 @@
                     "{{{py,16}}}",
                     "{{{py,13-14}}}",
                     "",
-                    "{{{cpp,19-24}}}"
+                    "Định nghĩa hàm {m_s}",
+                    "{{{cpp,20-24}}}"
                 ]
             }
         }

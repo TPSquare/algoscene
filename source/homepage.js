@@ -13,7 +13,7 @@ export default {
             );
             const getAContentTag = (e) =>
                 `<a href="/${lang}/${e[1]}/${e[0]}" title="${e[2]}">` +
-                `<img src="/jpg/${e[0]}.${e[1]}.jpg" alt="">` +
+                `<img src="/jpg/${e[0]}.${e[1]}.jpg" alt="${e[2]}">` +
                 `<strong>${e[2]}</strong>` +
                 `</a>`;
             const contentHTML = contentData[lang].map(getAContentTag).join('');

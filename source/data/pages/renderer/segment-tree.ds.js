@@ -270,4 +270,4 @@ const data = JSON.stringify({
 
 await fs.writeFileSync('./source/data/pages/segment-tree.ds.json', data);
 
-console.log('OK!');
+console.log('Done!');

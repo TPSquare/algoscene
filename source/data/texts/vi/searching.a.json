@@ -33,7 +33,8 @@
                     "{{{cpp,3-6}}}"
                 ],
                 "py": [
-                    "{{{cpp,3-4}}}",
+                    "Định nghĩa hàm {sqt_s}",
+                    "{{{cpp,4}}}",
                     "Kiểm tra xem phần tử hiện tại có phải là {target} hay không",
                     "Nếu đúng, trả về vị trí {i}",
                     "{{{cpp,6}}}"
@@ -84,7 +85,7 @@
                     "{{{cpp,12}}}"
                 ],
                 "py": [
-                    "{{{cpp,3}}}",
+                    "Định nghĩa hàm {bnr_s}",
                     "Khởi tạo 2 biến {left} và {right} để đánh dấu phạm vi tìm kiếm",
                     "{{{cpp,6-7}}}",
                     "Kiểm tra xem phần tử ở giữa có phải là {target} hay không",

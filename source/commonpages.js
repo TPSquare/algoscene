@@ -4,6 +4,7 @@ const CONFIG = (() => {
         const singleInformation = true;
         return {
             a: {sorting: {}, searching: {}, pathfinding: {}},
+            // ds: {'segment-tree': {singleInformation}, 'prefix-sum': {}}
             ds: {'segment-tree': {singleInformation}}
         };
     })(),
@@ -73,7 +74,7 @@ class Page {
             ].join(','),
             screenBtnDataText: [this.textData.fullScreenText, this.textData.exitFullScreenText].join(','),
             guideMessageTexts: this.textData.guideMessageTexts.join('|'),
-            constraintsTexts: this.data.texts.constraints.map((text) => `*${text}`).join('<br>')
+            constraintsTexts: this.data.texts.constraints?.map((text) => `*${text}`)?.join('<br>')
         };
 
         app.get(`/${lang}/${type}/${key}`, (req, res) => this.render(res));
@@ -92,7 +93,7 @@ class Page {
 
         if (this.settings.singleInformation) config.informationHTML = this.informationHTML;
         else config.informationHTML = this.childInfomationHTML[child];
-        
+
         res.render('child-of-common', config);
     }
     render(res) {
@@ -107,11 +108,10 @@ class Page {
         });
     }
     getHTMLOfCode(dataKey, comments = {}) {
-        if (Object.keys(comments).length == 0)
-            for (const key of this.list) {
-                comments[key] = {};
-                for (const prolang of this.data.prolangs) comments[key][prolang] = [];
-            }
+        for (const key of this.list) {
+            comments[key] = comments[key] || {};
+            for (const prolang of this.data.prolangs) comments[key][prolang] = comments[key][prolang] || [];
+        }
         return this.list
             .map((key) =>
                 this.data.prolangs

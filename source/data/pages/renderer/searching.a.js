@@ -35,7 +35,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">sequentialSearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">sequential_search</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk18">for</span> <span class="mtk10">i</span> <span class="mtk18">in</span> <span class="mtk17">range</span><span class="bracket-highlighting-0">(</span><span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-1">(</span><span class="mtk10">array</span><span class="bracket-highlighting-1">)</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk18">if</span> <span class="mtk10">array</span><span class="bracket-highlighting-0">[</span><span class="mtk10">i</span><span class="bracket-highlighting-0">]</span> <span class="mtk3">==</span> <span class="mtk10">target</span><span class="mtk1">:</span>',
                     '&tab3;<span class="mtk18">return</span> <span class="mtk10">i</span>',
@@ -43,7 +43,7 @@ const data = JSON.stringify({
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">9</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">11</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">8</span><span class="mtk1">,</span> <span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">12</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="mtk1">,</span> <span class="mtk7">10</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk10">result</span> <span class="mtk3">=</span> <span class="mtk16">sequentialSearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk10">result</span> <span class="mtk3">=</span> <span class="mtk16">sequential_search</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         },
@@ -91,7 +91,7 @@ const data = JSON.stringify({
             },
             py: {
                 main: [
-                    '<span class="mtk6">def</span> <span class="mtk16">binarySearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
+                    '<span class="mtk6">def</span> <span class="mtk16">binary_search</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">target</span><span class="bracket-highlighting-0">)</span><span class="mtk1">:</span>',
                     '&tab1;<span class="mtk10">left</span><span class="mtk1">,</span> <span class="mtk10">right</span> <span class="mtk3">=</span> <span class="mtk7">0</span><span class="mtk1">,</span> <span class="mtk16">len</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="bracket-highlighting-0">)</span> <span class="mtk3">-</span> <span class="mtk7">1</span>',
                     '&tab1;<span class="mtk18">while</span> <span class="mtk10">left</span> <span class="mtk3">&lt;=</span> <span class="mtk10">right</span><span class="mtk1">:</span>',
                     '&tab2;<span class="mtk10">middle</span> <span class="mtk3">=</span> <span class="mtk17">int</span><span class="bracket-highlighting-0">(</span><span class="bracket-highlighting-1">(</span><span class="mtk10">left</span> <span class="mtk3">+</span> <span class="mtk10">right</span><span class="bracket-highlighting-1">)</span> <span class="mtk3">/</span> <span class="mtk7">2</span><span class="bracket-highlighting-0">)</span>',
@@ -105,7 +105,7 @@ const data = JSON.stringify({
                 ],
                 usage: [
                     '<span class="mtk10">array</span> <span class="mtk3">=</span> <span class="bracket-highlighting-0">[</span><span class="mtk7">1</span><span class="mtk1">,</span> <span class="mtk7">2</span><span class="mtk1">,</span> <span class="mtk7">3</span><span class="mtk1">,</span> <span class="mtk7">4</span><span class="mtk1">,</span> <span class="mtk7">5</span><span class="mtk1">,</span> <span class="mtk7">6</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="mtk1">,</span> <span class="mtk7">8</span><span class="mtk1">,</span> <span class="mtk7">9</span><span class="mtk1">,</span> <span class="mtk7">10</span><span class="mtk1">,</span> <span class="mtk7">11</span><span class="mtk1">,</span> <span class="mtk7">12</span><span class="bracket-highlighting-0">]</span>',
-                    '<span class="mtk10">result</span> <span class="mtk3">=</span> <span class="mtk16">binarySearch</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">)</span>'
+                    '<span class="mtk10">result</span> <span class="mtk3">=</span> <span class="mtk16">binary_search</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk7">7</span><span class="bracket-highlighting-0">)</span>'
                 ]
             }
         }
@@ -126,7 +126,9 @@ const data = JSON.stringify({
     },
     commentCodes: {
         sqts: 'mtk16|sequentialSearch',
+        sqt_s: 'mtk16|sequential_search',
         bnrs: 'mtk16|binarySearch',
+        bnr_s: 'mtk16|binary_search',
         target: 'mtk10|target',
         i: 'mtk10|i',
         left: 'mtk10|left',
@@ -143,4 +145,4 @@ const data = JSON.stringify({
 
 await fs.writeFileSync('./source/data/pages/searching.a.json', data);
 
-console.log('OK!');
+console.log('Done!');
