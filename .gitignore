@@ -4,9 +4,10 @@ nodemon.json
 /.vscode
 
 # dev
-js.js
-cpp.cpp
-cpp.exe
-py.py
+tempCodeRunnerFile.js
+tempCodeRunnerFile.cpp
+tempCodeRunnerFile.exe
+tempCodeRunnerFile.py
+/source/data/pages/renderer/tempCodeRunnerFile.js
 svg.svg
 note

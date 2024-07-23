@@ -4,7 +4,6 @@ const CONFIG = (() => {
         const singleInformation = true;
         return {
             a: {sorting: {}, searching: {}, pathfinding: {}},
-            // ds: {'segment-tree': {singleInformation}, 'prefix-sum': {}}
             ds: {'segment-tree': {singleInformation}}
         };
     })(),
@@ -29,7 +28,9 @@ const DATA = new (class {
                     const fileData = await fs.readFileSync(path);
                     this.pages[type][key].texts[lang] = JSON.parse(fileData);
                 }
-                const commonData = JSON.parse(await fs.readFileSync(`./source/data/pages/${key}.${type}.json`));
+                const commonData = JSON.parse(
+                    await fs.readFileSync(`./source/data/pages/${key}.${type}.json`)
+                );
                 this.pages[type][key].complexitys = commonData.complexitys;
                 this.pages[type][key].prolangs = commonData.prolangs;
                 this.pages[type][key].codes = commonData.codes;
@@ -72,7 +73,10 @@ class Page {
                 this.textData.repeatText,
                 this.textData.selectText
             ].join(','),
-            screenBtnDataText: [this.textData.fullScreenText, this.textData.exitFullScreenText].join(','),
+            screenBtnDataText: [
+                this.textData.fullScreenText,
+                this.textData.exitFullScreenText
+            ].join(','),
             guideMessageTexts: this.textData.guideMessageTexts.join('|'),
             constraintsTexts: this.data.texts.constraints?.map((text) => `*${text}`)?.join('<br>')
         };
@@ -110,7 +114,8 @@ class Page {
     getHTMLOfCode(dataKey, comments = {}) {
         for (const key of this.list) {
             comments[key] = comments[key] || {};
-            for (const prolang of this.data.prolangs) comments[key][prolang] = comments[key][prolang] || [];
+            for (const prolang of this.data.prolangs)
+                comments[key][prolang] = comments[key][prolang] || [];
         }
         return this.list
             .map((key) =>
@@ -121,13 +126,18 @@ class Page {
                             this.data.codes[key][prolang][dataKey]
                                 .map((lineCode) => {
                                     if (lineCode == '<span>&empty-line;</span>')
-                                        return '<span class="line-code"><span>&nbsp;</span></span>';
-                                    if (lineCode[0] != '&') return `<span class="line-code">${lineCode}</span>`;
-                                    let tabNumber = Number(lineCode.substring(4, lineCode.indexOf(';'))),
+                                        return '<span class="line-code empty-line"><span>&nbsp;</span></span>';
+                                    if (lineCode[0] != '&')
+                                        return `<span class="line-code">${lineCode}</span>`;
+                                    let tabNumber = Number(
+                                            lineCode.substring(4, lineCode.indexOf(';'))
+                                        ),
                                         tabHTML = '';
-                                    for (let i = 0; i < tabNumber; i++) tabHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    for (let i = 0; i < tabNumber; i++)
+                                        tabHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
                                     tabHTML = `<span class="tab">${tabHTML}</span><span class="line-code">`;
-                                    lineCode = lineCode.replace(`&tab${tabNumber};`, tabHTML) + '</span>';
+                                    lineCode =
+                                        lineCode.replace(`&tab${tabNumber};`, tabHTML) + '</span>';
                                     return lineCode;
                                 })
                                 .map(
@@ -144,15 +154,19 @@ class Page {
             .join('');
     }
     getCodesHTML() {
-        const shortcuts = {' ': ' '};
+        const shortcuts = {' ': ' ', '': ' '};
         ['1|.', '3|-', '3|+', '3|--', '3|>', '3|<', '3|...', '3|/', '3|%', '1|,']
             .map((k) => k.split('|'))
             .forEach((k) => (shortcuts[k[1]] = `<span class="mtk${k[0]}">${k[2] || k[1]}</span>`));
         ['()|1,2,3'].forEach((k) => {
             k = k.split('|');
             k[1].split(',').forEach((n) => {
-                shortcuts[k[0][0] + n] = `<span class="bracket-highlighting-${n}">${k[0][0]}</span>`;
-                shortcuts[k[0][1] + n] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
+                shortcuts[
+                    k[0][0] + n
+                ] = `<span class="bracket-highlighting-${n}">${k[0][0]}</span>`;
+                shortcuts[
+                    k[0][1] + n
+                ] = `<span class="bracket-highlighting-${n}">${k[0][1]}</span>`;
             });
         });
 
@@ -172,6 +186,7 @@ class Page {
                 })
                 .join('');
         }
+        this.data.commentCodes[':+:'] = '<span class="mtk0 small">[...]</span>';
 
         const completeComments = {};
         const comments = {};
@@ -180,7 +195,10 @@ class Page {
             completeComments[key] = {};
             for (const lang in comments[key]) {
                 completeComments[key][lang] = [];
-                if (typeof comments[key][lang] == 'string' && comments[key][lang].includes('{{{all(')) {
+                if (
+                    typeof comments[key][lang] == 'string' &&
+                    comments[key][lang].includes('{{{all(')
+                ) {
                     const endQuery = comments[key][lang].length - 4;
                     const query = comments[key][lang].substring(7, endQuery);
                     completeComments[key][lang] = completeComments[key][query];
@@ -206,7 +224,8 @@ class Page {
                             const startIndex = temp.indexOf('{'),
                                 endIndex = temp.indexOf('}');
                             const keyOfCode = temp.slice(startIndex + 1, endIndex);
-                            const htmlCode = '<code>' + (this.data.commentCodes[keyOfCode] || '~') + '</code>';
+                            const htmlCode =
+                                '<code>' + (this.data.commentCodes[keyOfCode] || '~') + '</code>';
                             cmt += temp.slice(0, startIndex) + htmlCode;
                             temp = temp.substring(endIndex + 1);
                         }
@@ -228,7 +247,12 @@ class Page {
         return this.getHTMLOfCode('usage');
     }
     getSelectOptionsHTML() {
-        return this.list.map((key) => `<option value="${key}">${this.data.texts.list[key].name}</option>`).join('');
+        return this.list
+            .map((key) => {
+                const t = this.data.texts.list[key].name.replaceAll('\n', ' ');
+                return `<option value="${key}">${t}</option>`;
+            })
+            .join('');
     }
     getInformationsHTML() {
         const tabHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -257,8 +281,8 @@ class Page {
         };
 
         const divInnerHTML = {
-            a: (child) =>
-                `<h1>${this.data.texts.list[child].name}</h1>` +
+            default: (child) =>
+                `<h1>${this.data.texts.list[child].name.replaceAll('\n', '<br>')}</h1>` +
                 Object.keys(this.data.texts.list[child].informations)
                     .map(
                         (e) =>
@@ -272,16 +296,24 @@ class Page {
                     .map(
                         (e) =>
                             '<tr>' +
-                            `<td>${this.textData.complexityTexts[e]}</td>` +
-                            `<td><span>${getComplexity(this.data.complexitys[child][e])}</span></td>` +
+                            `<td>${
+                                this.textData.complexityTexts[e] || this.data.texts.complexity[e]
+                            }</td>` +
+                            `<td><span>${getComplexity(
+                                this.data.complexitys[child][e]
+                            )}</span></td>` +
                             '</tr>'
                     )
                     .join('') +
                 '</tbody></table>',
-            ds: () =>
-                `<h1>${this.data.texts.NAME}</h1>` +
+            single: () =>
+                `<h1>${this.data.texts.NAME.replaceAll('\n', '<br>')}</h1>` +
                 Object.keys(this.data.texts.INFORMATIONS)
-                    .map((e) => `<h2>${this.textData.informationTexts[e]}</h2>` + getP(this.data.texts.INFORMATIONS[e]))
+                    .map(
+                        (e) =>
+                            `<h2>${this.textData.informationTexts[e]}</h2>` +
+                            getP(this.data.texts.INFORMATIONS[e])
+                    )
                     .join('') +
                 `<h2>${this.textData.informationTexts.complexity}</h2>` +
                 '<table><tbody>' +
@@ -298,13 +330,13 @@ class Page {
         };
 
         if (this.settings.singleInformation) {
-            this.informationHTML = divInnerHTML.ds();
+            this.informationHTML = divInnerHTML.single();
             return `<div class="show">${this.informationHTML}</div>`;
         } else {
             this.childInfomationHTML = {};
             return this.list
                 .map((child) => {
-                    this.childInfomationHTML[child] = divInnerHTML.a(child);
+                    this.childInfomationHTML[child] = divInnerHTML.default(child);
                     return `<div class="${child}">` + this.childInfomationHTML[child] + '</div>';
                 })
                 .join('');
@@ -352,7 +384,8 @@ const main = {
         for (const lang of app.languages) {
             const contentData = [];
             for (const type of TYPELIST)
-                for (const key in CONFIG[type]) contentData.push([key, type, DATA.pages[type][key].texts[lang].NAME]);
+                for (const key in CONFIG[type])
+                    contentData.push([key, type, DATA.pages[type][key].texts[lang].NAME]);
             this.data.home.content[lang] = contentData;
         }
     },

@@ -52,6 +52,7 @@ body {
 }
 
 #bg {
+    font-size: 1em;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -62,9 +63,9 @@ body {
 
     .brc {
         position: absolute;
-        height: 150px;
-        right: 40px;
-        bottom: -45px;
+        height: 15em;
+        right: 4em;
+        bottom: -4.5em;
     }
 }
 
@@ -401,9 +402,9 @@ main {
     display: flex;
     flex-direction: column;
     top: var(--margin-by-header);
-    right: 2em;
+    right: 1em;
     bottom: 12em;
-    width: 40em;
+    width: 42em;
     padding: 2em 1.5%;
     background-color: #1d2033;
     border-radius: 1em;
@@ -515,8 +516,8 @@ main {
 }
 
 #informations.expand {
-    top: 62px;
-    width: calc(100% - 40px);
+    top: 6.2em;
+    width: calc(100% - 4em);
     bottom: 0;
 
     .expand {
@@ -528,22 +529,26 @@ main {
 
 #informations::-webkit-scrollbar,
 #informations::-webkit-scrollbar-thumb {
-    width: 26px;
-    border-radius: 13px;
+    width: 2.6em;
+    border-radius: 1.3em;
     background-clip: padding-box;
-    border: 10px solid transparent;
+    border: 1em solid transparent;
 }
 
 #informations::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 10px;
+    box-shadow: inset 0 0 0 1em;
     color: white;
 }
 
 code {
     font-family: monospace;
+    
+    .mtk0 {
+        color: #6e7681;
+    }
 
-    .mtkl {
-        text-decoration: underline;
+    .mtk0.small {
+        font-size: 0.8em;
     }
 
     .mtk1 {
@@ -856,15 +861,15 @@ code {
 }
 
 footer {
+    font-size: 1.4em;
     display: flex;
     justify-content: space-around;
-    padding: 2px 20px;
+    padding: 0.142em 1.42em;
     margin-top: var(--content-space);
-    margin-bottom: 50px;
+    margin-bottom: 3.55em;
     background-color: #1D2033;
     font-family: var(--default-font-family);
-    border-radius: 10px;
-    font-size: 14px;
+    border-radius: 0.71em;
     color: #f4f4f4;
 }
 
@@ -1020,7 +1025,7 @@ footer {
     .close {
         position: absolute;
         right: 0.2em;
-        top: 0px;
+        top: 0;
         font-size: 2.5em;
     }
 }
@@ -1323,10 +1328,6 @@ footer {
         font-size: 8px;
     }
 
-    footer {
-        font-size: 12px;
-    }
-
     #popup .custom-input {
         width: 70%;
     }
@@ -1359,8 +1360,7 @@ footer {
     }
 
     footer {
-        padding: 1vw 4vw;
-        font-size: 3vw;
+        padding: 0.33em 2em;
     }
 
     #popup .guide-box {

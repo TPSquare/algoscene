@@ -38,15 +38,17 @@ input:focus-visible {
 }
 
 body {
+    font-size: 10px;
     height: 100vh;
     background-color: #f2f2f2;
-    margin-bottom: 200px;
+    margin-bottom: 20em;
     --popup-bgc: #e0f5ff;
     --header-height: 100px;
     --default-font-family: 'Open Sans', sans-serif;
 }
 
 header {
+    font-size: 1em;
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -54,7 +56,7 @@ header {
     height: var(--header-height);
     top: 0;
     left: 0;
-    box-shadow: 0 0 10px 0 #000000;
+    box-shadow: 0 0 1em 0 #000000;
     background-color: #303554;
     -webkit-user-select: none;
     user-select: none;
@@ -73,15 +75,15 @@ header {
 
     .left {
         .title {
+            font-size: 5em;
             position: relative;
             display: flex;
             align-items: center;
             color: #ffffff;
             font-family: var(--default-font-family);
             font-weight: 900;
-            font-size: 50px;
-            text-shadow: 4px 4px 0 #475ab9;
-            margin-left: 70px;
+            text-shadow: 0.08em 0.08em 0 #475ab9;
+            margin-left: 1.4em;
         }
 
         .title img {
@@ -103,8 +105,8 @@ header {
     }
 
     .right {
-        --margin: 15px;
-        font-size: 25px;
+        font-size: 2.5em;
+        --margin: 0.6em;
         align-items: center;
         padding-right: var(--margin);
 
@@ -143,7 +145,7 @@ header {
             font-family: var(--default-font-family);
             font-weight: bold;
             text-transform: uppercase;
-            border-radius: 5px;
+            border-radius: 0.2em;
             transition: background-color 300ms;
         }
 
@@ -158,36 +160,40 @@ header {
 }
 
 main {
+    font-size: 1em;
     position: relative;
-    padding: 100px 20px 200px;
+    padding: 8em 4em 10em;
     background: url(/jpg/home-main-bg.jpg);
     background-size: cover;
     text-align: center;
-    font-size: 18px;
-    box-shadow: 0 0 10px 0 #000000;
+    box-shadow: 0 0 1em 0 #000000;
 
     * {
         font-family: var(--default-font-family);
     }
 
     .above {
+        font-size: 3.5em;
         font-weight: 800;
-        font-size: 35px;
-        margin-top: 50px;
-        margin-bottom: 30px;
+        margin-top: 1.4em;
+        margin-bottom: 0.84em;
         text-transform: uppercase;
         color: white;
     }
 
+    .autoComplete_wrapper {
+        font-size: 1.4em;
+    }
+
     input {
-        width: 800px;
+        width: 50em;
     }
 
     .info {
+        font-size: 1.2em;
         position: absolute;
-        right: 4px;
-        bottom: 2px;
-        font-size: 12px;
+        right: 0.332em;
+        bottom: 0.166em;
         color: white;
     }
 }
@@ -195,7 +201,7 @@ main {
 #contents {
     display: flex;
     flex-wrap: wrap;
-    font-size: 18px;
+    font-size: 1.8em;
     padding: 0 1em;
     margin-top: 1em;
 
@@ -261,8 +267,7 @@ main {
     header {
         .left {
             .title {
-                font-size: 40px;
-                margin-left: 50px;
+                margin-left: 1em;
             }
         }
     }
@@ -275,38 +280,18 @@ main {
 @media only screen and (max-width: 56em) {
     body {
         --header-height: 60px;
+        font-size: 9px;
     }
 
     header {
-        .left {
-            .title {
-                font-size: 30px;
-                margin-left: 30px;
-                text-shadow: 3px 3px 0 #475ab9;
-            }
-        }
-
         .right {
-            font-size: 20px;
+            font-size: 2em;
         }
     }
 
     main {
-        font-size: 16px;
-        padding: 80px 16px 150px;
-
-        .above {
-            font-size: 26px;
-            margin-bottom: 20px;
-            margin-top: 35px;
-        }
-
         input {
-            width: 600px;
-        }
-
-        .info {
-            font-size: 10px;
+            width: 40em;
         }
     }
 }
@@ -314,90 +299,31 @@ main {
 @media only screen and (max-width: 40em) {
     body {
         --header-height: 50px;
+        font-size: 8px;
     }
 
     header {
-        .left {
-            .title {
-                font-size: 25px;
-                margin-left: 20px;
-                text-shadow: 2px 2px 0 #475ab9;
-            }
-        }
-
         .right {
-            --margin: 10px;
-
             .decorate {
                 display: none;
             }
         }
     }
 
-    #contents {
-        font-size: 2.35vw;
+    main {
+        input {
+            width: 28em;
+        }
     }
 
-    main {
-        font-size: 14px;
-        padding: 60px 12px 100px;
-
-        .above {
-            font-size: 25px;
-            margin-top: 30px;
-        }
-
-        input {
-            width: 300px;
-        }
-
-        .info {
-            font-size: 8px;
-        }
+    #contents {
+        font-size: 2.35vw;
     }
 }
 
 @media only screen and (max-width: 24em) {
     body {
         --header-height: 15vw;
-    }
-
-    header {
-        .left {
-            .title {
-                font-size: 7vw;
-                margin-left: 5vw;
-            }
-        }
-
-        .right {
-            font-size: 5vw;
-            --margin: 4vw;
-        }
-    }
-
-    #contents {
-        font-size: 3.4vw;
-    }
-
-    main {
-        padding: 12vw 6vw 24vw;
-        font-size: 4vw;
-
-        .above {
-            margin-top: 10vw;
-            margin-bottom: 5vw;
-            font-size: 7vw;
-        }
-
-        input {
-            width: 80vw;
-        }
-
-        .info {
-            font-size: 2vw;
-            right: 0.2vw;
-            bottom: 0.1vw;
-        }
+        font-size: 2vw;
     }
 }

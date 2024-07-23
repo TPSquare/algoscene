@@ -3,7 +3,7 @@ import fs from 'fs';
 const code = {
     cpp: {
         main: (e, t, n, r) => [
-            '<span class="mtk6">const</span> <span class="mtk6">int</span> <span class="mtk10">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">1e5</span><span class="mtk1">;</span>',
+            '<span class="mtk6">const</span> <span class="mtk6">int</span> <span class="mtk10">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">100</span><span class="mtk1">;</span>',
             '<span class="mtk6">int</span> <span class="mtk10">segmentTree</span><span class="bracket-highlighting-0">[</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk10">MAXN</span><span class="bracket-highlighting-0">]</span><span class="mtk1">;</span>',
             '<span>&empty-line;</span>',
             '<span class="mtk6">void</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk6">int</span> <span class="mtk10">array</span><span class="bracket-highlighting-1">[</span><span class="bracket-highlighting-1">]</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk6">int</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',
@@ -58,7 +58,7 @@ const code = {
     },
     js: {
         main: (e, t, n, r) => [
-            '<span class="mtk6">const</span> <span class="mtk19">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">100000</span><span class="mtk1">;</span>',
+            '<span class="mtk6">const</span> <span class="mtk19">MAXN</span> <span class="mtk3">=</span> <span class="mtk7">100</span><span class="mtk1">;</span>',
             '<span class="mtk6">const</span> <span class="mtk19">segmentTree</span> <span class="mtk3">=</span> <span class="mtk6">new</span> <span class="mtk17">Array</span><span class="bracket-highlighting-0">(</span><span class="mtk7">4</span> <span class="mtk3">*</span> <span class="mtk19">MAXN</span><span class="bracket-highlighting-0">)</span><span class="mtk1">;</span>',
             '<span>&empty-line;</span>',
             '<span class="mtk6">function</span> <span class="mtk16">build</span><span class="bracket-highlighting-0">(</span><span class="mtk10">array</span><span class="mtk1">,</span> <span class="mtk10">id</span><span class="mtk1">,</span> <span class="mtk10">start</span><span class="mtk1">,</span> <span class="mtk10">end</span><span class="bracket-highlighting-0">)</span> <span class="bracket-highlighting-0">{</span>',

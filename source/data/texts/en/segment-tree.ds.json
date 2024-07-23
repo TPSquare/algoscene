@@ -16,7 +16,7 @@
             "name": "Sum of the segment",
             "comments": {
                 "cpp": [
-                    "Declare the maximum size of the input array",
+                    "Initialize the maximum size of the input array",
                     "Initialize the segment tree with a size four times the size of the input array (proven)",
                     "",
                     "Define a function to build the segment tree from the input array",

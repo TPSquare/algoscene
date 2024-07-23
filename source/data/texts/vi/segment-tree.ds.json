@@ -16,7 +16,7 @@
             "name": "Tính tổng của đoạn",
             "comments": {
                 "cpp": [
-                    "Khai báo kích thước tối đa của mảng đầu vào",
+                    "Khởi tạo kích thước tối đa của mảng đầu vào",
                     "Khởi tạo cây phân đoạn cần kích thước gấp 4 lần kích thước mảng đầu vào (đã được chứng minh)",
                     "",
                     "Định nghĩa hàm xây dựng cây phân đoạn từ mảng đầu vào",

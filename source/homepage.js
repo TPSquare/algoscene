@@ -8,7 +8,7 @@ export default {
     async render(app, fs, contentData) {
         for (const lang of app.languages) {
             const textData = Object.assign(
-                JSON.parse(await fs.readFileSync(`./source/data/texts/${lang}/index.json`)),
+                JSON.parse(await fs.readFileSync(`./source/data/texts/${lang}/home.json`)),
                 JSON.parse(await fs.readFileSync(`./source/data/texts/${lang}/general.json`))
             );
             const getAContentTag = (e) =>
@@ -20,7 +20,6 @@ export default {
             app.get(`/${lang}`, (req, res) =>
                 res.render('home', {
                     lang,
-                    title: textData.learning___,
                     description: textData.aboveText,
                     ...textData,
                     version: app.version,

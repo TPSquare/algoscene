@@ -52,7 +52,7 @@ new (class {
             actions: {},
             setAction(key, action) {
                 this.actions[key] = action;
-                if (key == document.body.main.bottombar.list.value) window.ALGOSCENE.runAction(key);
+                if (key == document.body.main.bottombar.list.value) this.runAction(key);
             },
             runAction(key, save = true) {
                 ALGOSCENE.playPauseBtn.reset();
@@ -108,10 +108,11 @@ new (class {
                 this.body.informations.update(key);
             };
 
-        document.updatePageTitle = function (algo) {
+        document.updatePageTitle = function (key) {
             const t = this.body.main.bottombar.list;
-            algo = t.querySelector(`option[value="${algo}"]`).innerHTML;
-            this.head.querySelector('title').innerHTML = algo + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene';
+            key = t.querySelector(`option[value="${key}"]`).innerHTML;
+            this.head.querySelector('title').innerHTML =
+                key + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene';
         };
 
         document.body.overflow = function (ok) {
@@ -156,7 +157,11 @@ new (class {
         const frame = main.querySelector('#frame').combine({
             onresize() {
                 const w = this.parentNode.offsetWidth,
-                    h = window.innerHeight - this.parentNode.offsetTop - bottombar.offsetHeight - 20;
+                    h =
+                        window.innerHeight -
+                        this.parentNode.offsetTop -
+                        bottombar.offsetHeight -
+                        20;
                 if ((w * 9) / 16 <= h) this.width = w;
                 else this.width = (h * 16) / 9;
                 this.height = (this.width * 9) / 16;
@@ -193,11 +198,14 @@ new (class {
                 window.ALGOSCENE.runAction(this.value);
             },
             setStartValue() {
-                this.value = localData.history[document.TYPE][document.KEY] || this.childNodes[0].value;
+                this.value =
+                    localData.history[document.TYPE][document.KEY] || this.childNodes[0].value;
             },
             up() {
                 this.selectedIndex =
-                    (Array.from(this.children).indexOf(this.querySelector(`option[value="${this.value}"]`)) -
+                    (Array.from(this.children).indexOf(
+                        this.querySelector(`option[value="${this.value}"]`)
+                    ) -
                         1 +
                         this.children.length) %
                     this.children.length;
@@ -205,7 +213,10 @@ new (class {
             },
             down() {
                 this.selectedIndex =
-                    (Array.from(this.children).indexOf(this.querySelector(`option[value="${this.value}"]`)) + 1) %
+                    (Array.from(this.children).indexOf(
+                        this.querySelector(`option[value="${this.value}"]`)
+                    ) +
+                        1) %
                     this.children.length;
                 this.onchange();
             }
@@ -239,7 +250,8 @@ new (class {
                     repeat: data[3],
                     select: data[4]
                 };
-                for (const key in this.textData) this.textData[key] += ` (${SHORTCUT_CONFIG.playPauseBtn})`;
+                for (const key in this.textData)
+                    this.textData[key] += ` (${SHORTCUT_CONFIG.playPauseBtn})`;
             },
             defaultStatus: 'play',
             setStatus(status) {
@@ -368,7 +380,9 @@ new (class {
                                 e.childNodes[1].style.width = 'auto';
                                 return e;
                             }),
-                            right = Math.max(...elm.map((e) => e.childNodes[1].clientWidth)) + this.clientWidth * 0.05,
+                            right =
+                                Math.max(...elm.map((e) => e.childNodes[1].clientWidth)) +
+                                this.clientWidth * 0.05,
                             left = this.clientWidth - right;
                         elm.forEach((e) => {
                             e.childNodes[0].style.width = left + 'px';
@@ -388,7 +402,8 @@ new (class {
 
         const expandBtn = informations.querySelector('.expand').combine({
             onclick: () => {
-                if (informations.classList.contains('expand')) informations.classList.remove('expand');
+                if (informations.classList.contains('expand'))
+                    informations.classList.remove('expand');
                 else informations.classList.add('expand');
                 setTimeout(() => informations.onresize(), 1000);
             }
@@ -425,13 +440,15 @@ new (class {
                 return ok;
             },
             right() {
-                const index = (Number(this.querySelector('.active').id) + 1) % this.childNodes.length;
+                const index =
+                    (Number(this.querySelector('.active').id) + 1) % this.childNodes.length;
                 this.setActive(this.childNodes[index].prolang);
                 document.update();
             },
             left() {
                 const index =
-                    (Number(this.querySelector('.active').id) - 1 + this.childNodes.length) % this.childNodes.length;
+                    (Number(this.querySelector('.active').id) - 1 + this.childNodes.length) %
+                    this.childNodes.length;
                 this.setActive(this.childNodes[index].prolang);
                 document.update();
             },
@@ -495,17 +512,11 @@ new (class {
             innerHTML:
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"></path></svg>',
             onclick() {
-                if (this.classList.contains('success') || this.classList.contains('failure')) return;
+                if (this.classList.contains('success') || this.classList.contains('failure'))
+                    return;
                 try {
                     textarea.value = [...this.parentNode.querySelectorAll('code.show .view-line')]
-                        .map((e) => {
-                            return (
-                                (e.querySelector('.tab')?.innerHTML?.replaceAll('&nbsp;', ' ') || '') +
-                                (e.querySelector('.line-code').childNodes[0].innerHTML == '&nbsp;'
-                                    ? ' '
-                                    : e.querySelector('.line-code').innerText)
-                            );
-                        })
+                        .map((e) => e.innerText.replaceAll(' ', ' '))
                         .join('\n');
                     textarea.select();
                     document.execCommand('copy');
@@ -538,7 +549,8 @@ new (class {
                         if (this.classList.contains('show')) this.classList.remove('show');
                         else {
                             this.classList.add('show');
-                            if (!localData.history.guide.selectAction) guideBox.controller.run('selectAction', 1000);
+                            if (!localData.history.guide.selectAction)
+                                guideBox.controller.run('selectAction', 1000);
                         }
                         overlay.handle();
                     }
@@ -547,7 +559,9 @@ new (class {
 
                 selectAction.querySelector('.close').onclick = () => selectAction.handle();
 
-                const textData = {select: selectAction.querySelector('.title').getAttribute('data-text')};
+                const textData = {
+                    select: selectAction.querySelector('.title').getAttribute('data-text')
+                };
                 Object.keys(config.actions)
                     .filter((key) => !config.actions[key].hidden)
                     .map((key) => {
@@ -668,14 +682,22 @@ new (class {
                     this.config = {
                         main: [
                             () => this.focusTo(document.body.main.frame, 0),
-                            () => this.focusTo(document.body.main.bottombar.listWrapper, listWrapperIndex),
+                            () =>
+                                this.focusTo(
+                                    document.body.main.bottombar.listWrapper,
+                                    listWrapperIndex
+                                ),
                             () => this.focusTo(document.body.main.bottombar.playPauseBtn, 3),
                             () => this.focusTo(document.body.main.bottombar.customInputBtn, 4),
                             () => this.focusTo(document.body.main.bottombar.settingBtn, 5),
                             () => this.focusTo(document.body.main.bottombar.screenBtn, 6),
                             () => this.focusTo(document.body.informations, 11),
                             () => this.focusTo(document.body.codeBox.codes, 7),
-                            () => this.focusTo(document.body.codeBox.codes.querySelector('.show span'), 9),
+                            () =>
+                                this.focusTo(
+                                    document.body.codeBox.codes.querySelector('.show span'),
+                                    9
+                                ),
                             () => this.focusTo(document.body.codeBox.prolangList, 8),
                             () => this.focusTo(document.body.codeBox.copyCodeBtn, 10)
                         ],
@@ -693,15 +715,20 @@ new (class {
                         selectAction: [
                             () => this.focusTo(document.body.popup.selectAction, 19),
                             () => {
-                                const elm = document.body.popup.selectAction.querySelector('section span');
+                                const elm =
+                                    document.body.popup.selectAction.querySelector('section span');
                                 this.focusTo(elm, 20);
                             },
                             () => {
-                                const elm = document.body.popup.selectAction.querySelector('section input');
+                                const elm =
+                                    document.body.popup.selectAction.querySelector('section input');
                                 this.focusTo(elm, 21);
                             },
                             () => {
-                                const elm = document.body.popup.selectAction.querySelector('section button');
+                                const elm =
+                                    document.body.popup.selectAction.querySelector(
+                                        'section button'
+                                    );
                                 this.focusTo(elm, 22);
                             }
                         ]
@@ -825,7 +852,8 @@ new (class {
                 else {
                     this.classList.add('show');
                     inputCustomInput.clearValue();
-                    if (!localData.history.guide[this.guideKey]) guideBox.controller.run(this.guideKey, 1000);
+                    if (!localData.history.guide[this.guideKey])
+                        guideBox.controller.run(this.guideKey, 1000);
                 }
                 overlay.handle();
             },
@@ -867,7 +895,8 @@ new (class {
                         if (this.classList.contains('show')) this.classList.remove('show');
                         else {
                             this.classList.add('show');
-                            const {top, width, left} = document.body.main.frame.getBoundingClientRect();
+                            const {top, width, left} =
+                                document.body.main.frame.getBoundingClientRect();
                             this.setStyle({
                                 bottom: window.innerHeight - top + 10 + 'px',
                                 right: window.innerWidth - left - width + 'px'
@@ -930,6 +959,7 @@ new (class {
     shortcut() {
         window.onkeydown = (e) => {
             if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            if (e.ctrlKey) return;
             switch (e.key.toUpperCase()) {
                 case SHORTCUT_CONFIG.prolangList[0]:
                     document.body.codeBox.prolangList.left();
@@ -977,13 +1007,15 @@ new (class {
                 children: [
                     document.createElement({
                         tag: 'input',
+                        key: 'input',
                         style: {
                             width: '300px',
                             height: '30px',
                             fontSize: '16px',
                             fontFamily: 'monospace',
                             border: '1px solid black',
-                            borderRadius: 'inherit'
+                            borderRadius: 'inherit',
+                            pointerEvents: 'none'
                         },
                         onkeydown(e) {
                             if (e.key != 'Enter') return;
@@ -998,7 +1030,9 @@ new (class {
                                 for (i = 0; i <= 10; i++)
                                     e.childNodes[0]
                                         .querySelectorAll('.bracket-highlighting-' + i)
-                                        .forEach((e) => (e.className = 'bracket-highlighting-' + i));
+                                        .forEach(
+                                            (e) => (e.className = 'bracket-highlighting-' + i)
+                                        );
                                 h = '';
                                 let html = e.childNodes[0].innerHTML;
                                 for (i = 1; i <= 10; i++) {
@@ -1012,14 +1046,23 @@ new (class {
                                     .forEach(
                                         (e) =>
                                             (html = html
-                                                .replaceAll(`<span class="mtk${e}">&nbsp;</span>`, ' ')
-                                                .replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`))
+                                                .replaceAll(
+                                                    `<span class="mtk${e}">&nbsp;</span>`,
+                                                    ' '
+                                                )
+                                                .replaceAll(
+                                                    `<span class="mtk${e}">&nbsp;`,
+                                                    ` <span class="mtk${e}">`
+                                                ))
                                     );
                                 html = html
                                     .replaceAll('<span></span>', '<span>&empty-line;</span>')
                                     .replaceAll('&nbsp;</span>', '</span> ');
                                 for (let i = 0; i <= 10; i++)
-                                    html = html.replaceAll(`<span class="mtk${e}">&nbsp;`, ` <span class="mtk${e}">`);
+                                    html = html.replaceAll(
+                                        `<span class="mtk${e}">&nbsp;`,
+                                        ` <span class="mtk${e}">`
+                                    );
                                 html = html.replaceAll('&nbsp;', '</span> <span class="mtk1">');
                                 r.push(html);
                             });
@@ -1030,10 +1073,20 @@ new (class {
                 handle() {
                     if (this.classList.contains('show')) {
                         this.classList.remove('show');
-                        this.setStyle({transform: 'translate(-50%, 50%)', opacity: 0, pointerEvents: 'none'});
+                        this.setStyle({
+                            transform: 'translate(-50%, 50%)',
+                            opacity: 0,
+                            pointerEvents: 'none'
+                        });
+                        this.input.style.pointerEvents = 'none';
                     } else {
                         this.classList.add('show');
-                        this.setStyle({transform: 'translate(-50%, -50%)', opacity: 1, pointerEvents: 'all'});
+                        this.setStyle({
+                            transform: 'translate(-50%, -50%)',
+                            opacity: 1,
+                            pointerEvents: 'all'
+                        });
+                        this.input.style.pointerEvents = 'all';
                     }
                     document.body.popup.overlay.handle();
                 }
