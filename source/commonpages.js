@@ -4,7 +4,7 @@ const CONFIG = (() => {
         const singleInformation = true;
         return {
             a: {sorting: {}, searching: {}, pathfinding: {}},
-            ds: {'segment-tree': {singleInformation}}
+            ds: {'segment-tree': {singleInformation}, 'prefix-sum': {}}
         };
     })(),
     TYPELIST = Object.keys(CONFIG);

@@ -32,12 +32,12 @@
                 ],
                 "js": [
                     "{{{cpp,0}}}",
-                    "Khai báo mảng {prefixSumjs} để lưu trữ tổng tích lũy của các phần tử từ mảng gốc.",
-                    "Khởi tạo giá trị đầu tiên của mảng {prefixSumjs} là {0}, vì không có phần tử nào trước phần tử đầu tiên.",
+                    "Khai báo mảng {prefixSum19} để lưu trữ tổng tích lũy của các phần tử từ mảng gốc.",
+                    "Gán giá trị {0} cho phần tử đầu tiên của mảng {prefixSum19}. Đây là giá trị khởi đầu để tính tổng tiền tố.",
                     "",
-                    "Định nghĩa hàm xây dựng mảng {prefixSumjs} từ mảng gốc {array}.",
-                    "Vòng lặp từ chỉ số {1} đến {arrayLength} (chỉ số bắt đầu từ {1} vì chỉ số {0} của {prefixSumjs} luôn là {0}).",
-                    "Tính tổng tích lũy cho chỉ số {i} trong {prefixSumjs}. Tổng tại chỉ số {i} bằng tổng tích lũy của chỉ số {iminus1} cộng với phần tử tương ứng trong mảng gốc {array}.",
+                    "Định nghĩa hàm xây dựng mảng {prefixSum19} từ mảng gốc {array}.",
+                    "Vòng lặp từ chỉ số {1} đến {arrayLength} (chỉ số bắt đầu từ {1} vì chỉ số {0} của {prefixSum19} luôn là {0}).",
+                    "Tính tổng tích lũy cho chỉ số {i} trong {prefixSum19}. Tổng tại chỉ số {i} bằng tổng tích lũy của chỉ số {iminus1} cộng với phần tử tương ứng trong mảng gốc {array}.",
                     "",
                     "",
                     "Định nghĩa hàm tính tổng của các phần tử từ chỉ số {left} đến chỉ số {right} trong mảng gốc. Tính tổng của các phần tử từ chỉ số {left} đến {right} bằng cách trừ tổng tích lũy tại {left} khỏi tổng tích lũy tại {rightplus1}."
@@ -80,6 +80,16 @@
                     "{:+:} trừ tổng tích lũy của vùng từ ({0}, {0}) đến ({xminus1}, {yy}) {:+:}",
                     "{:+:} trừ tổng tích lũy của vùng từ ({0}, {0}) đến ({xx}, {yminus1}) {:+:}",
                     "{:+:} cộng tổng tích lũy của vùng từ ({0}, {0}) đến ({xminus1}, {yminus1}), do bị trừ hai lần."
+                ],
+                "js": [
+                    "{{{cpp,0}}}",
+                    "Khai báo mảng {prefixSum19} để lưu trữ tổng tích lũy của các phần tử từ mảng gốc.",
+                    "",
+                    "Định nghĩa hàm xây dựng mảng {prefixSum19} từ mảng gốc {array}.",
+                    "Vòng lặp qua từng hàng của mảng {prefixSum19}, bắt đầu từ chỉ số {1} đến {arrayLength}.",
+                    "Vòng lặp qua từng cột của mảng {prefixSum19}, bắt đầu từ chỉ số {1} đến {array0Length}.",
+                    "Tính tổng tích lũy cho ô tại chỉ số ({i}, {j}) trong mảng {prefixSum19}.",
+                    "{{{cpp,7-17}}}"
                 ]
             }
         },
@@ -115,6 +125,18 @@
                     "Duyệt qua từng chỉ số từ {1} đến {sizeminus1} của mảng {array}.",
                     "Cập nhật mảng {prefixSum} để tính tổng tích lũy của các thay đổi từ các phép toán trước đó.",
                     "Cập nhật giá trị tại chỉ số {i} trong mảng {array} bằng tổng tích lũy hiện tại trong {prefixSum}."
+                ],
+                "js": [
+                    "{{{cpp,0}}}",
+                    "Khởi tạo mảng {prefixSum19} để theo dõi các thay đổi để tính tổng cập nhật cho mảng {array}.",
+                    "Vòng lặp {for} dùng để duyệt qua từng phần tử trong mảng {operations}. Mỗi phần tử là một mảng con chứa ba phần tử {left19}, {right19}, {value19} tương ứng với chỉ số trái, phải và giá trị cộng thêm của đoạn cập nhật.",
+                    "Tăng giá trị tại chỉ số {left19} trong mảng {prefixSum19} để bắt đầu cập nhật từ chỉ số này.",
+                    "Giảm giá trị tại chỉ số {right19plus1} trong mảng {prefixSum19} để kết thúc cập nhật sau chỉ số {right19}.",
+                    "",
+                    "Cập nhật phần tử đầu tiên của mảng {array} bằng giá trị tại {prefixSum19at0}.",
+                    "Duyệt qua từng chỉ số từ {1} đến {arrayLengthminus1} của mảng {array}.",
+                    "Cập nhật mảng {prefixSum19} để tính tổng tích lũy của các thay đổi từ các phép toán trước đó.",
+                    "Cập nhật giá trị tại chỉ số {i} trong mảng {array} bằng tổng tích lũy hiện tại trong {prefixSum19}."
                 ]
             }
         },
@@ -140,7 +162,7 @@
                     "Khởi tạo số cột tối đa của mảng đầu vào.",
                     "",
                     "Định nghĩa hàm cập nhật mảng {array} dựa trên các phép toán được mô tả trong {operations}.",
-                    "Tăng kích thước của {rows} và {cols} lên {2} để tạo không gian làm việc cho mảng {prefixSum}.",
+                    "Tăng kích thước của {rows} và {cols} lên {2} để dễ dàng xử lý biên.",
                     "Khởi tạo mảng {prefixSum} để theo dõi các thay đổi để tính tổng cập nhật cho mảng {array}.",
                     "Vòng lặp qua từng hàng của mảng {prefixSum}, bắt đầu từ chỉ số {1} đến {rowsminus1}.",
                     "Vòng lặp qua từng cột của mảng {prefixSum} từ chỉ số {1} đến {colsminus1} và giá trị tại chỉ số ({i}, {j}) của mảng {prefixSum} bằng {0}.",
@@ -160,6 +182,24 @@
                     "Vòng lặp qua từng cột của mảng {prefixSum}, bắt đầu từ chỉ số {1} đến {colsminus1}.",
                     "Cập nhật giá trị tại chỉ số ({i}, {j}) của mảng {prefixSum} bằng tổng tích lũy của các giá trị trước đó.",
                     "Cập nhật giá trị tại chỉ số ({iminus1}, {jminus1}) của mảng {array} bằng giá trị tương ứng trong mảng {prefixSum}."
+                ],
+                "js": [
+                    "{{{cpp,2}}}",
+                    "Khởi tạo {rows} để lưu số hàng của mảng {prefixSum19}. Giá trị này lớn hơn của {array} {2} đơn vị để dễ dàng xử lý biên.",
+                    "Khởi tạo {cols} để lưu số hàng của mảng {prefixSum19}. Giá trị này lớn hơn của {array} {2} đơn vị để dễ dàng xử lý biên.",
+                    "Khởi tạo mảng {prefixSum19} để theo dõi các thay đổi để tính tổng cập nhật cho mảng {array}.",
+                    "Vòng lặp {for} dùng để duyệt qua từng phần tử trong mảng {operations}. Mỗi phần tử là một mảng con chứa năm phần tử {x}, {y}, {xx}, {yy}, {value} tương ứng với chỉ số trên-trái, dưới-phải và giá trị cộng thêm của vùng cập nhật.",
+                    "Điều chỉnh các giá trị chỉ số {x}, {y}, {xx} và {yy} để phù hợp với mảng {prefixSum19} đã được mở rộng.",
+                    "Tăng giá trị tại chỉ số ({x}, {y}) trong mảng {prefixSum19} để bắt đầu cập nhật từ chỉ số này.",
+                    "Giảm giá trị tại chỉ số ({xx}, {y}) trong mảng {prefixSum19} để kết thúc cập nhật sau chỉ số {xx}.",
+                    "Giảm giá trị tại chỉ số ({x}, {yy}) trong mảng {prefixSum19} để kết thúc cập nhật sau chỉ số {yy}.",
+                    "Tăng giá trị tại chỉ số ({xx}, {yy}) trong mảng {prefixSum19} để bù đắp cho việc cập nhật hai lần trước đó.",
+                    "",
+                    "{{{cpp,18}}}",
+                    "Vòng lặp qua từng hàng của mảng {prefixSum19}, bắt đầu từ chỉ số {1} đến {rowsminus1}.",
+                    "Vòng lặp qua từng cột của mảng {prefixSum19}, bắt đầu từ chỉ số {1} đến {colsminus1}.",
+                    "Cập nhật giá trị tại chỉ số ({i}, {j}) của mảng {prefixSum19} bằng tổng tích lũy của các giá trị trước đó.",
+                    "Cập nhật giá trị tại chỉ số ({iminus1}, {jminus1}) của mảng {array} bằng giá trị tương ứng trong mảng {prefixSum19}."
                 ]
             }
         }

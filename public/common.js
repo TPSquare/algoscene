@@ -516,7 +516,12 @@ new (class {
                     return;
                 try {
                     textarea.value = [...this.parentNode.querySelectorAll('code.show .view-line')]
-                        .map((e) => e.innerText.replaceAll(' ', ' '))
+                        .map((e) => {
+                            let res = '';
+                            res += e.querySelector('.tab')?.innerText || '';
+                            res += e.querySelector('.line-code').innerText;
+                            return res.replaceAll(' ', ' ');
+                        })
                         .join('\n');
                     textarea.select();
                     document.execCommand('copy');

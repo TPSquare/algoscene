@@ -256,13 +256,19 @@ const data = JSON.stringify({
         sizeminus1: ['mtk10|size', '', '-', '', 'mtk7|1'],
         rowsminus1: ['mtk10|rows', '', '-', '', 'mtk7|1'],
         colsminus1: ['mtk10|cols', '', '-', '', 'mtk7|1'],
+        arrayLengthminus1: ['mtk10|array', '.', 'mtk10|length', '', '-', '', 'mtk7|1'],
         rightplus1: ['mtk10|right', '', '+', '', 'mtk7|1'],
+        right19plus1: ['mtk19|right', '', '+', '', 'mtk7|1'],
         array: 'mtk10|array',
-        arrayLength: 'mtk10|array.length',
+        arrayLength: ['mtk10|array', '.', 'mtk10|length'],
+        array0Length: ['mtk10|array', 'bh2|[', 'mtk7|0', 'bh2|]', '.', 'mtk10|length'],
         operations: 'mtk10|operations',
         numOps: 'mtk10|numOps',
         prefixSum: 'mtk10|prefixSum',
-        prefixSumjs: 'mtk19|prefixSum',
+        prefixSum19: 'mtk19|prefixSum',
+        left19: 'mtk19|left',
+        right19: 'mtk19|right',
+        value19: 'mtk19|value',
         left: 'mtk10|left',
         right: 'mtk10|right',
         value: 'mtk10|value',
@@ -275,7 +281,9 @@ const data = JSON.stringify({
         y: 'mtk10|y',
         xx: 'mtk10|xx',
         yy: 'mtk10|yy',
-        prefixSumat0: ['mtk10|prefixSum', 'bh1|[', 'mtk7|0', 'bh1|]']
+        for: 'mtk18|for',
+        prefixSumat0: ['mtk10|prefixSum', 'bh1|[', 'mtk7|0', 'bh1|]'],
+        prefixSum19at0: ['mtk19|prefixSum', 'bh1|[', 'mtk7|0', 'bh1|]']
     }
 });
 
