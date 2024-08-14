@@ -188,11 +188,13 @@
             }
         }
     },
-    "constraints": [
-        "Các giá trị cách nhau bởi khoảng trắng",
-        "Giá trị là một số nguyên nằm trong đoạn từ 1 đến 100",
-        "Có tối thiểu 2 giá trị (tối đa 8 giá trị sẽ được sử dụng)"
-    ],
+    "constraints": {
+        "default": [
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Giá trị là một số nguyên nằm trong đoạn từ 1 đến 100",
+            "Có tối thiểu 2 giá trị (tối đa 8 giá trị sẽ được sử dụng)"
+        ]
+    },
     "complexity": {
         "build": "Xây dựng",
         "update": "Cập nhật một phần tử",

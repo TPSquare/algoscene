@@ -204,6 +204,14 @@
             }
         }
     },
+    "constraints": {
+        "sumArray": [
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99",
+            "Có tối đa 8 giá trị"
+        ],
+        "default": []
+    },
     "complexity": {
         "build": "Xây dựng",
         "getSum": "Tính tổng",

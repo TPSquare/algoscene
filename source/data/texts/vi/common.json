@@ -60,5 +60,6 @@
     "applyText": "Áp dụng",
     "customizeInputText": "Tùy chỉnh đầu vào",
     "editText": "Chỉnh sửa",
-    "directEditing___": "Chỉnh sửa trực tiếp trên khung"
+    "directEditing___": "Chỉnh sửa trực tiếp trên khung",
+    "noActionText": "Mô phỏng này hiện chưa có sẵn. Chúng tôi đang làm việc để triển khai nó sớm."
 }

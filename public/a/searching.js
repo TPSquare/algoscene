@@ -1,7 +1,5 @@
 'use strict';
 
-ALGOSCENE.init();
-
 let TARGET = 7,
     ARRAY = [5, 9, 2, 4, 11, 6, 8, 1, 12, 3, 7, 10];
 

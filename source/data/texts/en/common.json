@@ -60,5 +60,6 @@
     "applyText": "Apply",
     "customizeInputText": "Customize input",
     "editText": "Edit",
-    "directEditing___": "Direct editing on frame"
+    "directEditing___": "Direct editing on frame",
+    "noActionText": "This simulation is currently unavailable. We are working on implementing it soon."
 }

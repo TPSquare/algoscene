@@ -1,7 +1,5 @@
 'use strict';
 
-ALGOSCENE.init();
-
 const gcd = (a, b) => (b == 0 ? a : gcd(b, a % b));
 
 const config = {
@@ -23,7 +21,9 @@ ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
 ALGOSCENE.customInput.onApply = function (value) {
     let isValid = true;
     value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) => (isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e) ? (isValid = false) : null));
+    value.forEach((e) =>
+        isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e) ? (isValid = false) : null
+    );
     if (value.length < MINN) isValid = false;
     if (isValid) {
         ARRAY = value.slice(0, MAXN);
@@ -42,7 +42,8 @@ const segmentTree = new (class {
         const degree = 30 * (this.currentLevelNumber / 3);
         const radian = (degree * Math.PI) / 180;
         const addTop = 6 * Math.cos(radian);
-        const addLeft = 7 * this.currentLevelNumber * this.currentLevelNumber * 0.2 * Math.sin(radian);
+        const addLeft =
+            7 * this.currentLevelNumber * this.currentLevelNumber * 0.2 * Math.sin(radian);
         return [addTop, addLeft];
     }
     setTree() {
@@ -65,7 +66,8 @@ const segmentTree = new (class {
         this.elm.style.width = width + 'em';
         this.elm.style.height = height + 'em';
         width *= ALGOSCENE.frameElm.em * 10;
-        if (width > ALGOSCENE.frameElm.width * 0.9) this.setScale((ALGOSCENE.frameElm.width / width) * 0.9);
+        if (width > ALGOSCENE.frameElm.width * 0.9)
+            this.setScale((ALGOSCENE.frameElm.width / width) * 0.9);
         height *= this.scale;
         height *= ALGOSCENE.frameElm.em * 10;
         if (height > ALGOSCENE.frameElm.height * 0.8)
@@ -76,7 +78,10 @@ const segmentTree = new (class {
         this.style.left = left + 'em';
     }
     getPositionElm() {
-        return [Number(this.style.top.replace('em', '')), Number(this.style.left.replace('em', ''))];
+        return [
+            Number(this.style.top.replace('em', '')),
+            Number(this.style.left.replace('em', ''))
+        ];
     }
     async selectedElm() {
         this.classList.add('selected');
@@ -91,7 +96,10 @@ const segmentTree = new (class {
         await ALGOSCENE.delay();
     }
     setLevelElm(id) {
-        this.getElmByIdx(id).setAttribute('data-level', this.levelNumber - this.currentLevelNumber + 1);
+        this.getElmByIdx(id).setAttribute(
+            'data-level',
+            this.levelNumber - this.currentLevelNumber + 1
+        );
     }
     createArrayNodes() {
         ARRAY.forEach((value, index) => {
@@ -167,7 +175,8 @@ const segmentTree = new (class {
         const parPos = this.getElmByIdx(parentId).getPos();
         const pos = this.getElmByIdx(id).getPos();
         path.setPos(...pos);
-        const degrees = Math.atan((pos[1] - parPos[1]) / (parPos[0] - pos[0])) * (180 / Math.PI) - 90;
+        const degrees =
+            Math.atan((pos[1] - parPos[1]) / (parPos[0] - pos[0])) * (180 / Math.PI) - 90;
         path.style.setProperty('--rotation', degrees + 'deg');
         const width = Math.sqrt(Math.pow(pos[0] - parPos[0], 2) + Math.pow(pos[1] - parPos[1], 2));
         path.style.setProperty('--width', width + 'em');
@@ -344,57 +353,71 @@ const result = new (class {
     }
 })();
 
-ALGOSCENE.enableSelectAction({
-    actions: {
-        build: {
-            action: async () => {
-                await segmentTree.build();
-                await segmentTree.render();
-            },
-            hidden: true
-        },
-        get: {
-            action: async (e) => await result.show(await segmentTree.get(1, 0, ARRAY.length - 1, e[0], e[1], 1)),
-            input: 'leftRange rightRange',
-            checkInput: (value) => {
-                let isValid = true;
-                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
-                if (value.length < 2 || value[0] > value[1]) isValid = false;
-                return isValid;
-            }
-        },
-        update: {
-            action: async (e) => await segmentTree.update(1, 0, ARRAY.length - 1, e[0], e[1], 1),
-            input: 'index value',
-            checkInput: (value) => {
-                let isValid = true;
-                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
-                if (value[1] < MINVALUE || value[1] > MAXVALUE) isValid = false;
-                if (value.length < 2) isValid = false;
-                return isValid;
-            }
-        },
-        rangeUpdate: {
-            action: async (e) => await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1),
-            input: 'leftRange rightRange value',
-            checkInput: (value) => {
-                let isValid = true;
-                value.forEach((e) => (isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null));
-                if (value[2] < MINVALUE || value[2] > MAXVALUE) isValid = false;
-                if (value.length < 2 || value[0] > value[1]) isValid = false;
-                for (let i = value[0]; i <= value[1]; i++)
-                    if (ARRAY[i] + value[2] > MAXVALUE || ARRAY[i] + value[2] < MINVALUE) isValid = false;
-                return isValid;
-            }
-        }
-    },
-    elmSize: [7, 13]
-});
-
 Object.keys(config).forEach((key) =>
-    ALGOSCENE.setAction(key, () => {
-        segmentTree.init(key);
-        result.init();
-        ALGOSCENE.playPauseBtn.setClick('build');
-    })
+    ALGOSCENE.setAction(
+        key,
+        () => {
+            segmentTree.init(key);
+            result.init();
+            ALGOSCENE.playPauseBtn.setClick('build');
+        },
+        {
+            actions: {
+                build: {
+                    action: async () => {
+                        await segmentTree.build();
+                        await segmentTree.render();
+                    },
+                    hidden: true
+                },
+                get: {
+                    action: async (e) =>
+                        await result.show(
+                            await segmentTree.get(1, 0, ARRAY.length - 1, e[0], e[1], 1)
+                        ),
+                    input: 'leftRange rightRange',
+                    checkInput: (value) => {
+                        let isValid = true;
+                        value.forEach((e) =>
+                            isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
+                        );
+                        if (value.length < 2 || value[0] > value[1]) isValid = false;
+                        return isValid;
+                    }
+                },
+                update: {
+                    action: async (e) =>
+                        await segmentTree.update(1, 0, ARRAY.length - 1, e[0], e[1], 1),
+                    input: 'index value',
+                    checkInput: (value) => {
+                        let isValid = true;
+                        value.forEach((e) =>
+                            isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
+                        );
+                        if (value[1] < MINVALUE || value[1] > MAXVALUE) isValid = false;
+                        if (value.length < 2) isValid = false;
+                        return isValid;
+                    }
+                },
+                rangeUpdate: {
+                    action: async (e) =>
+                        await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1),
+                    input: 'leftRange rightRange value',
+                    checkInput: (value) => {
+                        let isValid = true;
+                        value.forEach((e) =>
+                            isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
+                        );
+                        if (value[2] < MINVALUE || value[2] > MAXVALUE) isValid = false;
+                        if (value.length < 2 || value[0] > value[1]) isValid = false;
+                        for (let i = value[0]; i <= value[1]; i++)
+                            if (ARRAY[i] + value[2] > MAXVALUE || ARRAY[i] + value[2] < MINVALUE)
+                                isValid = false;
+                        return isValid;
+                    }
+                }
+            },
+            elmSize: [7, 13]
+        }
+    )
 );

@@ -1,4 +1,6 @@
-import infoComponent from './components/info.js';
+import infoComponent from '../components/info.js';
+import langBtnComponent from '../components/lang-btn.js';
+import footerComponent from '../components/footer.js';
 
 const CONFIG = (() => {
         const singleInformation = true;
@@ -47,12 +49,15 @@ const DATA = new (class {
     }
 })();
 
+const warnLogScript = (log) => `<script>console.warn('${log.replaceAll("'", "\\'")}');</script>`;
+
 class Page {
     constructor(app, lang, type, key) {
         this.lang = lang;
         this.type = type;
         this.key = key;
         this.version = app.version;
+        this.languages = app.languages;
         this.data = DATA.getPageData(lang, type, key);
         this.textData = DATA.text[lang];
         this.list = Object.keys(this.data.texts.list);
@@ -78,7 +83,18 @@ class Page {
                 this.textData.exitFullScreenText
             ].join(','),
             guideMessageTexts: this.textData.guideMessageTexts.join('|'),
-            constraintsTexts: this.data.texts.constraints?.map((text) => `*${text}`)?.join('<br>')
+            constraintsTexts:
+                Object.keys(this.data.texts?.constraints || {})
+                    .map(
+                        (key) =>
+                            `<div class="${key}">` +
+                            this.data.texts.constraints[key]
+                                .map((text) => `*${text}`)
+                                ?.join('<br>') +
+                            '</div>'
+                    )
+                    .join('') ||
+                `<div class="default">${warnLogScript('Undefined constraint')}</div>`
         };
 
         app.get(`/${lang}/${type}/${key}`, (req, res) => this.render(res));
@@ -100,14 +116,16 @@ class Page {
 
         res.render('child-of-common', config);
     }
-    render(res) {
+    async render(res) {
         res.render('common', {
             title: this.data.texts.NAME,
             description: this.list.map((e) => this.data.texts.list[e].name).join(', '),
             ...{key: this.key, lang: this.lang, type: this.type},
             ...{...this.textData, ...this.htmlCodes, ...this.htmlTexts},
             selectTitleText: this.textData.selectTitleText[this.type],
-            infoHTML: infoComponent(this.lang, this.textData, this.version),
+            infoHTML: await infoComponent(this.lang, this.textData.closeText),
+            langBtnHTML: langBtnComponent(this.lang, this.languages, this.textData.languageText),
+            footerHTML: await footerComponent(this.lang, this.version),
             settings: JSON.stringify(this.settings)
         });
     }
@@ -333,6 +351,7 @@ class Page {
             this.informationHTML = divInnerHTML.single();
             return `<div class="show">${this.informationHTML}</div>`;
         } else {
+            if (this.list.length == 0) return warnLogScript('Undefined content');
             this.childInfomationHTML = {};
             return this.list
                 .map((child) => {

@@ -1,7 +1,5 @@
 'use strict';
 
-ALGOSCENE.init();
-
 let ARRAY = [5, 2, 4, 6, 1, 3, 7];
 
 ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
@@ -108,7 +106,7 @@ const array = new (class {
         await ALGOSCENE.delay(0.2);
         const c = Array.from(this.elm.childNodes);
         for (let i = 0; i < this.length; i++) {
-            c.find((e) => e.index == i).setBackgroundColor(1);
+            c.find((e) => e.index == i)?.setBackgroundColor(1);
             await ALGOSCENE.delay(0.2);
         }
         await ALGOSCENE.delay();

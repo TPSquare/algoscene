@@ -36,6 +36,9 @@ new (class {
                 this.setElms();
                 document.update();
             },
+            run() {
+                this.runAction(document.body.main.bottombar.list.value);
+            },
             developing: localData.developing,
             delayDuration: localData.delay,
             updateDelayDuration() {
@@ -50,16 +53,22 @@ new (class {
             },
             frameHTML: '',
             actions: {},
-            setAction(key, action) {
+            configs: {},
+            setAction(key, action, config = {}) {
                 this.actions[key] = action;
-                if (key == document.body.main.bottombar.list.value) this.runAction(key);
+                this.configs[key] = config;
             },
             runAction(key, save = true) {
                 ALGOSCENE.playPauseBtn.reset();
                 this.currentAction = key;
                 this.frameElm.innerHTML = this.frameHTML;
-                if (this.actions[key]) this.actions[key]();
-                else console.warn(`There are no actions for '${key}'`);
+                if (this.actions[key]) {
+                    if (Object.keys(this.configs[key]).length != 0)
+                        this.enableSelectAction(this.configs[key]);
+                    else this.disableSelection();
+                    document.body.main.noAction('f');
+                    this.actions[key]();
+                } else document.body.main.noAction();
                 this.frameElm.className = key;
                 if (save) localData.history[document.TYPE].update(document.KEY, key);
             },
@@ -82,7 +91,13 @@ new (class {
             })(),
             enableSelectAction(config) {
                 this.playPauseBtn.enableSelection(config);
-                document.body.popup.enableSelectAction(config);
+                document.body.popup.selectAction.setSelectAction(config);
+            },
+            disableSelection() {
+                this.defaultAction();
+            },
+            defaultAction() {
+                this.playPauseBtn.disableSelection();
             },
             setElms() {
                 this.frameElm = document.body.main.frame;
@@ -98,6 +113,7 @@ new (class {
                     key = this.body.main.bottombar.list.value;
                 this.updatePageTitle(key);
                 this.body.codeBox.update(key, lang);
+                document.body.popup.customInput.constraints.update(key);
             };
         else
             document.update = function () {
@@ -106,6 +122,7 @@ new (class {
                 this.updatePageTitle(key);
                 this.body.codeBox.update(key, lang);
                 this.body.informations.update(key);
+                document.body.popup.customInput.constraints.update(key);
             };
 
         document.updatePageTitle = function (key) {
@@ -125,18 +142,6 @@ new (class {
         const header = document.body.querySelector('header');
         document.body.header = header;
 
-        header.querySelector('.right > .lang').combine({
-            onclick() {
-                if (this.innerHTML == 'en') this.goTo('vi');
-                else this.goTo('en');
-            },
-            goTo(lang) {
-                window.location.href = this.baseURI.replace(`/${document.LANG}`, `/${lang}`);
-            }
-        });
-
-        header.querySelector('.right > .info').onclick = () => document.body.popup.info.handle();
-
         header.querySelector('.right > .guide').onclick = () => {
             localData.history.guide.reset();
             document.body.popup.guideBox.run();
@@ -151,7 +156,12 @@ new (class {
         document.body.header.homeBtn = homeBtn;
     }
     main() {
-        const main = document.body.querySelector('main');
+        const main = document.body.querySelector('main').combine({
+            noAction(t = 't') {
+                if (t == 't') this.classList.add('no-action');
+                else this.classList.remove('no-action');
+            }
+        });
         document.body.main = main;
 
         const frame = main.querySelector('#frame').combine({
@@ -253,7 +263,6 @@ new (class {
                 for (const key in this.textData)
                     this.textData[key] += ` (${SHORTCUT_CONFIG.playPauseBtn})`;
             },
-            defaultStatus: 'play',
             setStatus(status) {
                 this.title = this.textData[status];
                 this.innerHTML = this[this.titleConfig[status]];
@@ -275,12 +284,6 @@ new (class {
                     this.reset();
                 }
             },
-            async endAction() {
-                this.isPausing = true;
-                this.setStatus('repeat');
-                await ALGOSCENE.delay(0);
-                ALGOSCENE.resetFrame.reset();
-            },
             reset() {
                 this.isPlaying = false;
                 this.isPausing = false;
@@ -289,11 +292,23 @@ new (class {
             enableSelection(config) {
                 this.defaultStatus = 'select';
                 this.clickConfig = config.actions;
+                this.endAction = async () =>
+                    (this.click = () => document.body.popup.selectAction.handle());
+                this.reset();
+            },
+            disableSelection() {
+                this.defaultAction();
+            },
+            defaultAction() {
+                this.defaultStatus = 'play';
+                this.clickConfig = {};
                 this.endAction = async () => {
-                    this.click = () => {
-                        document.body.popup.selectAction.handle();
-                    };
+                    this.isPausing = true;
+                    this.setStatus('repeat');
+                    await ALGOSCENE.delay(0);
+                    ALGOSCENE.resetFrame.reset();
                 };
+                this.reset();
             },
             setClick(key, input) {
                 ALGOSCENE.resetFrame.reset();
@@ -307,6 +322,7 @@ new (class {
 
         const screenBtn = bottombar.querySelector('.right > .screen').combine({
             open() {
+                main.classList.add('fullscreen');
                 document.openFullScreen(document.body.main);
                 this.onclick = this.close;
                 this.title = this.textData.exitFullScreen;
@@ -314,6 +330,7 @@ new (class {
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z"/></svg>';
             },
             close() {
+                main.classList.remove('fullscreen');
                 document.closeFullScreen();
                 this.onclick = this.open;
                 this.title = this.textData.fullScreen;
@@ -347,6 +364,14 @@ new (class {
             saveValue: localData.delay,
             min: 50,
             onblur() {
+                this.handle();
+            },
+            onkeydown({key}) {
+                if (key != 'Enter') return;
+                this.handle();
+                this.blur();
+            },
+            handle() {
                 if (isNaN(this.value)) this.value = this.saveValue;
                 else {
                     if (Number(this.value) < this.min) this.value = this.min;
@@ -546,39 +571,43 @@ new (class {
         usage.querySelector('.copy-code').combine(copyCodeBtnConfig);
     }
     popup() {
-        const popup = document.body.querySelector('#popup').combine({
-            enableSelectAction(config) {
-                const selectAction = popup.querySelector('.select-action').combine({
-                    style: `--span-width:${config.elmSize[0]}em;--input-width:${config.elmSize[1]}em;`,
-                    handle() {
-                        if (this.classList.contains('show')) this.classList.remove('show');
-                        else {
-                            this.classList.add('show');
-                            if (!localData.history.guide.selectAction)
-                                guideBox.controller.run('selectAction', 1000);
-                        }
-                        overlay.handle();
-                    }
-                });
-                document.body.popup.selectAction = selectAction;
+        const popup = document.body.querySelector('#popup').combine({});
+        document.body.popup = popup;
 
-                selectAction.querySelector('.close').onclick = () => selectAction.handle();
-
-                const textData = {
-                    select: selectAction.querySelector('.title').getAttribute('data-text')
+        const selectAction = popup.querySelector('.select-action').combine({
+            handle() {
+                if (this.classList.contains('show')) this.classList.remove('show');
+                else {
+                    this.classList.add('show');
+                    if (!localData.history.guide.selectAction)
+                        guideBox.controller.run('selectAction', 1000);
+                }
+                overlay.handle();
+            },
+            getTextData() {
+                this.textData = {
+                    select: this.querySelector('.title').getAttribute('data-text')
                 };
+            },
+            setSelectAction(config) {
+                this.style = `--span-width:${config.elmSize[0]}em;--input-width:${config.elmSize[1]}em;`;
+                this.querySelectorAll('section').forEach((e) => this.removeChild(e));
                 Object.keys(config.actions)
                     .filter((key) => !config.actions[key].hidden)
                     .map((key) => {
                         const input = document.createElement({
                             tag: 'input',
                             key: 'input',
-                            attributes: {placeholder: config.actions[key].input || ''}
+                            attributes: {placeholder: config.actions[key].input || ''},
+                            onkeydown({key}) {
+                                if (key != 'Enter') return;
+                                button.onclick();
+                            }
                         });
                         const button = document.createElement({
                             tag: 'button',
                             type: 'button',
-                            title: textData.select,
+                            title: selectAction.textData.select,
                             innerHTML:
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
                             onclick() {
@@ -586,17 +615,21 @@ new (class {
                                     .removeExtraWhitespace(this.parentNode.input.value)
                                     .split(' ')
                                     .map((e) => Number(e));
-                                if (config.actions[key].checkInput(input)) {
+                                if (
+                                    !config.actions[key].checkInput ||
+                                    config.actions[key].checkInput(input)
+                                ) {
                                     document.body.main.bottombar.playPauseBtn.setClick(key, input);
                                     this.parentNode.input.value = '';
                                     selectAction.handle();
+                                    this.parentNode.input.blur();
                                 } else {
                                     this.classList.add('error');
                                     setTimeout(() => this.classList.remove('error'), 200);
                                 }
                             }
                         });
-                        selectAction.appendChild(
+                        this.appendChild(
                             document.createElement({
                                 tag: 'section',
                                 className: key,
@@ -607,7 +640,10 @@ new (class {
                     });
             }
         });
-        document.body.popup = popup;
+        selectAction.getTextData();
+        document.body.popup.selectAction = selectAction;
+
+        selectAction.querySelector('.close').onclick = () => selectAction.handle();
 
         const overlay = popup.querySelector('.overlay').combine({
             handle() {
@@ -651,17 +687,6 @@ new (class {
             }
         });
         multiOverlay.setElm();
-
-        const info = popup.querySelector('#info').combine({
-            handle: function () {
-                if (this.classList.contains('show')) this.classList.remove('show');
-                else this.classList.add('show');
-                overlay.handle();
-            }
-        });
-        document.body.popup.info = info;
-
-        info.querySelector('.close').onclick = () => info.handle();
 
         const guideBox = popup.querySelector('.guide-box').combine({
             handle() {
@@ -868,9 +893,6 @@ new (class {
                 this.currentValue = value;
                 inputCustomInput.setAttribute('placeholder', value);
             },
-            setConstraints(list) {
-                constraintsCustomInput.innerHTML = list.map((e) => '*' + e).join('<br>');
-            },
             notify: {
                 success: () => {
                     ALGOSCENE.resetAction();
@@ -914,7 +936,14 @@ new (class {
         });
         document.body.popup.customInput = customInput;
 
-        const constraintsCustomInput = customInput.querySelector('.constraints');
+        const constraintsCustomInput = customInput.querySelector('.constraints').combine({
+            update(key) {
+                this.querySelector('.show')?.classList?.remove('show');
+                (this.querySelector('.' + key) || this.querySelector('.default')).classList.add(
+                    'show'
+                );
+            }
+        });
         document.body.popup.customInput.constraints = constraintsCustomInput;
 
         const inputCustomInput = customInput.querySelector('textarea').combine({

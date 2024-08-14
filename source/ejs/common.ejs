@@ -7,7 +7,9 @@
     <title><%= title %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AlgoScene</title>
     <meta name="description" content="<%= description %>">
     <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/info.css">
+    <link rel="stylesheet" href="/components/info.css">
+    <link rel="stylesheet" href="/components/lang-btn.css">
+    <link rel="stylesheet" href="/components/footer.css">
     <link rel="stylesheet" href="/common.css">
     <link rel="stylesheet" href="/<%= type %>/<%= key %>.css">
 </head>
@@ -20,15 +22,8 @@
             <div class="title">ALGOSCENE<img src="/svg/name.svg" alt="AlgoScene"></div>
         </div>
         <div class="right">
-            <button type="button" class="lang" title="<%= languageText %>"><%= lang %></button>
+            <%- langBtnHTML %>
             <button type="button" class="guide" title="<%= guideText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path></svg></button>
-            <button type="button" class="info" title="<%= infoText %>">
-                <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="64" cy="64" stroke-width="6.67279" style="fill:none;stroke-width:12.073;stroke-dasharray:none" id="circle1" r="57.963501"></circle>
-                    <path stroke-linecap="round" stroke-width="6.67279" d="m 55.368515,92.095025 h 9.578464 m 0,0 V 60.965039 c 0,-1.76346 0.622361,-2.877238 -1.141033,-2.877238 h -3.684424 m 4.825457,34.007224 h 9.578463" id="path1" sodipodi:nodetypes="cccssccc" style="stroke-width:11.273;stroke-dasharray:none"></path>
-                    <ellipse cx="63.526512" cy="37.510479" id="circle2" style="stroke-width:3.3;stroke-dasharray:none" rx="7.9820528" ry="7.9820533"></ellipse>
-                </svg>
-            </button>
         </div>
     </header>
     <main>
@@ -55,6 +50,7 @@
                 <button type="button" class="screen" data="<%= screenBtnDataText %>"></button>
             </div>
         </div>
+        <div class="no-action"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg><%= noActionText %></div>
     </main>
     <div id="informations">
         <button type="button" class="expand" title="<%= expandText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></button>
@@ -79,11 +75,7 @@
             <%- usageHTML %>
         </div>
     </div>
-    
-    <footer>
-        <span>© 2024 TPSquare</span>
-        <span>v2.0.0</span>
-    </footer>
+    <%- footerHTML %>
     <div id="popup">
         <span class="overlay"></span>
         <%- infoHTML %>
@@ -91,9 +83,9 @@
             <div style="display: none;" class="data"><%= guideMessageTexts %></div>
             <div class="message"></div>
             <div class="bottombar">
-                <button type="button" class="previous" title="previousText"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 256a208 208 0 1 1 416 0A208 208 0 1 1 48 256zm464 0A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM217.4 376.9c4.2 4.5 10.1 7.1 16.3 7.1c12.3 0 22.3-10 22.3-22.3V304h96c17.7 0 32-14.3 32-32V240c0-17.7-14.3-32-32-32H256V150.3c0-12.3-10-22.3-22.3-22.3c-6.2 0-12.1 2.6-16.3 7.1L117.5 242.2c-3.5 3.8-5.5 8.7-5.5 13.8s2 10.1 5.5 13.8l99.9 107.1z"></path></svg></button>
+                <button type="button" class="previous" title="<%= previousText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 256a208 208 0 1 1 416 0A208 208 0 1 1 48 256zm464 0A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM217.4 376.9c4.2 4.5 10.1 7.1 16.3 7.1c12.3 0 22.3-10 22.3-22.3V304h96c17.7 0 32-14.3 32-32V240c0-17.7-14.3-32-32-32H256V150.3c0-12.3-10-22.3-22.3-22.3c-6.2 0-12.1 2.6-16.3 7.1L117.5 242.2c-3.5 3.8-5.5 8.7-5.5 13.8s2 10.1 5.5 13.8l99.9 107.1z"></path></svg></button>
                 <div class="line"></div>
-                <button type="button" class="next" title="nextText"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1c-4.2-4.5-10.1-7.1-16.3-7.1C266 128 256 138 256 150.3V208H160c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h96v57.7c0 12.3 10 22.3 22.3 22.3c6.2 0 12.1-2.6 16.3-7.1l99.9-107.1c3.5-3.8 5.5-8.7 5.5-13.8s-2-10.1-5.5-13.8L294.6 135.1z"></path></svg></button>
+                <button type="button" class="next" title="<%= nextText %>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1c-4.2-4.5-10.1-7.1-16.3-7.1C266 128 256 138 256 150.3V208H160c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h96v57.7c0 12.3 10 22.3 22.3 22.3c6.2 0 12.1-2.6 16.3-7.1l99.9-107.1c3.5-3.8 5.5-8.7 5.5-13.8s-2-10.1-5.5-13.8L294.6 135.1z"></path></svg></button>
             </div>
             <button type="button" class="close" title="<%= closeText %>">×</button>
         </section>
@@ -108,9 +100,10 @@
         </section>
         <span class="multi-overlay"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></span>
         <button type="button" class="apply-frame-editing" style="display: none;" title="<%= applyText %>"><%= applyText %></button>
-        <div class="select-action" style="display: none;">
+        <div class="select-action">
             <div data-text="<%= selectText %>" class="title"></div>
             <button type="button" class="close" title="<%= closeText %>">×</button>
+            <section>PL</section>
         </div>
     </div>
     <script type="module" src="/local-data.js"></script>
@@ -118,7 +111,12 @@
         document.settings = JSON.parse(`<%- settings %>`);
         await import('/local-data.js');
         await import('/common.js');
-        import('/<%= type %>/<%= key %>.js');
+        await import('/components/info.js');
+        await import('/components/lang-btn.js');
+        await import('/components/footer.js');
+        ALGOSCENE.init();
+        await import('/<%= type %>/<%= key %>.js');
+        ALGOSCENE.run();
     </script>
 </body>
 

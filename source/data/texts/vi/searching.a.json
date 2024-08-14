@@ -99,10 +99,12 @@
             }
         }
     },
-    "constraints": [
-        "Dòng đầu tiên là giá trị cần tìm",
-        "Dòng thứ hai là mảng giá trị (tối thiểu 12 giá trị)",
-        "Các giá trị cách nhau bởi khoảng trắng",
-        "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99"
-    ]
+    "constraints": {
+        "default": [
+            "Dòng đầu tiên là giá trị cần tìm",
+            "Dòng thứ hai là mảng giá trị (tối thiểu 12 giá trị)",
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99"
+        ]
+    }
 }

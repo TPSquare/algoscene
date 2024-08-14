@@ -174,24 +174,12 @@ header {
             transform: scale(1.2);
         }
 
-        .lang {
-            width: 2em;
-            color: #f2f2f2;
-            font-size: inherit;
-            background-color: #7077a1;
-            font-family: var(--default-font-family);
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 0.25em;
-            transition: background-color 300ms;
+        #lang-btn {
+            font-size: 1em;
         }
 
-        .lang::before {
+        #lang-btn::before {
             content: '';
-        }
-
-        .lang:hover {
-            background-color: #ffffff40;
         }
     }
 }
@@ -375,6 +363,37 @@ main {
             }
         }
     }
+
+    .no-action {
+        display: none;
+        font-family: var(--default-font-family);
+        background-color: #2F3453;
+        width: 100%;
+        padding: 1em 2em;
+        color: white;
+        font-size: 1.5em;
+        font-weight: 600;
+
+        svg {
+            fill: white;
+            height: 1em;
+            margin-right: 0.2em;
+        }
+    }
+}
+
+main.fullscreen {
+    background: linear-gradient(#2e334f 0%, #4f547d 100%);
+}
+
+main.no-action {
+    #frame, .bottombar {
+        display: none;
+    }
+
+    .no-action {
+        display: block;
+    }
 }
 
 #frame {
@@ -517,7 +536,7 @@ main {
 
 #informations.expand {
     top: 6.2em;
-    width: calc(100% - 4em);
+    width: calc(100% - var(--body-padding));
     bottom: 0;
 
     .expand {
@@ -542,7 +561,7 @@ main {
 
 code {
     font-family: monospace;
-    
+
     .mtk0 {
         color: #6e7681;
     }
@@ -862,15 +881,15 @@ code {
 
 footer {
     font-size: 1.4em;
+    font-family: var(--default-font-family);
     display: flex;
     justify-content: space-around;
-    padding: 0.142em 1.42em;
     margin-top: var(--content-space);
-    margin-bottom: 3.55em;
     background-color: #1D2033;
-    font-family: var(--default-font-family);
-    border-radius: 0.71em;
     color: #f4f4f4;
+    padding: 0.142em 1.42em;
+    margin-bottom: 3.55em;
+    border-radius: 0.71em;
 }
 
 #popup {
@@ -1084,6 +1103,13 @@ footer {
         display: block;
         font-size: 1.4em;
         margin-bottom: 0.355em;
+
+        div {
+            display: none;
+        }
+        div.show {
+            display: block;
+        }
     }
 
     textarea {

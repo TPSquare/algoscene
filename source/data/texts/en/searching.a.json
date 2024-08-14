@@ -99,10 +99,12 @@
             }
         }
     },
-    "constraints": [
-        "The first line is the target value",
-        "The second line is the array of values (at least 12 values)",
-        "Values are separated by whitespace",
-        "Values are integers in the range from -9 to 99"
-    ]
+    "constraints": {
+        "default": [
+            "The first line is the target value",
+            "The second line is the array of values (at least 12 values)",
+            "Values are separated by whitespace",
+            "Values are integers in the range from -9 to 99"
+        ]
+    }
 }

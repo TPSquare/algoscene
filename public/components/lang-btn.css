@@ -1,0 +1,15 @@
+#lang-btn {
+    width: 2em;
+    color: #f2f2f2;
+    font-size: inherit;
+    background-color: #7077a1;
+    font-family: var(--default-font-family);
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0.25em;
+    transition: background-color 300ms;
+}
+
+#lang-btn:hover {
+    background-color: #ffffff40;
+}

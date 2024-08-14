@@ -158,11 +158,13 @@
             }
         }
     },
-    "constraints": [
-        "Yellow cells are starting points; double-click to swap with the ending point.",
-        "Green cells are ending points; double-click to swap with the starting point.",
-        "White cells are passable; click to change to impassable.",
-        "Black cells are impassable; click to change to passable.",
-        "Double-click on a white or black cell to change it to the starting point."
-    ]
+    "constraints": {
+        "default": [
+            "Yellow cells are starting points; double-click to swap with the ending point.",
+            "Green cells are ending points; double-click to swap with the starting point.",
+            "White cells are passable; click to change to impassable.",
+            "Black cells are impassable; click to change to passable.",
+            "Double-click on a white or black cell to change it to the starting point."
+        ]
+    }
 }

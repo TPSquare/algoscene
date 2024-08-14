@@ -1,7 +1,5 @@
 'use strict';
 
-ALGOSCENE.init();
-
 const ROWS = 14,
     COLS = 25;
 let [STARTX, STARTY] = [0, 0],

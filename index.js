@@ -27,10 +27,10 @@ app.get('/data/first-language', (req, res) => res.json(process.env.FIRST_LANGUAG
 
 app.get('/data/developing', (req, res) => res.json(process.env.DEVELOPING == 'true' ? true : false));
 
-import CommonPages from './source/commonpages.js';
+import CommonPages from './source/controllers/common.js';
 await CommonPages.init(app, fs);
 
-import HomePage from './source/homepage.js';
+import HomePage from './source/controllers/home.js';
 await HomePage.init(app, fs, CommonPages.data.home.content);
 
 const port = process.env.PORT || 8002;

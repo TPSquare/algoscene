@@ -158,11 +158,13 @@
             }
         }
     },
-    "constraints": [
-        "Ô màu vàng là ô bắt đầu, nhấn đúp để đổi chỗ với ô kết thúc",
-        "Ô màu xanh lá là ô kết thúc, nhấn đúp để đổi chỗ với ô bắt đầu",
-        "Ô trắng là có thể đi được, nhấn để chuyển thành ô không thể đi được",
-        "Ô đen là không thể đi được, nhấn để chuyển thành ô có thể đi được",
-        "Nhấn đúp vào ô trắng hoặc ô đen để đổi thành ô bắt đầu"
-    ]
+    "constraints": {
+        "default": [
+            "Ô màu vàng là ô bắt đầu, nhấn đúp để đổi chỗ với ô kết thúc",
+            "Ô màu xanh lá là ô kết thúc, nhấn đúp để đổi chỗ với ô bắt đầu",
+            "Ô trắng là có thể đi được, nhấn để chuyển thành ô không thể đi được",
+            "Ô đen là không thể đi được, nhấn để chuyển thành ô có thể đi được",
+            "Nhấn đúp vào ô trắng hoặc ô đen để đổi thành ô bắt đầu"
+        ]
+    }
 }

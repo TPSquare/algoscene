@@ -292,9 +292,11 @@
             }
         }
     },
-    "constraints": [
-        "Values are separated by whitespace",
-        "Values are integers in the range from -9 to 99",
-        "There are at least 7 values"
-    ]
+    "constraints": {
+        "default": [
+            "Values are separated by whitespace",
+            "Values are integers in the range from -9 to 99",
+            "There are at least 7 values"
+        ]
+    }
 }

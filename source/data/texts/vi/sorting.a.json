@@ -292,9 +292,11 @@
             }
         }
     },
-    "constraints": [
-        "Các giá trị cách nhau bởi khoảng trắng",
-        "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99",
-        "Có tối thiểu 7 giá trị"
-    ]
+    "constraints": {
+        "default": [
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99",
+            "Có tối thiểu 7 giá trị"
+        ]
+    }
 }

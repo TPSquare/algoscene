@@ -1,0 +1,217 @@
+{
+    "NAME": "Sắp xếp",
+    "bubble": {
+        "name": "Sắp xếp nổi bọt",
+        "informations": {
+            "idea": [
+                "Duyệt qua mảng nhiều lần",
+                "Mỗi lần duyệt, so sánh các cặp phần tử liền kề và hoán đổi chúng nếu cần thiết",
+                "Phần tử lớn nhất {{nổi lên}} cuối mảng sau mỗi lần duyệt, tương tự như bong bóng nổi lên mặt nước"
+            ],
+            "advantage": [
+                "Đơn giản, trực quan, dễ hiểu",
+                "Hiệu quả với mảng nhỏ"
+            ],
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn",
+            "application": [
+                "Thường được sử dụng để giảng dạy và minh họa cơ bản về thuật toán sắp xếp",
+                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {bbs}",
+                "Vòng lặp ngoài dùng giúp cho phép lặp qua mảng nhiều lần để đẩy phần tử lớn nhất (sắp xếp tăng dần) hoặc nhỏ nhất (sắp xếp giảm dần) vào vị trí cuối cùng của mảng",
+                "Vòng lặp trong dùng so sánh các cặp phần tử liền kề và hoán đổi nếu chúng không theo thứ tự",
+                "Kiểm tra xem hai phần tử liền kề trong mảng có đang ở sai thứ tự hay không. Nếu điều kiện đúng thì hai phần tử này cần được hoán đổi để đưa phần tử lớn hơn về sau (sắp xếp tăng dần).",
+                "Hoán đổi hai phần tử"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}"
+            ]
+        }
+    },
+    "selection": {
+        "name": "Sắp xếp chọn",
+        "informations": {
+            "idea": [
+                "Chia mảng thành hai phần: phần đã được sắp xếp và phần chưa được sắp xếp",
+                "Ban đầu, phần đã được sắp xếp là trống và phần chưa được sắp xếp là toàn bộ mảng",
+                "Lặp nhiều lần, với mỗi lần lặp, tìm phần tử nhỏ nhất (hoặc lớn nhất) trong phần chưa sắp xếp, sau đó hoán đổi nó với phần tử đầu tiên trong phần chưa sắp xếp, mở rộng phần đã được sắp xếp"
+            ],
+            "advantage": [
+                "Đơn giản, trực quan, dễ hiểu",
+                "Hiệu quả với mảng nhỏ"
+            ],
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn",
+            "application": [
+                "Thường được sử dụng để giảng dạy và minh họa các khái niệm cơ bản về thuật toán sắp xếp",
+                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {slts}",
+                "Vòng lặp ngoài giúp lặp qua mảng nhiều lần để tìm và đặt phần tử nhỏ nhất hoặc lớn nhất của phần mảng chưa được sắp xếp vào vị trí đúng của nó",
+                "Khởi tạo biến {min} dùng để giữ vị trí của phần tử nhỏ nhất trong phần mảng chưa được sắp xếp",
+                "Vòng lặp trong dùng để tìm phần tử nhỏ nhất trong phần mảng chưa được sắp xếp",
+                "Kiểm tra xem phần tử tại vị trí {j} có nhỏ hơn phần tử tại vị trí {min} hay không. Nếu đúng, cập nhật {min} để giữ vị trí của phần tử nhỏ nhất hiện tại.",
+                "Hoán đổi hai phần tử"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "Cập nhật {min}",
+                "{{{cpp,5}}}"
+            ]
+        }
+    },
+    "insertion": {
+        "name": "Sắp xếp chèn",
+        "informations": {
+            "idea": [
+                "Chia mảng thành hai phần: phần đã được sắp xếp và phần chưa được sắp xếp",
+                "Ban đầu, phần đã được sắp xếp chỉ chứa phần tử đầu tiên, phần còn lại của mảng là phần chưa được sắp xếp",
+                "Lặp lại quá trình lấy phần tử tiếp theo từ phần chưa được sắp xếp và chèn nó vào vị trí đúng trong phần đã được sắp xếp"
+            ],
+            "advantage": [
+                "Đơn giản, trực quan, dễ hiểu",
+                "Hiệu quả với mảng nhỏ",
+                "Hoạt động tốt với mảng gần như đã được sắp xếp"
+            ],
+            "disadvantage": "Hiệu suất kém đối với các mảng lớn",
+            "application": [
+                "Đơn giản và hiệu quả, đủ dùng cho các mảng dữ liệu nhỏ",
+                "Hữu ích khi dữ liệu đầu vào là một mảng gần như đã được sắp xếp",
+                "Trong thực tế, thuật toán này thường được sử dụng như một phần của các thuật toán sắp xếp phức tạp hơn"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {ists}",
+                "Vòng lặp ngoài để duyệt qua các vị trí của mảng. Phần tử đầu tiên được xem là đã sắp xếp.",
+                "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp",
+                "Khởi tạo {current} để lưu giữ giá trị của phần tử hiện đang cần tìm vị trí",
+                "Vòng lặp trong dùng để duyệt từ phải sang trái, tìm vị trí đúng để chèn phần tử {current} vào trong phần đã được sắp xếp của mảng. So sánh để kiểm tra phần tử tại vị trí {j} có lớn hơn {current} hay không, nếu đúng thì dịch chuyển phần tử tại {j} sang phải để tạo khoảng trống cho {current}.",
+                "Dịch chuyển phần tử tại vị trí {j} sang phải",
+                "Chèn {current} vào vị trí đúng"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "{{{cpp,2}}}",
+                "{{{cpp,3}}}",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "{{{cpp,6}}}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Khởi tạo {j} để duyệt ngược lại các phần tử đã sắp xếp. Khởi tạo {current} để lưu giữ giá trị của phần tử hiện đang cần tìm vị trí.",
+                "{{{cpp,4}}}",
+                "{{{cpp,5}}}",
+                "Giảm {j} để tiếp tục duyệt sang trái",
+                "{{{cpp,6}}}"
+            ]
+        }
+    },
+    "quick": {
+        "name": "Sắp xếp nhanh",
+        "informations": {
+            "idea": [
+                "Chọn một phần tử từ mảng làm điểm chốt",
+                "Phân chia mảng thành hai phần: phần chứa các phần tử nhỏ hơn hoặc bằng điểm chốt và phần chứa các phần tử lớn hơn hoặc bằng điểm chốt",
+                "Đệ quy cho hai phần mảng con",
+                "Các mảng con đã được sắp xếp và gộp lại với nhau sẽ tạo thành mảng đã sắp xếp hoàn chỉnh"
+            ],
+            "advantage": "Hiệu suất tốt, kể cả với mảng lớn",
+            "application": [
+                "Được sử dụng trong các ứng dụng thực tế để sắp xếp các mảng lớn",
+                "Được sử dụng trong các thuật toán tìm kiếm và phân loại dữ liệu"
+            ]
+        },
+        "comments": {
+            "cpp": [
+                "Khai báo hàm {qs}",
+                "Nếu {left} lớn hơn hoặc bằng {right}, nghĩa là đoạn mảng cần sắp xếp chỉ có một phần tử hoặc không còn phần tử nào để sắp xếp, hàm sẽ dừng lại và không thực hiện gì thêm",
+                "Khởi tạo {pivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
+                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}",
+                "Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}",
+                "Đảm bảo {i} không vượt quá {j} trong quá trình tìm và hoán đổi các phần tử",
+                "Tăng {i} cho đến khi tìm thấy phần tử lớn hơn hoặc bằng {pivot}",
+                "Giảm {j} cho đến khi tìm thấy phần tử nhỏ hơn hoặc bằng {pivot}",
+                "Kiểm tra lại xem {i} có vượt quá {j} hay không",
+                "Hoán đổi hai phần tử để bên trái là các phần tử nhỏ hơn hoặc bằng {pivot}, bên phải là các phần tử lớn hơn hoặc bằng {pivot}. Tăng {i} và giảm {j} cho lần tìm tiếp theo.",
+                "",
+                "Tiếp tục sắp xếp đoạn mảng từ {left} đến {j}",
+                "Tiếp tục sắp xếp đoạn mảng từ {i} đến {right}"
+            ],
+            "js": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Khởi tạo {jspivot} để lưu giá trị điểm chốt là phần tử ở giữa của đoạn mảng. Phần tử này sẽ được dùng để chia đoạn mảng thành hai phần.",
+                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {jspivot}",
+                "Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {jspivot}",
+                "{{{cpp,5}}}",
+                "Tăng {i} cho đến khi tìm thấy phần tử lớn hơn hoặc bằng {jspivot}",
+                "Giảm {j} cho đến khi tìm thấy phần tử nhỏ hơn hoặc bằng {jspivot}",
+                "{{{cpp,8}}}",
+                "Hoán đổi hai phần tử để bên trái là các phần tử nhỏ hơn hoặc bằng {jspivot}, bên phải là các phần tử lớn hơn hoặc bằng {jspivot}",
+                "Tăng {i} cho lần tìm tiếp theo",
+                "Giảm {j} cho lần tìm tiếp theo",
+                "",
+                "",
+                "Tiếp tục sắp xếp đoạn mảng từ {left} đến {j}",
+                "Tiếp tục sắp xếp đoạn mảng từ {i} đến {right}"
+            ],
+            "py": [
+                "{{{cpp,0}}}",
+                "{{{cpp,1}}}",
+                "Thoát khỏi hàm",
+                "{{{cpp,2}}}",
+                "Khởi tạo {i} để duyệt từ đầu đến giữa đoạn mảng, tìm các phần tử có giá trị lớn hơn hoặc bằng {pivot}. Khởi tại {j} để duyệt từ cuối đến giữa đoạn mảng, tìm các phần tử có giá trị nhỏ hơn hoặc bằng {pivot}.",
+                "{{{cpp,5}}}",
+                "Khi {i} chưa tìm thấy phần tử lớn hơn hoặc bằng {pivot}",
+                "Tăng {i}",
+                "Khi {j} chưa tìm thấy phần tử nhỏ hơn hoặc bằng {pivot}",
+                "Giảm {j}",
+                "{{{cpp,8}}}",
+                "Hoán đổi hai phần tử để bên trái là các phần tử nhỏ hơn hoặc bằng {pivot}, bên phải là các phần tử lớn hơn hoặc bằng {pivot}",
+                "{{{js,10}}}",
+                "{{{js,11}}}",
+                "{{{cpp,11}}}",
+                "{{{cpp,12}}}"
+            ]
+        }
+    },
+    "_": {
+        "constraints": [
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99",
+            "Có tối thiểu 7 giá trị"
+        ]
+    }
+}

@@ -1,16 +1,4 @@
 {
-    "googleFormsText": "Google Forms",
-    "developmentTeamText": "Development Team",
-    "leadDeveloperText": "Lead Developer",
-    "graphicDesignerText": "Graphic Designer",
-    "copyrightText": "Copyright",
-    "versionText": "Version",
-    "infoText": "Website Information",
-    "infoTexts": [
-        "AlgoScene is a platform for learning and exploring various algorithms. With AlgoScene, you can access detailed descriptions, advantages, disadvantages, applications, complexity analysis, source code, and visual simulations for a variety of algorithms. Whether you're a beginner learning basic concepts or an expert exploring advanced concepts, AlgoScene has something for you.",
-        "AlgoScene covers a diverse range of algorithms from basic to advanced, ensuring a broad and deep exploration of content. You'll be provided with an interactive and visual learning experience, allowing you to implement, experiment with algorithms, change inputs, and observe results directly. This method encourages deep understanding and mastery of algorithmic principles.",
-        "At AlgoScene, we value user feedback and contributions and are committed to continuously improving our platform. If you have any issues or suggestions, please contact us through one of the following methods:"
-    ],
     "searchText": "Search",
     "closeText": "Close",
     "languageText": "Language"

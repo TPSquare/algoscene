@@ -1,0 +1,36 @@
+{
+    "keys": {
+        "about": "About",
+        "team": "Team",
+        "terms-of-use": "Terms of Use",
+        "privacy-policy": "Privacy Policy"
+    },
+    "about": [
+        "ALGOSCENE began development on February 2, 2024, by Thai Phan Thanh Phu (TPSquare), with the goal of creating an interactive learning platform for data structures and algorithms. Phu collaborated with Phan Huynh Huu Nghi (Hbat) to further refine the graphic design.",
+        "The first version - ALGOSCENE v1.0.0, was released on June 10, 2024, and was designed to be compatible with all screen sizes. This version was developed with the purpose of participating in the 30th TIN HOC TRE competition of Binh Dinh province, Vietnam, and won the highest award, a Third Prize. It supports two languages: English and Vietnamese, along with features such as searching and selecting learning content, interactive simulations, input customization, and fullscreen mode.",
+        "In the latest version v2.0.0, ALGOSCENE has been significantly enhanced with the integration of Node.js, support for saving web usage history, and learning data structures. The interface is rendered from the server side, the link structure and SEO have been optimized. Additionally, this version provides keyboard shortcuts and usage code for deployment code.",
+        "ALGOSCENE is continuously being developed with the goal of becoming an effective learning and teaching tool, meeting the needs of users in mastering knowledge of data structures and algorithms. We are committed to continuously improving and expanding features to provide the best learning experience for users."
+    ],
+    "team": [
+        "Thai Phan Thanh Phu (TPSquare) - Lead Developer",
+        "Phan Huynh Huu Nghi (Hbat) - Graphic Designer"
+    ],
+    "terms-of-use": [
+        "ALGOSCENE provides a free interactive learning platform aimed at assisting users in learning and understanding data structures and algorithms. By using ALGOSCENE, you agree to comply with our terms and conditions.",
+        "All content and materials on ALGOSCENE, including text, images, source code, and other documents, are the intellectual property of ALGOSCENE or its respective parties. You are not permitted to copy, distribute, or use these contents for commercial purposes without written permission from us.",
+        "We do not guarantee that the service will always operate without issues, errors, or interruptions. You agree to use ALGOSCENE only for lawful purposes and not to interfere with the operation of the platform or disrupt the experience of other users.",
+        "ALGOSCENE does not collect any personal information from users. You can use the platform without creating an account or providing personal information. We are committed to protecting your privacy and security during your use of the service.",
+        "ALGOSCENE is committed to providing a quality and secure platform. We will do our best to fix any technical errors and maintain service stability. However, in rare cases beyond our control, such as unexpected technical issues or service interruptions due to objective reasons, we are not responsible for any damages incurred.",
+        "We reserve the right to change these terms and conditions at any time. Changes will take effect immediately after being posted on our website. Continued use of ALGOSCENE after changes are made indicates your acceptance of the new terms.",
+        "We are always listening and ready to receive your feedback. If you have any questions, comments, feedback, or encounter any issues while using ALGOSCENE, please contact us via Google Form. We will try to respond and resolve your issues as soon as possible."
+    ],
+    "privacy-policy": [
+        "ALGOSCENE is committed to protecting the privacy of users and ensuring that any information you provide to us is handled securely and safely. This privacy policy explains how we collect, use, and protect your information when you use our platform.",
+        "ALGOSCENE does not collect any personal information from users. You can use all features of the platform without registering an account or providing personal information.",
+        "Because we do not collect personal information from users, ALGOSCENE does not use personal information for any purpose. All activities on the platform are conducted anonymously and are not linked to any personally identifiable information.",
+        "Although we do not collect personal information, we are committed to protecting the security of all data related to the platform's operations. ALGOSCENE uses standard security measures to ensure that the platform operates safely and is not subject to unauthorized access.",
+        "We encourage users to provide feedback, opinions, and contributions to improve ALGOSCENE. To collect this feedback, we use a Google Form where you can share your thoughts. All information you provide through this Google Form will be handled anonymously and only used for the purpose of improving the platform.",
+        "We may update this privacy policy to reflect changes in platform operations or legal requirements. All changes will be announced on our website and take effect immediately upon posting.",
+        "If you have any questions about this privacy policy, please contact us via Google Form."
+    ]
+}

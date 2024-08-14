@@ -188,11 +188,13 @@
             }
         }
     },
-    "constraints": [
-        "Values are separated by spaces",
-        "Values are integers in the range from 1 to 100",
-        "There are at least 2 values (a maximum of 8 values will be used)"
-    ],
+    "constraints": {
+        "default": [
+            "Values are separated by spaces",
+            "Values are integers in the range from 1 to 100",
+            "There are at least 2 values (a maximum of 8 values will be used)"
+        ]
+    },
     "complexity": {
         "build": "Build",
         "update": "Update an element",

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+#frame {
+    background-color: #fcf4db;
+    font-family: Rubik, sans-serif;
+    font-weight: 500;
+}
+
+#frame .array,
+#frame .prefix-sum-array {
+    --scale: 1;
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(var(--scale));
+    font-size: 8em;
+    height: 2em;
+    transition: var(--delay);
+
+    span {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        margin: 0 0.2em;
+        line-height: 2em;
+        text-align: center;
+        border-radius: 0.4em;
+        transition: color var(--delay), background-color var(--delay);
+    }
+
+    .empty {
+        background-color: transparent;
+        transition: width var(--delay), margin var(--delay);
+    }
+
+    .empty.hidden {
+        width: 0;
+        margin: 0;
+    }
+}
+
+#frame .array {
+    z-index: 1;
+
+    span {
+        background-color: #ffffff;
+    }
+
+    span.plus {
+        background-color: greenyellow;
+    }
+
+    span.minus {
+        background-color: red;
+        color: white;
+    }
+}
+
+#frame .prefix-sum-array.hidden {
+    --scale: 0.8;
+    opacity: 0;
+}
+
+
+#frame .prefix-sum-array {
+    z-index: 0;
+
+    span {
+        background-color: #ffc3c3;
+    }
+
+    .hidden {
+        background-color: #ffffff;
+        color: transparent;
+    }
+}
+
+#frame .prefix-sum-array.sum {
+    span {
+        position: relative;
+    }
+
+    span::before,
+    span::after {
+        content: '';
+        position: absolute;
+        width: 0.2em;
+    }
+
+    span::before {
+        --height: 0.5em;
+        height: 0;
+        bottom: 2em;
+        left: 0.9em;
+        background-color: greenyellow;
+        animation: animate-2-height var(--delay) ease forwards;
+    }
+
+    span::after {
+        --height: 1.2em;
+        height: 0;
+        top: -0.6em;
+        right: 0;
+        transform-origin: 0.1em 0.1em;
+        transform: rotate(-45deg);
+        background-color: greenyellow;
+        animation: animate-2-height var(--delay) ease forwards;
+    }
+
+    span.active {
+        background-color: greenyellow;
+    }
+
+    span.active::before {
+        animation: animate-1-height var(--delay) ease calc(var(--delay)) forwards;
+    }
+
+    span.active::after {
+        animation: animate-1-height var(--delay) ease calc(var(--delay) * 3) forwards;
+    }
+
+    span.plus {
+        background-color: greenyellow;
+    }
+
+    span.minus {
+        background-color: red;
+        color: white;
+    }
+
+    section {
+        --width: calc(2.4em * var(--width-num) + 0.2em);
+        position: absolute;
+        width: 0;
+        top: 2.6em;
+        right: calc(2.4em * var(--right-num) - 1.3em);
+        height: 0.2em;
+        background-color: red;
+        animation: animate-2-width var(--delay) ease forwards;
+    }
+
+    section::before,
+    section::after {
+        --height: 0.8em;
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 0.2em;
+        height: 0;
+        background-color: inherit;
+        animation: animate-2-height var(--delay) ease forwards;
+    }
+
+    section::before {
+        top: -0.6em;
+        left: calc(100% - 0.2em);
+    }
+
+    section::after {
+        bottom: 0;
+        left: 0;
+    }
+
+    section.show {
+        animation: animate-1-width calc(var(--delay) * var(--width-num)) ease var(--delay) forwards;
+    }
+
+    section.show::before {
+        animation: animate-1-height var(--delay) ease forwards;
+    }
+
+    section.show::after {
+        animation: animate-1-height var(--delay) ease calc(var(--delay) * (var(--width-num) + 1)) forwards;
+    }
+}
+
+#frame .result {
+    position: absolute;
+    font-size: 8em;
+    top: 0.5em;
+    left: 0;
+    height: 1.6em;
+    width: 1em;
+    line-height: 1.6em;
+    padding: 0;
+    background-color: green;
+    border-radius: 0 0.2em 0.2em 0;
+    color: transparent;
+    transition: width var(--delay), padding var(--delay), color var(--delay);
+}
+
+#frame .result::after,
+#frame .result::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1em;
+}
+
+#frame .result::before {
+    content: '<';
+    text-align: center;
+    color: white;
+    transition: transform var(--delay);
+}
+
+#frame .result::after {
+    content: '';
+    height: 100%;
+    background-color: #ffffff27;
+}
+
+#frame .result.show {
+    width: auto;
+    padding: 0 0.5em 0 1.5em;
+    color: white;
+}
+
+#frame .result.show::before {
+    transform: rotate(180deg);
+}
+
+@keyframes animate-1-height {
+    to {
+        height: var(--height);
+    }
+}
+
+@keyframes animate-2-height {
+    from {
+        height: var(--height);
+        opacity: 1;
+    }
+
+    to {
+        height: var(--height);
+        opacity: 0;
+    }
+}
+
+@keyframes animate-1-width {
+    to {
+        width: var(--width);
+    }
+}
+
+@keyframes animate-2-width {
+    from {
+        width: var(--width);
+        opacity: 1;
+    }
+
+    to {
+        width: var(--width);
+        opacity: 0;
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "keys": {
+        "about": "Giới thiệu",
+        "team": "Đội ngũ",
+        "terms-of-use": "Điều khoản sử dụng",
+        "privacy-policy": "Chính sách bảo mật"
+    },
+    "about": [
+        "ALGOSCENE được bắt đầu phát triển vào ngày 02/02/2024 bởi Thái Phan Thanh Phú (TPSquare), với mục tiêu tạo ra một nền tảng học tập tương tác về cấu trúc dữ liệu và thuật toán. Phú đã hợp tác với Phan Huỳnh Hữu Nghị (Hbat) để hoàn thiện hơn về phần thiết kế đồ họa.",
+        "Phiên bản đầu tiên - ALGOSCENE v1.0.0, ra mắt vào ngày 10/06/2024, được thiết kế để phù hợp với tất cả các kích thước màn hình. Phiên bản này được phát triển với mục đích tham gia Hội thi TIN HỌC TRẺ lần thứ XXX của tỉnh Bình Định, Việt Nam và đã đã giành được giải thưởng cao nhất, giải Ba. Nó hỗ trợ hai ngôn ngữ: Tiếng Anh và Tiếng Việt, cùng với các tính năng như tìm kiếm, lựa chọn nội dung học tập, mô phỏng tương tác, tùy chỉnh đầu vào và chế độ toàn màn hình.",
+        "Trong phiên bản mới nhất v2.0.0, ALGOSCENE đã được cải tiến mạnh mẽ với việc tích hợp Node.js, hỗ trợ lưu lịch sử sử dụng trang web và học các cấu trúc dữ liệu. Giao diện được kết xuất từ phía máy chủ, cấu trúc liên kết và SEO được tối ưu hóa. Ngoài ra, phiên bản này còn cung cấp các phím tắt và mã sử dụng cho mã triển khai.",
+        "ALGOSCENE đang được tiếp tục phát triển với mục tiêu trở thành một công cụ học tập và giảng dạy hiệu quả, đáp ứng nhu cầu của người dùng trong việc nắm bắt các kiến thức về cấu trúc dữ liệu và thuật toán. Chúng tôi cam kết liên tục cải tiến và mở rộng các tính năng để mang đến trải nghiệm học tập tốt nhất cho người dùng."
+    ],
+    "team": [
+        "Thái Phan Thanh Phú (TPSquare) - Nhà phát triển chính",
+        "Phan Huỳnh Hữu Nghị (Hbat) - Nhà thiết kế đồ họa"
+    ],
+    "terms-of-use": [
+        "ALGOSCENE cung cấp một nền tảng học tập tương tác miễn phí nhằm hỗ trợ người dùng trong việc học và hiểu các cấu trúc dữ liệu và thuật toán. Việc sử dụng ALGOSCENE đồng nghĩa với việc bạn phải đồng ý tuân thủ các điều khoản và điều kiện của chúng tôi.",
+        "Tất cả nội dung và tài liệu trên ALGOSCENE bao gồm văn bản, hình ảnh, mã nguồn và các tài liệu khác đều thuộc quyền sở hữu trí tuệ của ALGOSCENE hoặc các bên liên quan. Bạn không được phép sao chép, phân phối hoặc sử dụng các nội dung này cho mục đích thương mại mà không có sự cho phép bằng văn bản từ chúng tôi.",
+        "Chúng tôi không đảm bảo rằng dịch vụ sẽ luôn hoạt động mà không gặp sự cố, lỗi hoặc gián đoạn. Bạn đồng ý sử dụng ALGOSCENE chỉ cho mục đích hợp pháp và không gây cản trở đến hoạt động của nền tảng hoặc làm tổn hại đến trải nghiệm của người dùng khác.",
+        "ALGOSCENE không thu thập bất kỳ thông tin cá nhân nào từ người dùng. Bạn có thể sử dụng nền tảng mà không cần phải tạo tài khoản hoặc cung cấp thông tin cá nhân. Chúng tôi cam kết bảo vệ sự riêng tư và bảo mật của bạn trong quá trình sử dụng dịch vụ.",
+        "ALGOSCENE cam kết cung cấp nền tảng chất lượng và an toàn. Chúng tôi sẽ cố gắng hết sức để khắc phục mọi lỗi kỹ thuật và duy trì sự ổn định của dịch vụ. Tuy nhiên, trong một số trường hợp hiếm hoi nằm ngoài tầm kiểm soát của chúng tôi, chẳng hạn như sự cố kỹ thuật bất ngờ hoặc gián đoạn dịch vụ do lý do khách quan, chúng tôi không chịu trách nhiệm cho những thiệt hại phát sinh.",
+        "Chúng tôi có quyền thay đổi các điều khoản và điều kiện này bất kỳ lúc nào. Các thay đổi sẽ có hiệu lực ngay lập tức sau khi được công bố trên trang web của chúng tôi. Việc tiếp tục sử dụng ALGOSCENE sau khi có thay đổi đồng nghĩa với việc bạn chấp nhận các điều khoản mới.",
+        "Chúng tôi luôn lắng nghe và sẵn sàng tiếp nhận ý kiến phản hồi từ bạn. Nếu bạn có bất kỳ câu hỏi, ý kiến, phản hồi hoặc gặp vấn đề gì khi sử dụng ALGOSCENE, vui lòng liên hệ với chúng tôi qua Google Form. Chúng tôi sẽ cố gắng phản hồi và giải quyết các vấn đề của bạn trong thời gian sớm nhất."
+    ],
+    "privacy-policy": [
+        "ALGOSCENE cam kết bảo vệ quyền riêng tư của người dùng và đảm bảo rằng bất kỳ thông tin nào bạn cung cấp cho chúng tôi đều được xử lý một cách an toàn và bảo mật. Chính sách bảo mật này giải thích cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn khi bạn sử dụng nền tảng của chúng tôi.",
+        "ALGOSCENE không thu thập bất kỳ thông tin cá nhân nào từ người dùng. Bạn có thể sử dụng toàn bộ các tính năng của nền tảng mà không cần phải đăng ký tài khoản hoặc cung cấp thông tin cá nhân.",
+        "Vì chúng tôi không thu thập thông tin cá nhân từ người dùng, ALGOSCENE không sử dụng thông tin cá nhân cho bất kỳ mục đích nào. Tất cả các hoạt động trên nền tảng đều được thực hiện một cách ẩn danh và không được liên kết với bất kỳ thông tin nhận dạng cá nhân nào.",
+        "Mặc dù chúng tôi không thu thập thông tin cá nhân, chúng tôi vẫn cam kết bảo vệ sự an toàn của mọi dữ liệu liên quan đến hoạt động của nền tảng. ALGOSCENE sử dụng các biện pháp bảo mật tiêu chuẩn để đảm bảo rằng nền tảng hoạt động an toàn và không bị truy cập trái phép.",
+        "Chúng tôi khuyến khích người dùng cung cấp phản hồi, ý kiến và đóng góp để cải thiện ALGOSCENE. Để thu thập phản hồi này, chúng tôi sử dụng một Google Form, nơi bạn có thể chia sẻ ý kiến của mình. Mọi thông tin bạn cung cấp qua Google Form này sẽ được xử lý và chỉ được sử dụng cho mục đích cải thiện nền tảng.",
+        "Chúng tôi có thể cập nhật chính sách bảo mật này để phản ánh những thay đổi trong hoạt động của nền tảng hoặc yêu cầu pháp lý. Mọi thay đổi sẽ được công bố trên trang web của chúng tôi và có hiệu lực ngay khi được đăng tải.",
+        "Nếu bạn có bất kỳ câu hỏi nào về chính sách bảo mật này, vui lòng liên hệ với chúng tôi qua Google Form."
+    ]
+}

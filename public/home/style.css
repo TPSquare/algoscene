@@ -136,25 +136,13 @@ header {
         button:hover svg {
             transform: scale(1.2);
         }
-
-        .lang {
-            width: 2em;
-            color: #f2f2f2;
+        
+        #lang-btn {
             font-size: inherit;
-            background-color: #7077a1;
-            font-family: var(--default-font-family);
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 0.2em;
-            transition: background-color 300ms;
         }
 
-        .lang::before {
+        #lang-btn::before {
             content: '';
-        }
-
-        .lang:hover {
-            background-color: #ffffff40;
         }
     }
 }
@@ -173,10 +161,10 @@ main {
     }
 
     .above {
-        font-size: 3.5em;
+        font-size: 3.2em;
         font-weight: 800;
-        margin-top: 1.4em;
-        margin-bottom: 0.84em;
+        margin-top: 1.8em;
+        margin-bottom: 1em;
         text-transform: uppercase;
         color: white;
     }
@@ -189,18 +177,25 @@ main {
         width: 50em;
     }
 
-    .info {
+    footer {
+        font-family: var(--default-font-family);
         font-size: 1.2em;
         position: absolute;
         right: 0.332em;
         bottom: 0.166em;
         color: white;
+        max-width: 80%;
+
+        span:first-child {
+            margin-right: 1em;
+        }
     }
 }
 
 #contents {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     font-size: 1.8em;
     padding: 0 1em;
     margin-top: 1em;

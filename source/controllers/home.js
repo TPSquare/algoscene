@@ -1,4 +1,6 @@
-import infoComponent from './components/info.js';
+import infoComponent from '../components/info.js';
+import langBtnComponent from '../components/lang-btn.js';
+import footerComponent from '../components/footer.js';
 export default {
     async init(app, fs, contentData) {
         app.get('/', (req, res) => res.render('redirect'));
@@ -17,16 +19,17 @@ export default {
                 `<strong>${e[2]}</strong>` +
                 `</a>`;
             const contentHTML = contentData[lang].map(getAContentTag).join('');
-            app.get(`/${lang}`, (req, res) =>
+            app.get(`/${lang}`, async (req, res) =>
                 res.render('home', {
                     lang,
                     description: textData.aboveText,
                     ...textData,
-                    version: app.version,
                     contentHTML,
-                    infoHTML: infoComponent(lang, textData, app.version),
+                    infoHTML: await infoComponent(lang, textData.closeText),
+                    langBtnHTML: langBtnComponent(lang, app.languages, textData.languageText),
+                    footerHTML: await footerComponent(lang, app.version)
                 })
             );
         }
-    },
+    }
 };

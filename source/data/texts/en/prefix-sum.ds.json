@@ -1,5 +1,220 @@
 {
-    "NAME": "Prefix sum",
-    "list": {},
-    "complexity": {}
+    "NAME": "Prefix Sum Array",
+    "list": {
+        "sumArray": {
+            "name": "Sum of a Segment\n(1D Array)",
+            "informations": {
+                "definition": "A prefix sum array is a value array where the element at any given position stores the sum of all the elements of the original array before that position (including that position).",
+                "idea": "Precompute the sum of elements from the start of the array to each position so that the sum of any subarray can be quickly computed without recalculating each element.",
+                "advantage": [
+                    "Fast computation",
+                    "Simplifies calculations",
+                    "Simple, easy to understand and implement"
+                ],
+                "disadvantage": [
+                    "Uses additional memory",
+                    "Not suitable when the original array is frequently updated",
+                    "Cannot be extended to compute product, minimum value, maximum value, etc."
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "Initialize the maximum size of the input array.",
+                    "Declare the {prefixSum} array to store the cumulative sum of elements from the original array.",
+                    "",
+                    "Define a function to build the {prefixSum} array from the original {array}. {size} is the number of elements in the {array}.",
+                    "Loop from index {1} to {size} (index starts from {1} because index {0} of {prefixSum} is always {0}).",
+                    "Compute the cumulative sum for index {i} in {prefixSum}. The sum at index {i} is equal to the cumulative sum of index {iminus1} plus the corresponding element in the original {array}.",
+                    "",
+                    "",
+                    "Define a function to compute the sum of elements from index {left} to index {right} in the original array.",
+                    "Compute the sum of elements from index {left} to {right} by subtracting the cumulative sum at {left} from the cumulative sum at {rightplus1}."
+                ],
+                "js": [
+                    "{{{cpp,0}}}",
+                    "Declare the {prefixSum19} array to store the cumulative sum of elements from the original array.",
+                    "Assign the value {0} to the first element of the {prefixSum19} array. This is the initial value for computing the prefix sum.",
+                    "",
+                    "Define a function to build the {prefixSum19} array from the original {array}.",
+                    "Loop from index {1} to {arrayLength} (index starts from {1} because index {0} of {prefixSum19} is always {0}).",
+                    "Compute the cumulative sum for index {i} in {prefixSum19}. The sum at index {i} is equal to the cumulative sum of index {iminus1} plus the corresponding element in the original {array}.",
+                    "",
+                    "",
+                    "Define a function to compute the sum of elements from index {left} to index {right} in the original array. Compute the sum of elements from index {left} to {right} by subtracting the cumulative sum at {left} from the cumulative sum at {rightplus1}."
+                ]
+            }
+        },
+        "sumMatrix": {
+            "name": "Sum of a Region\n(2D Array)",
+            "informations": {
+                "definition": "A prefix sum array is a value array where the element at any given position stores the sum of all the elements of the original array before that position (including that position).",
+                "idea": "Precompute the sum of elements from the start of the array to each position so that the sum of any submatrix can be quickly computed without recalculating each element.",
+                "advantage": [
+                    "Fast computation",
+                    "Simplifies calculations",
+                    "Simple, easy to understand and implement"
+                ],
+                "disadvantage": [
+                    "Uses additional memory",
+                    "Not suitable when the original array is frequently updated",
+                    "Cannot be extended to compute product, minimum value, maximum value, etc."
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "Initialize the maximum number of rows and columns of the input array.",
+                    "Declare the {prefixSum} array to store the cumulative sum of elements from the original array.",
+                    "",
+                    "Define a function to build the {prefixSum} array from the original {array} with {rows} rows and {cols} columns.",
+                    "Loop through each row of the {prefixSum} array, starting from index {1} to {rows}.",
+                    "Loop through each column of the {prefixSum} array, starting from index {1} to {cols}.",
+                    "Compute the cumulative sum for the cell at index ({i}, {j}) in the {prefixSum} array.",
+                    "Take the current element of the original array at index ({iminus1}, {jminus1}) {:+:}",
+                    "{:+:} add the cumulative sum of the row above at index ({iminus1}, {j}) {:+:}",
+                    "{:+:} add the cumulative sum of the column to the left at index ({i}, {jminus1}) {:+:}",
+                    "{:+:} subtract the cumulative sum of the top-left diagonal cell, as it has been added twice.",
+                    "",
+                    "",
+                    "Define a function to compute the sum of the region from ({x}, {y}) to ({xx}, {yy}) in the original array.",
+                    "Take the cumulative sum of the region from ({0}, {0}) to ({xx}, {yy}) {:+:}",
+                    "{:+:} subtract the cumulative sum of the region from ({0}, {0}) to ({xminus1}, {yy}) {:+:}",
+                    "{:+:} subtract the cumulative sum of the region from ({0}, {0}) to ({xx}, {yminus1}) {:+:}",
+                    "{:+:} add the cumulative sum of the region from ({0}, {0}) to ({xminus1}, {yminus1}), as it was subtracted twice."
+                ],
+                "js": [
+                    "{{{cpp,0}}}",
+                    "Declare the {prefixSum19} array to store the cumulative sum of elements from the original array.",
+                    "",
+                    "Define a function to build the {prefixSum19} array from the original {array}.",
+                    "Loop through each row of the {prefixSum19} array, starting from index {1} to {arrayLength}.",
+                    "Loop through each column of the {prefixSum19} array, starting from index {1} to {array0Length}.",
+                    "Compute the cumulative sum for the cell at index ({i}, {j}) in the {prefixSum19} array.",
+                    "{{{cpp,7-17}}}"
+                ]
+            }
+        },
+        "updateArray": {
+            "name": "Update 1D Array",
+            "informations": {
+                "idea": [
+                    "Use a prefix sum array to store changes at corresponding positions",
+                    "The new value of the elements in the original array will be computed by adding the value at the corresponding position in the prefix sum array"
+                ],
+                "advantage": [
+                    "Time efficient",
+                    "Simple and easy to understand",
+                    "Memory optimization"
+                ],
+                "disadvantage": [
+                    "Uses additional memory",
+                    "Not suitable for a single update"
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "Define a function to update the {array} based on the operations described in {operations}.",
+                    "Initialize the {prefixSum} array to track changes for the updated sum of the {array}.",
+                    "Loop to process each operation from the end of the {operations} array to the beginning (countdown {numOps}).",
+                    "{left} is the left index of the update range in the current operation.",
+                    "{right} is the right index of the update range in the current operation.",
+                    "{value} is the value to add to the elements in the range from {left} to {right}.",
+                    "Increase the value at index {left} in the {prefixSum} array to start updating from this index.",
+                    "Decrease the value at index {rightplus1} in the {prefixSum} array to stop updating after index {right}.",
+                    "",
+                    "Update the first element of the {array} with the value at {prefixSumat0}.",
+                    "Loop through each index from {1} to {sizeminus1} of the {array}.",
+                    "Update the {prefixSum} array to compute the cumulative sum of the changes from the previous operations.",
+                    "Update the value at index {i} in the {array} with the current cumulative sum in the {prefixSum}."
+                ],
+                "js": [
+                    "{{{cpp,0}}}",
+                    "Initialize the {prefixSum19} array to track changes for the updated sum of the {array}.",
+                    "The {for} loop is used to iterate through each element in the {operations} array. Each element is a subarray containing three elements {left19}, {right19}, {value19} corresponding to the left, right indices, and the increment value of the update range.",
+                    "Increase the value at index {left19} in the {prefixSum19} array to start updating from this index.",
+                    "Decrease the value at index {right19plus1} in the {prefixSum19} array to stop updating after index {right19}.",
+                    "",
+                    "Update the first element of the {array} with the value at {prefixSum19at0}.",
+                    "Loop through each index from {1} to {arrayLengthminus1} of the {array}.",
+                    "Update the {prefixSum19} array to compute the cumulative sum of the changes from the previous operations.",
+                    "Update the value at index {i} in the {array} with the current cumulative sum in the {prefixSum19}."
+                ]
+            }
+        },
+        "updateMatrix": {
+            "name": "Update 2D Array",
+            "informations": {
+                "idea": [
+                    "Use a prefix sum array to store changes at corresponding positions",
+                    "The new value of the elements in the original array will be calculated by adding the value at their corresponding position in the prefix sum array"
+                ],
+                "advantage": [
+                    "Time efficient",
+                    "Simple and easy to understand",
+                    "Memory optimization"
+                ],
+                "disadvantage": [
+                    "Uses additional memory",
+                    "Not suitable for a single update"
+                ]
+            },
+            "comments": {
+                "cpp": [
+                    "Initialize the maximum number of columns of the input array.",
+                    "",
+                    "Define a function to update the {array} based on the operations described in {operations}.",
+                    "Increase the size of {rows} and {cols} by {2} for easier boundary handling.",
+                    "Initialize the {prefixSum} array to track changes for the updated sum of the {array}.",
+                    "Loop through each row of the {prefixSum} array, starting from index {1} to {rowsminus1}.",
+                    "Loop through each column of the {prefixSum} array from index {1} to {colsminus1}, and set the value at index ({i}, {j}) in the {prefixSum} array to {0}.",
+                    "Loop to process each operation from the end of the {operations} array to the beginning (count down {numOps}).",
+                    "{x} is the start row index of the update region in the current operation, increased by {1} to match the {prefixSum} array.",
+                    "{y} is the start column index of the update region in the current operation, increased by {1} to match the {prefixSum} array.",
+                    "{xx} is the end row index of the update region in the current operation, increased by {2} to match the {prefixSum} array.",
+                    "{yy} is the end column index of the update region in the current operation, increased by {2} to match the {prefixSum} array.",
+                    "{value} is the value to add to the elements in the region from ({x}, {y}) to ({xx}, {yy}).",
+                    "Increase the value at index ({x}, {y}) in the {prefixSum} array to start updating from this index.",
+                    "Decrease the value at index ({xx}, {y}) in the {prefixSum} array to stop updating after index {xx}.",
+                    "Decrease the value at index ({x}, {yy}) in the {prefixSum} array to stop updating after index {yy}.",
+                    "Increase the value at index ({xx}, {yy}) in the {prefixSum} array to compensate for the previous two updates.",
+                    "",
+                    "Reduce the size of {rows} and {cols} by {1} to match the next steps.",
+                    "Loop through each row of the {prefixSum} array, starting from index {1} to {rowsminus1}.",
+                    "Loop through each column of the {prefixSum} array, starting from index {1} to {colsminus1}.",
+                    "Update the value at index ({i}, {j}) in the {prefixSum} array with the cumulative sum of previous values.",
+                    "Update the value at index ({iminus1}, {jminus1}) in the {array} with the corresponding value in the {prefixSum} array."
+                ],
+                "js": [
+                    "{{{cpp,2}}}",
+                    "Initialize {rows} to store the number of rows in the {prefixSum19} array. This value is greater than {array} by {2} units for easier boundary handling.",
+                    "Initialize {cols} to store the number of columns in the {prefixSum19} array. This value is greater than {array} by {2} units for easier boundary handling.",
+                    "Initialize the {prefixSum19} array to track changes for the updated sum of the {array}.",
+                    "The {for} loop is used to iterate through each element in the {operations} array. Each element is a subarray containing five elements {x}, {y}, {xx}, {yy}, {value}, corresponding to the top-left and bottom-right indices and the increment value of the update region.",
+                    "Adjust the values of {x}, {y}, {xx}, and {yy} to match the expanded {prefixSum19} array.",
+                    "Increase the value at index ({x}, {y}) in the {prefixSum19} array to start updating from this index.",
+                    "Decrease the value at index ({xx}, {y}) in the {prefixSum19} array to stop updating after index {xx}.",
+                    "Decrease the value at index ({x}, {yy}) in the {prefixSum19} array to stop updating after index {yy}.",
+                    "Increase the value at index ({xx}, {yy}) in the {prefixSum19} array to compensate for the previous two updates.",
+                    "",
+                    "{{{cpp,18}}}",
+                    "Loop through each row of the {prefixSum19} array, starting from index {1} to {rowsminus1}.",
+                    "Loop through each column of the {prefixSum19} array, starting from index {1} to {colsminus1}.",
+                    "Update the value at index ({i}, {j}) in the {prefixSum19} array with the cumulative sum of previous values.",
+                    "Update the value at index ({iminus1}, {jminus1}) in the {array} with the corresponding value in the {prefixSum19} array."
+                ]
+            }
+        }
+    },
+    "constraints": {
+        "sumArray": [
+            "Values are separated by spaces",
+            "Values are integers ranging from -9 to 99",
+            "A maximum of 8 values"
+        ],
+        "default": []
+    },
+    "complexity": {
+        "build": "Build",
+        "getSum": "Get Sum",
+        "updateArray": "Update Array"
+    }
 }
