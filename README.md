@@ -10,6 +10,7 @@
 -   Improve SEO
 -   Support for using keyboard shortcuts
 -   Provide usage code for deployment code
+-   Add Terms of Use and Privacy Policy
 
 ## VERSION HISTORY
 
