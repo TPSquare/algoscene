@@ -1,7 +1,5 @@
 'use strict';
 
-import MODULES from '/modules.js';
-
 document.LANG = document.querySelector('html').lang;
 document.TYPE = document.body.getAttribute('type');
 document.KEY = document.body.getAttribute('key');
@@ -29,8 +27,6 @@ new (class {
         this.developing(localData.developing);
     }
     window() {
-        MODULES.upgradeWindow();
-
         window.ALGOSCENE = {
             init() {
                 this.setElms();
@@ -47,9 +43,9 @@ new (class {
             },
             async delay(mul = 1) {
                 if (!this.playPauseBtn.isPlaying) return;
-                await window.delay(localData.delay * mul);
+                await TPSM.delay(localData.delay * mul);
                 const t = localData.delay / 10;
-                while (this.playPauseBtn.isPausing) await window.delay(t);
+                while (this.playPauseBtn.isPausing) await TPSM.delay(t);
             },
             frameHTML: '',
             actions: {},
@@ -135,8 +131,6 @@ new (class {
         document.body.overflow = function (ok) {
             this.style.setProperty('overflow', ok ? '' : 'hidden');
         };
-
-        MODULES.upgradeDocument();
     }
     header() {
         const header = document.body.querySelector('header');
@@ -147,7 +141,7 @@ new (class {
             document.body.popup.guideBox.run();
         };
 
-        const homeBtn = header.querySelector('.home').combine({
+        const homeBtn = TPSM.doc.fromElement(header).querySelector('.home', {
             click() {
                 window.location.href = this.href;
             }
@@ -156,7 +150,7 @@ new (class {
         document.body.header.homeBtn = homeBtn;
     }
     main() {
-        const main = document.body.querySelector('main').combine({
+        const main = TPSM.doc.querySelector('main', {
             noAction(t = 't') {
                 if (t == 't') this.classList.add('no-action');
                 else this.classList.remove('no-action');
@@ -164,7 +158,7 @@ new (class {
         });
         document.body.main = main;
 
-        const frame = main.querySelector('#frame').combine({
+        const frame = TPSM.doc.fromElement(main).querySelector('#frame', {
             onresize() {
                 const w = this.parentNode.offsetWidth,
                     h =
@@ -176,14 +170,14 @@ new (class {
                 else this.width = (h * 16) / 9;
                 this.height = (this.width * 9) / 16;
                 this.em = this.height / 100;
-                this.setStyle({
+                TPSM.doc.setStyle(this, {
                     width: this.width + 'px',
                     height: this.height + 'px',
                     '--em': this.em + 'px'
                 });
             },
             setDelay(value) {
-                this.setStyle({'--delay': (value || localData.delay) + 'ms'});
+                TPSM.doc.setStyle(this, {'--delay': (value || localData.delay) + 'ms'})
             },
             style: `--delay:${localData.delay}ms;`,
             enableEditing() {
@@ -202,7 +196,7 @@ new (class {
         const listWrapper = bottombar.querySelector('.left > .list-wrapper');
         document.body.main.bottombar.listWrapper = listWrapper;
 
-        const list = bottombar.querySelector('.left .list').combine({
+        const list = TPSM.doc.fromElement(bottombar).querySelector('.left .list', {
             onchange() {
                 document.update();
                 window.ALGOSCENE.runAction(this.value);
@@ -235,7 +229,7 @@ new (class {
         list.setStartValue();
         document.body.main.bottombar.list = list;
 
-        const playPauseBtn = bottombar.querySelector('.right > .play-pause').combine({
+        const playPauseBtn = TPSM.doc.fromElement(bottombar).querySelector('.right > .play-pause', {
             playIcon:
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
             resetIcon:
@@ -320,10 +314,10 @@ new (class {
         playPauseBtn.getTextData();
         document.body.main.bottombar.playPauseBtn = playPauseBtn;
 
-        const screenBtn = bottombar.querySelector('.right > .screen').combine({
+        const screenBtn = TPSM.doc.fromElement(bottombar).querySelector('.right > .screen', {
             open() {
                 main.classList.add('fullscreen');
-                document.openFullScreen(document.body.main);
+                TPSM.doc.openFullScreen(document.body.main);
                 this.onclick = this.close;
                 this.title = this.textData.exitFullScreen;
                 this.innerHTML =
@@ -331,7 +325,7 @@ new (class {
             },
             close() {
                 main.classList.remove('fullscreen');
-                document.closeFullScreen();
+                TPSM.doc.closeFullScreen();
                 this.onclick = this.open;
                 this.title = this.textData.fullScreen;
                 this.innerHTML =
@@ -349,7 +343,7 @@ new (class {
         screenBtn.close();
         document.body.main.bottombar.screenBtn = screenBtn;
 
-        const settingBtn = bottombar.querySelector('.right > .setting').combine({
+        const settingBtn = TPSM.doc.fromElement(bottombar).querySelector('.right > .setting', {
             onclick(e) {
                 if (!e) e = {target: this};
                 if (e.target.classList.contains('setting'))
@@ -359,7 +353,7 @@ new (class {
         });
         document.body.main.bottombar.settingBtn = settingBtn;
 
-        settingBtn.querySelector('ul > .delay > input').combine({
+        TPSM.doc.fromElement(settingBtn).querySelector('ul > .delay > input', {
             value: localData.delay,
             saveValue: localData.delay,
             min: 50,
@@ -382,13 +376,15 @@ new (class {
             }
         });
 
-        const customInputBtn = bottombar
-            .querySelector('.right > .custom-input')
-            .combine({onclick: () => document.body.popup.customInput.handle()});
+        const customInputBtn = TPSM.doc
+            .fromElement(bottombar)
+            .querySelector('.right > .custom-input', {
+                onclick: () => document.body.popup.customInput.handle()
+            });
         document.body.main.bottombar.customInputBtn = customInputBtn;
     }
     informations() {
-        const informations = document.body.querySelector('#informations').combine({
+        const informations = TPSM.doc.querySelector('#informations', {
             update(key) {
                 this.querySelector('.show')?.classList?.remove('show');
                 this.querySelector(`.${key}`).classList.add('show');
@@ -398,7 +394,7 @@ new (class {
                 this.complexity?.onresize();
             },
             setComplexity() {
-                this.complexity = this.querySelector(`.show tbody`).combine({
+                this.complexity = TPSM.doc.fromElement(this).querySelector(`.show tbody`, {
                     onresize() {
                         const elm = Array.from(this.querySelectorAll('tr')).map((e) => {
                                 e.childNodes[0].style.width = 'auto';
@@ -425,7 +421,7 @@ new (class {
         document.body.informations = informations;
         if (document.settings.singleInformation) informations.setComplexity();
 
-        const expandBtn = informations.querySelector('.expand').combine({
+        const expandBtn = TPSM.doc.fromElement(informations).querySelector('.expand', {
             onclick: () => {
                 if (informations.classList.contains('expand'))
                     informations.classList.remove('expand');
@@ -437,7 +433,7 @@ new (class {
         document.body.informations.expandBtn = expandBtn;
     }
     codeBox() {
-        const codeBox = document.body.querySelector('#code-box').combine({
+        const codeBox = TPSM.doc.querySelector('#code-box', {
             update(key, lang) {
                 codes.update(key, lang);
                 usage.update(key, lang);
@@ -445,7 +441,7 @@ new (class {
         });
         document.body.codeBox = codeBox;
 
-        const prolangList = codeBox.querySelector('.top > .prolang-list').combine({
+        const prolangList = TPSM.doc.fromElement(codeBox).querySelector('.top > .prolang-list', {
             setActive(lang) {
                 this.querySelector('.active')?.classList?.remove('active');
                 if (lang) this.okActive(lang);
@@ -495,7 +491,7 @@ new (class {
 
         const textarea = codeBox.querySelector('textarea');
 
-        const codes = codeBox.querySelector('.codes').combine({
+        const codes = TPSM.doc.fromElement(codeBox).querySelector('.codes', {
             update(key, lang) {
                 this.querySelector('.show')?.classList?.remove('show');
                 this.querySelector(`.${key}.${lang}`).classList.add('show');
@@ -503,7 +499,7 @@ new (class {
         });
         document.body.codeBox.codes = codes;
 
-        const usage = codeBox.querySelector('.usage').combine({
+        const usage = TPSM.doc.fromElement(codeBox).querySelector('.usage', {
             update(key, lang) {
                 this.querySelector('.show')?.classList?.remove('show');
                 this.querySelector(`.${key}.${lang}`).classList.add('show');
@@ -513,14 +509,14 @@ new (class {
         });
         document.body.codeBox.usage = usage;
 
-        const labelName = usage.querySelector('.label-name').combine({
+        const labelName = TPSM.doc.fromElement(usage).querySelector('.label-name', {
             update(lang) {
                 labelNameIcon.update(lang);
                 labelNameExtension.innerText = lang;
             }
         });
 
-        const labelNameIcon = labelName.querySelector('.icon').combine({
+        const labelNameIcon = TPSM.doc.fromElement(labelName).querySelector('.icon', {
             data: (() => {
                 const data = {};
                 prolangList.childNodes.forEach((e) => (data[e.classList[0]] = e.innerHTML));
@@ -565,16 +561,18 @@ new (class {
             }
         };
 
-        const copyCodeBtn = codes.querySelector('.copy-code').combine(copyCodeBtnConfig);
+        const copyCodeBtn = TPSM.doc
+            .fromElement(codes)
+            .querySelector('.copy-code', copyCodeBtnConfig);
         document.body.codeBox.copyCodeBtn = copyCodeBtn;
 
-        usage.querySelector('.copy-code').combine(copyCodeBtnConfig);
+        TPSM.doc.fromElement(usage).querySelector('.copy-code', copyCodeBtnConfig);
     }
     popup() {
-        const popup = document.body.querySelector('#popup').combine({});
+        const popup = document.body.querySelector('#popup');
         document.body.popup = popup;
 
-        const selectAction = popup.querySelector('.select-action').combine({
+        const selectAction = TPSM.doc.fromElement(popup).querySelector('.select-action', {
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else {
@@ -595,24 +593,23 @@ new (class {
                 Object.keys(config.actions)
                     .filter((key) => !config.actions[key].hidden)
                     .map((key) => {
-                        const input = document.createElement({
+                        const input = TPSM.doc.createElement({
                             tag: 'input',
-                            key: 'input',
                             attributes: {placeholder: config.actions[key].input || ''},
                             onkeydown({key}) {
                                 if (key != 'Enter') return;
                                 button.onclick();
                             }
                         });
-                        const button = document.createElement({
+                        const button = TPSM.doc.createElement({
                             tag: 'button',
                             type: 'button',
                             title: selectAction.textData.select,
                             innerHTML:
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
                             onclick() {
-                                const input = document
-                                    .removeExtraWhitespace(this.parentNode.input.value)
+                                const input = TPSM
+                                    .removeExtraWhitespace(this.parentNode.childNodes[1].value)
                                     .split(' ')
                                     .map((e) => Number(e));
                                 if (
@@ -620,9 +617,9 @@ new (class {
                                     config.actions[key].checkInput(input)
                                 ) {
                                     document.body.main.bottombar.playPauseBtn.setClick(key, input);
-                                    this.parentNode.input.value = '';
+                                    this.parentNode.childNodes[1].value = '';
                                     selectAction.handle();
-                                    this.parentNode.input.blur();
+                                    this.parentNode.childNodes[1].blur();
                                 } else {
                                     this.classList.add('error');
                                     setTimeout(() => this.classList.remove('error'), 200);
@@ -630,7 +627,7 @@ new (class {
                             }
                         });
                         this.appendChild(
-                            document.createElement({
+                            TPSM.doc.createElement({
                                 tag: 'section',
                                 className: key,
                                 innerHTML: `<span>${key}:</span>`,
@@ -645,7 +642,7 @@ new (class {
 
         selectAction.querySelector('.close').onclick = () => selectAction.handle();
 
-        const overlay = popup.querySelector('.overlay').combine({
+        const overlay = TPSM.doc.fromElement(popup).querySelector('.overlay', {
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else this.classList.add('show');
@@ -653,7 +650,7 @@ new (class {
         });
         document.body.popup.overlay = overlay;
 
-        const multiOverlay = popup.querySelector('.multi-overlay').combine({
+        const multiOverlay = TPSM.doc.fromElement(popup).querySelector('.multi-overlay', {
             handle(enableClick = false) {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else {
@@ -688,7 +685,7 @@ new (class {
         });
         multiOverlay.setElm();
 
-        const guideBox = popup.querySelector('.guide-box').combine({
+        const guideBox = TPSM.doc.fromElement(popup).querySelector('.guide-box', {
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else this.classList.add('show');
@@ -772,7 +769,7 @@ new (class {
                 async run(key, delay) {
                     document.body.overflow(false);
                     multiOverlay.handle();
-                    await window.delay(delay);
+                    await TPSM.delay(delay);
                     localData.history.guide.update(key);
                     guideBox.handle();
 
@@ -798,7 +795,7 @@ new (class {
                 async focusTo(elm, textIndex) {
                     messageGuideBox.setText(this.textData[textIndex]);
 
-                    await window.scrollToElement(elm, 'center');
+                    await TPSM.doc.scrollToElement(elm, 'center');
 
                     const [left, t] = multiOverlay.focusTo(elm);
                     const bcr = elm.getBoundingClientRect();
@@ -812,7 +809,7 @@ new (class {
                     if (styles.left < 0) styles.left = 2;
                     styles.left += 'px';
                     guideBox.style = '';
-                    guideBox.setStyle(styles);
+                    TPSM.doc.setStyle(guideBox, styles);
                 }
             })(),
             getTextData() {
@@ -828,13 +825,13 @@ new (class {
             document.body.overflow(true);
         };
 
-        const messageGuideBox = guideBox.querySelector('.message').combine({
+        const messageGuideBox = TPSM.doc.fromElement(guideBox).querySelector('.message', {
             setText(text) {
                 this.innerHTML = text;
             }
         });
 
-        const previousGuideBtn = guideBox.querySelector('button.previous').combine({
+        const previousGuideBtn = TPSM.doc.fromElement(guideBox).querySelector('button.previous', {
             onclick() {
                 if (this.disabled) return;
                 if (!guideBox.controller.previous()) this.disable();
@@ -851,7 +848,7 @@ new (class {
         });
         previousGuideBtn.disable();
 
-        const nextGuideBtn = guideBox.querySelector('button.next').combine({
+        const nextGuideBtn = TPSM.doc.fromElement(guideBox).querySelector('button.next', {
             onclick() {
                 if (this.disabled) return;
                 if (!guideBox.controller.next()) this.disable();
@@ -867,7 +864,7 @@ new (class {
             }
         });
 
-        const line = guideBox.querySelector('.line').combine({
+        const line = TPSM.doc.fromElement(guideBox).querySelector('.line', {
             setLen(len) {
                 this.style.setProperty('--len', len);
             },
@@ -876,7 +873,7 @@ new (class {
             }
         });
 
-        const customInput = popup.querySelector('.custom-input').combine({
+        const customInput = TPSM.doc.fromElement(popup).querySelector('.custom-input', {
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else {
@@ -909,7 +906,7 @@ new (class {
                 inputCustomInput.isEditOnFrame();
                 this.guideKey = 'customInputFrame';
 
-                const applyFrameEditingBtn = popup.querySelector('.apply-frame-editing').combine({
+                const applyFrameEditingBtn = TPSM.doc.fromElement(popup).querySelector('.apply-frame-editing', {
                     style: '',
                     onclick() {
                         document.body.overflow(true);
@@ -924,10 +921,10 @@ new (class {
                             this.classList.add('show');
                             const {top, width, left} =
                                 document.body.main.frame.getBoundingClientRect();
-                            this.setStyle({
+                            TPSM.doc.setStyle(this, {
                                 bottom: window.innerHeight - top + 10 + 'px',
                                 right: window.innerWidth - left - width + 'px'
-                            });
+                            })
                         }
                     }
                 });
@@ -936,19 +933,21 @@ new (class {
         });
         document.body.popup.customInput = customInput;
 
-        const constraintsCustomInput = customInput.querySelector('.constraints').combine({
-            update(key) {
-                this.querySelector('.show')?.classList?.remove('show');
-                (this.querySelector('.' + key) || this.querySelector('.default')).classList.add(
-                    'show'
-                );
-            }
-        });
+        const constraintsCustomInput = TPSM.doc
+            .fromElement(customInput)
+            .querySelector('.constraints', {
+                update(key) {
+                    this.querySelector('.show')?.classList?.remove('show');
+                    (this.querySelector('.' + key) || this.querySelector('.default')).classList.add(
+                        'show'
+                    );
+                }
+            });
         document.body.popup.customInput.constraints = constraintsCustomInput;
 
-        const inputCustomInput = customInput.querySelector('textarea').combine({
+        const inputCustomInput = TPSM.doc.fromElement(customInput).querySelector('textarea', {
             handle() {
-                return document.removeExtraWhitespace(this.value);
+                return TPSM.removeExtraWhitespace(this.value);
             },
             clearValue() {
                 this.value = '';
@@ -961,7 +960,7 @@ new (class {
 
         customInput.querySelector('button.close').onclick = () => customInput.handle();
 
-        const customBtn = customInput.querySelector('button.custom').combine({
+        const customBtn = TPSM.doc.fromElement(customInput).querySelector('button.custom', {
             onclick() {
                 customInput.onApply(inputCustomInput.handle());
             },
@@ -973,8 +972,8 @@ new (class {
                     ALGOSCENE.resetAction();
                     customInput.handle();
                     document.body.overflow(false);
-                    await window.scrollToElement(document.body.main.frame, 'center');
-                    await window.delay(100);
+                    await TPSM.doc.scrollToElement(document.body.main.frame, 'center');
+                    await TPSM.delay(100);
                     document.body.main.frame.enableEditing();
                     multiOverlay.handle(true);
                     multiOverlay.focusTo(document.body.main.frame);
@@ -1107,7 +1106,7 @@ new (class {
                 handle() {
                     if (this.classList.contains('show')) {
                         this.classList.remove('show');
-                        this.setStyle({
+                        TPSM.doc.setStyle(this, {
                             transform: 'translate(-50%, 50%)',
                             opacity: 0,
                             pointerEvents: 'none'
@@ -1115,7 +1114,7 @@ new (class {
                         this.input.style.pointerEvents = 'none';
                     } else {
                         this.classList.add('show');
-                        this.setStyle({
+                        TPSM.doc.setStyle(this, {
                             transform: 'translate(-50%, -50%)',
                             opacity: 1,
                             pointerEvents: 'all'
@@ -1148,5 +1147,5 @@ new (class {
 
 for (let i = 0; i < 5; i++) {
     window.dispatchEvent(new Event('resize'));
-    await window.delay(100);
+    await TPSM.delay(100);
 }

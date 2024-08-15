@@ -24,7 +24,7 @@ const array = new (class {
     }
     appendElm(empty = 0) {
         this.length = this.value.length;
-        this.elm = document.createElement({
+        this.elm = TPSM.doc.createElement({
             className: 'array',
             innerHTML: this.value.map((e, i) => `<span index="${i}">${e}</span>`).join('')
         });
@@ -65,7 +65,7 @@ const prefixSumArray = new (class {
         ALGOSCENE.resetFrame.setAction('prefixSumArray', () => this.reset());
     }
     appendElm() {
-        this.elm = document.createElement({className: 'prefix-sum-array'});
+        this.elm = TPSM.doc.createElement({className: 'prefix-sum-array'});
         this.hidden();
         ALGOSCENE.frameElm.appendChild(this.elm);
     }
@@ -81,7 +81,7 @@ const prefixSumArray = new (class {
         array.value.forEach((v, i) => this.setValue(i + 1, this.getValue(i) + v));
 
         this.elm.innerHTML += '<section></section>';
-        this.elm.section = this.elm.querySelector('section').combine({
+        this.elm.section = TPSM.doc.fromElement(this.elm).querySelector('section', {
             async show() {
                 this.classList.add('show');
                 await ALGOSCENE.delay();
@@ -153,7 +153,7 @@ const result = new (class {
         ALGOSCENE.resetFrame.setAction('result', () => this.reset());
     }
     appendElm() {
-        this.elm = document.createElement({className: 'result', innerHTML: '1106'});
+        this.elm = TPSM.doc.createElement({className: 'result', innerHTML: '1106'});
         ALGOSCENE.frameElm.appendChild(this.elm);
     }
     async show(value) {

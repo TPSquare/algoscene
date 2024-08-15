@@ -1,4 +1,4 @@
-document.body.popup.info = document.body.querySelector('#info').combine({
+document.body.popup.info = TPSM.doc.querySelector('#info', {
     handle: function (key) {
         if (this.classList.contains('show')) this.classList.remove('show');
         else {
@@ -8,6 +8,6 @@ document.body.popup.info = document.body.querySelector('#info').combine({
         }
         document.body.popup.overlay.handle();
     }
-})
+});
 
 document.body.popup.info.querySelector('.close').onclick = () => document.body.popup.info.handle();

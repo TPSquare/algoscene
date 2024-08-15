@@ -35,7 +35,7 @@ ALGOSCENE.customInput.onApply = function (value) {
 const segmentTree = new (class {
     constructor() {
         ALGOSCENE.resetFrame.setAction('resetTree', () => this.reset());
-        this.elm = document.createElement({className: 'tree'});
+        this.elm = TPSM.doc.createElement({className: 'tree'});
         this.nodeSize = 3;
     }
     growthTree() {
@@ -103,7 +103,7 @@ const segmentTree = new (class {
     }
     createArrayNodes() {
         ARRAY.forEach((value, index) => {
-            const elm = document.createElement({
+            const elm = TPSM.doc.createElement({
                 tag: 'span',
                 attributes: {'data-value': value},
                 arrayIndex: index,
@@ -119,14 +119,15 @@ const segmentTree = new (class {
         this.setSize((this.nodeSize + 0.4) * ARRAY.length - 0.4, this.nodeSize);
     }
     async setArrayNode(id, index) {
-        Array.from(this.elm.childNodes)
-            .find((node) => node.arrayIndex == index)
-            .combine({idx: id, className: 'array-value'});
+        TPSM.doc.combine(
+            Array.from(this.elm.childNodes).find((node) => node.arrayIndex == index),
+            {idx: id, className: 'array-value'}
+        );
         await ALGOSCENE.delay();
     }
     addTreeNode(id) {
         const str = String(this.tree[id]);
-        const elm = document.createElement({
+        const elm = TPSM.doc.createElement({
             tag: 'span',
             attributes: {'data-value': this.tree[id]},
             style: {
@@ -159,7 +160,7 @@ const segmentTree = new (class {
         return Array.from(this.elm.childNodes).find((node) => node.idx == id);
     }
     createPath(id, parentId) {
-        const path = document.createElement({
+        const path = TPSM.doc.createElement({
             className: 'path pre-build',
             setPos: this.setPositionElm,
             getPos: this.getPositionElm,
@@ -333,7 +334,7 @@ const segmentTree = new (class {
 
 const result = new (class {
     constructor() {
-        this.elm = document.createElement({className: 'result'});
+        this.elm = TPSM.doc.createElement({className: 'result'});
         ALGOSCENE.resetFrame.setAction('result', () => this.reset());
     }
     reset() {

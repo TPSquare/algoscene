@@ -110,6 +110,7 @@
     <script type="module">
         document.settings = JSON.parse(`<%- settings %>`);
         await import('/local-data.js');
+        await import('https://tpsquare.github.io/modules/js/tpsm.js');
         await import('/common.js');
         await import('/components/info.js');
         await import('/components/lang-btn.js');

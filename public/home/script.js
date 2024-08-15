@@ -1,21 +1,11 @@
 'use strict';
 
-import MODULES from '/modules.js';
-
 document.LANG = document.querySelector('html').lang;
 
 new (class {
     constructor() {
-        this.document();
-        this.window();
         this.popup();
         this.main();
-    }
-    document() {
-        MODULES.upgradeDocument();
-    }
-    window() {
-        MODULES.upgradeWindow();
     }
     main() {
         const autoCompleteJS = new autoComplete({
@@ -39,7 +29,7 @@ new (class {
         const popup = document.body.querySelector('#popup');
         document.body.popup = popup;
 
-        const overlay = popup.querySelector('.overlay').combine({
+        const overlay = TPSM.doc.fromElement(popup).querySelector('.overlay', {
             handle() {
                 if (this.classList.contains('show')) this.classList.remove('show');
                 else this.classList.add('show');
