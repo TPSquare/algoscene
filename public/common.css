@@ -367,12 +367,13 @@ main {
     .no-action {
         display: none;
         font-family: var(--default-font-family);
-        background-color: #2F3453;
+        background-color: #252a47;
         width: 100%;
         padding: 1em 2em;
         color: white;
         font-size: 1.5em;
         font-weight: 600;
+        border-radius: 0.5em;
 
         svg {
             fill: white;
@@ -384,10 +385,20 @@ main {
 
 main.fullscreen {
     background: linear-gradient(#2e334f 0%, #4f547d 100%);
+
+    .right {
+        width: 13.5em;
+    }
+
+    .custom-input {
+        display: none;
+    }
 }
 
 main.no-action {
-    #frame, .bottombar {
+
+    #frame,
+    .bottombar {
         display: none;
     }
 
@@ -809,6 +820,8 @@ code {
                 padding: 0.462em;
                 pointer-events: none;
                 opacity: 0;
+                -webkit-user-select: none;
+                user-select: none;
             }
 
             .view-line .cmt:hover {
@@ -817,6 +830,8 @@ code {
 
             .view-line:hover .cmt {
                 animation: showComment 200ms linear forwards 500ms;
+                -webkit-user-select: auto;
+                user-select: auto;
             }
 
             .view-line code {
@@ -844,6 +859,7 @@ code {
         color: #f2f2f2;
         height: 2.7em;
         font-family: var(--default-font-family);
+        border-radius: 0.5em 0.5em 0 0;
 
         >* {
             font-size: 1.35em;
@@ -855,6 +871,7 @@ code {
 
         .icon {
             padding: 0 0.8em;
+            border-top-left-radius: 0.5em;
 
             svg {
                 margin-top: 40%;
@@ -864,6 +881,7 @@ code {
 
         .extension {
             padding-right: 0.8em;
+            border-top-right-radius: 0.5em;
         }
     }
 
@@ -1107,8 +1125,13 @@ footer {
         div {
             display: none;
         }
+
         div.show {
             display: block;
+        }
+
+        span {
+            display: inline-block;
         }
     }
 

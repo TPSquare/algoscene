@@ -90,7 +90,9 @@ class Page {
                             `<div class="${key}">` +
                             this.data.texts.constraints[key]
                                 .map((text) => `*${text}`)
-                                ?.join('<br>') +
+                                ?.join('<br>')
+                                .replaceAll('{{', '<span>')
+                                .replaceAll('}}', '</span>') +
                             '</div>'
                     )
                     .join('') ||

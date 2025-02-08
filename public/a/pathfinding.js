@@ -21,29 +21,24 @@ let [STARTX, STARTY] = [0, 0],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0]
     ];
 
-const setFrameHTML = () => {
+ALGOSCENE.getDefaultHTMLFrame = () => {
     let t = '';
     for (let i = 0; i < COLS; i++) t += '<span></span>';
     let html = '';
     for (let i = 0; i < ROWS; i++) html += `<div>${t}</div>`;
-
-    ALGOSCENE.frameHTML = html;
+    return html;
 };
-setFrameHTML();
 
 ALGOSCENE.customInput.isEditOnFrame();
-
-ALGOSCENE.customInput.onApply = () => {
+ALGOSCENE.customInput.applyValue = () => {
     MATRIX = matrix.getVALUE();
     [STARTX, STARTY] = matrix.getSTART();
     [ENDX, ENDY] = matrix.getEND();
 };
 
 const matrix = new (class {
-    constructor() {
-        ALGOSCENE.resetFrame.setAction('resetMatrix', () => this.reset());
-    }
     regetElm() {
+        ALGOSCENE.resetFrame.setAction('resetMatrix', () => this.reset());
         this.rows = ALGOSCENE.frameElm.childNodes;
         this.rows.forEach((row, i) =>
             row.childNodes.forEach((elm, j) => {
@@ -88,7 +83,9 @@ const matrix = new (class {
         return this.rows[x]?.childNodes[y];
     }
     getVALUE() {
-        return Array.from(this.rows).map((row) => Array.from(row.childNodes).map((elm) => elm.value));
+        return Array.from(this.rows).map((row) =>
+            Array.from(row.childNodes).map((elm) => elm.value)
+        );
     }
     getSTART() {
         const {x, y} = ALGOSCENE.frameElm.querySelector('.start');
@@ -182,7 +179,14 @@ ALGOSCENE.setAction('dfs', () => {
         for (let i = 0; i < 4; ++i) {
             const nx = x + directions[i][0];
             const ny = y + directions[i][1];
-            if (nx >= 0 && ny >= 0 && nx < ROWS && ny < COLS && matrix.get(nx, ny).value == 0 && !visited[nx][ny]) {
+            if (
+                nx >= 0 &&
+                ny >= 0 &&
+                nx < ROWS &&
+                ny < COLS &&
+                matrix.get(nx, ny).value == 0 &&
+                !visited[nx][ny]
+            ) {
                 await dfs(nx, ny, path, visited, found);
                 if (!found[0]) await matrix.visit(nx, ny);
             }

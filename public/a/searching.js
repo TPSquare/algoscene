@@ -3,23 +3,23 @@
 let TARGET = 7,
     ARRAY = [5, 9, 2, 4, 11, 6, 8, 1, 12, 3, 7, 10];
 
-ALGOSCENE.customInput.setCurrentValue(`${String(TARGET)}\n${ARRAY.join(' ')}`);
-
-ALGOSCENE.customInput.onApply = function (value) {
-    let isValid = true;
-    value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) => (isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e) ? (isValid = false) : null));
-    if (value.length < 13) isValid = false;
-    if (isValid) {
+ALGOSCENE.customInput.configAll({
+    getPlaceholder: () => `${String(TARGET)}\n${ARRAY.join(' ')}`,
+    configValue: {oneLine: true},
+    preprocessing: (value) => value.split(' ').map((e) => Number(e)),
+    checkValue: (value) => {
+        for (const e of value)
+            if (isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e)) return false;
+        if (value.length < 13) return false;
+        return true;
+    },
+    applyValue: (value) => {
         TARGET = value[0];
         ARRAY = value.slice(1, 13);
-        ALGOSCENE.frameHTML = getframeHTML();
-        ALGOSCENE.customInput.setCurrentValue(`${String(TARGET)}\n${ARRAY.join(' ')}`);
-        ALGOSCENE.customInput.notify.success();
-    } else ALGOSCENE.customInput.notify.failure();
-};
+    }
+});
 
-const getframeHTML = () =>
+ALGOSCENE.getDefaultHTMLFrame = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
     `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>` +
     `<div class="target"><span>${TARGET}</span>: <span>?</span></div>` +
@@ -29,19 +29,17 @@ const getframeHTML = () =>
         return r;
     })()}</div>`;
 
-ALGOSCENE.frameHTML = getframeHTML();
-
 const colors = ['', 'yellowgreen', 'orange', 'red'];
 
 const array = new (class {
     constructor() {
         this.length = ARRAY.length;
-        ALGOSCENE.resetFrame.setAction('resetArray', () => this.reset());
     }
     setPosition() {
         this.elm.childNodes.forEach((e) => (e.style.left = 2 * e.index + 'em'));
     }
     regetElm() {
+        ALGOSCENE.resetFrame.setAction('resetArray', () => this.reset());
         this.elm = ALGOSCENE.frameElm.querySelector('.array');
         this.elm.childNodes.forEach((e) => {
             e.setBackgroundColor = async function (c = 0) {
@@ -108,10 +106,8 @@ const array = new (class {
 })();
 
 const target = new (class {
-    constructor() {
-        ALGOSCENE.resetFrame.setAction('resetTarget', () => this.reset());
-    }
     regetElm() {
+        ALGOSCENE.resetFrame.setAction('resetTarget', () => this.reset());
         this.elm = ALGOSCENE.frameElm.querySelector('.target');
         this.elm.value = this.elm.querySelector('span:last-child');
     }

@@ -2,38 +2,34 @@
 
 let ARRAY = [5, 2, 4, 6, 1, 3, 7];
 
-ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
+ALGOSCENE.customInput.configAll({
+    getPlaceholder: () => ARRAY.join(' '),
+    configValue: {oneLine: true},
+    preprocessing: (value) => value.split(' ').map((e) => Number(e)),
+    checkValue: (value) => {
+        for (const e of value)
+            if (isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e)) return false;
+        if (value.length < 7) return false;
+        return true;
+    },
+    applyValue: (value) => (ARRAY = value.slice(0, 7))
+});
 
-ALGOSCENE.customInput.onApply = function (value) {
-    let isValid = true;
-    value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) => (isNaN(e) || e < -9 || e > 99 || !Number.isInteger(e) ? (isValid = false) : null));
-    if (value.length < 7) isValid = false;
-    if (isValid) {
-        ARRAY = value.slice(0, 7);
-        ALGOSCENE.frameHTML = getframeHTML();
-        ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
-        ALGOSCENE.customInput.notify.success();
-    } else ALGOSCENE.customInput.notify.failure();
-};
-
-const getframeHTML = () =>
+ALGOSCENE.getDefaultHTMLFrame = () =>
     '<div class="background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
     `<div class="array">${ARRAY.map((e, i) => `<span o="${i + 1}">${e}</span>`).join('')}</div>`;
-
-ALGOSCENE.frameHTML = getframeHTML();
 
 const colors = ['', 'yellowgreen', 'red', 'orange'];
 
 const array = new (class {
     constructor() {
         this.length = ARRAY.length;
-        ALGOSCENE.resetFrame.setAction('resetArray', () => this.reset());
     }
     setPosition() {
         this.elm.childNodes.forEach((e) => (e.style.left = 2.4 * e.index + 'em'));
     }
     regetElm() {
+        ALGOSCENE.resetFrame.setAction('resetArray', () => this.reset());
         this.elm = ALGOSCENE.frameElm.querySelector('.array');
         this.elm.childNodes.forEach((e) => {
             e.setBackgroundColor = async function (c = 0) {
@@ -222,7 +218,8 @@ ALGOSCENE.setAction('merge', () => {
             j = 0;
         let k = left;
         while (i < leftSize && j < rightSize)
-            if (leftArray[i].value <= rightArray[j].value) await array.swap(k++, leftArray[i++].index);
+            if (leftArray[i].value <= rightArray[j].value)
+                await array.swap(k++, leftArray[i++].index);
             else await array.swap(k++, rightArray[j++].index);
         while (i < leftSize) await array.swap(k++, leftArray[i++].index);
         while (j < rightSize) await array.swap(k++, rightArray[j++].index);

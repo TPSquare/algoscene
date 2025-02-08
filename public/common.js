@@ -47,7 +47,7 @@ new (class {
                 const t = localData.delay / 10;
                 while (this.playPauseBtn.isPausing) await TPSM.delay(t);
             },
-            frameHTML: '',
+            getDefaultHTMLFrame: () => '',
             actions: {},
             configs: {},
             setAction(key, action, config = {}) {
@@ -55,9 +55,10 @@ new (class {
                 this.configs[key] = config;
             },
             runAction(key, save = true) {
-                ALGOSCENE.playPauseBtn.reset();
+                this.playPauseBtn.reset();
+                this.resetFrame.clearAction();
                 this.currentAction = key;
-                this.frameElm.innerHTML = this.frameHTML;
+                this.frameElm.innerHTML = this.getDefaultHTMLFrame();
                 if (this.actions[key]) {
                     if (Object.keys(this.configs[key]).length != 0)
                         this.enableSelectAction(this.configs[key]);
@@ -68,7 +69,7 @@ new (class {
                 this.frameElm.className = key;
                 if (save) localData.history[document.TYPE].update(document.KEY, key);
             },
-            endAction() {},
+            async endAction() {},
             resetAction() {
                 this.runAction(this.currentAction);
             },
@@ -80,6 +81,9 @@ new (class {
                 }
                 setAction(key, action) {
                     this.actions[key] = action;
+                }
+                clearAction() {
+                    this.actions = {};
                 }
                 reset() {
                     for (const key in this.actions) this.actions[key]();
@@ -152,8 +156,10 @@ new (class {
     main() {
         const main = TPSM.doc.querySelector('main', {
             noAction(t = 't') {
-                if (t == 't') this.classList.add('no-action');
-                else this.classList.remove('no-action');
+                if (t == 't') {
+                    this.classList.add('no-action');
+                    TPSM.doc.closeFullScreen();
+                } else this.classList.remove('no-action');
             }
         });
         document.body.main = main;
@@ -177,7 +183,7 @@ new (class {
                 });
             },
             setDelay(value) {
-                TPSM.doc.setStyle(this, {'--delay': (value || localData.delay) + 'ms'})
+                TPSM.doc.setStyle(this, {'--delay': (value || localData.delay) + 'ms'});
             },
             style: `--delay:${localData.delay}ms;`,
             enableEditing() {
@@ -262,6 +268,7 @@ new (class {
                 this.innerHTML = this[this.titleConfig[status]];
             },
             async onclick() {
+                if (main.classList.contains('no-action')) return;
                 if (this.isPlaying) {
                     if (this.isPausing) {
                         this.isPausing = false;
@@ -316,6 +323,7 @@ new (class {
 
         const screenBtn = TPSM.doc.fromElement(bottombar).querySelector('.right > .screen', {
             open() {
+                if (main.classList.contains('no-action')) return;
                 main.classList.add('fullscreen');
                 TPSM.doc.openFullScreen(document.body.main);
                 this.onclick = this.close;
@@ -608,10 +616,10 @@ new (class {
                             innerHTML:
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg>',
                             onclick() {
-                                const input = TPSM
-                                    .removeExtraWhitespace(this.parentNode.childNodes[1].value)
-                                    .split(' ')
-                                    .map((e) => Number(e));
+                                const input = TPSM.removeExtraWhitespace(
+                                    this.parentNode.childNodes[1].value,
+                                    {oneLine: true}
+                                );
                                 if (
                                     !config.actions[key].checkInput ||
                                     config.actions[key].checkInput(input)
@@ -879,19 +887,41 @@ new (class {
                 else {
                     this.classList.add('show');
                     inputCustomInput.clearValue();
+                    this.setPlaceholder();
                     if (!localData.history.guide[this.guideKey])
                         guideBox.controller.run(this.guideKey, 1000);
                 }
                 overlay.handle();
             },
             guideKey: 'customInputDefault',
-            onApply: null,
-            setCurrentValue(value) {
-                this.currentValue = value;
-                inputCustomInput.setAttribute('placeholder', value);
+            error(item) {
+                console.error(
+                    'customInput -> configAll -> ' +
+                        item +
+                        '  |  ' +
+                        (ALGOSCENE.currentAction || 'all')
+                );
+            },
+            configAll(config) {
+                this.checkValue = config.checkValue || this.error('checkValue');
+                this.applyValue = config.applyValue || this.error('applyValue');
+                this.getPlaceholder = config.getPlaceholder || this.error('getPlaceholder');
+                this.preprocessing = config.preprocessing || this.error('preprocessing');
+                this.configValue = config.configValue || this.error('configValue');
+            },
+            reset() {
+                this.checkValue = () => true;
+                this.applyValue = () => {};
+                this.getPlaceholder = () => '';
+                this.preprocessing = (value) => value;
+                this.configValue = {};
+            },
+            setPlaceholder() {
+                inputCustomInput.setAttribute('placeholder', this.getPlaceholder());
             },
             notify: {
                 success: () => {
+                    customInput.setPlaceholder();
                     ALGOSCENE.resetAction();
                     customInput.classList.add('success');
                     setTimeout(() => customInput.classList.remove('success'), 1000);
@@ -906,31 +936,34 @@ new (class {
                 inputCustomInput.isEditOnFrame();
                 this.guideKey = 'customInputFrame';
 
-                const applyFrameEditingBtn = TPSM.doc.fromElement(popup).querySelector('.apply-frame-editing', {
-                    style: '',
-                    onclick() {
-                        document.body.overflow(true);
-                        document.body.main.frame.disableEditing();
-                        multiOverlay.handle();
-                        this.handle();
-                        customInput.onApply();
-                    },
-                    handle() {
-                        if (this.classList.contains('show')) this.classList.remove('show');
-                        else {
-                            this.classList.add('show');
-                            const {top, width, left} =
-                                document.body.main.frame.getBoundingClientRect();
-                            TPSM.doc.setStyle(this, {
-                                bottom: window.innerHeight - top + 10 + 'px',
-                                right: window.innerWidth - left - width + 'px'
-                            })
+                const applyFrameEditingBtn = TPSM.doc
+                    .fromElement(popup)
+                    .querySelector('.apply-frame-editing', {
+                        style: 'display: block;',
+                        onclick() {
+                            document.body.overflow(true);
+                            document.body.main.frame.disableEditing();
+                            multiOverlay.handle();
+                            this.handle();
+                            customInput.applyValue();
+                        },
+                        handle() {
+                            if (this.classList.contains('show')) this.classList.remove('show');
+                            else {
+                                this.classList.add('show');
+                                const {top, width, left} =
+                                    document.body.main.frame.getBoundingClientRect();
+                                TPSM.doc.setStyle(this, {
+                                    bottom: window.innerHeight - top + 10 + 'px',
+                                    right: window.innerWidth - left - width + 'px'
+                                });
+                            }
                         }
-                    }
-                });
+                    });
                 document.body.popup.applyFrameEditingBtn = applyFrameEditingBtn;
             }
         });
+        customInput.reset();
         document.body.popup.customInput = customInput;
 
         const constraintsCustomInput = TPSM.doc
@@ -946,14 +979,18 @@ new (class {
         document.body.popup.customInput.constraints = constraintsCustomInput;
 
         const inputCustomInput = TPSM.doc.fromElement(customInput).querySelector('textarea', {
-            handle() {
-                return TPSM.removeExtraWhitespace(this.value);
+            getValue() {
+                return this.value;
             },
             clearValue() {
                 this.value = '';
             },
             isEditOnFrame() {
                 customInput.removeChild(this);
+            },
+            oninput() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
             }
         });
         document.body.popup.customInput.input = inputCustomInput;
@@ -962,7 +999,13 @@ new (class {
 
         const customBtn = TPSM.doc.fromElement(customInput).querySelector('button.custom', {
             onclick() {
-                customInput.onApply(inputCustomInput.handle());
+                const value = customInput.preprocessing(
+                    TPSM.removeExtraWhitespace(inputCustomInput.getValue(), customInput.configValue)
+                );
+                if (customInput.checkValue(value)) {
+                    customInput.applyValue(value);
+                    customInput.notify.success();
+                } else customInput.notify.failure();
             },
             isEditOnFrame() {
                 this.getTextData();
@@ -977,7 +1020,7 @@ new (class {
                     document.body.main.frame.enableEditing();
                     multiOverlay.handle(true);
                     multiOverlay.focusTo(document.body.main.frame);
-                    popup.applyFrameEditingBtn.handle();
+                    document.body.popup.applyFrameEditingBtn.handle();
                 };
             },
             getTextData() {
@@ -1023,7 +1066,7 @@ new (class {
     }
     developing(ok) {
         if (ok) {
-            const getCodeFromVSCode = document.createElement({
+            const getCodeFromVSCode = TPSM.doc.createElement({
                 id: 'get-code-from-vscode',
                 style: {
                     position: 'absolute',
@@ -1038,7 +1081,7 @@ new (class {
                     pointerEvents: 'none'
                 },
                 children: [
-                    document.createElement({
+                    TPSM.doc.createElement({
                         tag: 'input',
                         key: 'input',
                         style: {

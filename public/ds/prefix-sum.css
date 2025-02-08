@@ -43,6 +43,7 @@
     z-index: 1;
 
     span {
+        position: relative;
         background-color: #ffffff;
     }
 
@@ -53,6 +54,16 @@
     span.minus {
         background-color: red;
         color: white;
+    }
+
+    span::before {
+        content: attr(index);
+        position: absolute;
+        color: gray;
+        font-size: 0.8em;
+        top: -2em;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -65,13 +76,28 @@
 #frame .prefix-sum-array {
     z-index: 0;
 
-    span {
+    >span {
         background-color: #ffc3c3;
     }
 
     .hidden {
         background-color: #ffffff;
         color: transparent;
+    }
+
+    .index {
+        position: absolute;
+        top: 130%;
+        left: 0;
+        font-size: 0.8em;
+        color: gray;
+
+        span {
+            display: inline-block;
+            width: 2.5em;
+            margin: 0 0.25em;
+            text-align: center;
+        }
     }
 }
 
@@ -218,6 +244,91 @@
 
 #frame .result.show::before {
     transform: rotate(180deg);
+}
+
+#frame .matrix,
+#frame .prefix-sum-matrix {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), auto);
+    grid-template-rows: repeat(var(--rows), auto);
+    font-size: 5em;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: var(--delay);
+
+    >span {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        margin: 0.1em;
+        line-height: 2em;
+        text-align: center;
+        border-radius: 0.25em;
+        transition: color var(--delay), background-color var(--delay);
+    }
+
+    .plus {
+        background-color: greenyellow;
+    }
+
+    .minus {
+        background-color: red;
+        color: white;
+    }
+
+    .index {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 0.8em;
+
+        section:first-child {
+            display: flex;
+            position: absolute;
+            top: -2.3em;
+            left: 0;
+        }
+
+        section:last-child {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: -2.25em;
+        }
+
+        span {
+            display: inline-block;
+            width: 2.5em;
+            height: 2.5em;
+            margin: 0.125em;
+            text-align: center;
+            line-height: 2.5em;
+            color: gray;
+        }
+    }
+}
+
+#frame .matrix {
+    >span {
+        background-color: white;
+    }
+}
+
+#frame .prefix-sum-matrix {
+    >span {
+        background-color: #ffc3c3;
+    }
+
+    .hidden {
+        color: transparent;
+        background-color: white;
+    }
+}
+
+#frame .prefix-sum-matrix.hidden {
+    opacity: 0;
 }
 
 @keyframes animate-1-height {

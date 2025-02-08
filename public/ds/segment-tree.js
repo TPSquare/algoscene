@@ -16,25 +16,21 @@ const MAXN = 8,
     MINVALUE = 1;
 let ARRAY = [12, 48, 70, 8, 20, 4];
 
-ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
-
-ALGOSCENE.customInput.onApply = function (value) {
-    let isValid = true;
-    value = value.split(' ').map((e) => Number(e));
-    value.forEach((e) =>
-        isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e) ? (isValid = false) : null
-    );
-    if (value.length < MINN) isValid = false;
-    if (isValid) {
-        ARRAY = value.slice(0, MAXN);
-        ALGOSCENE.customInput.setCurrentValue(ARRAY.join(' '));
-        ALGOSCENE.customInput.notify.success();
-    } else ALGOSCENE.customInput.notify.failure();
-};
+ALGOSCENE.customInput.configAll({
+    getPlaceholder: () => ARRAY.join(' '),
+    configValue: {oneLine: true},
+    preprocessing: (value) => value.split(' ').map((e) => Number(e)),
+    checkValue: (value) => {
+        for (const e of value)
+            if (isNaN(e) || e < MINVALUE || e > MAXVALUE || !Number.isInteger(e)) return false;
+        if (value.length < MINN) return false;
+        return true;
+    },
+    applyValue: (value) => (ARRAY = value.slice(0, MAXN))
+});
 
 const segmentTree = new (class {
     constructor() {
-        ALGOSCENE.resetFrame.setAction('resetTree', () => this.reset());
         this.elm = TPSM.doc.createElement({className: 'tree'});
         this.nodeSize = 3;
     }
@@ -50,6 +46,7 @@ const segmentTree = new (class {
         this.tree = new Array(MAXN * 4);
     }
     init(type) {
+        ALGOSCENE.resetFrame.setAction('resetTree', () => this.reset());
         this.elm.innerHTML = '';
         this.func = config[type][0];
         this.notFoundValue = config[type][1];
@@ -335,12 +332,12 @@ const segmentTree = new (class {
 const result = new (class {
     constructor() {
         this.elm = TPSM.doc.createElement({className: 'result'});
-        ALGOSCENE.resetFrame.setAction('result', () => this.reset());
     }
     reset() {
         this.hidden();
     }
     init() {
+        ALGOSCENE.resetFrame.setAction('result', () => this.reset());
         this.hidden();
         ALGOSCENE.frameElm.appendChild(this.elm);
     }
@@ -372,13 +369,16 @@ Object.keys(config).forEach((key) =>
                     hidden: true
                 },
                 get: {
-                    action: async (e) =>
+                    action: async (e) => {
+                        e = e.split(' ').map((t) => Number(t));
                         await result.show(
                             await segmentTree.get(1, 0, ARRAY.length - 1, e[0], e[1], 1)
-                        ),
+                        );
+                    },
                     input: 'leftRange rightRange',
                     checkInput: (value) => {
                         let isValid = true;
+                        value = value.split(' ').map((e) => Number(e));
                         value.forEach((e) =>
                             isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
                         );
@@ -387,11 +387,14 @@ Object.keys(config).forEach((key) =>
                     }
                 },
                 update: {
-                    action: async (e) =>
-                        await segmentTree.update(1, 0, ARRAY.length - 1, e[0], e[1], 1),
+                    action: async (e) => {
+                        e = e.split(' ').map((t) => Number(t));
+                        await segmentTree.update(1, 0, ARRAY.length - 1, e[0], e[1], 1);
+                    },
                     input: 'index value',
                     checkInput: (value) => {
                         let isValid = true;
+                        value = value.split(' ').map((e) => Number(e));
                         value.forEach((e) =>
                             isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
                         );
@@ -401,11 +404,14 @@ Object.keys(config).forEach((key) =>
                     }
                 },
                 rangeUpdate: {
-                    action: async (e) =>
-                        await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1),
+                    action: async (e) => {
+                        e = e.split(' ').map((t) => Number(t));
+                        await segmentTree.rangeUpdate(1, 0, ARRAY.length - 1, e[0], e[1], e[2], 1);
+                    },
                     input: 'leftRange rightRange value',
                     checkInput: (value) => {
                         let isValid = true;
+                        value = value.split(' ').map((e) => Number(e));
                         value.forEach((e) =>
                             isNaN(e) || !Number.isInteger(e) ? (isValid = false) : null
                         );

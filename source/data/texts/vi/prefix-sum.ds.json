@@ -210,6 +210,11 @@
             "Giá trị là một số nguyên nằm trong đoạn từ -9 đến 99",
             "Có tối đa 8 giá trị"
         ],
+        "sumMatrix": [
+            "Các giá trị cách nhau bởi khoảng trắng",
+            "Dòng đầu tiên là 2 số nguyên dương m và n chỉ cho số hàng và số cột {{(m ≤ 5, n ≤ 6)}}",
+            "m dòng tiếp theo, mỗi dòng chứa n số nguyên nằm trong đoạn từ -3 đến 33"
+        ],
         "default": []
     },
     "complexity": {
