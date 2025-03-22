@@ -1,7 +1,6 @@
 # ALGOSCENE
 
 ## LATEST VERSION (v2.0.0)
-
 -   Node.js has been used
 -   Support the ability to save web usage history
 -   Support learning data structures
@@ -18,7 +17,7 @@
 
 &nbsp;&nbsp;<sup>02/02/2024</sup>
 
-### v1.0.\*
+### v1.0.0
 
 &nbsp;&nbsp;<sup>10/06/2024</sup>
 
